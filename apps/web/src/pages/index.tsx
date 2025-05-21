@@ -1,36 +1,44 @@
-import Layout from '../components/layout/Layout';
+/**
+ * Updated index page to use dynamic country routing instead of hardcoded 'my'
+ *
+ * IMPORTANT: Do not use redirect in getStaticProps as it causes errors in static generation.
+ * Instead, use client-side redirects (useEffect + meta refresh) as implemented below.
+ */
 
-export default function Home() {
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+
+export default function Home(): JSX.Element {
+  const router = useRouter();
+
+  // Default country to use - could be set from browser locale, user preferences, etc.
+  const defaultCountry = 'my';
+
+  useEffect(() => {
+    // Redirect to the default country page
+    router.replace(`/${defaultCountry}`);
+  }, [router]);
+
+  // Return a minimal div instead of null to ensure index.html generation
   return (
-    <Layout title="Bellyfed - Home" description="Discover the best food experiences around you">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 className="text-4xl font-bold text-center text-gray-900 dark:text-white mb-8">
-          Welcome to Bellyfed
-        </h1>
-
-        <p className="text-xl text-center text-gray-600 dark:text-gray-300 mb-12">
-          Discover the best food experiences around you
-        </p>
-
-        <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 mb-8">
-          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Featured Restaurants</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-md shadow">
-              <h3 className="font-medium text-gray-900 dark:text-white">Pasta Paradise</h3>
-              <p className="text-gray-500 dark:text-gray-300">Italian cuisine</p>
-            </div>
-            <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-md shadow">
-              <h3 className="font-medium text-gray-900 dark:text-white">Sushi Sensation</h3>
-              <p className="text-gray-500 dark:text-gray-300">Japanese cuisine</p>
-            </div>
-            <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-md shadow">
-              <h3 className="font-medium text-gray-900 dark:text-white">Taco Temple</h3>
-              <p className="text-gray-500 dark:text-gray-300">Mexican cuisine</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Layout>
+    <div style={{ display: 'none' }}>
+      <Head>
+        <title>Bellyfed - Redirecting...</title>
+        <meta name="description" content="Redirecting to Bellyfed" />
+        {/* Add meta refresh as a fallback for static export */}
+        <meta httpEquiv="refresh" content={`0;url=/${defaultCountry}`} />
+      </Head>
+      Redirecting to country page...
+    </div>
   );
+}
+
+// Add getStaticProps to ensure the page is pre-rendered
+// IMPORTANT: Do NOT add a redirect here as it will break static generation
+export async function getStaticProps() {
+  return {
+    props: {},
+    // DO NOT add redirect here - it will cause errors in static builds
+  };
 }
