@@ -1,9 +1,12 @@
 {
-  "name": "@bellyfed/trpc",
+  "name": "@bellyfed/utils",
   "version": "0.1.0",
   "private": true,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
   "scripts": {
     "build": "tsc",
     "build:fast": "tsc --incremental",
@@ -16,20 +19,7 @@
     "test": "echo \"No tests specified\" && exit 0",
     "clean": "rm -rf dist node_modules/.cache"
   },
-  "exports": {
-    ".": "./dist/index.js",
-    "./context": "./dist/context.js",
-    "./router": "./dist/routers/index.js",
-    "./server": "./dist/server/index.js"
-  },
   "dependencies": {
-    "@bellyfed/db": "workspace:*",
-    "@bellyfed/utils": "workspace:*",
-    "@trpc/server": "^10.45.2",
-    "bcrypt": "^5.1.1",
-    "next": "15.3.2",
-    "next-auth": "^4.24.11",
-    "superjson": "^2.2.2",
     "zod": "^3.22.4"
   },
   "devDependencies": {

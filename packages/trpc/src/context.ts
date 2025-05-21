@@ -1,4 +1,4 @@
-import { prisma } from '@repo/db';
+import { prisma } from '@bellyfed/db';
 import type {CreateExpressContextOptions} from "@trpc/server/adapters/express";
 
 /**
