@@ -1,11 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { Star, Award, MapPin } from 'lucide-react';
+import Image from 'next/image';
+import { Star } from 'lucide-react';
 import { Avatar } from '@/components/ui/Avatar';
 
 // Types for the ranking data
+interface BaseItem {
+  id: string;
+  name: string;
+  imageUrl?: string; // Optional for reviewer if using Avatar with fallback
+  avatarUrl?: string; // For reviewer
+}
+
+interface Dish extends BaseItem {
+  restaurant: string;
+  rating: number;
+}
+
+interface Reviewer extends BaseItem {
+  specialty: string;
+  reviewCount: number;
+}
+
+interface Restaurant extends BaseItem {
+  cuisine: string;
+  priceRange: string;
+  rating: number;
+}
+
+export type RankingItemData = Dish | Reviewer | Restaurant;
+
 interface RankingItemProps {
   index: number;
-  item: any;
+  item: RankingItemData;
   type: 'dish' | 'reviewer' | 'restaurant';
   isAnimating?: boolean;
 }
@@ -113,7 +139,9 @@ const AnimatedRankingItem: React.FC<RankingItemProps> = ({
       className={`py-3 flex items-center justify-between px-2 rounded-lg transition-all duration-300 group cursor-pointer ${getHoverBgColor()} ${animationClass}`}
     >
       <div className="flex items-center">
-        <div className={`${getRankingBgColor()} ${getRankingColor()} font-heading font-bold w-6 h-6 flex items-center justify-center rounded-full text-center group-hover:scale-110 transition-transform shadow-sm`}>
+        <div
+          className={`${getRankingBgColor()} ${getRankingColor()} font-heading font-bold w-6 h-6 flex items-center justify-center rounded-full text-center group-hover:scale-110 transition-transform shadow-sm`}
+        >
           {index + 1}
         </div>
 
@@ -126,10 +154,13 @@ const AnimatedRankingItem: React.FC<RankingItemProps> = ({
           />
         ) : (
           <div className="w-10 h-10 rounded-md overflow-hidden ml-3 mr-3 flex-shrink-0 shadow-sm group-hover:shadow-md transition-all">
-            <img
-              src={item.imageUrl}
+            <Image
+              src={item.imageUrl!}
               alt={item.name}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              width={40}
+              height={40}
+              objectFit="cover"
+              className="transition-transform duration-500 group-hover:scale-110"
             />
           </div>
         )}
@@ -139,21 +170,26 @@ const AnimatedRankingItem: React.FC<RankingItemProps> = ({
             {item.name}
           </div>
           <div className="text-xs text-neutral-500 truncate">
-            {type === 'dish' && item.restaurant}
-            {type === 'reviewer' && item.specialty}
-            {type === 'restaurant' && `${item.cuisine} • ${item.priceRange}`}
+            {type === 'dish' && (item as Dish).restaurant}
+            {type === 'reviewer' && (item as Reviewer).specialty}
+            {type === 'restaurant' && `${(item as Restaurant).cuisine} • ${(item as Restaurant).priceRange}`}
           </div>
         </div>
       </div>
 
-      {(type === 'dish' || type === 'restaurant') ? (
-        <div className={`flex items-center ml-2 flex-shrink-0 ${getBadgeBgColor()} px-2 py-1 rounded-full transition-colors`}>
+      {type === 'dish' || type === 'restaurant' ? (
+        <div
+          className={`flex items-center ml-2 flex-shrink-0 ${getBadgeBgColor()} px-2 py-1 rounded-full transition-colors`}
+        >
           <Star className="w-3.5 h-3.5 text-accent-gold-500 mr-1" />
-          <span className="text-sm font-medium">{item.rating}</span>
+          <span className="text-sm font-medium">{(item as Dish | Restaurant).rating}</span>
         </div>
       ) : (
-        <div className={`text-sm font-medium ${getRankingColor()} flex-shrink-0 ml-2 ${getBadgeBgColor()} px-2 py-1 rounded-full transition-colors`}>
-          {item.reviewCount} <span className="text-xs text-neutral-500">reviews</span>
+        <div
+          className={`text-sm font-medium ${getRankingColor()} flex-shrink-0 ml-2 ${getBadgeBgColor()} px-2 py-1 rounded-full transition-colors`}
+        >
+          {(item as Reviewer).reviewCount}{' '}
+          <span className="text-xs text-neutral-500">reviews</span>
         </div>
       )}
     </li>

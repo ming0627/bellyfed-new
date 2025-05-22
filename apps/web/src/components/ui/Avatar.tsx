@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/utils/cn';
 
@@ -31,12 +32,16 @@ const avatarVariants = cva(
 
       // Avatar status indicators with refined styling
       status: {
-        online: 'after:absolute after:bottom-0 after:right-0 after:h-2.5 after:w-2.5 after:rounded-full after:bg-success after:ring-2 after:ring-white dark:after:ring-neutral-800',
-        offline: 'after:absolute after:bottom-0 after:right-0 after:h-2.5 after:w-2.5 after:rounded-full after:bg-neutral-300 after:ring-2 after:ring-white dark:after:ring-neutral-800',
+        online:
+          'after:absolute after:bottom-0 after:right-0 after:h-2.5 after:w-2.5 after:rounded-full after:bg-success after:ring-2 after:ring-white dark:after:ring-neutral-800',
+        offline:
+          'after:absolute after:bottom-0 after:right-0 after:h-2.5 after:w-2.5 after:rounded-full after:bg-neutral-300 after:ring-2 after:ring-white dark:after:ring-neutral-800',
         away: 'after:absolute after:bottom-0 after:right-0 after:h-2.5 after:w-2.5 after:rounded-full after:bg-warning after:ring-2 after:ring-white dark:after:ring-neutral-800',
         busy: 'after:absolute after:bottom-0 after:right-0 after:h-2.5 after:w-2.5 after:rounded-full after:bg-error after:ring-2 after:ring-white dark:after:ring-neutral-800',
-        verified: 'after:absolute after:bottom-0 after:right-0 after:h-3 after:w-3 after:rounded-full after:bg-white after:flex after:items-center after:justify-center after:text-[8px] after:text-success after:content-["✓"] after:ring-2 after:ring-success',
-        premium: 'after:absolute after:bottom-0 after:right-0 after:h-3 after:w-3 after:rounded-full after:bg-premium after:ring-2 after:ring-white dark:after:ring-neutral-800',
+        verified:
+          'after:absolute after:bottom-0 after:right-0 after:h-3 after:w-3 after:rounded-full after:bg-white after:flex after:items-center after:justify-center after:text-[8px] after:text-success after:content-["✓"] after:ring-2 after:ring-success',
+        premium:
+          'after:absolute after:bottom-0 after:right-0 after:h-3 after:w-3 after:rounded-full after:bg-premium after:ring-2 after:ring-white dark:after:ring-neutral-800',
       },
 
       // Avatar border styles
@@ -71,7 +76,7 @@ const avatarVariants = cva(
       hover: 'none',
       background: 'default',
     },
-  }
+  },
 );
 
 export interface AvatarProps extends VariantProps<typeof avatarVariants> {
@@ -151,11 +156,16 @@ const Avatar = ({
   // Badge position classes
   const getBadgePositionClasses = () => {
     switch (badgePosition) {
-      case 'top-right': return 'top-0 right-0 -translate-y-1/3 translate-x-1/3';
-      case 'top-left': return 'top-0 left-0 -translate-y-1/3 -translate-x-1/3';
-      case 'bottom-right': return 'bottom-0 right-0 translate-y-1/3 translate-x-1/3';
-      case 'bottom-left': return 'bottom-0 left-0 translate-y-1/3 -translate-x-1/3';
-      default: return 'top-0 right-0 -translate-y-1/3 translate-x-1/3';
+      case 'top-right':
+        return 'top-0 right-0 -translate-y-1/3 translate-x-1/3';
+      case 'top-left':
+        return 'top-0 left-0 -translate-y-1/3 -translate-x-1/3';
+      case 'bottom-right':
+        return 'bottom-0 right-0 translate-y-1/3 translate-x-1/3';
+      case 'bottom-left':
+        return 'bottom-0 left-0 translate-y-1/3 -translate-x-1/3';
+      default:
+        return 'top-0 right-0 -translate-y-1/3 translate-x-1/3';
     }
   };
 
@@ -164,16 +174,17 @@ const Avatar = ({
       className={cn(
         avatarVariants({ size, shape, status, border, hover, background }),
         interactive && 'cursor-pointer',
-        className
+        className,
       )}
       onClick={onClick}
       {...props}
     >
       {!imageError && src ? (
-        <img
+        <Image
           src={src}
           alt={alt}
-          className="h-full w-full object-cover"
+          layout="fill"
+          objectFit="cover"
           onError={handleImageError}
         />
       ) : (
@@ -184,10 +195,12 @@ const Avatar = ({
 
       {/* Custom badge */}
       {badge && (
-        <div className={cn(
-          'absolute z-10 flex items-center justify-center',
-          getBadgePositionClasses()
-        )}>
+        <div
+          className={cn(
+            'absolute z-10 flex items-center justify-center',
+            getBadgePositionClasses(),
+          )}
+        >
           {badge}
         </div>
       )}

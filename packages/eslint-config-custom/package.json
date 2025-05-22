@@ -1,17 +1,17 @@
 {
-  "name": "@repo/eslint-config",
+  "name": "eslint-config-custom",
   "version": "0.1.0",
   "type": "module",
   "private": true,
+  "main": "./base.js",
   "exports": {
+    ".": "./base.js",
     "./base": "./base.js",
-    "./next-js": "./next.js",
-    "./react-internal": "./react-internal.js"
+    "./nextjs": "./next.js",
+    "./react-library": "./react-library.js"
   },
   "scripts": {
-    "clean": "rm -rf node_modules",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "clean": "rm -rf node_modules"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^2.1.4",

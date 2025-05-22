@@ -14,19 +14,21 @@ export const PremiumBanner = memo(function PremiumBanner({
   showPremiumBanner,
   setShowPremiumBanner,
 }) {
+  // Memoize the close handler to prevent unnecessary re-renders
+  const handleClose = useCallback(() => {
+    setShowPremiumBanner(false);
+  }, [setShowPremiumBanner]);
+
   // Early return if banner should be hidden
   if (!showPremiumBanner) return null;
 
   // Validate required props
   if (typeof setShowPremiumBanner !== 'function') {
-    console.error('PremiumBanner component missing required setShowPremiumBanner function');
+    console.error(
+      'PremiumBanner component missing required setShowPremiumBanner function',
+    );
     return null;
   }
-
-  // Memoize the close handler to prevent unnecessary re-renders
-  const handleClose = useCallback(() => {
-    setShowPremiumBanner(false);
-  }, [setShowPremiumBanner]);
 
   return (
     <div

@@ -27,7 +27,10 @@ export function TopCritics({ topReviewers }: TopCriticsProps): JSX.Element {
   return (
     <section className="mb-12">
       <div className="flex items-center mb-4">
-        <LucideClientIcon icon={Award} className="w-5 h-5 text-yellow-500 mr-2" />
+        <LucideClientIcon
+          icon={Award}
+          className="w-5 h-5 text-yellow-500 mr-2"
+        />
         <h2 className="text-xl font-bold">Top Food Critics</h2>
       </div>
 

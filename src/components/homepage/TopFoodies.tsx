@@ -42,7 +42,9 @@ export function TopFoodies({
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <LucideClientIcon icon={Trophy} className="w-5 h-5 mr-2" />
-                <h3 className="font-semibold">Top Reviewers in {countryName}</h3>
+                <h3 className="font-semibold">
+                  Top Reviewers in {countryName}
+                </h3>
               </div>
               <Link
                 href={getCountryLink('/social')}
@@ -63,7 +65,9 @@ export function TopFoodies({
                   }`}
                 >
                   <div className="flex items-center">
-                    <span className="text-gray-500 text-sm w-5">{index + 1}</span>
+                    <span className="text-gray-500 text-sm w-5">
+                      {index + 1}
+                    </span>
                     <span className="ml-3 font-medium">{reviewer.name}</span>
                     <span className="ml-2 text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full">
                       {reviewer.badge}
@@ -108,7 +112,9 @@ export function TopFoodies({
                   }`}
                 >
                   <div className="flex items-center">
-                    <span className="text-gray-500 text-sm w-5">{index + 1}</span>
+                    <span className="text-gray-500 text-sm w-5">
+                      {index + 1}
+                    </span>
                     <span className="ml-3 font-medium">{dish.name}</span>
                   </div>
                   <div className="text-right">
@@ -116,7 +122,9 @@ export function TopFoodies({
                       {dish.votes}
                     </span>
                     <span className="text-gray-500 text-sm ml-1">votes</span>
-                    <span className="ml-2 text-xs text-green-600">{dish.trend}</span>
+                    <span className="ml-2 text-xs text-green-600">
+                      {dish.trend}
+                    </span>
                   </div>
                 </li>
               ))}
@@ -151,14 +159,18 @@ export function TopFoodies({
                   }`}
                 >
                   <div className="flex items-center">
-                    <span className="text-gray-500 text-sm w-5">{index + 1}</span>
+                    <span className="text-gray-500 text-sm w-5">
+                      {index + 1}
+                    </span>
                     <span className="ml-3 font-medium">{location.name}</span>
                   </div>
                   <div className="text-right">
                     <span className="text-gray-900 font-semibold">
                       {location.restaurants}
                     </span>
-                    <span className="text-gray-500 text-sm ml-1">restaurants</span>
+                    <span className="text-gray-500 text-sm ml-1">
+                      restaurants
+                    </span>
                     <span className="ml-2 text-xs text-green-600">
                       {location.new}
                     </span>

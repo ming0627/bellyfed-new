@@ -1,10 +1,11 @@
 import React, { memo } from 'react';
+import Image from 'next/image';
 import { Award } from 'lucide-react';
 import { LucideClientIcon } from '../ui/lucide-icon.js';
 
 /**
  * TopCritics component displays a grid of top food critics with their badges and achievements.
- * 
+ *
  * @param {Object} props - Component props
  * @param {Array} props.topReviewers - Array of top reviewer objects
  * @returns {JSX.Element} - Rendered component
@@ -18,15 +19,12 @@ export const TopCritics = memo(function TopCritics({ topReviewers }) {
   return (
     <section className="mb-12" aria-labelledby="top-critics-heading">
       <div className="flex items-center mb-4">
-        <LucideClientIcon 
-          icon={Award} 
-          className="w-5 h-5 text-yellow-500 mr-2" 
-          aria-hidden="true" 
+        <LucideClientIcon
+          icon={Award}
+          className="w-5 h-5 text-yellow-500 mr-2"
+          aria-hidden="true"
         />
-        <h2 
-          id="top-critics-heading" 
-          className="text-xl font-bold"
-        >
+        <h2 id="top-critics-heading" className="text-xl font-bold">
           Top Food Critics
         </h2>
       </div>
@@ -41,10 +39,13 @@ export const TopCritics = memo(function TopCritics({ topReviewers }) {
           >
             <div className="flex items-center mb-3">
               {reviewer.avatar ? (
-                <img
+                <Image
                   src={reviewer.avatar}
                   alt={`${reviewer.name}'s profile`}
-                  className="w-12 h-12 rounded-full object-cover"
+                  width={48}
+                  height={48}
+                  objectFit="cover"
+                  className="rounded-full"
                   loading="lazy"
                 />
               ) : (

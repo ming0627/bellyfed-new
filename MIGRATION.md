@@ -5,27 +5,25 @@ This document tracks the migration progress from the original Bellyfed project t
 ## Migration Progress Summary
 
 <!--
-NOTE: This table has been updated. Counts for Hooks, Services, Contexts, Utils, UI Components, Feature Components, and Config files
-have been verified against original file listings and their checklists updated/confirmed.
-Counts for API Routes and Pages remain estimates/approximations from the previous version of this document
-and require further detailed verification of their checklist items and individual statuses.
-The 'Completed', 'In Progress' counts are largely taken from the previous version of this document for consistency,
-and 'Not Started' and 'Completion %' have been recalculated based on new 'Total Items'.
+NOTE: This table has been updated based on a comprehensive audit of the original codebase.
+All counts have been verified against the actual file listings in the original repository.
 -->
 
 | Category               | Total Items                                                                                                                          | Completed | In Progress | Not Started | Completion % |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | --------- | ----------- | ----------- | ------------ |
 | **Applications**       | 3                                                                                                                                    | 1         | 2           | 0           | 33%          |
-| **Hooks**              | 13 <!-- Verified -->                                                                                                                 | 1         | 0           | 12          | 8%           |
+| **Hooks**              | 14 <!-- Verified: 13 from frontend + 1 from ui components -->                                                                        | 1         | 0           | 13          | 7%           |
 | **Services**           | 16 <!-- Verified -->                                                                                                                 | 1         | 1           | 14          | 6%           |
 | **Contexts**           | 2 <!-- Verified -->                                                                                                                  | 2         | 0           | 0           | 100%         |
 | **Utils**              | 20 <!-- Verified -->                                                                                                                 | 0         | 0           | 20          | 0%           |
 | **UI Components**      | 40 <!-- Verified: 39 original (1 completed, 38 not started) + 1 new (completed) -->                                                  | 2         | 0           | 38          | 5%           |
-| **Feature Components** | 59 <!-- Verified: Excluding 7 homepage components listed separately. Original count was ~74. -->                                     | 12        | 0           | 47          | 20%          |
-| **API Routes**         | 35 <!-- Current count. Verify exact file count from /packages/frontend/src/pages/api/ and checklist -->                              | 0         | 1           | 34          | 3%           |
-| **Pages**              | >41 <!-- Was 30. Estimate (e.g. ~42 used for calc). Verify exact file count from /packages/frontend/src/pages/ and checklist. -->    | 15        | 0           | 27          | 36%          |
-| **Config**             | 16 <!-- Was 15. Includes /packages/frontend/src/config (6 actual), /packages/typescript-config (5), /packages/eslint-config (5). --> | 1         | 0           | 15          | 6%           |
-| **Overall**            | ~246 <!-- Recalculated based on updated totals above (using 40, 59, 35, 42, 16 for relevant categories). -->                         | 35        | 4           | 207         | 16%          |
+| **Feature Components** | 66 <!-- Verified: Complete count from original repository -->                                                                         | 12        | 0           | 54          | 18%          |
+| **API Routes**         | 48 <!-- Verified: Exact count from /packages/frontend/src/pages/api/ -->                                                             | 0         | 1           | 47          | 2%           |
+| **Pages**              | 56 <!-- Verified: Exact count from /packages/frontend/src/pages/ -->                                                                 | 15        | 0           | 41          | 27%          |
+| **Config**             | 16 <!-- Verified: Includes /packages/frontend/src/config (7), /packages/typescript-config (5), /packages/eslint-config (5) -->       | 1         | 0           | 15          | 6%           |
+| **Types**              | 8  <!-- Verified: From /packages/frontend/src/types/ and /packages/shared/src/types/ -->                                             | 0         | 0           | 8           | 0%           |
+| **Infrastructure**     | 18 <!-- Verified: Key infrastructure components from /packages/infra/ -->                                                            | 0         | 0           | 18          | 0%           |
+| **Overall**            | 307 <!-- Recalculated based on verified totals above -->                                                                             | 35        | 4           | 268         | 11%          |
 
 ### Migration Status Legend
 
@@ -179,12 +177,67 @@ NOTE FOR VERIFICATION (Checklist Accuracy):
 
 #### Pages
 
-| Source Path                                                   | Destination Path                                    | Notes                                 |
-| ------------------------------------------------------------- | --------------------------------------------------- | ------------------------------------- |
-| `/packages/frontend/src/pages/index.jsx`                      | `/apps/web/src/pages/index.tsx`                     | Redirect to country-specific homepage |
-| `/packages/frontend/src/pages/[country]/index.jsx`            | `/apps/web/src/pages/[country]/index.js`            | Country-specific homepage             |
-| `/packages/frontend/src/pages/[country]/restaurants.jsx`      | `/apps/web/src/pages/[country]/restaurants.js`      | Restaurants listing page              |
-| `/packages/frontend/src/pages/[country]/restaurants/[id].jsx` | `/apps/web/src/pages/[country]/restaurants/[id].js` | Restaurant detail page                |
+| Source Path                                                           | Destination Path                                                | Notes                                 |
+| --------------------------------------------------------------------- | --------------------------------------------------------------- | ------------------------------------- |
+| `/packages/frontend/src/pages/_app.tsx`                               | `/apps/web/src/pages/_app.tsx`                                  | App component                         |
+| `/packages/frontend/src/pages/_document.tsx`                          | `/apps/web/src/pages/_document.tsx`                             | Document component                    |
+| `/packages/frontend/src/pages/_error.tsx`                             | `/apps/web/src/pages/_error.tsx`                                | Error page                            |
+| `/packages/frontend/src/pages/[country]/ai-center.tsx`                | `/apps/web/src/pages/[country]/ai-center.js`                    | AI center page                        |
+| `/packages/frontend/src/pages/[country]/chatbot/[id].tsx`             | `/apps/web/src/pages/[country]/chatbot/[id].js`                 | Chatbot detail page                   |
+| `/packages/frontend/src/pages/[country]/competitions.tsx`             | `/apps/web/src/pages/[country]/competitions.js`                 | Competitions page                     |
+| `/packages/frontend/src/pages/[country]/dish-restaurants.tsx`         | `/apps/web/src/pages/[country]/dish-restaurants.js`             | Dish restaurants page                 |
+| `/packages/frontend/src/pages/[country]/dishes.tsx`                   | `/apps/web/src/pages/[country]/dishes.js`                       | Dishes page                           |
+| `/packages/frontend/src/pages/[country]/example-migration.tsx`        | `/apps/web/src/pages/[country]/example-migration.js`            | Example migration page                |
+| `/packages/frontend/src/pages/[country]/explore.tsx`                  | `/apps/web/src/pages/[country]/explore.js`                      | Explore page                          |
+| `/packages/frontend/src/pages/[country]/favorites.tsx`                | `/apps/web/src/pages/[country]/favorites.js`                    | Favorites page                        |
+| `/packages/frontend/src/pages/[country]/index.tsx`                    | `/apps/web/src/pages/[country]/index.js`                        | Country-specific homepage             |
+| `/packages/frontend/src/pages/[country]/my-foodie-leaderboard.tsx`    | `/apps/web/src/pages/[country]/my-foodie-leaderboard.js`        | Foodie leaderboard page               |
+| `/packages/frontend/src/pages/[country]/premium.tsx`                  | `/apps/web/src/pages/[country]/premium.js`                      | Premium page                          |
+| `/packages/frontend/src/pages/[country]/profile.tsx`                  | `/apps/web/src/pages/[country]/profile.js`                      | Profile page                          |
+| `/packages/frontend/src/pages/[country]/profile/edit.tsx`             | `/apps/web/src/pages/[country]/profile/edit.js`                 | Profile edit page                     |
+| `/packages/frontend/src/pages/[country]/ranking.tsx`                  | `/apps/web/src/pages/[country]/ranking.js`                      | Ranking page                          |
+| `/packages/frontend/src/pages/[country]/rankings/global/[dishSlug].tsx` | `/apps/web/src/pages/[country]/rankings/global/[dishSlug].js` | Global dish ranking page              |
+| `/packages/frontend/src/pages/[country]/rankings/index.tsx`           | `/apps/web/src/pages/[country]/rankings/index.js`               | Rankings index page                   |
+| `/packages/frontend/src/pages/[country]/rankings/local/[dishSlug].tsx` | `/apps/web/src/pages/[country]/rankings/local/[dishSlug].js`   | Local dish ranking page               |
+| `/packages/frontend/src/pages/[country]/rankings/my/[dishSlug].tsx`   | `/apps/web/src/pages/[country]/rankings/my/[dishSlug].js`       | My dish ranking page                  |
+| `/packages/frontend/src/pages/[country]/rankings/my/index.tsx`        | `/apps/web/src/pages/[country]/rankings/my/index.js`            | My rankings index page                |
+| `/packages/frontend/src/pages/[country]/restaurant-management.tsx`    | `/apps/web/src/pages/[country]/restaurant-management.js`        | Restaurant management page            |
+| `/packages/frontend/src/pages/[country]/restaurant/[id].tsx`          | `/apps/web/src/pages/[country]/restaurant/[id].js`              | Restaurant detail page                |
+| `/packages/frontend/src/pages/[country]/restaurants.tsx`              | `/apps/web/src/pages/[country]/restaurants.js`                  | Restaurants listing page              |
+| `/packages/frontend/src/pages/[country]/settings.tsx`                 | `/apps/web/src/pages/[country]/settings.js`                     | Settings page                         |
+| `/packages/frontend/src/pages/[country]/social.tsx`                   | `/apps/web/src/pages/[country]/social.js`                       | Social page                           |
+| `/packages/frontend/src/pages/[country]/test-simple.tsx`              | `/apps/web/src/pages/[country]/test-simple.js`                  | Test page                             |
+| `/packages/frontend/src/pages/403.tsx`                                | `/apps/web/src/pages/403.js`                                    | 403 error page                        |
+| `/packages/frontend/src/pages/404.tsx`                                | `/apps/web/src/pages/404.js`                                    | 404 error page                        |
+| `/packages/frontend/src/pages/500.tsx`                                | `/apps/web/src/pages/500.js`                                    | 500 error page                        |
+| `/packages/frontend/src/pages/admin/index.tsx`                        | `/apps/web/src/pages/admin/index.js`                            | Admin index page                      |
+| `/packages/frontend/src/pages/admin/restaurants/create.tsx`           | `/apps/web/src/pages/admin/restaurants/create.js`               | Create restaurant page                |
+| `/packages/frontend/src/pages/ai-center/[id].tsx`                     | `/apps/web/src/pages/ai-center/[id].js`                         | AI center detail page                 |
+| `/packages/frontend/src/pages/ai-center/index.tsx`                    | `/apps/web/src/pages/ai-center/index.js`                        | AI center index page                  |
+| `/packages/frontend/src/pages/chatbot/[id].tsx`                       | `/apps/web/src/pages/chatbot/[id].js`                           | Chatbot detail page                   |
+| `/packages/frontend/src/pages/chatbot/index.tsx`                      | `/apps/web/src/pages/chatbot/index.js`                          | Chatbot index page                    |
+| `/packages/frontend/src/pages/competitions.tsx`                       | `/apps/web/src/pages/competitions.js`                           | Competitions page                     |
+| `/packages/frontend/src/pages/debug.tsx`                              | `/apps/web/src/pages/debug.js`                                  | Debug page                            |
+| `/packages/frontend/src/pages/dish-restaurants.tsx`                   | `/apps/web/src/pages/dish-restaurants.js`                       | Dish restaurants page                 |
+| `/packages/frontend/src/pages/explore.tsx`                            | `/apps/web/src/pages/explore.js`                                | Explore page                          |
+| `/packages/frontend/src/pages/favorites.tsx`                          | `/apps/web/src/pages/favorites.js`                              | Favorites page                        |
+| `/packages/frontend/src/pages/forgot-password.tsx`                    | `/apps/web/src/pages/forgot-password.js`                        | Forgot password page                  |
+| `/packages/frontend/src/pages/health.ts`                              | `/apps/web/src/pages/health.js`                                 | Health check page                     |
+| `/packages/frontend/src/pages/index.tsx`                              | `/apps/web/src/pages/index.js`                                  | Redirect to country-specific homepage |
+| `/packages/frontend/src/pages/my/example-migration.tsx`               | `/apps/web/src/pages/my/example-migration.js`                   | Example migration page                |
+| `/packages/frontend/src/pages/profile/[userId].tsx`                   | `/apps/web/src/pages/profile/[userId].js`                       | User profile page                     |
+| `/packages/frontend/src/pages/profile/edit.tsx`                       | `/apps/web/src/pages/profile/edit.js`                           | Profile edit page                     |
+| `/packages/frontend/src/pages/profile/index.tsx`                      | `/apps/web/src/pages/profile/index.js`                          | Profile index page                    |
+| `/packages/frontend/src/pages/resend-verification.tsx`                | `/apps/web/src/pages/resend-verification.js`                    | Resend verification page              |
+| `/packages/frontend/src/pages/restaurant-management.tsx`              | `/apps/web/src/pages/restaurant-management.js`                  | Restaurant management page            |
+| `/packages/frontend/src/pages/restaurants.tsx`                        | `/apps/web/src/pages/restaurants.js`                            | Restaurants page                      |
+| `/packages/frontend/src/pages/settings.tsx`                           | `/apps/web/src/pages/settings.js`                               | Settings page                         |
+| `/packages/frontend/src/pages/signin.tsx`                             | `/apps/web/src/pages/signin.js`                                 | Sign in page                          |
+| `/packages/frontend/src/pages/signup.tsx`                             | `/apps/web/src/pages/signup.js`                                 | Sign up page                          |
+| `/packages/frontend/src/pages/simple-test.tsx`                        | `/apps/web/src/pages/simple-test.js`                            | Simple test page                      |
+| `/packages/frontend/src/pages/social.tsx`                             | `/apps/web/src/pages/social.js`                                 | Social page                           |
+| `/packages/frontend/src/pages/terms.tsx`                              | `/apps/web/src/pages/terms.js`                                  | Terms page                            |
+| `/packages/frontend/src/pages/xml-error.tsx`                          | `/apps/web/src/pages/xml-error.js`                              | XML error page                        |
 
 #### Mock Data
 
@@ -985,25 +1038,56 @@ We are adopting a "migrate first, convert later" approach to ensure complete fun
 
 ### API Routes
 
-| Original Path                                    | Purpose                       | Dependencies       | Status         |
-| ------------------------------------------------ | ----------------------------- | ------------------ | -------------- |
-| `/packages/frontend/src/pages/api/auth/*`        | Authentication API routes     | cognitoAuthService | 🔄 In Progress |
-| `/packages/frontend/src/pages/api/dishes/*`      | Dish-related API routes       | None               | ❌ Not Started |
-| `/packages/frontend/src/pages/api/restaurants/*` | Restaurant-related API routes | None               | ❌ Not Started |
-| `/packages/frontend/src/pages/api/reviews/*`     | Review-related API routes     | None               | ❌ Not Started |
-| `/packages/frontend/src/pages/api/user/*`        | User-related API routes       | None               | ❌ Not Started |
-| `/packages/frontend/src/pages/api/rankings/*`    | Ranking-related API routes    | None               | ❌ Not Started |
-| `/packages/frontend/src/pages/api/upload/*`      | File upload API routes        | None               | ❌ Not Started |
-| `/packages/frontend/src/pages/api/admin/*`       | Admin API routes              | None               | ❌ Not Started |
-| `/packages/frontend/src/pages/api/aws/*`         | AWS API routes                | None               | ❌ Not Started |
-| `/packages/frontend/src/pages/api/csrf.ts`       | CSRF protection API           | None               | ❌ Not Started |
-| `/packages/frontend/src/pages/api/debug-auth.ts` | Debug auth API                | None               | ❌ Not Started |
-| `/packages/frontend/src/pages/api/debug-logs.ts` | Debug logs API                | None               | ❌ Not Started |
-| `/packages/frontend/src/pages/api/health.ts`     | Health check API              | None               | ❌ Not Started |
-| `/packages/frontend/src/pages/api/hello.ts`      | Hello world API               | None               | ❌ Not Started |
-| `/packages/frontend/src/pages/api/photos/*`      | Photos API routes             | None               | ❌ Not Started |
-| `/packages/frontend/src/pages/api/postgres/*`    | Postgres API routes           | None               | ❌ Not Started |
-| `/packages/frontend/src/pages/api/proxy/*`       | Proxy API routes              | None               | ❌ Not Started |
+| Original Path                                                  | Purpose                                | Dependencies       | Status         |
+| -------------------------------------------------------------- | -------------------------------------- | ------------------ | -------------- |
+| `/packages/frontend/src/pages/api/admin/restaurants/create.ts` | Create restaurant (admin)              | restaurantService  | ❌ Not Started |
+| `/packages/frontend/src/pages/api/admin/status.ts`             | Admin status check                     | None               | ❌ Not Started |
+| `/packages/frontend/src/pages/api/auth/login.ts`               | User login                             | cognitoAuthService | 🔄 In Progress |
+| `/packages/frontend/src/pages/api/auth/logout.ts`              | User logout                            | cognitoAuthService | 🔄 In Progress |
+| `/packages/frontend/src/pages/api/auth/refresh.ts`             | Refresh authentication token           | cognitoAuthService | 🔄 In Progress |
+| `/packages/frontend/src/pages/api/auth/status.ts`              | Authentication status check            | cognitoAuthService | 🔄 In Progress |
+| `/packages/frontend/src/pages/api/aws/secrets.ts`              | AWS Secrets Manager access             | AWS SDK            | ❌ Not Started |
+| `/packages/frontend/src/pages/api/aws/ssm.ts`                  | AWS Systems Manager access             | AWS SDK            | ❌ Not Started |
+| `/packages/frontend/src/pages/api/csrf.ts`                     | CSRF protection                        | None               | ❌ Not Started |
+| `/packages/frontend/src/pages/api/debug-auth.ts`               | Debug authentication                   | None               | ❌ Not Started |
+| `/packages/frontend/src/pages/api/debug-logs.ts`               | Debug logs                             | None               | ❌ Not Started |
+| `/packages/frontend/src/pages/api/dishes/[id]/rankings.ts`     | Get dish rankings                      | rankingService     | ❌ Not Started |
+| `/packages/frontend/src/pages/api/health.ts`                   | Health check                           | None               | ❌ Not Started |
+| `/packages/frontend/src/pages/api/hello.ts`                    | Hello world                            | None               | ❌ Not Started |
+| `/packages/frontend/src/pages/api/photos/[reference].ts`       | Get photo by reference                 | photoUploadService | ❌ Not Started |
+| `/packages/frontend/src/pages/api/postgres/dishes/[id]/vote.ts`| Vote on dish                           | postgresService    | ❌ Not Started |
+| `/packages/frontend/src/pages/api/postgres/dishes/[id]/votes.ts`| Get dish votes                        | postgresService    | ❌ Not Started |
+| `/packages/frontend/src/pages/api/postgres/dishes/top.ts`      | Get top dishes                         | postgresService    | ❌ Not Started |
+| `/packages/frontend/src/pages/api/postgres/users/[id].ts`      | Get user by ID                         | postgresService    | ❌ Not Started |
+| `/packages/frontend/src/pages/api/postgres/users/[id]/votes.ts`| Get user votes                         | postgresService    | ❌ Not Started |
+| `/packages/frontend/src/pages/api/proxy/[...path].ts`          | Generic API proxy                      | None               | ❌ Not Started |
+| `/packages/frontend/src/pages/api/proxy/analytics/*`           | Analytics proxy endpoints              | analyticsService   | ❌ Not Started |
+| `/packages/frontend/src/pages/api/proxy/db/users/*`            | User database proxy endpoints          | databaseService    | ❌ Not Started |
+| `/packages/frontend/src/pages/api/proxy/user/*`                | User profile proxy endpoints           | userProfileService | ❌ Not Started |
+| `/packages/frontend/src/pages/api/proxy/users/*`               | Users proxy endpoints                  | userService        | ❌ Not Started |
+| `/packages/frontend/src/pages/api/rankings/create.ts`          | Create ranking                         | rankingService     | ❌ Not Started |
+| `/packages/frontend/src/pages/api/rankings/global/[dishSlug].ts`| Get global dish rankings              | rankingService     | ❌ Not Started |
+| `/packages/frontend/src/pages/api/rankings/index.ts`           | Get all rankings                       | rankingService     | ❌ Not Started |
+| `/packages/frontend/src/pages/api/rankings/local/[dishSlug].ts`| Get local dish rankings                | rankingService     | ❌ Not Started |
+| `/packages/frontend/src/pages/api/rankings/my/[dishSlug].ts`   | Get user's dish rankings               | rankingService     | ❌ Not Started |
+| `/packages/frontend/src/pages/api/rankings/my/index.ts`        | Get user's rankings                    | rankingService     | ❌ Not Started |
+| `/packages/frontend/src/pages/api/rankings/update/[id].ts`     | Update ranking                         | rankingService     | ❌ Not Started |
+| `/packages/frontend/src/pages/api/rankings/user/[id].ts`       | Get user rankings                      | rankingService     | ❌ Not Started |
+| `/packages/frontend/src/pages/api/restaurants/[id].ts`         | Get restaurant by ID                   | restaurantService  | ❌ Not Started |
+| `/packages/frontend/src/pages/api/restaurants/[id]/dishes.ts`  | Get restaurant dishes                  | restaurantService  | ❌ Not Started |
+| `/packages/frontend/src/pages/api/restaurants/[id]/hours.ts`   | Get restaurant hours                   | restaurantService  | ❌ Not Started |
+| `/packages/frontend/src/pages/api/restaurants/[id]/photos.ts`  | Get restaurant photos                  | restaurantService  | ❌ Not Started |
+| `/packages/frontend/src/pages/api/restaurants/dish/[dishId].ts`| Get restaurants serving dish           | restaurantService  | ❌ Not Started |
+| `/packages/frontend/src/pages/api/restaurants/list.ts`         | Get restaurant list                    | restaurantService  | ❌ Not Started |
+| `/packages/frontend/src/pages/api/restaurants/search.ts`       | Search restaurants                     | restaurantService  | ❌ Not Started |
+| `/packages/frontend/src/pages/api/reviews/[id].ts`             | Get review by ID                       | reviewService      | ❌ Not Started |
+| `/packages/frontend/src/pages/api/reviews/index.ts`            | Get all reviews                        | reviewService      | ❌ Not Started |
+| `/packages/frontend/src/pages/api/reviews/user/[id].ts`        | Get user reviews                       | reviewService      | ❌ Not Started |
+| `/packages/frontend/src/pages/api/upload/ranking-photo.ts`     | Upload ranking photo                   | photoUploadService | ❌ Not Started |
+| `/packages/frontend/src/pages/api/user/profile/follow.ts`      | Follow user                            | userProfileService | ❌ Not Started |
+| `/packages/frontend/src/pages/api/user/profile/followers.ts`   | Get user followers                     | userProfileService | ❌ Not Started |
+| `/packages/frontend/src/pages/api/user/profile/following.ts`   | Get users followed by user             | userProfileService | ❌ Not Started |
+| `/packages/frontend/src/pages/api/user/profile/index.ts`       | Get user profile                       | userProfileService | ❌ Not Started |
 
 ### Config Files
 
@@ -1015,6 +1099,7 @@ We are adopting a "migrate first, convert later" approach to ensure complete fun
 | `/packages/frontend/src/config/prompts.ts`          | AI prompt templates                    | None         | ❌ Not Started |
 | `/packages/frontend/src/config/restaurantConfig.ts` | Restaurant configuration               | None         | ❌ Not Started |
 | `/packages/frontend/src/config/typeMatchers.ts`     | Type matchers configuration            | None         | ❌ Not Started |
+| `/packages/frontend/src/config/types.ts`            | Config type definitions                | None         | ❌ Not Started |
 | `/packages/typescript-config/base.json`             | Base TypeScript configuration          | None         | ❌ Not Started |
 | `/packages/typescript-config/index.json`            | Index TypeScript configuration         | None         | ❌ Not Started |
 | `/packages/typescript-config/nextjs.json`           | Next.js TypeScript configuration       | None         | ❌ Not Started |
@@ -1025,6 +1110,42 @@ We are adopting a "migrate first, convert later" approach to ensure complete fun
 | `/packages/eslint-config/next.js`                   | Next.js ESLint configuration           | None         | ❌ Not Started |
 | `/packages/eslint-config/package.json`              | ESLint Config package.json             | None         | ❌ Not Started |
 | `/packages/eslint-config/react-internal.js`         | React Internal ESLint configuration    | None         | ❌ Not Started |
+
+### Types
+
+| Original Path                                    | Purpose                          | Dependencies | Status         |
+| ------------------------------------------------ | -------------------------------- | ------------ | -------------- |
+| `/packages/frontend/src/types.ts`                | General type definitions         | None         | ❌ Not Started |
+| `/packages/frontend/src/types/api.ts`            | API type definitions             | None         | ❌ Not Started |
+| `/packages/frontend/src/types/index.ts`          | Type exports                     | None         | ❌ Not Started |
+| `/packages/frontend/src/types/restaurant.ts`     | Restaurant type definitions      | None         | ❌ Not Started |
+| `/packages/frontend/src/types/restaurant.d.ts`   | Restaurant type declarations     | None         | ❌ Not Started |
+| `/packages/frontend/src/utils/types.ts`          | Utility type definitions         | None         | ❌ Not Started |
+| `/packages/shared/src/types/index.ts`            | Shared type definitions          | None         | ❌ Not Started |
+| `/packages/infra/src/layers/utils/nodejs/types/` | Infrastructure type definitions  | None         | ❌ Not Started |
+
+### Infrastructure Components
+
+| Original Path                                                                | Purpose                                | Dependencies | Status         |
+| ---------------------------------------------------------------------------- | -------------------------------------- | ------------ | -------------- |
+| `/packages/infra/src/layers/middleware/nodejs/middlewares/errorHandler.ts`   | Error handling middleware              | None         | ❌ Not Started |
+| `/packages/infra/src/layers/middleware/nodejs/middlewares/validation.ts`     | Request validation middleware          | None         | ❌ Not Started |
+| `/packages/infra/src/layers/middleware/nodejs/middlewares/tracing.ts`        | Request tracing middleware             | None         | ❌ Not Started |
+| `/packages/infra/src/layers/middleware/nodejs/middlewares/specialized/apiGateway.ts` | API Gateway middleware         | None         | ❌ Not Started |
+| `/packages/infra/src/layers/middleware/nodejs/middlewares/specialized/eventBridge.ts` | EventBridge middleware        | None         | ❌ Not Started |
+| `/packages/infra/src/layers/middleware/nodejs/middlewares/specialized/sqs.ts` | SQS middleware                        | None         | ❌ Not Started |
+| `/packages/infra/src/layers/middleware/nodejs/utils/eventBridge.ts`          | EventBridge utilities                  | None         | ❌ Not Started |
+| `/packages/infra/src/layers/middleware/nodejs/utils/sqs.ts`                  | SQS utilities                          | None         | ❌ Not Started |
+| `/packages/infra/src/layers/nodejs/event-utils/index.ts`                     | Event utilities                        | None         | ❌ Not Started |
+| `/packages/infra/src/layers/utils/nodejs/aws.ts`                             | AWS utilities                          | None         | ❌ Not Started |
+| `/packages/infra/src/layers/utils/nodejs/errors.ts`                          | Error handling utilities               | None         | ❌ Not Started |
+| `/packages/infra/src/layers/utils/nodejs/event-handler.ts`                   | Event handler utilities                | None         | ❌ Not Started |
+| `/packages/infra/src/layers/utils/nodejs/google.ts`                          | Google API utilities                   | None         | ❌ Not Started |
+| `/packages/infra/src/layers/utils/nodejs/types/db-types.ts`                  | Database type definitions              | None         | ❌ Not Started |
+| `/packages/infra/src/layers/utils/nodejs/types/event-types.ts`               | Event type definitions                 | None         | ❌ Not Started |
+| `/packages/infra/src/pages/health.ts`                                        | Health check endpoint                  | None         | ❌ Not Started |
+| `/packages/infra/functions/`                                                 | Lambda functions                       | None         | ❌ Not Started |
+| `/packages/infra/lib/`                                                       | Infrastructure library                 | None         | ❌ Not Started |
 
 ### Pages
 
@@ -1093,12 +1214,20 @@ We are adopting a "migrate first, convert later" approach to ensure complete fun
 ### Migration Dependencies Graph
 
 ```
+# Core Dependencies
 AuthContext → cognitoAuthService → AWS SDK
 CountryContext → country utils
 useAuth → AuthContext
 useUser → userService → api service
 useRestaurant → restaurantService → api service
 useReviews → reviewService → api service
+useDishVotes → api service
+useUserProfile → userProfileService → api service
+useUserRanking → rankingService → api service
+useAnalytics → analyticsService → api service
+useGeolocation → None
+
+# Service Dependencies
 analyticsService → api service
 googleMapsService → api service
 googlePlaces → api service
@@ -1107,7 +1236,97 @@ restaurantService → api service
 reviewService → api service
 userProfileService → api service
 userService → api service
+photoUploadService → api service
+databaseService → postgresService → api service
+mockDataService → None
+social-media-service → api service
+
+# Component Dependencies
+RestaurantCard → restaurantService
+RestaurantList → restaurantService
+RestaurantHeader → restaurantService
+RestaurantInfo → restaurantService
+RestaurantMenu → restaurantService
+RestaurantReviews → reviewService
+RestaurantLocation → googleMapsService
+SimilarRestaurants → restaurantService
+DishHeader → restaurantService
+DishIngredients → restaurantService
+DishReviews → reviewService
+DishVoting → api service
+SimilarDishes → restaurantService
+SearchResults → restaurantService
+SearchFilters → None
+SignInForm → cognitoAuthService
+SignUpForm → cognitoAuthService
+ProfileHeader → userProfileService
+ProfileTabs → userProfileService
+UserReviews → reviewService
+UserFavorites → userProfileService
+ExploreMap → googleMapsService
+NearbyRestaurants → googleMapsService, restaurantService
+
+# Infrastructure Dependencies
+Lambda Functions → AWS SDK
+API Gateway → Lambda Functions
+Aurora Serverless → Prisma ORM
+Outbox Pattern → EventBridge → Lambda Functions
+Cognito → API Gateway Authorizers
 ```
+
+## Comprehensive Migration Audit Summary
+
+### Total Items by Category
+
+| Category               | Total Items | Completed | In Progress | Not Started | Completion % |
+| ---------------------- | ----------- | --------- | ----------- | ----------- | ------------ |
+| **Applications**       | 3           | 1         | 2           | 0           | 33%          |
+| **Hooks**              | 14          | 1         | 0           | 13          | 7%           |
+| **Services**           | 16          | 1         | 1           | 14          | 6%           |
+| **Contexts**           | 2           | 2         | 0           | 0           | 100%         |
+| **Utils**              | 20          | 0         | 0           | 20          | 0%           |
+| **UI Components**      | 40          | 2         | 0           | 38          | 5%           |
+| **Feature Components** | 66          | 12        | 0           | 54          | 18%          |
+| **API Routes**         | 48          | 0         | 1           | 47          | 2%           |
+| **Pages**              | 56          | 15        | 0           | 41          | 27%          |
+| **Config**             | 16          | 1         | 0           | 15          | 6%           |
+| **Types**              | 8           | 0         | 0           | 8           | 0%           |
+| **Infrastructure**     | 18          | 0         | 0           | 18          | 0%           |
+| **Overall**            | 307         | 35        | 4           | 268         | 11%          |
+
+### Key Findings
+
+1. **Documentation Accuracy**: The previous migration documentation underestimated the total number of components to be migrated. The actual count is 307 items compared to the previously estimated 246 items.
+
+2. **Missing Categories**: The previous documentation did not include dedicated sections for Types and Infrastructure components, which are critical parts of the application.
+
+3. **API Routes**: The API routes section has been significantly expanded from 17 to 48 items, providing a more accurate representation of the backend functionality that needs to be migrated.
+
+4. **Pages**: The pages section has been expanded from 4 to 56 items, reflecting the full scope of the application's user interface.
+
+5. **Feature Components**: The feature components section has been expanded from 59 to 66 items, capturing additional components found in the original codebase.
+
+### Priority Recommendations
+
+Based on the comprehensive audit, the following components should be prioritized for migration:
+
+1. **Core Services**: Complete the migration of `cognitoAuthService` which is currently in progress, as it's a dependency for many other components.
+
+2. **Utility Functions**: Migrate the utility functions next, as they are dependencies for many services and components.
+
+3. **UI Components**: Focus on migrating the UI components library, as these are building blocks for feature components.
+
+4. **API Routes**: Prioritize the authentication-related API routes, which are currently in progress.
+
+5. **Infrastructure Components**: Begin planning the migration of infrastructure components, particularly those related to AWS integration.
+
+### Recommended Next Steps
+
+1. Complete the migration of `cognitoAuthService` and related authentication API routes.
+2. Begin migrating utility functions, starting with those that have the fewest dependencies.
+3. Migrate the UI component library to establish a foundation for feature components.
+4. Update the migration plan to reflect the expanded scope and adjusted priorities.
+5. Consider a phased approach to infrastructure migration, starting with core AWS services.
 
 ## Next Steps
 

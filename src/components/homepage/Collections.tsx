@@ -17,8 +17,10 @@ export function Collections({
     {
       id: '1',
       title: 'Best Street Food in KL',
-      description: 'Discover the most authentic street food experiences in Kuala Lumpur',
-      imageUrl: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=600&h=400&fit=crop',
+      description:
+        'Discover the most authentic street food experiences in Kuala Lumpur',
+      imageUrl:
+        'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=600&h=400&fit=crop',
       count: 12,
       curator: 'Sarah Chen',
     },
@@ -26,7 +28,8 @@ export function Collections({
       id: '2',
       title: 'Hidden Gems',
       description: 'Off-the-beaten-path restaurants that locals love',
-      imageUrl: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=600&h=400&fit=crop',
+      imageUrl:
+        'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=600&h=400&fit=crop',
       count: 8,
       curator: 'Mike Wong',
     },
@@ -34,7 +37,8 @@ export function Collections({
       id: '3',
       title: 'Best Date Night Spots',
       description: 'Romantic restaurants perfect for special occasions',
-      imageUrl: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=600&h=400&fit=crop',
+      imageUrl:
+        'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=600&h=400&fit=crop',
       count: 10,
       curator: 'Lisa Tan',
     },
@@ -42,7 +46,8 @@ export function Collections({
       id: '4',
       title: 'Family-Friendly Restaurants',
       description: 'Kid-approved places with great food for adults too',
-      imageUrl: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=600&h=400&fit=crop',
+      imageUrl:
+        'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=600&h=400&fit=crop',
       count: 15,
       curator: 'David Lim',
     },
@@ -52,7 +57,10 @@ export function Collections({
     <section className="mb-12">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center">
-          <LucideClientIcon icon={BookOpen} className="w-5 h-5 text-purple-600 mr-2" />
+          <LucideClientIcon
+            icon={BookOpen}
+            className="w-5 h-5 text-purple-600 mr-2"
+          />
           <h2 className="text-xl font-bold">
             Popular Collections in {countryName}
           </h2>
@@ -67,7 +75,7 @@ export function Collections({
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {collections.map((collection) => (
+        {collections.map(collection => (
           <Link
             key={collection.id}
             href={getCountryLink(`/collections/${collection.id}`)}

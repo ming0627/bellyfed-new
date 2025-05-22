@@ -1,8 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   darkMode: 'class',
   theme: {
@@ -99,16 +99,16 @@ export default {
         // Semantic colors - Improved contrast for accessibility
         success: '#36B37E', // Green with better contrast (WCAG AA compliant)
         warning: '#FFAB00', // Amber with better contrast (WCAG AA compliant)
-        error: '#E53935',   // Red with better contrast (WCAG AA compliant)
-        info: '#2196F3',    // Blue with better contrast (WCAG AA compliant)
+        error: '#E53935', // Red with better contrast (WCAG AA compliant)
+        info: '#2196F3', // Blue with better contrast (WCAG AA compliant)
 
         // Special purpose colors - Aligned with orange-peach theme with better contrast
-        premium: '#FFB700',    // Gold with better contrast
-        verified: '#36B37E',   // Green with better contrast for verified
-        new: '#2196F3',        // Blue with better contrast for new items
-        popular: '#FF8033',    // Peach with better contrast for popular
-        featured: '#FF6B47',   // Coral with better contrast for featured
-        ranking: '#FF6600',    // Orange with better contrast for ranking board
+        premium: '#FFB700', // Gold with better contrast
+        verified: '#36B37E', // Green with better contrast for verified
+        new: '#2196F3', // Blue with better contrast for new items
+        popular: '#FF8033', // Peach with better contrast for popular
+        featured: '#FF6B47', // Coral with better contrast for featured
+        ranking: '#FF6600', // Orange with better contrast for ranking board
       },
 
       fontFamily: {
@@ -119,16 +119,16 @@ export default {
       },
 
       fontSize: {
-        xs: '0.75rem',     // 12px
-        sm: '0.875rem',    // 14px
-        base: '1rem',      // 16px
-        lg: '1.125rem',    // 18px
-        xl: '1.25rem',     // 20px
-        '2xl': '1.5rem',   // 24px
+        xs: '0.75rem', // 12px
+        sm: '0.875rem', // 14px
+        base: '1rem', // 16px
+        lg: '1.125rem', // 18px
+        xl: '1.25rem', // 20px
+        '2xl': '1.5rem', // 24px
         '3xl': '1.875rem', // 30px
-        '4xl': '2.25rem',  // 36px
-        '5xl': '3rem',     // 48px
-        '6xl': '3.75rem',  // 60px
+        '4xl': '2.25rem', // 36px
+        '5xl': '3rem', // 48px
+        '6xl': '3.75rem', // 60px
       },
 
       lineHeight: {
@@ -150,71 +150,72 @@ export default {
       },
 
       spacing: {
-        '0.5': '0.125rem', // 2px
-        '1': '0.25rem',    // 4px
-        '1.5': '0.375rem', // 6px
-        '2': '0.5rem',     // 8px
-        '2.5': '0.625rem', // 10px
-        '3': '0.75rem',    // 12px
-        '3.5': '0.875rem', // 14px
-        '4': '1rem',       // 16px
-        '5': '1.25rem',    // 20px
-        '6': '1.5rem',     // 24px
-        '7': '1.75rem',    // 28px
-        '8': '2rem',       // 32px
-        '9': '2.25rem',    // 36px
-        '10': '2.5rem',    // 40px
-        '12': '3rem',      // 48px
-        '14': '3.5rem',    // 56px
-        '16': '4rem',      // 64px
-        '20': '5rem',      // 80px
-        '24': '6rem',      // 96px
-        '28': '7rem',      // 112px
-        '32': '8rem',      // 128px
+        0.5: '0.125rem', // 2px
+        1: '0.25rem', // 4px
+        1.5: '0.375rem', // 6px
+        2: '0.5rem', // 8px
+        2.5: '0.625rem', // 10px
+        3: '0.75rem', // 12px
+        3.5: '0.875rem', // 14px
+        4: '1rem', // 16px
+        5: '1.25rem', // 20px
+        6: '1.5rem', // 24px
+        7: '1.75rem', // 28px
+        8: '2rem', // 32px
+        9: '2.25rem', // 36px
+        10: '2.5rem', // 40px
+        12: '3rem', // 48px
+        14: '3.5rem', // 56px
+        16: '4rem', // 64px
+        20: '5rem', // 80px
+        24: '6rem', // 96px
+        28: '7rem', // 112px
+        32: '8rem', // 128px
       },
 
       borderRadius: {
-        'none': '0',
-        'xs': '0.125rem',    // 2px
-        'sm': '0.25rem',     // 4px
-        'DEFAULT': '0.375rem', // 6px
-        'md': '0.5rem',      // 8px
-        'lg': '0.75rem',     // 12px
-        'xl': '1rem',        // 16px
-        '2xl': '1.5rem',     // 24px
-        'pill': '9999px',    // Pill shape
+        none: '0',
+        xs: '0.125rem', // 2px
+        sm: '0.25rem', // 4px
+        DEFAULT: '0.375rem', // 6px
+        md: '0.5rem', // 8px
+        lg: '0.75rem', // 12px
+        xl: '1rem', // 16px
+        '2xl': '1.5rem', // 24px
+        pill: '9999px', // Pill shape
       },
 
       boxShadow: {
-        'xs': '0 1px 2px rgba(255, 153, 102, 0.05)',
-        'sm': '0 1px 3px rgba(255, 153, 102, 0.08)',
-        'DEFAULT': '0 4px 6px rgba(255, 153, 102, 0.06), 0 1px 3px rgba(255, 153, 102, 0.04)',
-        'md': '0 10px 15px rgba(255, 153, 102, 0.05), 0 4px 6px rgba(255, 153, 102, 0.03)',
-        'lg': '0 20px 25px rgba(255, 153, 102, 0.05), 0 10px 10px rgba(255, 153, 102, 0.03)',
-        'xl': '0 25px 50px rgba(255, 153, 102, 0.06)',
-        'inner': 'inset 0 2px 4px rgba(255, 153, 102, 0.05)',
-        'none': 'none',
-        'primary': '0 4px 14px rgba(255, 153, 102, 0.25)',
-        'secondary': '0 4px 14px rgba(255, 155, 102, 0.25)',
-        'coral': '0 4px 14px rgba(255, 133, 102, 0.25)',
-        'hover': '0 6px 20px rgba(255, 153, 102, 0.15)',
-        'card': '0 8px 24px rgba(255, 153, 102, 0.12)',
+        xs: '0 1px 2px rgba(255, 153, 102, 0.05)',
+        sm: '0 1px 3px rgba(255, 153, 102, 0.08)',
+        DEFAULT:
+          '0 4px 6px rgba(255, 153, 102, 0.06), 0 1px 3px rgba(255, 153, 102, 0.04)',
+        md: '0 10px 15px rgba(255, 153, 102, 0.05), 0 4px 6px rgba(255, 153, 102, 0.03)',
+        lg: '0 20px 25px rgba(255, 153, 102, 0.05), 0 10px 10px rgba(255, 153, 102, 0.03)',
+        xl: '0 25px 50px rgba(255, 153, 102, 0.06)',
+        inner: 'inset 0 2px 4px rgba(255, 153, 102, 0.05)',
+        none: 'none',
+        primary: '0 4px 14px rgba(255, 153, 102, 0.25)',
+        secondary: '0 4px 14px rgba(255, 155, 102, 0.25)',
+        coral: '0 4px 14px rgba(255, 133, 102, 0.25)',
+        hover: '0 6px 20px rgba(255, 153, 102, 0.15)',
+        card: '0 8px 24px rgba(255, 153, 102, 0.12)',
       },
 
       transitionTimingFunction: {
-        'DEFAULT': 'cubic-bezier(0.4, 0, 0.2, 1)',
-        'linear': 'linear',
-        'in': 'cubic-bezier(0.4, 0, 1, 1)',
-        'out': 'cubic-bezier(0, 0, 0.2, 1)',
+        DEFAULT: 'cubic-bezier(0.4, 0, 0.2, 1)',
+        linear: 'linear',
+        in: 'cubic-bezier(0.4, 0, 1, 1)',
+        out: 'cubic-bezier(0, 0, 0.2, 1)',
         'in-out': 'cubic-bezier(0.4, 0, 0.2, 1)',
-        'bounce': 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-        'smooth': 'cubic-bezier(0.65, 0, 0.35, 1)',
+        bounce: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+        smooth: 'cubic-bezier(0.65, 0, 0.35, 1)',
       },
 
       transitionDuration: {
-        'DEFAULT': '250ms',
-        'fast': '150ms',
-        'slow': '400ms',
+        DEFAULT: '250ms',
+        fast: '150ms',
+        slow: '400ms',
       },
 
       animation: {
@@ -226,8 +227,8 @@ export default {
         'pulse-subtle': 'pulseSubtle 3s infinite',
         'scale-subtle': 'scaleSubtle 0.3s ease-out',
         'glow-subtle': 'glowSubtle 2s infinite',
-        'float': 'float 3s ease-in-out infinite',
-        'shimmer': 'shimmer 2s linear infinite',
+        float: 'float 3s ease-in-out infinite',
+        shimmer: 'shimmer 2s linear infinite',
         'rank-change': 'rankChange 0.5s ease-in-out',
       },
 
@@ -275,28 +276,44 @@ export default {
           '100%': { backgroundPosition: '1000px 0' },
         },
         rankChange: {
-          '0%': { backgroundColor: 'rgba(255, 153, 102, 0.1)', transform: 'translateX(0)' },
-          '25%': { backgroundColor: 'rgba(255, 153, 102, 0.2)', transform: 'translateX(5px)' },
-          '50%': { backgroundColor: 'rgba(255, 153, 102, 0.3)', transform: 'translateX(-5px)' },
-          '75%': { backgroundColor: 'rgba(255, 153, 102, 0.2)', transform: 'translateX(5px)' },
-          '100%': { backgroundColor: 'rgba(255, 153, 102, 0)', transform: 'translateX(0)' },
+          '0%': {
+            backgroundColor: 'rgba(255, 153, 102, 0.1)',
+            transform: 'translateX(0)',
+          },
+          '25%': {
+            backgroundColor: 'rgba(255, 153, 102, 0.2)',
+            transform: 'translateX(5px)',
+          },
+          '50%': {
+            backgroundColor: 'rgba(255, 153, 102, 0.3)',
+            transform: 'translateX(-5px)',
+          },
+          '75%': {
+            backgroundColor: 'rgba(255, 153, 102, 0.2)',
+            transform: 'translateX(5px)',
+          },
+          '100%': {
+            backgroundColor: 'rgba(255, 153, 102, 0)',
+            transform: 'translateX(0)',
+          },
         },
       },
 
       backgroundImage: {
         'gradient-primary': 'linear-gradient(135deg, #FF9966 0%, #FF8033 100%)',
-        'gradient-secondary': 'linear-gradient(135deg, #FF9B66 0%, #FFD44D 100%)',
+        'gradient-secondary':
+          'linear-gradient(135deg, #FF9B66 0%, #FFD44D 100%)',
         'gradient-accent': 'linear-gradient(135deg, #FFD44D 0%, #FF9966 100%)',
         'gradient-neutral': 'linear-gradient(135deg, #FFFAF5 0%, #F2EFE9 100%)',
         'gradient-ranking': 'linear-gradient(135deg, #FF8033 0%, #FF6600 100%)',
         'gradient-coral': 'linear-gradient(135deg, #FF8566 0%, #FF5128 100%)',
         'gradient-dishes': 'linear-gradient(135deg, #FF9966 0%, #FF8033 100%)',
-        'gradient-reviewers': 'linear-gradient(135deg, #FF9B66 0%, #FF8742 100%)',
-        'gradient-restaurants': 'linear-gradient(135deg, #FF8566 0%, #FF6B47 100%)',
+        'gradient-reviewers':
+          'linear-gradient(135deg, #FF9B66 0%, #FF8742 100%)',
+        'gradient-restaurants':
+          'linear-gradient(135deg, #FF8566 0%, #FF6B47 100%)',
       },
     },
   },
-  plugins: [
-    require('tailwindcss-animate'),
-  ],
+  plugins: [require('tailwindcss-animate')],
 };

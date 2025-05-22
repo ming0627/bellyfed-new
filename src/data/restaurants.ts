@@ -38,8 +38,9 @@ export const restaurants: FoodEstablishment[] = [
     featuredDishes: [
       {
         name: 'Nasi Lemak Special',
-        description: 'Coconut rice with sambal, fried chicken, and all the trimmings',
-        price: 15.90,
+        description:
+          'Coconut rice with sambal, fried chicken, and all the trimmings',
+        price: 15.9,
         currency: 'MYR',
         imageUrl: '/dishes/nasi-lemak-special.jpg',
         rating: 4.8,
@@ -48,7 +49,7 @@ export const restaurants: FoodEstablishment[] = [
       {
         name: 'Rendang Beef',
         description: 'Slow-cooked beef in rich coconut and spice sauce',
-        price: 18.90,
+        price: 18.9,
         currency: 'MYR',
         imageUrl: '/dishes/rendang-beef.jpg',
         rating: 4.7,
@@ -117,7 +118,7 @@ export const restaurants: FoodEstablishment[] = [
       {
         name: 'Premium Sushi Platter',
         description: 'Selection of premium nigiri and maki sushi',
-        price: 88.00,
+        price: 88.0,
         currency: 'MYR',
         imageUrl: '/dishes/premium-sushi-platter.jpg',
         rating: 4.9,
@@ -126,7 +127,7 @@ export const restaurants: FoodEstablishment[] = [
       {
         name: 'Wagyu Beef Teppanyaki',
         description: 'A5 Wagyu beef cooked on teppanyaki grill',
-        price: 128.00,
+        price: 128.0,
         currency: 'MYR',
         imageUrl: '/dishes/wagyu-teppanyaki.jpg',
         rating: 4.8,
@@ -195,7 +196,7 @@ export const restaurants: FoodEstablishment[] = [
       {
         name: 'Street Tacos Trio',
         description: 'Three different street-style tacos with homemade salsas',
-        price: 24.90,
+        price: 24.9,
         currency: 'MYR',
         imageUrl: '/dishes/street-tacos.jpg',
         rating: 4.7,
@@ -203,8 +204,9 @@ export const restaurants: FoodEstablishment[] = [
       },
       {
         name: 'Loaded Nachos',
-        description: 'Crispy nachos with beef, cheese, guacamole, and sour cream',
-        price: 28.90,
+        description:
+          'Crispy nachos with beef, cheese, guacamole, and sour cream',
+        price: 28.9,
         currency: 'MYR',
         imageUrl: '/dishes/loaded-nachos.jpg',
         rating: 4.6,
@@ -234,5 +236,5 @@ export const restaurants: FoodEstablishment[] = [
     isFeatured: true,
     isVerified: true,
     tags: ['Casual Dining', 'Happy Hour', 'Group Friendly'],
-  }
+  },
 ];

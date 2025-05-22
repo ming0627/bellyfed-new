@@ -19,15 +19,22 @@ const badgeVariants = cva(
 
         // Soft badges with improved contrast
         soft: 'bg-primary-100 text-primary-800 hover:bg-primary-200',
-        'soft-secondary': 'bg-secondary-100 text-secondary-800 hover:bg-secondary-200',
-        'soft-gold': 'bg-accent-gold-100 text-accent-gold-800 hover:bg-accent-gold-200',
-        'soft-plum': 'bg-accent-plum-100 text-accent-plum-800 hover:bg-accent-plum-200',
-        'soft-teal': 'bg-accent-teal-100 text-accent-teal-800 hover:bg-accent-teal-200',
+        'soft-secondary':
+          'bg-secondary-100 text-secondary-800 hover:bg-secondary-200',
+        'soft-gold':
+          'bg-accent-gold-100 text-accent-gold-800 hover:bg-accent-gold-200',
+        'soft-plum':
+          'bg-accent-plum-100 text-accent-plum-800 hover:bg-accent-plum-200',
+        'soft-teal':
+          'bg-accent-teal-100 text-accent-teal-800 hover:bg-accent-teal-200',
 
         // Outline badges with improved contrast
-        outline: 'bg-transparent border border-neutral-400 text-neutral-800 hover:bg-neutral-50',
-        'outline-primary': 'bg-transparent border border-primary-500 text-primary-700 hover:bg-primary-50',
-        'outline-secondary': 'bg-transparent border border-secondary-500 text-secondary-700 hover:bg-secondary-50',
+        outline:
+          'bg-transparent border border-neutral-400 text-neutral-800 hover:bg-neutral-50',
+        'outline-primary':
+          'bg-transparent border border-primary-500 text-primary-700 hover:bg-primary-50',
+        'outline-secondary':
+          'bg-transparent border border-secondary-500 text-secondary-700 hover:bg-secondary-50',
 
         // Semantic badges with improved contrast
         success: 'bg-success text-white hover:bg-success/90',
@@ -43,9 +50,11 @@ const badgeVariants = cva(
 
         // Special badges
         premium: 'bg-accent-gold-500 text-neutral-900 hover:bg-accent-gold-600',
-        verified: 'bg-success/10 text-success border border-success/20 hover:bg-success/15',
+        verified:
+          'bg-success/10 text-success border border-success/20 hover:bg-success/15',
         new: 'bg-info/10 text-info border border-info/20 hover:bg-info/15',
-        popular: 'bg-secondary-500/10 text-secondary-700 border border-secondary-500/20 hover:bg-secondary-500/15',
+        popular:
+          'bg-secondary-500/10 text-secondary-700 border border-secondary-500/20 hover:bg-secondary-500/15',
         ghost: 'bg-neutral-100 text-neutral-800 hover:bg-neutral-200',
       },
 
@@ -80,7 +89,7 @@ const badgeVariants = cva(
       shape: 'pill',
       hover: 'none',
     },
-  }
+  },
 );
 
 export interface BadgeProps
@@ -147,7 +156,7 @@ const Badge = ({
       className={cn(
         badgeVariants({ variant, size, shape, hover }),
         interactive && 'cursor-pointer',
-        className
+        className,
       )}
       {...props}
     >

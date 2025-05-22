@@ -1,6 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
-import { Twitter, Facebook, Instagram, Mail, MapPin, Phone, ArrowRight, Heart } from 'lucide-react';
+import {
+  Twitter,
+  Facebook,
+  Instagram,
+  Mail,
+  MapPin,
+  Phone,
+  ArrowRight,
+  Heart,
+} from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
 
@@ -16,7 +25,8 @@ const Footer: React.FC = () => {
                 Join our culinary community
               </h3>
               <p className="text-neutral-600 dark:text-neutral-300">
-                Subscribe to our newsletter for the latest food trends, restaurant openings, and exclusive offers.
+                Subscribe to our newsletter for the latest food trends,
+                restaurant openings, and exclusive offers.
               </p>
             </div>
             <div>
@@ -29,17 +39,20 @@ const Footer: React.FC = () => {
                     required
                   />
                 </div>
-                <Button
-                  variant="primary"
-                  className="px-6 py-3"
-                  withRipple
-                >
+                <Button variant="primary" className="px-6 py-3" withRipple>
                   Subscribe
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </form>
               <p className="mt-2 text-xs text-neutral-500 dark:text-neutral-400">
-                By subscribing, you agree to our <Link href="/privacy" className="underline hover:text-primary-500">Privacy Policy</Link>.
+                By subscribing, you agree to our{' '}
+                <Link
+                  href="/privacy"
+                  className="underline hover:text-primary-500"
+                >
+                  Privacy Policy
+                </Link>
+                .
               </p>
             </div>
           </div>
@@ -57,7 +70,8 @@ const Footer: React.FC = () => {
               </span>
             </div>
             <p className="text-neutral-600 dark:text-neutral-300">
-              Discover the best food experiences around you. Explore restaurants, read reviews, and find your next favorite meal.
+              Discover the best food experiences around you. Explore
+              restaurants, read reviews, and find your next favorite meal.
             </p>
             <div className="flex space-x-4 pt-2">
               <a
@@ -91,7 +105,8 @@ const Footer: React.FC = () => {
 
             <div className="pt-4">
               <Badge variant="soft" size="sm" className="inline-flex">
-                <Heart className="w-3 h-3 mr-1" /> Made with love for food enthusiasts
+                <Heart className="w-3 h-3 mr-1" /> Made with love for food
+                enthusiasts
               </Badge>
             </div>
           </div>
@@ -158,7 +173,9 @@ const Footer: React.FC = () => {
                         Trending
                         <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-300 group-hover:w-full"></span>
                       </span>
-                      <Badge variant="new" size="xs" className="ml-2">New</Badge>
+                      <Badge variant="new" size="xs" className="ml-2">
+                        New
+                      </Badge>
                     </Link>
                   </li>
                 </ul>
@@ -235,30 +252,35 @@ const Footer: React.FC = () => {
                 </h3>
                 <ul className="space-y-4">
                   <li className="flex items-start">
-                    <MapPin size={16} className="text-primary-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <MapPin
+                      size={16}
+                      className="text-primary-500 mr-2 mt-0.5 flex-shrink-0"
+                    />
                     <span className="text-neutral-600 dark:text-neutral-300 text-sm">
                       123 Food Street, Cuisine City, FC 12345
                     </span>
                   </li>
                   <li className="flex items-center">
-                    <Phone size={16} className="text-primary-500 mr-2 flex-shrink-0" />
+                    <Phone
+                      size={16}
+                      className="text-primary-500 mr-2 flex-shrink-0"
+                    />
                     <span className="text-neutral-600 dark:text-neutral-300 text-sm">
                       +1 (555) 123-4567
                     </span>
                   </li>
                   <li className="flex items-center">
-                    <Mail size={16} className="text-primary-500 mr-2 flex-shrink-0" />
+                    <Mail
+                      size={16}
+                      className="text-primary-500 mr-2 flex-shrink-0"
+                    />
                     <span className="text-neutral-600 dark:text-neutral-300 text-sm">
                       info@bellyfed.com
                     </span>
                   </li>
                   <li className="pt-2">
                     <Link href="/contact">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="group"
-                      >
+                      <Button variant="outline" size="sm" className="group">
                         Send Message
                         <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </Button>
@@ -276,13 +298,22 @@ const Footer: React.FC = () => {
           </p>
 
           <div className="mt-4 md:mt-0 flex space-x-6">
-            <Link href="/accessibility" className="text-neutral-500 hover:text-primary-500 text-sm">
+            <Link
+              href="/accessibility"
+              className="text-neutral-500 hover:text-primary-500 text-sm"
+            >
               Accessibility
             </Link>
-            <Link href="/sitemap" className="text-neutral-500 hover:text-primary-500 text-sm">
+            <Link
+              href="/sitemap"
+              className="text-neutral-500 hover:text-primary-500 text-sm"
+            >
               Sitemap
             </Link>
-            <Link href="/cookies" className="text-neutral-500 hover:text-primary-500 text-sm">
+            <Link
+              href="/cookies"
+              className="text-neutral-500 hover:text-primary-500 text-sm"
+            >
               Cookie Policy
             </Link>
           </div>
