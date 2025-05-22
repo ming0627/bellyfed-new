@@ -4,7 +4,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ThemeProvider } from 'next-themes';
 import { Toaster } from 'react-hot-toast';
 import { useState } from 'react';
-import { CountryProvider } from '../contexts/index.js';
+import { CountryProvider, AuthProvider } from '../contexts/index.js';
 import { TRPCProvider } from '../utils/trpc-provider.js';
 import '../styles/globals.css';
 
@@ -15,10 +15,12 @@ export default function App({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider attribute="class">
         <CountryProvider>
-          <TRPCProvider>
-            <Component {...pageProps} />
-            <Toaster position="bottom-right" />
-          </TRPCProvider>
+          <AuthProvider>
+            <TRPCProvider>
+              <Component {...pageProps} />
+              <Toaster position="bottom-right" />
+            </TRPCProvider>
+          </AuthProvider>
         </CountryProvider>
       </ThemeProvider>
       <ReactQueryDevtools initialIsOpen={false} />

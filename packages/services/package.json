@@ -1,0 +1,35 @@
+{
+  "name": "@bellyfed/services",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "dev": "tsc --watch",
+    "lint": "eslint \"src/**/*.ts*\"",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@aws-sdk/client-cognito-identity-provider": "^3.485.0",
+    "@bellyfed/utils": "workspace:*",
+    "cookie": "^0.6.0"
+  },
+  "devDependencies": {
+    "@bellyfed/eslint-config": "workspace:*",
+    "@bellyfed/typescript-config": "workspace:*",
+    "@types/cookie": "^0.6.0",
+    "@types/node": "^20.10.6",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3"
+  }
+}

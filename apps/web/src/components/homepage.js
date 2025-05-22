@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 import { useCallback, useEffect, useState, useMemo } from 'react';
-import Head from 'next/head';
 
 import { LucideClientIcon } from './ui/lucide-icon.js';
 import { useCountry } from '../contexts/CountryContext.js';
@@ -9,7 +8,6 @@ import { useCountry } from '../contexts/CountryContext.js';
 // Import components
 import Collections from './homepage/Collections.js';
 import FeaturedRestaurants from './homepage/FeaturedRestaurants.js';
-import Navigation from './homepage/Navigation.js';
 import PremiumBanner from './homepage/PremiumBanner.js';
 import TopCritics from './homepage/TopCritics.js';
 import TopFoodies from './homepage/TopFoodies.js';
@@ -350,42 +348,37 @@ export function Homepage() {
 
   return (
     <>
-      <Head>
-        <title>Bellyfed - {currentCountry?.name || 'Food Discovery'}</title>
-        <meta name="description" content={`Discover the best restaurants and dishes in ${currentCountry?.name || 'your country'}`} />
-      </Head>
-
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         <PremiumBanner
           showPremiumBanner={showPremiumBanner}
           setShowPremiumBanner={setShowPremiumBanner}
         />
 
-        <Navigation getCountryLink={getCountryLink} />
-
         {/* Main Content */}
-        <main className="container mx-auto px-4 py-8">
-          <TopFoodies
-            reviewers={reviewers}
-            dishes={dishes}
-            locations={locations}
-            countryName={currentCountry?.name || 'Your Country'}
-            getCountryLink={getCountryLink}
-          />
+        <main className="w-full">
+          <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+            <TopFoodies
+              reviewers={reviewers}
+              dishes={dishes}
+              locations={locations}
+              countryName={currentCountry?.name || 'Your Country'}
+              getCountryLink={getCountryLink}
+            />
 
-          <TopCritics topReviewers={topReviewers} />
+            <TopCritics topReviewers={topReviewers} />
 
-          <TopRatedDishes />
+            <TopRatedDishes />
 
-          <Collections
-            countryName={currentCountry?.name || 'Your Country'}
-            getCountryLink={getCountryLink}
-          />
+            <Collections
+              countryName={currentCountry?.name || 'Your Country'}
+              getCountryLink={getCountryLink}
+            />
 
-          <FeaturedRestaurants
-            countryName={currentCountry?.name || 'Your Country'}
-            getCountryLink={getCountryLink}
-          />
+            <FeaturedRestaurants
+              countryName={currentCountry?.name || 'Your Country'}
+              getCountryLink={getCountryLink}
+            />
+          </div>
         </main>
       </div>
     </>

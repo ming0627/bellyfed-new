@@ -1,0 +1,180 @@
+/**
+ * Mock data for dish detail page
+ */
+export const mockDishDetail = {
+  id: '1',
+  name: 'Nasi Lemak with Fried Chicken',
+  description: 'Traditional Malaysian coconut rice served with crispy fried chicken, sambal, fried anchovies, peanuts, cucumber slices, and a boiled egg.',
+  imageUrl: 'https://images.unsplash.com/photo-1627308595171-d1b5d95d051d?q=80&w=1000&h=600&fit=crop',
+  price: 12.90,
+  currency: 'RM',
+  categories: ['Malaysian', 'Rice Dishes', 'Signature'],
+  rating: 4.7,
+  reviewCount: 256,
+  isFavorite: false,
+  isSignature: true,
+  isAvailable: true,
+  spicyLevel: 3,
+  dietaryOptions: ['Halal'],
+  allergens: ['Peanuts', 'Eggs', 'Fish', 'Gluten'],
+  ingredients: [
+    'Coconut rice',
+    'Fried chicken',
+    'Sambal (chili paste)',
+    'Fried anchovies',
+    'Roasted peanuts',
+    'Cucumber slices',
+    'Boiled egg',
+    'Banana leaf (for serving)',
+  ],
+  restaurant: {
+    id: '101',
+    name: 'Nasi Lemak House',
+    location: 'Kuala Lumpur',
+    imageUrl: 'https://images.unsplash.com/photo-1627308595171-d1b5d95d051d?q=80&w=200&h=200&fit=crop',
+  },
+  reviews: [
+    {
+      id: '201',
+      user: {
+        id: '301',
+        name: 'Sarah Chen',
+        username: 'sarahc',
+        profilePicture: 'https://randomuser.me/api/portraits/women/12.jpg',
+      },
+      rating: 5,
+      date: '2023-08-15T08:30:00Z',
+      content: "This is the best Nasi Lemak I've ever had! The coconut rice was perfectly cooked - fluffy and fragrant. The fried chicken was crispy on the outside and juicy on the inside. The sambal had just the right amount of spiciness. Highly recommended!",
+      photos: [
+        'https://images.unsplash.com/photo-1627308595171-d1b5d95d051d?q=80&w=300&h=300&fit=crop',
+        'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=80&w=300&h=300&fit=crop',
+      ],
+      helpfulCount: 24,
+      commentCount: 3,
+    },
+    {
+      id: '202',
+      user: {
+        id: '302',
+        name: 'Mike Wong',
+        username: 'mikew',
+        profilePicture: 'https://randomuser.me/api/portraits/men/22.jpg',
+      },
+      rating: 4,
+      date: '2023-08-10T14:45:00Z',
+      content: 'Very good Nasi Lemak! The rice was fragrant and the chicken was well-seasoned. The sambal was a bit too spicy for my taste, but still delicious. The portion size was generous and definitely worth the price. I would order this again, but maybe ask for less spicy sambal next time.',
+      photos: [],
+      helpfulCount: 15,
+      commentCount: 1,
+    },
+    {
+      id: '203',
+      user: {
+        id: '303',
+        name: 'Lisa Tan',
+        username: 'lisat',
+        profilePicture: 'https://randomuser.me/api/portraits/women/32.jpg',
+      },
+      rating: 5,
+      date: '2023-08-05T12:15:00Z',
+      content: "Authentic Malaysian Nasi Lemak! The coconut rice was cooked to perfection - not too wet, not too dry. The fried chicken was crispy and flavorful. The sambal had a good balance of spiciness and sweetness. The anchovies and peanuts added a nice crunch. Definitely one of the best Nasi Lemak in KL!",
+      photos: [
+        'https://images.unsplash.com/photo-1627308595171-d1b5d95d051d?q=80&w=300&h=300&fit=crop',
+      ],
+      helpfulCount: 18,
+      commentCount: 2,
+    },
+    {
+      id: '204',
+      user: {
+        id: '304',
+        name: 'David Lim',
+        username: 'davidl',
+        profilePicture: 'https://randomuser.me/api/portraits/men/42.jpg',
+      },
+      rating: 3,
+      date: '2023-07-28T18:30:00Z',
+      content: 'The Nasi Lemak was okay, but not exceptional. The rice lacked coconut flavor, and the chicken was a bit dry. The sambal was good though, with a nice balance of spiciness. The portion size was decent for the price. There are better options in KL for Nasi Lemak.',
+      photos: [],
+      helpfulCount: 7,
+      commentCount: 1,
+    },
+    {
+      id: '205',
+      user: {
+        id: '305',
+        name: 'Jenny Koh',
+        username: 'jennyk',
+        profilePicture: 'https://randomuser.me/api/portraits/women/52.jpg',
+      },
+      rating: 5,
+      date: '2023-07-20T09:45:00Z',
+      content: "Absolutely delicious! The coconut rice was aromatic and flavorful. The fried chicken was crispy and well-seasoned. The sambal had the perfect level of spiciness. The anchovies and peanuts were fresh and crunchy. The cucumber slices provided a refreshing contrast to the spicy sambal. This is definitely my go-to place for Nasi Lemak now!",
+      photos: [
+        'https://images.unsplash.com/photo-1627308595171-d1b5d95d051d?q=80&w=300&h=300&fit=crop',
+        'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=80&w=300&h=300&fit=crop',
+        'https://images.unsplash.com/photo-1585032226651-759b368d7246?q=80&w=300&h=300&fit=crop',
+      ],
+      helpfulCount: 32,
+      commentCount: 5,
+    },
+  ],
+};
+
+/**
+ * Mock data for similar dishes
+ */
+export const mockSimilarDishes = [
+  {
+    id: '2',
+    name: 'Nasi Lemak with Rendang',
+    imageUrl: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=80&w=200&h=200&fit=crop',
+    price: 14.90,
+    currency: 'RM',
+    rating: 4.5,
+    reviewCount: 189,
+    restaurant: {
+      id: '101',
+      name: 'Nasi Lemak House',
+    },
+  },
+  {
+    id: '3',
+    name: 'Nasi Lemak with Sambal Squid',
+    imageUrl: 'https://images.unsplash.com/photo-1585032226651-759b368d7246?q=80&w=200&h=200&fit=crop',
+    price: 15.90,
+    currency: 'RM',
+    rating: 4.6,
+    reviewCount: 142,
+    restaurant: {
+      id: '101',
+      name: 'Nasi Lemak House',
+    },
+  },
+  {
+    id: '4',
+    name: 'Nasi Lemak with Beef Rendang',
+    imageUrl: 'https://images.unsplash.com/photo-1626804475297-41608ea09aeb?q=80&w=200&h=200&fit=crop',
+    price: 16.90,
+    currency: 'RM',
+    rating: 4.8,
+    reviewCount: 210,
+    restaurant: {
+      id: '102',
+      name: 'Malaysian Delights',
+    },
+  },
+  {
+    id: '5',
+    name: 'Hainanese Chicken Rice',
+    imageUrl: 'https://images.unsplash.com/photo-1569058242567-93de6f36f8eb?q=80&w=200&h=200&fit=crop',
+    price: 11.90,
+    currency: 'RM',
+    rating: 4.7,
+    reviewCount: 178,
+    restaurant: {
+      id: '103',
+      name: 'Chicken Rice Specialist',
+    },
+  },
+];
