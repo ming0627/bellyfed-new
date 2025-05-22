@@ -19,10 +19,13 @@ const getBaseUrl = () => {
 };
 
 export function TRPCProvider({ children }) {
-  const [queryClient] = useState(() => new QueryClient({
-    defaultOptions: { queries: { staleTime: 5 * 1000 } },
-  }));
-  
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: { queries: { staleTime: 5 * 1000 } },
+      }),
+  );
+
   const [trpcClient] = useState(() =>
     trpc.createClient({
       links: [
@@ -34,7 +37,7 @@ export function TRPCProvider({ children }) {
         }),
       ],
       transformer: superjson,
-    })
+    }),
   );
 
   return (

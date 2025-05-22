@@ -1,11 +1,12 @@
 import React, { memo } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { MapPin, Utensils, Clock, ChevronRight } from 'lucide-react';
 import { LucideClientIcon } from '../ui/lucide-icon.js';
 
 /**
  * CollectionCard component for displaying a restaurant collection
- * 
+ *
  * @param {Object} props - Component props
  * @param {string} props.id - Collection ID
  * @param {string} props.title - Collection title
@@ -38,15 +39,15 @@ const CollectionCard = memo(function CollectionCard({
   className = '',
 }) {
   // Format date for display
-  const formatDate = (dateString) => {
+  const formatDate = dateString => {
     if (!dateString) return '';
-    
+
     try {
       const date = new Date(dateString);
       const now = new Date();
       const diffTime = Math.abs(now - date);
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-      
+
       if (diffDays <= 1) {
         return 'Today';
       } else if (diffDays <= 7) {
@@ -65,20 +66,23 @@ const CollectionCard = memo(function CollectionCard({
       return dateString;
     }
   };
-  
+
   // Determine card layout based on variant
   if (variant === 'horizontal') {
     return (
-      <div className={`bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden flex ${className}`}>
+      <div
+        className={`bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden flex ${className}`}
+      >
         {/* Image */}
         <div className="relative w-1/3 min-w-[120px]">
           <div className="absolute inset-0">
             {imageUrl ? (
-              <img
+              <Image
                 src={imageUrl}
                 alt={title}
-                className="w-full h-full object-cover"
-                loading="lazy"
+                layout="fill"
+                objectFit="cover"
+                className="w-full h-full"
               />
             ) : (
               <div className="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
@@ -90,7 +94,7 @@ const CollectionCard = memo(function CollectionCard({
               </div>
             )}
           </div>
-          
+
           {/* Badges */}
           <div className="absolute top-2 left-2 flex flex-col gap-2">
             {isFeatured && (
@@ -105,7 +109,7 @@ const CollectionCard = memo(function CollectionCard({
             )}
           </div>
         </div>
-        
+
         {/* Content */}
         <div className="flex-1 p-4">
           <Link
@@ -114,55 +118,76 @@ const CollectionCard = memo(function CollectionCard({
           >
             {title}
           </Link>
-          
+
           {description && (
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-2">
               {description}
             </p>
           )}
-          
+
           <div className="flex flex-wrap gap-y-2 text-xs text-gray-500 dark:text-gray-400">
             <div className="flex items-center mr-4">
-              <LucideClientIcon icon={Utensils} className="w-3.5 h-3.5 mr-1" aria-hidden="true" />
-              <span>{restaurantCount} {restaurantCount === 1 ? 'Restaurant' : 'Restaurants'}</span>
+              <LucideClientIcon
+                icon={Utensils}
+                className="w-3.5 h-3.5 mr-1"
+                aria-hidden="true"
+              />
+              <span>
+                {restaurantCount}{' '}
+                {restaurantCount === 1 ? 'Restaurant' : 'Restaurants'}
+              </span>
             </div>
-            
+
             {location && (
               <div className="flex items-center mr-4">
-                <LucideClientIcon icon={MapPin} className="w-3.5 h-3.5 mr-1" aria-hidden="true" />
+                <LucideClientIcon
+                  icon={MapPin}
+                  className="w-3.5 h-3.5 mr-1"
+                  aria-hidden="true"
+                />
                 <span>{location}</span>
               </div>
             )}
-            
+
             {updatedAt && (
               <div className="flex items-center">
-                <LucideClientIcon icon={Clock} className="w-3.5 h-3.5 mr-1" aria-hidden="true" />
+                <LucideClientIcon
+                  icon={Clock}
+                  className="w-3.5 h-3.5 mr-1"
+                  aria-hidden="true"
+                />
                 <span>Updated {formatDate(updatedAt)}</span>
               </div>
             )}
           </div>
-          
+
           {curator && (
             <div className="mt-3 text-xs text-gray-500 dark:text-gray-400">
-              Curated by <span className="font-medium text-gray-700 dark:text-gray-300">{curator}</span>
+              Curated by{' '}
+              <span className="font-medium text-gray-700 dark:text-gray-300">
+                {curator}
+              </span>
             </div>
           )}
         </div>
       </div>
     );
   }
-  
+
   if (variant === 'compact') {
     return (
-      <div className={`bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden ${className}`}>
+      <div
+        className={`bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden ${className}`}
+      >
         {/* Image */}
         <div className="relative h-32">
           {imageUrl ? (
-            <img
+            <Image
               src={imageUrl}
               alt={title}
-              className="w-full h-full object-cover"
-              loading="lazy"
+              layout="fill"
+              objectFit="cover"
+              className="w-full h-full"
             />
           ) : (
             <div className="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
@@ -173,10 +198,10 @@ const CollectionCard = memo(function CollectionCard({
               />
             </div>
           )}
-          
+
           {/* Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-          
+
           {/* Badges */}
           <div className="absolute top-2 left-2 flex gap-2">
             {isFeatured && (
@@ -190,7 +215,7 @@ const CollectionCard = memo(function CollectionCard({
               </span>
             )}
           </div>
-          
+
           {/* Title overlay */}
           <div className="absolute bottom-0 left-0 right-0 p-3">
             <h3 className="text-sm font-medium text-white line-clamp-1">
@@ -198,46 +223,64 @@ const CollectionCard = memo(function CollectionCard({
             </h3>
           </div>
         </div>
-        
+
         {/* Content */}
         <div className="p-3">
           <div className="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400 mb-2">
             <div className="flex items-center">
-              <LucideClientIcon icon={Utensils} className="w-3.5 h-3.5 mr-1" aria-hidden="true" />
-              <span>{restaurantCount} {restaurantCount === 1 ? 'Restaurant' : 'Restaurants'}</span>
+              <LucideClientIcon
+                icon={Utensils}
+                className="w-3.5 h-3.5 mr-1"
+                aria-hidden="true"
+              />
+              <span>
+                {restaurantCount}{' '}
+                {restaurantCount === 1 ? 'Restaurant' : 'Restaurants'}
+              </span>
             </div>
-            
+
             {location && (
               <div className="flex items-center">
-                <LucideClientIcon icon={MapPin} className="w-3.5 h-3.5 mr-1" aria-hidden="true" />
+                <LucideClientIcon
+                  icon={MapPin}
+                  className="w-3.5 h-3.5 mr-1"
+                  aria-hidden="true"
+                />
                 <span className="truncate max-w-[100px]">{location}</span>
               </div>
             )}
           </div>
-          
+
           <Link
             href={getCountryLink(`/collections/${id}`)}
             className="flex items-center justify-center w-full py-1.5 text-xs font-medium text-orange-500 hover:text-orange-600 dark:hover:text-orange-400 transition-colors border-t border-gray-100 dark:border-gray-700 mt-1 pt-2"
           >
             View Collection
-            <LucideClientIcon icon={ChevronRight} className="w-3.5 h-3.5 ml-1" aria-hidden="true" />
+            <LucideClientIcon
+              icon={ChevronRight}
+              className="w-3.5 h-3.5 ml-1"
+              aria-hidden="true"
+            />
           </Link>
         </div>
       </div>
     );
   }
-  
+
   // Default variant
   return (
-    <div className={`bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden group ${className}`}>
+    <div
+      className={`bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden group ${className}`}
+    >
       {/* Image */}
       <div className="relative h-48">
         {imageUrl ? (
-          <img
+          <Image
             src={imageUrl}
             alt={title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            loading="lazy"
+            layout="fill"
+            objectFit="cover"
+            className="w-full h-full"
           />
         ) : (
           <div className="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
@@ -248,10 +291,10 @@ const CollectionCard = memo(function CollectionCard({
             />
           </div>
         )}
-        
+
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-80"></div>
-        
+
         {/* Badges */}
         <div className="absolute top-3 left-3 flex gap-2">
           {isFeatured && (
@@ -265,7 +308,7 @@ const CollectionCard = memo(function CollectionCard({
             </span>
           )}
         </div>
-        
+
         {/* Title overlay */}
         <div className="absolute bottom-0 left-0 right-0 p-4">
           <h3 className="text-xl font-semibold text-white group-hover:text-orange-300 transition-colors">
@@ -273,7 +316,7 @@ const CollectionCard = memo(function CollectionCard({
           </h3>
         </div>
       </div>
-      
+
       {/* Content */}
       <div className="p-4">
         {description && (
@@ -281,40 +324,62 @@ const CollectionCard = memo(function CollectionCard({
             {description}
           </p>
         )}
-        
+
         <div className="flex flex-wrap gap-y-2 text-sm text-gray-500 dark:text-gray-400">
           <div className="flex items-center mr-4">
-            <LucideClientIcon icon={Utensils} className="w-4 h-4 mr-1.5" aria-hidden="true" />
-            <span>{restaurantCount} {restaurantCount === 1 ? 'Restaurant' : 'Restaurants'}</span>
+            <LucideClientIcon
+              icon={Utensils}
+              className="w-4 h-4 mr-1.5"
+              aria-hidden="true"
+            />
+            <span>
+              {restaurantCount}{' '}
+              {restaurantCount === 1 ? 'Restaurant' : 'Restaurants'}
+            </span>
           </div>
-          
+
           {location && (
             <div className="flex items-center mr-4">
-              <LucideClientIcon icon={MapPin} className="w-4 h-4 mr-1.5" aria-hidden="true" />
+              <LucideClientIcon
+                icon={MapPin}
+                className="w-4 h-4 mr-1.5"
+                aria-hidden="true"
+              />
               <span>{location}</span>
             </div>
           )}
-          
+
           {updatedAt && (
             <div className="flex items-center">
-              <LucideClientIcon icon={Clock} className="w-4 h-4 mr-1.5" aria-hidden="true" />
+              <LucideClientIcon
+                icon={Clock}
+                className="w-4 h-4 mr-1.5"
+                aria-hidden="true"
+              />
               <span>Updated {formatDate(updatedAt)}</span>
             </div>
           )}
         </div>
-        
+
         {curator && (
           <div className="mt-3 text-sm text-gray-500 dark:text-gray-400">
-            Curated by <span className="font-medium text-gray-700 dark:text-gray-300">{curator}</span>
+            Curated by{' '}
+            <span className="font-medium text-gray-700 dark:text-gray-300">
+              {curator}
+            </span>
           </div>
         )}
-        
+
         <Link
           href={getCountryLink(`/collections/${id}`)}
           className="mt-4 inline-flex items-center text-orange-500 hover:text-orange-600 dark:hover:text-orange-400 font-medium transition-colors"
         >
           View Collection
-          <LucideClientIcon icon={ChevronRight} className="w-4 h-4 ml-1" aria-hidden="true" />
+          <LucideClientIcon
+            icon={ChevronRight}
+            className="w-4 h-4 ml-1"
+            aria-hidden="true"
+          />
         </Link>
       </div>
     </div>

@@ -6,14 +6,15 @@ import { serialize } from 'cookie';
 
 // Environment variables
 const REGION = process.env.NEXT_PUBLIC_AWS_REGION || 'ap-southeast-1';
-const CLIENT_ID = process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID || '3qmr0b7s247e2c7ogaopih1kgd';
+const CLIENT_ID =
+  process.env.NEXT_PUBLIC_COGNITO_CLIENT_ID || '3qmr0b7s247e2c7ogaopih1kgd';
 
 // Initialize Cognito client
 const cognitoClient = new CognitoIdentityProviderClient({ region: REGION });
 
 /**
  * Login API handler
- * 
+ *
  * @param {import('next').NextApiRequest} req - Next.js API request
  * @param {import('next').NextApiResponse} res - Next.js API response
  */

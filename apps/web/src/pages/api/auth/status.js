@@ -11,7 +11,7 @@ const cognitoClient = new CognitoIdentityProviderClient({ region: REGION });
 
 /**
  * Auth status API handler
- * 
+ *
  * @param {import('next').NextApiRequest} req - Next.js API request
  * @param {import('next').NextApiResponse} res - Next.js API response
  */
@@ -50,7 +50,7 @@ export default async function handler(req, res) {
       };
 
       // Map Cognito attributes to user object
-      userAttributes.forEach((attr) => {
+      userAttributes.forEach(attr => {
         if (attr.Name === 'sub') user.id = attr.Value || '';
         if (attr.Name === 'email') user.email = attr.Value || '';
         if (attr.Name === 'name') user.name = attr.Value || '';

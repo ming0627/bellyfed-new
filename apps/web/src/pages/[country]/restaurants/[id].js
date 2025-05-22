@@ -17,7 +17,7 @@ import { mockRestaurantDetail } from '../../../data/mockRestaurantDetail.js';
 
 /**
  * RestaurantDetailPage component for displaying detailed information about a restaurant
- * 
+ *
  * @returns {JSX.Element} - Rendered component
  */
 export default function RestaurantDetailPage() {
@@ -26,13 +26,20 @@ export default function RestaurantDetailPage() {
   const { currentCountry, isInitialized } = useCountry();
 
   // Function to generate country-specific links
-  const getCountryLink = useCallback((path) => {
-    if (!isInitialized || !currentCountry?.code) return path;
-    return `/${currentCountry.code}${path}`;
-  }, [currentCountry, isInitialized]);
+  const getCountryLink = useCallback(
+    path => {
+      if (!isInitialized || !currentCountry?.code) return path;
+      return `/${currentCountry.code}${path}`;
+    },
+    [currentCountry, isInitialized],
+  );
 
   // Fetch restaurant data
-  const { data: restaurant, isLoading, error } = useQuery({
+  const {
+    data: restaurant,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ['restaurant', id],
     queryFn: () => {
       // In a real app, this would fetch data from an API with the restaurant ID
@@ -48,7 +55,10 @@ export default function RestaurantDetailPage() {
   // Loading state
   if (isLoading) {
     return (
-      <Layout title="Loading Restaurant..." description="Loading restaurant details">
+      <Layout
+        title="Loading Restaurant..."
+        description="Loading restaurant details"
+      >
         <div className="flex items-center justify-center min-h-screen">
           <LucideClientIcon
             icon={Loader2}
@@ -63,13 +73,17 @@ export default function RestaurantDetailPage() {
   // Error state
   if (error || !restaurant) {
     return (
-      <Layout title="Restaurant Not Found" description="The restaurant you're looking for could not be found">
+      <Layout
+        title="Restaurant Not Found"
+        description="The restaurant you're looking for could not be found"
+      >
         <div className="container mx-auto px-4 py-12 text-center">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
             Restaurant Not Found
           </h1>
           <p className="text-gray-600 dark:text-gray-400 mb-6">
-            The restaurant you're looking for could not be found or may have been removed.
+            The restaurant you&apos;re looking for could not be found or may have
+            been removed.
           </p>
           <button
             onClick={() => router.push(getCountryLink('/restaurants'))}
@@ -85,33 +99,42 @@ export default function RestaurantDetailPage() {
   return (
     <Layout
       title={restaurant.name}
-      description={restaurant.description || `${restaurant.name} - ${restaurant.cuisineTypes?.join(', ')}`}
+      description={
+        restaurant.description ||
+        `${restaurant.name} - ${restaurant.cuisineTypes?.join(', ')}`
+      }
     >
       {/* Restaurant Header */}
-      <RestaurantHeader restaurant={restaurant} getCountryLink={getCountryLink} />
-      
+      <RestaurantHeader
+        restaurant={restaurant}
+        getCountryLink={getCountryLink}
+      />
+
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2">
             {/* Restaurant Info */}
             <RestaurantInfo restaurant={restaurant} />
-            
+
             {/* Restaurant Menu */}
             <RestaurantMenu restaurant={restaurant} />
-            
+
             {/* Restaurant Reviews */}
-            <RestaurantReviews restaurant={restaurant} getCountryLink={getCountryLink} />
+            <RestaurantReviews
+              restaurant={restaurant}
+              getCountryLink={getCountryLink}
+            />
           </div>
-          
+
           {/* Sidebar */}
           <div className="lg:col-span-1">
             {/* Restaurant Location */}
             <RestaurantLocation restaurant={restaurant} />
-            
+
             {/* Similar Restaurants */}
-            <SimilarRestaurants 
-              cuisineTypes={restaurant.cuisineTypes} 
+            <SimilarRestaurants
+              cuisineTypes={restaurant.cuisineTypes}
               currentRestaurantId={restaurant.id}
               getCountryLink={getCountryLink}
             />
@@ -130,7 +153,7 @@ export async function getStaticPaths() {
     { params: { country: 'my', id: '1' } },
     { params: { country: 'sg', id: '1' } },
   ];
-  
+
   return {
     paths,
     fallback: true, // Generate pages for paths not returned by getStaticPaths
@@ -140,7 +163,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   // In a real app, you would fetch the restaurant data from an API
   // For now, we'll just use the mock data
-  
+
   return {
     props: {
       country: params.country,

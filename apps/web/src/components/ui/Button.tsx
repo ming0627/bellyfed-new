@@ -14,16 +14,20 @@ const buttonVariants = cva(
       // Button variants with modern, minimalist aesthetics
       variant: {
         // Primary button - Orange with improved contrast
-        primary: 'bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800 shadow-sm after:absolute after:inset-0 after:bg-white after:opacity-0 hover:after:opacity-10 after:transition-opacity',
+        primary:
+          'bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800 shadow-sm after:absolute after:inset-0 after:bg-white after:opacity-0 hover:after:opacity-10 after:transition-opacity',
 
         // Secondary button - Deeper peach-coral with improved contrast
-        secondary: 'bg-secondary-600 text-white hover:bg-secondary-700 active:bg-secondary-800 shadow-sm after:absolute after:inset-0 after:bg-white after:opacity-0 hover:after:opacity-10 after:transition-opacity',
+        secondary:
+          'bg-secondary-600 text-white hover:bg-secondary-700 active:bg-secondary-800 shadow-sm after:absolute after:inset-0 after:bg-white after:opacity-0 hover:after:opacity-10 after:transition-opacity',
 
         // Outline button - Clean border with hover effect and improved contrast
-        outline: 'border border-neutral-400 bg-white hover:border-primary-500 hover:text-primary-700 active:bg-neutral-100 text-neutral-800 after:absolute after:inset-0 after:bg-primary-50 after:opacity-0 hover:after:opacity-30 after:transition-opacity',
+        outline:
+          'border border-neutral-400 bg-white hover:border-primary-500 hover:text-primary-700 active:bg-neutral-100 text-neutral-800 after:absolute after:inset-0 after:bg-primary-50 after:opacity-0 hover:after:opacity-30 after:transition-opacity',
 
         // Ghost button - Transparent with subtle hover and improved contrast
-        ghost: 'bg-transparent hover:bg-neutral-100 active:bg-neutral-200 text-neutral-800 hover:text-primary-700',
+        ghost:
+          'bg-transparent hover:bg-neutral-100 active:bg-neutral-200 text-neutral-800 hover:text-primary-700',
 
         // Link button - Clean text link with improved contrast
         link: 'bg-transparent p-0 h-auto text-primary-700 hover:text-primary-800 underline-offset-4 hover:underline',
@@ -33,18 +37,24 @@ const buttonVariants = cva(
 
         // Accent buttons - For special actions with improved contrast
         accent: {
-          cream: 'bg-accent-gold-600 text-white hover:bg-accent-gold-700 active:bg-accent-gold-800 shadow-sm after:absolute after:inset-0 after:bg-white after:opacity-0 hover:after:opacity-10 after:transition-opacity',
+          cream:
+            'bg-accent-gold-600 text-white hover:bg-accent-gold-700 active:bg-accent-gold-800 shadow-sm after:absolute after:inset-0 after:bg-white after:opacity-0 hover:after:opacity-10 after:transition-opacity',
           plum: 'bg-accent-plum-600 text-white hover:bg-accent-plum-700 active:bg-accent-plum-800 shadow-sm after:absolute after:inset-0 after:bg-white after:opacity-0 hover:after:opacity-10 after:transition-opacity',
-          azure: 'bg-accent-teal-600 text-white hover:bg-accent-teal-700 active:bg-accent-teal-800 shadow-sm after:absolute after:inset-0 after:bg-white after:opacity-0 hover:after:opacity-10 after:transition-opacity',
+          azure:
+            'bg-accent-teal-600 text-white hover:bg-accent-teal-700 active:bg-accent-teal-800 shadow-sm after:absolute after:inset-0 after:bg-white after:opacity-0 hover:after:opacity-10 after:transition-opacity',
         },
 
         // Gradient button - Sophisticated gradient background with improved contrast
-        gradient: 'bg-gradient-to-r from-primary-600 to-secondary-600 text-white hover:shadow-md active:shadow-sm transition-shadow',
+        gradient:
+          'bg-gradient-to-r from-primary-600 to-secondary-600 text-white hover:shadow-md active:shadow-sm transition-shadow',
 
         // Semantic buttons with improved contrast
-        success: 'bg-success text-white hover:bg-success/90 active:bg-success/100 shadow-sm',
-        warning: 'bg-warning text-neutral-900 hover:bg-warning/90 active:bg-warning/100 shadow-sm',
-        error: 'bg-error text-white hover:bg-error/90 active:bg-error/100 shadow-sm',
+        success:
+          'bg-success text-white hover:bg-success/90 active:bg-success/100 shadow-sm',
+        warning:
+          'bg-warning text-neutral-900 hover:bg-warning/90 active:bg-warning/100 shadow-sm',
+        error:
+          'bg-error text-white hover:bg-error/90 active:bg-error/100 shadow-sm',
         info: 'bg-info text-white hover:bg-info/90 active:bg-info/100 shadow-sm',
       },
 
@@ -101,7 +111,7 @@ const buttonVariants = cva(
       shape: 'default',
       elevation: 'low',
     },
-  }
+  },
 );
 
 export interface ButtonProps
@@ -151,7 +161,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       onClick,
       ...props
     },
-    ref
+    ref,
   ) => {
     // Handle ripple effect
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -167,7 +177,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ripple.style.width = ripple.style.height = `${size}px`;
         ripple.style.left = `${x}px`;
         ripple.style.top = `${y}px`;
-        ripple.className = 'absolute rounded-full bg-white bg-opacity-30 pointer-events-none';
+        ripple.className =
+          'absolute rounded-full bg-white bg-opacity-30 pointer-events-none';
         ripple.style.transform = 'scale(0)';
         ripple.style.animation = 'ripple 600ms ease-out forwards';
 
@@ -188,7 +199,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         className={cn(
           buttonVariants({ variant, size, width, shape, elevation }),
           withRipple && 'overflow-hidden',
-          className
+          className,
         )}
         ref={ref}
         disabled={isLoading || props.disabled}
@@ -218,12 +229,18 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           </svg>
         )}
 
-        {leftIcon && !isLoading && <span className="mr-2 flex-shrink-0">{leftIcon}</span>}
-        <span className="relative">{isLoading && loadingText ? loadingText : children}</span>
-        {rightIcon && !isLoading && <span className="ml-2 flex-shrink-0">{rightIcon}</span>}
+        {leftIcon && !isLoading && (
+          <span className="mr-2 flex-shrink-0">{leftIcon}</span>
+        )}
+        <span className="relative">
+          {isLoading && loadingText ? loadingText : children}
+        </span>
+        {rightIcon && !isLoading && (
+          <span className="ml-2 flex-shrink-0">{rightIcon}</span>
+        )}
       </button>
     );
-  }
+  },
 );
 
 Button.displayName = 'Button';

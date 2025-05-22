@@ -122,7 +122,7 @@ export function Homepage(): JSX.Element {
       })),
     );
     setLocations(
-      currentCountry.locations.map((l) => ({
+      currentCountry.locations.map(l => ({
         ...l,
         highlight: false,
         area: l.name,
@@ -137,8 +137,8 @@ export function Homepage(): JSX.Element {
   // Function to randomly update stats
   const updateStats = useCallback(() => {
     // Update reviewers
-    setReviewers((prev) => {
-      const newReviews = prev.map((reviewer) => {
+    setReviewers(prev => {
+      const newReviews = prev.map(reviewer => {
         const newReviews = reviewer.reviews + Math.floor(Math.random() * 8); // Increased range
         return {
           ...reviewer,
@@ -150,8 +150,8 @@ export function Homepage(): JSX.Element {
     });
 
     // Update dishes
-    setDishes((prev) => {
-      const newDishes = prev.map((dish) => {
+    setDishes(prev => {
+      const newDishes = prev.map(dish => {
         const change = Math.floor(Math.random() * 15); // Increased range
         const newVotes = dish.votes + change;
         const newTrend = `↑ ${Math.floor(Math.random() * 15 + 5)}%`; // Increased range
@@ -166,8 +166,8 @@ export function Homepage(): JSX.Element {
     });
 
     // Update locations
-    setLocations((prev) => {
-      const newLocations = prev.map((location) => {
+    setLocations(prev => {
+      const newLocations = prev.map(location => {
         const newRestaurants = Math.floor(Math.random() * 5); // Increased range
         const newTotal = location.restaurants + newRestaurants;
         const newAdded = `+${Math.floor(Math.random() * 8 + 1)} this month`; // Increased range
@@ -187,8 +187,8 @@ export function Homepage(): JSX.Element {
     const interval = setInterval(() => {
       updateStats();
       // Update top reviewers
-      setTopReviewers((prev) =>
-        prev.map((reviewer) => ({
+      setTopReviewers(prev =>
+        prev.map(reviewer => ({
           ...reviewer,
           reviews: reviewer.reviews + Math.floor(Math.random() * 3),
           highlight: true,
@@ -214,8 +214,8 @@ export function Homepage(): JSX.Element {
 
     // Calculate cuisine stats
     const stats = new Map<string, { count: number; totalRating: number }>();
-    restaurants.forEach((restaurant) => {
-      restaurant.cuisineTypes?.forEach((cuisine) => {
+    restaurants.forEach(restaurant => {
+      restaurant.cuisineTypes?.forEach(cuisine => {
         const current = stats.get(cuisine) || { count: 0, totalRating: 0 };
         stats.set(cuisine, {
           count: current.count + 1,

@@ -1,12 +1,18 @@
 import React, { useState, memo } from 'react';
-import { Star, Heart, Award, Settings, MapPin, Users, Calendar } from 'lucide-react';
+import {
+  Star,
+  Heart,
+  Award,
+  Settings,
+  MapPin,
+} from 'lucide-react';
 import { LucideClientIcon } from '../ui/lucide-icon.js';
 import UserReviews from './UserReviews.js';
 import UserFavorites from './UserFavorites.js';
 
 /**
  * ProfileTabs component for displaying user profile tabs
- * 
+ *
  * @param {Object} props - Component props
  * @param {Object} props.user - User data object
  * @param {boolean} props.isCurrentUser - Whether the profile belongs to the current user
@@ -19,7 +25,7 @@ const ProfileTabs = memo(function ProfileTabs({
   getCountryLink,
 }) {
   const [activeTab, setActiveTab] = useState('reviews');
-  
+
   // Define tabs
   const tabs = [
     {
@@ -46,7 +52,7 @@ const ProfileTabs = memo(function ProfileTabs({
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
             Badges
           </h3>
-          
+
           {user.badges && user.badges.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {user.badges.map((badge, index) => (
@@ -96,7 +102,7 @@ const ProfileTabs = memo(function ProfileTabs({
       ),
     },
   ];
-  
+
   // Add settings tab for current user
   if (isCurrentUser) {
     tabs.push({
@@ -109,17 +115,20 @@ const ProfileTabs = memo(function ProfileTabs({
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
             Account Settings
           </h3>
-          
+
           <div className="space-y-6">
             {/* Profile Information */}
             <div className="border-b border-gray-200 dark:border-gray-700 pb-6">
               <h4 className="text-md font-medium text-gray-900 dark:text-white mb-4">
                 Profile Information
               </h4>
-              
+
               <div className="space-y-4">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
                     Name
                   </label>
                   <input
@@ -130,9 +139,12 @@ const ProfileTabs = memo(function ProfileTabs({
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                   />
                 </div>
-                
+
                 <div>
-                  <label htmlFor="bio" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label
+                    htmlFor="bio"
+                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
                     Bio
                   </label>
                   <textarea
@@ -143,9 +155,12 @@ const ProfileTabs = memo(function ProfileTabs({
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                   />
                 </div>
-                
+
                 <div>
-                  <label htmlFor="location" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <label
+                    htmlFor="location"
+                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                  >
                     Location
                   </label>
                   <div className="relative">
@@ -167,13 +182,13 @@ const ProfileTabs = memo(function ProfileTabs({
                 </div>
               </div>
             </div>
-            
+
             {/* Privacy Settings */}
             <div className="border-b border-gray-200 dark:border-gray-700 pb-6">
               <h4 className="text-md font-medium text-gray-900 dark:text-white mb-4">
                 Privacy Settings
               </h4>
-              
+
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
@@ -195,7 +210,7 @@ const ProfileTabs = memo(function ProfileTabs({
                     <option value="private">Private</option>
                   </select>
                 </div>
-                
+
                 <div className="flex items-center justify-between">
                   <div>
                     <h5 className="text-sm font-medium text-gray-900 dark:text-white">
@@ -221,13 +236,13 @@ const ProfileTabs = memo(function ProfileTabs({
                 </div>
               </div>
             </div>
-            
+
             {/* Account Actions */}
             <div>
               <h4 className="text-md font-medium text-gray-900 dark:text-white mb-4">
                 Account Actions
               </h4>
-              
+
               <div className="space-y-4">
                 <button
                   type="button"
@@ -235,14 +250,14 @@ const ProfileTabs = memo(function ProfileTabs({
                 >
                   Save Changes
                 </button>
-                
+
                 <button
                   type="button"
                   className="w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
                 >
                   Change Password
                 </button>
-                
+
                 <button
                   type="button"
                   className="w-full flex justify-center py-2 px-4 border border-red-300 dark:border-red-700 rounded-md shadow-sm text-sm font-medium text-red-700 dark:text-red-400 bg-white dark:bg-gray-800 hover:bg-red-50 dark:hover:bg-red-900/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
@@ -256,13 +271,13 @@ const ProfileTabs = memo(function ProfileTabs({
       ),
     });
   }
-  
+
   return (
     <div>
       {/* Tabs Navigation */}
       <div className="border-b border-gray-200 dark:border-gray-700 mb-6">
         <nav className="flex -mb-px space-x-8 overflow-x-auto">
-          {tabs.map((tab) => (
+          {tabs.map(tab => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
@@ -297,11 +312,9 @@ const ProfileTabs = memo(function ProfileTabs({
           ))}
         </nav>
       </div>
-      
+
       {/* Tab Content */}
-      <div>
-        {tabs.find((tab) => tab.id === activeTab)?.component}
-      </div>
+      <div>{tabs.find(tab => tab.id === activeTab)?.component}</div>
     </div>
   );
 });

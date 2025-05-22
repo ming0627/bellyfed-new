@@ -1,11 +1,11 @@
 import React, { useState, memo } from 'react';
-import { Search, Filter, MapPin, Utensils, Clock } from 'lucide-react';
+import { Search, MapPin, Utensils, Clock } from 'lucide-react';
 import { LucideClientIcon } from '../ui/lucide-icon.js';
 import CollectionCard from './CollectionCard.js';
 
 /**
  * CollectionList component for displaying a filterable list of collections
- * 
+ *
  * @param {Object} props - Component props
  * @param {Array} props.collections - Array of collection objects
  * @param {Function} props.getCountryLink - Function to generate country-specific links
@@ -22,50 +22,59 @@ const CollectionList = memo(function CollectionList({
   const [searchQuery, setSearchQuery] = useState('');
   const [filterLocation, setFilterLocation] = useState('all');
   const [sortBy, setSortBy] = useState('newest');
-  
+
   // Extract unique locations from collections
-  const locations = [...new Set(
-    collections
-      .map(collection => collection.location)
-      .filter(Boolean)
-  )].sort();
-  
+  const locations = [
+    ...new Set(
+      collections.map(collection => collection.location).filter(Boolean),
+    ),
+  ].sort();
+
   // Handle search input change
-  const handleSearchChange = (e) => {
+  const handleSearchChange = e => {
     setSearchQuery(e.target.value);
   };
-  
+
   // Handle location filter change
-  const handleLocationFilterChange = (e) => {
+  const handleLocationFilterChange = e => {
     setFilterLocation(e.target.value);
   };
-  
+
   // Handle sort change
-  const handleSortChange = (e) => {
+  const handleSortChange = e => {
     setSortBy(e.target.value);
   };
-  
+
   // Filter collections based on search query and location filter
-  const filteredCollections = collections.filter((collection) => {
+  const filteredCollections = collections.filter(collection => {
     // Search filter
-    const searchMatch = searchQuery === '' || 
+    const searchMatch =
+      searchQuery === '' ||
       collection.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      collection.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      collection.description
+        ?.toLowerCase()
+        .includes(searchQuery.toLowerCase()) ||
       collection.curator?.toLowerCase().includes(searchQuery.toLowerCase());
-    
+
     // Location filter
-    const locationMatch = filterLocation === 'all' || 
-      collection.location === filterLocation;
-    
+    const locationMatch =
+      filterLocation === 'all' || collection.location === filterLocation;
+
     return searchMatch && locationMatch;
   });
-  
+
   // Sort collections based on sort option
   const sortedCollections = [...filteredCollections].sort((a, b) => {
     if (sortBy === 'newest') {
-      return new Date(b.updatedAt || b.createdAt || 0) - new Date(a.updatedAt || a.createdAt || 0);
+      return (
+        new Date(b.updatedAt || b.createdAt || 0) -
+        new Date(a.updatedAt || a.createdAt || 0)
+      );
     } else if (sortBy === 'oldest') {
-      return new Date(a.updatedAt || a.createdAt || 0) - new Date(b.updatedAt || b.createdAt || 0);
+      return (
+        new Date(a.updatedAt || a.createdAt || 0) -
+        new Date(b.updatedAt || b.createdAt || 0)
+      );
     } else if (sortBy === 'restaurants-high') {
       return b.restaurantCount - a.restaurantCount;
     } else if (sortBy === 'restaurants-low') {
@@ -75,7 +84,7 @@ const CollectionList = memo(function CollectionList({
     }
     return 0;
   });
-  
+
   return (
     <div className={className}>
       {/* Filters */}
@@ -99,7 +108,7 @@ const CollectionList = memo(function CollectionList({
               onChange={handleSearchChange}
             />
           </div>
-          
+
           {/* Sort Dropdown */}
           <div className="relative min-w-[200px]">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -122,7 +131,7 @@ const CollectionList = memo(function CollectionList({
             </select>
           </div>
         </div>
-        
+
         {/* Location Filter */}
         {locations.length > 0 && (
           <div className="relative">
@@ -139,7 +148,7 @@ const CollectionList = memo(function CollectionList({
               onChange={handleLocationFilterChange}
             >
               <option value="all">All Locations</option>
-              {locations.map((location) => (
+              {locations.map(location => (
                 <option key={location} value={location}>
                   {location}
                 </option>
@@ -148,24 +157,27 @@ const CollectionList = memo(function CollectionList({
           </div>
         )}
       </div>
-      
+
       {/* Results Count */}
       <div className="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        Showing {sortedCollections.length} {sortedCollections.length === 1 ? 'collection' : 'collections'}
+        Showing {sortedCollections.length}{' '}
+        {sortedCollections.length === 1 ? 'collection' : 'collections'}
         {filterLocation !== 'all' && ` in ${filterLocation}`}
         {searchQuery && ` matching "${searchQuery}"`}
       </div>
-      
+
       {/* Collections Grid */}
       {sortedCollections.length > 0 ? (
-        <div className={`grid gap-6 ${
-          variant === 'compact' 
-            ? 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5' 
-            : variant === 'horizontal'
-              ? 'grid-cols-1'
-              : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
-        }`}>
-          {sortedCollections.map((collection) => (
+        <div
+          className={`grid gap-6 ${
+            variant === 'compact'
+              ? 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5'
+              : variant === 'horizontal'
+                ? 'grid-cols-1'
+                : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+          }`}
+        >
+          {sortedCollections.map(collection => (
             <CollectionCard
               key={collection.id}
               id={collection.id}

@@ -1,5 +1,6 @@
 import React, { useState, memo } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Star, MapPin, Search, Filter, Heart } from 'lucide-react';
 import { LucideClientIcon } from '../ui/lucide-icon.js';
 
@@ -21,7 +22,8 @@ const mockUserFavorites = [
     priceRange: '$$',
     rating: 4.7,
     reviewCount: 256,
-    imageUrl: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=600&h=400&fit=crop',
+    imageUrl:
+      'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=600&h=400&fit=crop',
     savedAt: '2023-05-10T14:23:00Z',
   },
   {
@@ -40,7 +42,8 @@ const mockUserFavorites = [
     priceRange: '$$$',
     rating: 4.8,
     reviewCount: 189,
-    imageUrl: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=600&h=400&fit=crop',
+    imageUrl:
+      'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=600&h=400&fit=crop',
     savedAt: '2023-04-15T18:45:00Z',
   },
   {
@@ -59,78 +62,77 @@ const mockUserFavorites = [
     priceRange: '$$',
     rating: 4.5,
     reviewCount: 142,
-    imageUrl: 'https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?q=80&w=600&h=400&fit=crop',
+    imageUrl:
+      'https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?q=80&w=600&h=400&fit=crop',
     savedAt: '2023-03-20T12:30:00Z',
   },
 ];
 
 /**
  * UserFavorites component for displaying a user's favorite restaurants
- * 
+ *
  * @param {Object} props - Component props
  * @param {Object} props.user - User data object
  * @param {Function} props.getCountryLink - Function to generate country-specific links
  * @returns {JSX.Element} - Rendered component
  */
-const UserFavorites = memo(function UserFavorites({
-  user,
-  getCountryLink,
-}) {
+const UserFavorites = memo(function UserFavorites({ user, getCountryLink }) {
   const [favorites, setFavorites] = useState(mockUserFavorites);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterCuisine, setFilterCuisine] = useState('all');
-  
+
   // Get unique cuisine types from favorites
-  const cuisineTypes = [...new Set(
-    favorites.flatMap(favorite => favorite.cuisineTypes || [])
-  )].sort();
-  
+  const cuisineTypes = [
+    ...new Set(favorites.flatMap(favorite => favorite.cuisineTypes || [])),
+  ].sort();
+
   // Handle search input change
-  const handleSearchChange = (e) => {
+  const handleSearchChange = e => {
     setSearchQuery(e.target.value);
   };
-  
+
   // Handle cuisine filter change
-  const handleCuisineFilterChange = (e) => {
+  const handleCuisineFilterChange = e => {
     setFilterCuisine(e.target.value);
   };
-  
+
   // Filter favorites based on search query and cuisine filter
-  const filteredFavorites = favorites.filter((favorite) => {
+  const filteredFavorites = favorites.filter(favorite => {
     // Search filter
-    const searchMatch = searchQuery === '' || 
+    const searchMatch =
+      searchQuery === '' ||
       favorite.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       favorite.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       favorite.address?.city?.toLowerCase().includes(searchQuery.toLowerCase());
-    
+
     // Cuisine filter
-    const cuisineMatch = filterCuisine === 'all' || 
-      favorite.cuisineTypes?.includes(filterCuisine);
-    
+    const cuisineMatch =
+      filterCuisine === 'all' || favorite.cuisineTypes?.includes(filterCuisine);
+
     return searchMatch && cuisineMatch;
   });
-  
+
   // Format address for display
-  const formatAddress = (address) => {
+  const formatAddress = address => {
     if (!address) return 'Address not available';
-    
+
     const { street, city, state } = address;
     const parts = [street, city, state].filter(Boolean);
     return parts.join(', ');
   };
-  
+
   // Remove from favorites
-  const handleRemoveFavorite = (id) => {
+  const handleRemoveFavorite = id => {
     setFavorites(favorites.filter(favorite => favorite.id !== id));
   };
-  
+
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 sm:mb-0">
           Favorite Restaurants ({filteredFavorites.length})
         </h3>
-        
+
         <div className="flex flex-col sm:flex-row gap-4">
           {/* Search Input */}
           <div className="relative">
@@ -149,7 +151,7 @@ const UserFavorites = memo(function UserFavorites({
               onChange={handleSearchChange}
             />
           </div>
-          
+
           {/* Cuisine Filter */}
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -165,7 +167,7 @@ const UserFavorites = memo(function UserFavorites({
               onChange={handleCuisineFilterChange}
             >
               <option value="all">All Cuisines</option>
-              {cuisineTypes.map((cuisine) => (
+              {cuisineTypes.map(cuisine => (
                 <option key={cuisine} value={cuisine}>
                   {cuisine}
                 </option>
@@ -174,11 +176,11 @@ const UserFavorites = memo(function UserFavorites({
           </div>
         </div>
       </div>
-      
+
       {/* Favorites List */}
       {filteredFavorites.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredFavorites.map((favorite) => (
+          {filteredFavorites.map(favorite => (
             <div
               key={favorite.id}
               className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
@@ -186,18 +188,21 @@ const UserFavorites = memo(function UserFavorites({
               {/* Restaurant Image */}
               <div className="relative h-48">
                 {favorite.imageUrl ? (
-                  <img
+                  <Image
                     src={favorite.imageUrl}
                     alt={favorite.name}
-                    className="w-full h-full object-cover"
+                    layout="fill"
+                    objectFit="cover"
                     loading="lazy"
                   />
                 ) : (
                   <div className="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-                    <span className="text-gray-500 dark:text-gray-400">No Image</span>
+                    <span className="text-gray-500 dark:text-gray-400">
+                      No Image
+                    </span>
                   </div>
                 )}
-                
+
                 {/* Remove Button */}
                 <button
                   onClick={() => handleRemoveFavorite(favorite.id)}
@@ -210,7 +215,7 @@ const UserFavorites = memo(function UserFavorites({
                     aria-hidden="true"
                   />
                 </button>
-                
+
                 {/* Price Range */}
                 {favorite.priceRange && (
                   <div className="absolute bottom-2 right-2 px-2 py-1 bg-black bg-opacity-70 text-white text-xs rounded">
@@ -218,7 +223,7 @@ const UserFavorites = memo(function UserFavorites({
                   </div>
                 )}
               </div>
-              
+
               {/* Restaurant Info */}
               <div className="p-4">
                 <Link
@@ -227,10 +232,14 @@ const UserFavorites = memo(function UserFavorites({
                 >
                   {favorite.name}
                 </Link>
-                
+
                 <div className="flex items-center mb-2">
                   <div className="flex items-center text-yellow-500 mr-2">
-                    <LucideClientIcon icon={Star} className="w-4 h-4 fill-current" aria-hidden="true" />
+                    <LucideClientIcon
+                      icon={Star}
+                      className="w-4 h-4 fill-current"
+                      aria-hidden="true"
+                    />
                     <span className="ml-1 text-xs font-medium">
                       {favorite.rating?.toFixed(1) || 'N/A'}
                     </span>
@@ -239,10 +248,10 @@ const UserFavorites = memo(function UserFavorites({
                     ({favorite.reviewCount?.toLocaleString() || 0} reviews)
                   </span>
                 </div>
-                
+
                 {favorite.cuisineTypes && favorite.cuisineTypes.length > 0 && (
                   <div className="mb-2 flex flex-wrap gap-1">
-                    {favorite.cuisineTypes.map((cuisine) => (
+                    {favorite.cuisineTypes.map(cuisine => (
                       <span
                         key={cuisine}
                         className="inline-block px-2 py-0.5 bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-300 text-xs rounded-full"
@@ -252,7 +261,7 @@ const UserFavorites = memo(function UserFavorites({
                     ))}
                   </div>
                 )}
-                
+
                 <div className="flex items-start text-gray-600 dark:text-gray-400 text-sm">
                   <LucideClientIcon
                     icon={MapPin}

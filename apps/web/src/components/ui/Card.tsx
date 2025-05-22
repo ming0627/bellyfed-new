@@ -1,4 +1,5 @@
 import React, { HTMLAttributes, forwardRef } from 'react';
+import Image from 'next/image';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/utils/cn';
 
@@ -14,10 +15,12 @@ const cardVariants = cva(
       // Card variants with modern, minimalist aesthetics
       variant: {
         // Default card - Clean white with improved border contrast
-        default: 'bg-white border border-neutral-300 dark:bg-neutral-800 dark:border-neutral-700',
+        default:
+          'bg-white border border-neutral-300 dark:bg-neutral-800 dark:border-neutral-700',
 
         // Outlined card - Transparent with improved border contrast
-        outlined: 'bg-transparent border border-neutral-400 dark:border-neutral-600',
+        outlined:
+          'bg-transparent border border-neutral-400 dark:border-neutral-600',
 
         // Elevated card - Enhanced shadow without border
         elevated: 'bg-white shadow-md border-none dark:bg-neutral-800',
@@ -26,15 +29,19 @@ const cardVariants = cva(
         flat: 'bg-neutral-100 border-none dark:bg-neutral-800/50',
 
         // Frosted card - Subtle blur effect for overlays with improved contrast
-        frosted: 'bg-white/90 backdrop-blur-md border border-white/30 dark:bg-neutral-800/90 dark:border-neutral-700/30',
+        frosted:
+          'bg-white/90 backdrop-blur-md border border-white/30 dark:bg-neutral-800/90 dark:border-neutral-700/30',
 
         // Gradient card - Subtle gradient background with improved contrast
-        gradient: 'bg-gradient-to-r from-primary-50 to-secondary-50 border-none dark:from-primary-900/20 dark:to-secondary-900/20',
+        gradient:
+          'bg-gradient-to-r from-primary-50 to-secondary-50 border-none dark:from-primary-900/20 dark:to-secondary-900/20',
 
         // Accent cards - With color accents and improved contrast
         accent: {
-          primary: 'bg-white border-l-4 border border-neutral-300 border-l-primary-600 dark:bg-neutral-800 dark:border-neutral-700 dark:border-l-primary-500',
-          secondary: 'bg-white border-l-4 border border-neutral-300 border-l-secondary-600 dark:bg-neutral-800 dark:border-neutral-700 dark:border-l-secondary-500',
+          primary:
+            'bg-white border-l-4 border border-neutral-300 border-l-primary-600 dark:bg-neutral-800 dark:border-neutral-700 dark:border-l-primary-500',
+          secondary:
+            'bg-white border-l-4 border border-neutral-300 border-l-secondary-600 dark:bg-neutral-800 dark:border-neutral-700 dark:border-l-secondary-500',
           gold: 'bg-white border-l-4 border border-neutral-300 border-l-accent-gold-600 dark:bg-neutral-800 dark:border-neutral-700 dark:border-l-accent-gold-500',
           plum: 'bg-white border-l-4 border border-neutral-300 border-l-accent-plum-600 dark:bg-neutral-800 dark:border-neutral-700 dark:border-l-accent-plum-500',
           teal: 'bg-white border-l-4 border border-neutral-300 border-l-accent-teal-600 dark:bg-neutral-800 dark:border-neutral-700 dark:border-l-accent-teal-500',
@@ -55,10 +62,12 @@ const cardVariants = cva(
       hover: {
         none: '',
         lift: 'hover:translate-y-[-4px] hover:shadow-md transition-all duration-300 focus:translate-y-[-2px] focus:shadow-sm',
-        highlight: 'hover:border-primary-500 hover:shadow-sm transition-all duration-300 focus:border-primary-400',
+        highlight:
+          'hover:border-primary-500 hover:shadow-sm transition-all duration-300 focus:border-primary-400',
         grow: 'hover:scale-[1.02] hover:shadow-md transition-all duration-300 focus:scale-[1.01] focus:shadow-sm',
         glow: 'hover:shadow-lg hover:shadow-primary-500/20 transition-shadow duration-300 focus:shadow-md focus:shadow-primary-500/15',
-        reveal: 'after:absolute after:inset-0 after:bg-primary-500/10 after:opacity-0 hover:after:opacity-100 after:transition-opacity duration-300',
+        reveal:
+          'after:absolute after:inset-0 after:bg-primary-500/10 after:opacity-0 hover:after:opacity-100 after:transition-opacity duration-300',
       },
 
       // Card radius options
@@ -92,11 +101,11 @@ const cardVariants = cva(
       width: 'auto',
       height: 'auto',
     },
-  }
+  },
 );
 
 export interface CardProps
-  extends HTMLAttributes<HTMLDivElement>,
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'title'>,
     VariantProps<typeof cardVariants> {
   /**
    * Optional card title
@@ -159,19 +168,25 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     // Handle aspect ratio for images
     const getAspectRatioClass = () => {
       if (!image?.aspectRatio) return 'aspect-video'; // 16:9 default
 
       switch (image.aspectRatio) {
-        case '1:1': return 'aspect-square';
-        case '16:9': return 'aspect-video';
-        case '4:3': return 'aspect-[4/3]';
-        case '3:2': return 'aspect-[3/2]';
-        case '2:1': return 'aspect-[2/1]';
-        default: return 'aspect-video';
+        case '1:1':
+          return 'aspect-square';
+        case '16:9':
+          return 'aspect-video';
+        case '4:3':
+          return 'aspect-[4/3]';
+        case '3:2':
+          return 'aspect-[3/2]';
+        case '2:1':
+          return 'aspect-[2/1]';
+        default:
+          return 'aspect-video';
       }
     };
 
@@ -180,7 +195,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
         className={cn(
           cardVariants({ variant, padding, hover, radius, width, height }),
           isClickable && 'cursor-pointer',
-          className
+          className,
         )}
         ref={ref}
         onClick={isClickable ? onClick : undefined}
@@ -189,10 +204,11 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
         {/* Background image */}
         {image && image.position === 'background' && (
           <div className="absolute inset-0 -z-10">
-            <img
+            <Image
               src={image.src}
               alt={image.alt}
-              className="w-full h-full object-cover"
+              layout="fill"
+              objectFit="cover"
             />
             {image.overlay && (
               <div className="absolute inset-0 bg-neutral-900/40"></div>
@@ -201,15 +217,29 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
         )}
 
         {/* Top image */}
-        {image && image.position !== 'bottom' && image.position !== 'background' && (
-          <div className={cn("w-full overflow-hidden", getAspectRatioClass(), radius === 'lg' ? 'rounded-t-lg' : radius === 'xl' ? 'rounded-t-xl' : '')}>
-            <img
-              src={image.src}
-              alt={image.alt}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-          </div>
-        )}
+        {image &&
+          image.position !== 'bottom' &&
+          image.position !== 'background' && (
+            <div
+              className={cn(
+                'w-full overflow-hidden',
+                getAspectRatioClass(),
+                radius === 'lg'
+                  ? 'rounded-t-lg'
+                  : radius === 'xl'
+                    ? 'rounded-t-xl'
+                    : '',
+              )}
+            >
+              <Image
+                src={image.src}
+                alt={image.alt}
+                layout="fill"
+                objectFit="cover"
+                className="transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+          )}
 
         {/* Card content */}
         <div className={padding === 'none' ? 'p-5' : ''}>
@@ -236,36 +266,49 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
 
           {/* Actions */}
           {actions && (
-            <div className="mt-4 flex flex-wrap gap-2">
-              {actions}
-            </div>
+            <div className="mt-4 flex flex-wrap gap-2">{actions}</div>
           )}
         </div>
 
         {/* Footer with optional divider */}
         {footer && (
-          <div className={cn(
-            'mt-auto',
-            withDivider && 'border-t border-neutral-200 dark:border-neutral-700',
-            padding === 'none' ? 'px-5 py-4' : 'pt-4'
-          )}>
+          <div
+            className={cn(
+              'mt-auto',
+              withDivider &&
+                'border-t border-neutral-200 dark:border-neutral-700',
+              padding === 'none' ? 'px-5 py-4' : 'pt-4',
+            )}
+          >
             {footer}
           </div>
         )}
 
         {/* Bottom image */}
         {image && image.position === 'bottom' && (
-          <div className={cn("w-full overflow-hidden mt-4", getAspectRatioClass(), radius === 'lg' ? 'rounded-b-lg' : radius === 'xl' ? 'rounded-b-xl' : '')}>
-            <img
+          <div
+            className={cn(
+              'w-full overflow-hidden mt-auto',
+              getAspectRatioClass(),
+              radius === 'lg'
+                ? 'rounded-b-lg'
+                : radius === 'xl'
+                  ? 'rounded-b-xl'
+                  : '',
+            )}
+          >
+            <Image
               src={image.src}
               alt={image.alt}
-              className="w-full h-full object-cover"
+              layout="fill"
+              objectFit="cover"
+              className="transition-transform duration-500 group-hover:scale-105"
             />
           </div>
         )}
       </div>
     );
-  }
+  },
 );
 
 Card.displayName = 'Card';

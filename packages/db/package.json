@@ -23,8 +23,8 @@
     "@prisma/client": "^6.8.2"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
+    "eslint-config-custom": "workspace:*",
+    "@bellyfed/typescript-config": "workspace:*",
     "@types/node": "^20",
     "eslint": "^8.57.1",
     "prisma": "^6.8.2",

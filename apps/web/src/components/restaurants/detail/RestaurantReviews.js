@@ -1,11 +1,20 @@
 import React, { useState, memo } from 'react';
 import Link from 'next/link';
-import { Star, ThumbsUp, MessageSquare, Calendar, ChevronDown, ChevronUp, Check } from 'lucide-react';
+import Image from 'next/image';
+import {
+  Star,
+  ThumbsUp,
+  MessageSquare,
+  Calendar,
+  ChevronDown,
+  ChevronUp,
+  Check,
+} from 'lucide-react';
 import { LucideClientIcon } from '../../ui/lucide-icon.js';
 
 /**
  * ReviewItem component for displaying a single review
- * 
+ *
  * @param {Object} props - Component props
  * @param {Object} props.review - Review data
  * @param {Function} props.getCountryLink - Function to generate country-specific links
@@ -14,20 +23,20 @@ import { LucideClientIcon } from '../../ui/lucide-icon.js';
 const ReviewItem = memo(function ReviewItem({ review, getCountryLink }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
-  
+
   // Toggle review expansion
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
-  
+
   // Handle like button click
-  const handleLike = (e) => {
+  const handleLike = e => {
     e.preventDefault();
     setIsLiked(!isLiked);
   };
-  
+
   // Format date for display
-  const formatDate = (dateString) => {
+  const formatDate = dateString => {
     try {
       const date = new Date(dateString);
       return date.toLocaleDateString('en-US', {
@@ -39,65 +48,68 @@ const ReviewItem = memo(function ReviewItem({ review, getCountryLink }) {
       return dateString;
     }
   };
-  
+
   // Generate stars for rating
-  const renderStars = (rating) => {
+  const renderStars = rating => {
     const stars = [];
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 >= 0.5;
-    
+
     for (let i = 0; i < 5; i++) {
       if (i < fullStars) {
         stars.push(
-          <LucideClientIcon 
-            key={i} 
-            icon={Star} 
-            className="w-4 h-4 text-yellow-500 fill-current" 
-            aria-hidden="true" 
-          />
+          <LucideClientIcon
+            key={i}
+            icon={Star}
+            className="w-4 h-4 text-yellow-500 fill-current"
+            aria-hidden="true"
+          />,
         );
       } else if (i === fullStars && hasHalfStar) {
         stars.push(
           <span key={i} className="relative">
-            <LucideClientIcon 
-              icon={Star} 
-              className="w-4 h-4 text-gray-300 dark:text-gray-600 fill-current" 
-              aria-hidden="true" 
+            <LucideClientIcon
+              icon={Star}
+              className="w-4 h-4 text-gray-300 dark:text-gray-600 fill-current"
+              aria-hidden="true"
             />
             <span className="absolute inset-0 overflow-hidden w-1/2">
-              <LucideClientIcon 
-                icon={Star} 
-                className="w-4 h-4 text-yellow-500 fill-current" 
-                aria-hidden="true" 
+              <LucideClientIcon
+                icon={Star}
+                className="w-4 h-4 text-yellow-500 fill-current"
+                aria-hidden="true"
               />
             </span>
-          </span>
+          </span>,
         );
       } else {
         stars.push(
-          <LucideClientIcon 
-            key={i} 
-            icon={Star} 
-            className="w-4 h-4 text-gray-300 dark:text-gray-600" 
-            aria-hidden="true" 
-          />
+          <LucideClientIcon
+            key={i}
+            icon={Star}
+            className="w-4 h-4 text-gray-300 dark:text-gray-600"
+            aria-hidden="true"
+          />,
         );
       }
     }
-    
+
     return stars;
   };
-  
+
   return (
     <div className="py-6 border-b border-gray-200 dark:border-gray-700 last:border-0">
       {/* Review Header */}
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center">
           {review.userProfilePicture ? (
-            <img
+            <Image
               src={review.userProfilePicture}
               alt={review.userName}
-              className="w-10 h-10 rounded-full object-cover mr-3"
+              width={40}
+              height={40}
+              objectFit="cover"
+              className="rounded-full mr-3"
               loading="lazy"
             />
           ) : (
@@ -107,7 +119,7 @@ const ReviewItem = memo(function ReviewItem({ review, getCountryLink }) {
               </span>
             </div>
           )}
-          
+
           <div>
             <Link
               href={getCountryLink(`/users/${review.userId}`)}
@@ -116,36 +128,44 @@ const ReviewItem = memo(function ReviewItem({ review, getCountryLink }) {
               {review.userName}
             </Link>
             <div className="flex items-center mt-1">
-              <div className="flex">
-                {renderStars(review.rating)}
-              </div>
+              <div className="flex">{renderStars(review.rating)}</div>
               {review.isVerifiedVisit && (
                 <span className="ml-2 inline-flex items-center text-xs text-green-600 dark:text-green-400">
-                  <LucideClientIcon icon={Check} className="w-3 h-3 mr-0.5" aria-hidden="true" />
+                  <LucideClientIcon
+                    icon={Check}
+                    className="w-3 h-3 mr-0.5"
+                    aria-hidden="true"
+                  />
                   Verified Visit
                 </span>
               )}
             </div>
           </div>
         </div>
-        
+
         <div className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
-          <LucideClientIcon icon={Calendar} className="w-4 h-4 mr-1" aria-hidden="true" />
+          <LucideClientIcon
+            icon={Calendar}
+            className="w-4 h-4 mr-1"
+            aria-hidden="true"
+          />
           <span>{formatDate(review.visitDate)}</span>
         </div>
       </div>
-      
+
       {/* Review Title and Content */}
       {review.title && (
         <h4 className="font-medium text-gray-900 dark:text-white mb-2">
           {review.title}
         </h4>
       )}
-      
-      <div className={`text-gray-700 dark:text-gray-300 ${!isExpanded && review.content.length > 200 ? 'line-clamp-3' : ''}`}>
+
+      <div
+        className={`text-gray-700 dark:text-gray-300 ${!isExpanded && review.content.length > 200 ? 'line-clamp-3' : ''}`}
+      >
         {review.content}
       </div>
-      
+
       {review.content.length > 200 && (
         <button
           onClick={toggleExpand}
@@ -159,35 +179,38 @@ const ReviewItem = memo(function ReviewItem({ review, getCountryLink }) {
           />
         </button>
       )}
-      
+
       {/* Review Images */}
       {review.images && review.images.length > 0 && (
         <div className="mt-4 flex space-x-2 overflow-x-auto pb-2">
           {review.images.map((image, index) => (
-            <div key={index} className="flex-shrink-0 w-24 h-24">
-              <img
+            <div key={index} className="flex-shrink-0 w-24 h-24 relative">
+              <Image
                 src={image.url}
                 alt={image.caption || `Image ${index + 1}`}
-                className="w-full h-full object-cover rounded-md"
+                layout="fill"
+                objectFit="cover"
+                className="rounded-md"
                 loading="lazy"
               />
             </div>
           ))}
         </div>
       )}
-      
+
       {/* Category Ratings */}
       {review.categoryRatings && (
         <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-2">
           {Object.entries(review.categoryRatings).map(([category, rating]) => (
-            <div key={category} className="bg-gray-50 dark:bg-gray-700 rounded-md p-2">
+            <div
+              key={category}
+              className="bg-gray-50 dark:bg-gray-700 rounded-md p-2"
+            >
               <div className="text-xs text-gray-500 dark:text-gray-400 capitalize mb-1">
                 {category}
               </div>
               <div className="flex items-center">
-                <div className="flex">
-                  {renderStars(rating)}
-                </div>
+                <div className="flex">{renderStars(rating)}</div>
                 <span className="ml-1 text-sm font-medium text-gray-700 dark:text-gray-300">
                   {rating.toFixed(1)}
                 </span>
@@ -196,7 +219,7 @@ const ReviewItem = memo(function ReviewItem({ review, getCountryLink }) {
           ))}
         </div>
       )}
-      
+
       {/* Review Actions */}
       <div className="mt-4 flex items-center space-x-4">
         <button
@@ -214,12 +237,16 @@ const ReviewItem = memo(function ReviewItem({ review, getCountryLink }) {
           />
           <span>Helpful ({review.helpfulCount + (isLiked ? 1 : 0)})</span>
         </button>
-        
+
         <Link
           href={getCountryLink(`/reviews/${review.id}`)}
           className="flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
         >
-          <LucideClientIcon icon={MessageSquare} className="w-4 h-4 mr-1" aria-hidden="true" />
+          <LucideClientIcon
+            icon={MessageSquare}
+            className="w-4 h-4 mr-1"
+            aria-hidden="true"
+          />
           <span>Comment ({review.comments})</span>
         </Link>
       </div>
@@ -229,33 +256,40 @@ const ReviewItem = memo(function ReviewItem({ review, getCountryLink }) {
 
 /**
  * RestaurantReviews component for displaying reviews for a restaurant
- * 
+ *
  * @param {Object} props - Component props
  * @param {Object} props.restaurant - Restaurant data object
  * @param {Function} props.getCountryLink - Function to generate country-specific links
  * @returns {JSX.Element} - Rendered component
  */
-const RestaurantReviews = memo(function RestaurantReviews({ restaurant, getCountryLink }) {
+const RestaurantReviews = memo(function RestaurantReviews({
+  restaurant,
+  getCountryLink,
+}) {
   const [sortOption, setSortOption] = useState('newest');
-  
+
   // Handle sort change
-  const handleSortChange = (e) => {
+  const handleSortChange = e => {
     setSortOption(e.target.value);
   };
-  
+
   // Sort reviews based on selected option
   const sortedReviews = React.useMemo(() => {
     if (!restaurant.reviews || restaurant.reviews.length === 0) {
       return [];
     }
-    
+
     const reviews = [...restaurant.reviews];
-    
+
     switch (sortOption) {
       case 'newest':
-        return reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        return reviews.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+        );
       case 'oldest':
-        return reviews.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+        return reviews.sort(
+          (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
+        );
       case 'highest':
         return reviews.sort((a, b) => b.rating - a.rating);
       case 'lowest':
@@ -266,7 +300,7 @@ const RestaurantReviews = memo(function RestaurantReviews({ restaurant, getCount
         return reviews;
     }
   }, [restaurant.reviews, sortOption]);
-  
+
   // If no reviews, show a message
   if (!restaurant.reviews || restaurant.reviews.length === 0) {
     return (
@@ -286,16 +320,19 @@ const RestaurantReviews = memo(function RestaurantReviews({ restaurant, getCount
       </section>
     );
   }
-  
+
   return (
     <section className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-8">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
         <h2 className="text-xl font-bold text-gray-900 dark:text-white">
           Reviews ({restaurant.reviewCount})
         </h2>
-        
+
         <div className="flex items-center mt-2 sm:mt-0">
-          <label htmlFor="sort-reviews" className="text-sm text-gray-600 dark:text-gray-400 mr-2">
+          <label
+            htmlFor="sort-reviews"
+            className="text-sm text-gray-600 dark:text-gray-400 mr-2"
+          >
             Sort by:
           </label>
           <select
@@ -312,7 +349,7 @@ const RestaurantReviews = memo(function RestaurantReviews({ restaurant, getCount
           </select>
         </div>
       </div>
-      
+
       {/* Rating Summary */}
       <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
         <div className="flex flex-col md:flex-row md:items-center">
@@ -328,22 +365,20 @@ const RestaurantReviews = memo(function RestaurantReviews({ restaurant, getCount
               Based on {restaurant.reviewCount} reviews
             </div>
           </div>
-          
+
           {/* Category Ratings */}
           {restaurant.ranking && (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:ml-6 flex-grow">
               {Object.entries(restaurant.ranking).map(([category, rating]) => {
                 if (category === 'totalScore') return null;
-                
+
                 return (
                   <div key={category} className="flex flex-col">
                     <div className="text-sm text-gray-600 dark:text-gray-400 capitalize mb-1">
                       {category.replace('Score', '')}
                     </div>
                     <div className="flex items-center">
-                      <div className="flex">
-                        {renderStars(rating)}
-                      </div>
+                      <div className="flex">{renderStars(rating)}</div>
                       <span className="ml-1 text-sm font-medium text-gray-700 dark:text-gray-300">
                         {rating.toFixed(1)}
                       </span>
@@ -355,7 +390,7 @@ const RestaurantReviews = memo(function RestaurantReviews({ restaurant, getCount
           )}
         </div>
       </div>
-      
+
       {/* Write Review Button */}
       <div className="mb-6">
         <Link
@@ -365,10 +400,10 @@ const RestaurantReviews = memo(function RestaurantReviews({ restaurant, getCount
           Write a Review
         </Link>
       </div>
-      
+
       {/* Reviews List */}
       <div>
-        {sortedReviews.map((review) => (
+        {sortedReviews.map(review => (
           <ReviewItem
             key={review.id}
             review={review}
@@ -376,7 +411,7 @@ const RestaurantReviews = memo(function RestaurantReviews({ restaurant, getCount
           />
         ))}
       </div>
-      
+
       {/* View All Reviews Button */}
       {restaurant.reviewCount > sortedReviews.length && (
         <div className="mt-6 text-center">
@@ -393,50 +428,50 @@ const RestaurantReviews = memo(function RestaurantReviews({ restaurant, getCount
 });
 
 // Helper function to render stars
-const renderStars = (rating) => {
+const renderStars = rating => {
   const stars = [];
   const fullStars = Math.floor(rating);
   const hasHalfStar = rating % 1 >= 0.5;
-  
+
   for (let i = 0; i < 5; i++) {
     if (i < fullStars) {
       stars.push(
-        <LucideClientIcon 
-          key={i} 
-          icon={Star} 
-          className="w-4 h-4 text-yellow-500 fill-current" 
-          aria-hidden="true" 
-        />
+        <LucideClientIcon
+          key={i}
+          icon={Star}
+          className="w-4 h-4 text-yellow-500 fill-current"
+          aria-hidden="true"
+        />,
       );
     } else if (i === fullStars && hasHalfStar) {
       stars.push(
         <span key={i} className="relative">
-          <LucideClientIcon 
-            icon={Star} 
-            className="w-4 h-4 text-gray-300 dark:text-gray-600 fill-current" 
-            aria-hidden="true" 
+          <LucideClientIcon
+            icon={Star}
+            className="w-4 h-4 text-gray-300 dark:text-gray-600 fill-current"
+            aria-hidden="true"
           />
           <span className="absolute inset-0 overflow-hidden w-1/2">
-            <LucideClientIcon 
-              icon={Star} 
-              className="w-4 h-4 text-yellow-500 fill-current" 
-              aria-hidden="true" 
+            <LucideClientIcon
+              icon={Star}
+              className="w-4 h-4 text-yellow-500 fill-current"
+              aria-hidden="true"
             />
           </span>
-        </span>
+        </span>,
       );
     } else {
       stars.push(
-        <LucideClientIcon 
-          key={i} 
-          icon={Star} 
-          className="w-4 h-4 text-gray-300 dark:text-gray-600" 
-          aria-hidden="true" 
-        />
+        <LucideClientIcon
+          key={i}
+          icon={Star}
+          className="w-4 h-4 text-gray-300 dark:text-gray-600"
+          aria-hidden="true"
+        />,
       );
     }
   }
-  
+
   return stars;
 };
 

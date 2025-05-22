@@ -71,7 +71,7 @@ export function Navigation({ getCountryLink }: NavigationProps): JSX.Element {
                 placeholder="Search restaurants, dishes..."
                 className="pl-8 pr-4 py-1 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-48 lg:w-64"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={e => setSearchQuery(e.target.value)}
               />
               <LucideClientIcon
                 icon={Search}
@@ -117,7 +117,7 @@ export function Navigation({ getCountryLink }: NavigationProps): JSX.Element {
               placeholder="Search restaurants, dishes..."
               className="pl-8 pr-4 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={e => setSearchQuery(e.target.value)}
             />
             <LucideClientIcon
               icon={Search}

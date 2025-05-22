@@ -3,10 +3,11 @@ import { useRouter } from 'next/router';
 import { Star, Camera, X, AlertTriangle } from 'lucide-react';
 import { LucideClientIcon } from '../ui/lucide-icon.js';
 import Link from 'next/link';
+import Image from 'next/image';
 
 /**
  * ReviewForm component for submitting reviews for restaurants and dishes
- * 
+ *
  * @param {Object} props - Component props
  * @param {Object} props.restaurant - Restaurant data object
  * @param {Object} props.dish - Optional dish data object
@@ -28,28 +29,28 @@ const ReviewForm = memo(function ReviewForm({
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
-  
+
   // Handle rating change
-  const handleRatingChange = (value) => {
+  const handleRatingChange = value => {
     setRating(value);
     if (errors.rating) {
       setErrors({ ...errors, rating: null });
     }
   };
-  
+
   // Handle review text change
-  const handleReviewTextChange = (e) => {
+  const handleReviewTextChange = e => {
     setReviewText(e.target.value);
     if (errors.reviewText) {
       setErrors({ ...errors, reviewText: null });
     }
   };
-  
+
   // Handle photo upload
-  const handlePhotoUpload = (e) => {
+  const handlePhotoUpload = e => {
     const files = Array.from(e.target.files);
     if (files.length === 0) return;
-    
+
     // In a real app, this would upload the files to a server
     // For now, we'll just create object URLs for preview
     const newPhotos = files.map(file => ({
@@ -57,49 +58,49 @@ const ReviewForm = memo(function ReviewForm({
       url: URL.createObjectURL(file),
       file,
     }));
-    
+
     setPhotos([...photos, ...newPhotos]);
   };
-  
+
   // Handle photo removal
-  const handleRemovePhoto = (photoId) => {
+  const handleRemovePhoto = photoId => {
     const updatedPhotos = photos.filter(photo => photo.id !== photoId);
     setPhotos(updatedPhotos);
   };
-  
+
   // Validate form
   const validateForm = () => {
     const newErrors = {};
-    
+
     if (rating === 0) {
       newErrors.rating = 'Please select a rating';
     }
-    
+
     if (!reviewText.trim()) {
       newErrors.reviewText = 'Please enter your review';
     } else if (reviewText.trim().length < 10) {
       newErrors.reviewText = 'Review must be at least 10 characters';
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-  
+
   // Handle form submission
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
-    
+
     setIsSubmitting(true);
-    
+
     try {
       // In a real app, this would call an API to submit the review
       // For now, we'll just simulate a delay
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       // Call the onSubmit callback with the review data
       if (onSubmit) {
         onSubmit({
@@ -110,7 +111,7 @@ const ReviewForm = memo(function ReviewForm({
           dishId: dish?.id,
         });
       }
-      
+
       setShowConfirmation(true);
     } catch (error) {
       console.error('Error submitting review:', error);
@@ -119,13 +120,13 @@ const ReviewForm = memo(function ReviewForm({
       setIsSubmitting(false);
     }
   };
-  
+
   // Handle confirmation close
   const handleConfirmationClose = () => {
     // Navigate back to the restaurant page
     router.push(getCountryLink(`/restaurants/${restaurant.id}`));
   };
-  
+
   // If confirmation is shown, display a success message
   if (showConfirmation) {
     return (
@@ -137,7 +138,8 @@ const ReviewForm = memo(function ReviewForm({
           Review Submitted Successfully!
         </h2>
         <p className="text-gray-600 dark:text-gray-400 mb-6">
-          Thank you for sharing your experience. Your review will help others discover great food.
+          Thank you for sharing your experience. Your review will help others
+          discover great food.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button
@@ -156,7 +158,7 @@ const ReviewForm = memo(function ReviewForm({
       </div>
     );
   }
-  
+
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
       {/* Header */}
@@ -175,15 +177,17 @@ const ReviewForm = memo(function ReviewForm({
             {restaurant.location}
           </div>
         </div>
-        
+
         {dish && (
           <div className="mt-4 p-3 bg-gray-50 dark:bg-gray-750 rounded-md">
             <div className="flex items-center">
-              <div className="w-12 h-12 flex-shrink-0">
-                <img
+              <div className="w-12 h-12 flex-shrink-0 relative">
+                <Image
                   src={dish.imageUrl}
                   alt={dish.name}
-                  className="w-full h-full object-cover rounded-md"
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-md"
                   loading="lazy"
                 />
               </div>
@@ -199,7 +203,7 @@ const ReviewForm = memo(function ReviewForm({
           </div>
         )}
       </div>
-      
+
       {/* Review Form */}
       <form onSubmit={handleSubmit} className="p-6">
         {/* Rating */}
@@ -208,7 +212,7 @@ const ReviewForm = memo(function ReviewForm({
             Your Rating
           </label>
           <div className="flex items-center">
-            {[1, 2, 3, 4, 5].map((value) => (
+            {[1, 2, 3, 4, 5].map(value => (
               <button
                 key={value}
                 type="button"
@@ -250,10 +254,13 @@ const ReviewForm = memo(function ReviewForm({
             </p>
           )}
         </div>
-        
+
         {/* Review Text */}
         <div className="mb-6">
-          <label htmlFor="reviewText" className="block text-lg font-medium text-gray-900 dark:text-white mb-2">
+          <label
+            htmlFor="reviewText"
+            className="block text-lg font-medium text-gray-900 dark:text-white mb-2"
+          >
             Your Review
           </label>
           <textarea
@@ -270,19 +277,23 @@ const ReviewForm = memo(function ReviewForm({
             </p>
           )}
         </div>
-        
+
         {/* Photo Upload */}
         <div className="mb-6">
           <label className="block text-lg font-medium text-gray-900 dark:text-white mb-2">
             Add Photos
           </label>
-          <div className="flex flex-wrap gap-4">
-            {photos.map((photo) => (
-              <div key={photo.id} className="relative w-24 h-24">
-                <img
+          <div className="mt-2 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3">
+            {photos.map(photo => (
+              <div
+                key={photo.id}
+                className="relative group w-20 h-20 rounded-md overflow-hidden shadow-sm"
+              >
+                <Image
                   src={photo.url}
-                  alt="Review"
-                  className="w-full h-full object-cover rounded-md"
+                  alt={`Uploaded photo ${photo.id}`}
+                  layout="fill"
+                  objectFit="cover"
                 />
                 <button
                   type="button"
@@ -295,8 +306,13 @@ const ReviewForm = memo(function ReviewForm({
               </div>
             ))}
             <label className="w-24 h-24 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-md cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-750 transition-colors">
-              <LucideClientIcon icon={Camera} className="w-8 h-8 text-gray-400 dark:text-gray-500 mb-1" />
-              <span className="text-xs text-gray-500 dark:text-gray-400">Add Photo</span>
+              <LucideClientIcon
+                icon={Camera}
+                className="w-8 h-8 text-gray-400 dark:text-gray-500 mb-1"
+              />
+              <span className="text-xs text-gray-500 dark:text-gray-400">
+                Add Photo
+              </span>
               <input
                 type="file"
                 accept="image/*"
@@ -310,11 +326,14 @@ const ReviewForm = memo(function ReviewForm({
             You can upload up to 5 photos. Max size: 5MB each.
           </p>
         </div>
-        
+
         {/* Guidelines */}
         <div className="mb-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md">
           <div className="flex items-start">
-            <LucideClientIcon icon={AlertTriangle} className="w-5 h-5 text-yellow-500 mr-2 mt-0.5" />
+            <LucideClientIcon
+              icon={AlertTriangle}
+              className="w-5 h-5 text-yellow-500 mr-2 mt-0.5"
+            />
             <div>
               <h3 className="text-base font-medium text-gray-900 dark:text-white mb-1">
                 Review Guidelines
@@ -323,12 +342,12 @@ const ReviewForm = memo(function ReviewForm({
                 <li>Be honest and respectful in your review</li>
                 <li>Focus on your personal experience</li>
                 <li>Avoid offensive language or personal attacks</li>
-                <li>Don't include personal information or contact details</li>
+                <li>Don&apos;t include personal information or contact details</li>
               </ul>
             </div>
           </div>
         </div>
-        
+
         {/* Submit Error */}
         {errors.submit && (
           <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md">
@@ -337,7 +356,7 @@ const ReviewForm = memo(function ReviewForm({
             </p>
           </div>
         )}
-        
+
         {/* Submit Button */}
         <div className="flex justify-end">
           <button

@@ -21,7 +21,8 @@ export function FeaturedRestaurants({
       rating: 4.7,
       reviewCount: 256,
       priceRange: '$$',
-      imageUrl: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=600&h=400&fit=crop',
+      imageUrl:
+        'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=600&h=400&fit=crop',
       location: 'Bukit Bintang, KL',
       isNew: false,
       isFeatured: true,
@@ -33,7 +34,8 @@ export function FeaturedRestaurants({
       rating: 4.8,
       reviewCount: 189,
       priceRange: '$$$',
-      imageUrl: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=600&h=400&fit=crop',
+      imageUrl:
+        'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=600&h=400&fit=crop',
       location: 'KLCC, Kuala Lumpur',
       isNew: true,
       isFeatured: true,
@@ -45,7 +47,8 @@ export function FeaturedRestaurants({
       rating: 4.5,
       reviewCount: 142,
       priceRange: '$$',
-      imageUrl: 'https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?q=80&w=600&h=400&fit=crop',
+      imageUrl:
+        'https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?q=80&w=600&h=400&fit=crop',
       location: 'Petaling Jaya',
       isNew: false,
       isFeatured: true,
@@ -56,7 +59,10 @@ export function FeaturedRestaurants({
     <section className="mb-12">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center">
-          <LucideClientIcon icon={Store} className="w-5 h-5 text-green-600 mr-2" />
+          <LucideClientIcon
+            icon={Store}
+            className="w-5 h-5 text-green-600 mr-2"
+          />
           <h2 className="text-xl font-bold">
             Featured Restaurants in {countryName}
           </h2>
@@ -71,7 +77,7 @@ export function FeaturedRestaurants({
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {featuredRestaurants.map((restaurant) => (
+        {featuredRestaurants.map(restaurant => (
           <Link
             key={restaurant.id}
             href={getCountryLink(`/restaurants/${restaurant.id}`)}
@@ -96,13 +102,18 @@ export function FeaturedRestaurants({
                 )}
               </div>
               <div className="p-4">
-                <h3 className="font-semibold text-lg mb-1">{restaurant.name}</h3>
+                <h3 className="font-semibold text-lg mb-1">
+                  {restaurant.name}
+                </h3>
                 <p className="text-gray-600 text-sm mb-2">
                   {restaurant.cuisines.join(' • ')}
                 </p>
                 <div className="flex items-center mb-2">
                   <div className="flex items-center text-yellow-500 mr-2">
-                    <LucideClientIcon icon={Star} className="w-4 h-4 fill-current" />
+                    <LucideClientIcon
+                      icon={Star}
+                      className="w-4 h-4 fill-current"
+                    />
                     <span className="ml-1 text-sm font-medium">
                       {restaurant.rating}
                     </span>

@@ -11,11 +11,14 @@ import { useCountry } from '../../../contexts/index.js';
 import { LucideClientIcon } from '../../../components/ui/lucide-icon.js';
 
 // Mock dish data - in a real app, this would come from an API
-import { mockDishDetail, mockSimilarDishes } from '../../../data/mockDishDetail.js';
+import {
+  mockDishDetail,
+  mockSimilarDishes,
+} from '../../../data/mockDishDetail.js';
 
 /**
  * DishDetailPage component for displaying detailed information about a dish
- * 
+ *
  * @returns {JSX.Element} - Rendered component
  */
 export default function DishDetailPage() {
@@ -24,13 +27,20 @@ export default function DishDetailPage() {
   const { currentCountry, isInitialized } = useCountry();
 
   // Function to generate country-specific links
-  const getCountryLink = useCallback((path) => {
-    if (!isInitialized || !currentCountry?.code) return path;
-    return `/${currentCountry.code}${path}`;
-  }, [currentCountry, isInitialized]);
+  const getCountryLink = useCallback(
+    path => {
+      if (!isInitialized || !currentCountry?.code) return path;
+      return `/${currentCountry.code}${path}`;
+    },
+    [currentCountry, isInitialized],
+  );
 
   // Fetch dish data
-  const { data: dish, isLoading: isDishLoading, error: dishError } = useQuery({
+  const {
+    data: dish,
+    isLoading: isDishLoading,
+    error: dishError,
+  } = useQuery({
     queryKey: ['dish', id],
     queryFn: () => {
       // In a real app, this would fetch data from an API with the dish ID
@@ -60,10 +70,7 @@ export default function DishDetailPage() {
   // Show loading state
   if (isDishLoading) {
     return (
-      <Layout
-        title="Loading Dish"
-        description="Loading dish details"
-      >
+      <Layout title="Loading Dish" description="Loading dish details">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex items-center justify-center min-h-[60vh]">
             <LucideClientIcon
@@ -80,16 +87,16 @@ export default function DishDetailPage() {
   // Show error state
   if (dishError) {
     return (
-      <Layout
-        title="Error"
-        description="Error loading dish details"
-      >
+      <Layout title="Error" description="Error loading dish details">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex flex-col items-center justify-center min-h-[60vh]">
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 text-center max-w-md">
-              <h1 className="text-2xl font-bold text-red-600 mb-4">Error Loading Dish</h1>
+              <h1 className="text-2xl font-bold text-red-600 mb-4">
+                Error Loading Dish
+              </h1>
               <p className="text-gray-700 dark:text-gray-300 mb-6">
-                We encountered a problem while loading the dish details. Please try again later.
+                We encountered a problem while loading the dish details. Please
+                try again later.
               </p>
               <button
                 onClick={() => router.reload()}
@@ -105,32 +112,21 @@ export default function DishDetailPage() {
   }
 
   return (
-    <Layout
-      title={dish.name}
-      description={dish.description}
-    >
+    <Layout title={dish.name} description={dish.description}>
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2">
             {/* Dish Header */}
-            <DishHeader
-              dish={dish}
-              getCountryLink={getCountryLink}
-            />
-            
+            <DishHeader dish={dish} getCountryLink={getCountryLink} />
+
             {/* Dish Ingredients */}
-            <DishIngredients
-              dish={dish}
-            />
-            
+            <DishIngredients dish={dish} />
+
             {/* Dish Reviews */}
-            <DishReviews
-              dish={dish}
-              getCountryLink={getCountryLink}
-            />
+            <DishReviews dish={dish} getCountryLink={getCountryLink} />
           </div>
-          
+
           {/* Sidebar */}
           <div className="lg:col-span-1">
             {/* Similar Dishes */}
@@ -156,7 +152,7 @@ export async function getStaticPaths() {
     { params: { country: 'my', id: '1' } },
     { params: { country: 'sg', id: '1' } },
   ];
-  
+
   return {
     paths,
     fallback: true, // Generate pages for paths not returned by getStaticPaths
@@ -166,7 +162,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   // In a real app, you would fetch the dish data from an API
   // For now, we'll just use the mock data
-  
+
   return {
     props: {
       country: params.country,

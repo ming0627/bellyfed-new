@@ -1,8 +1,19 @@
 import React, { useCallback } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
-import { Loader2, Utensils, MapPin, Clock, User, ChevronLeft, Share2, Bookmark, BookmarkCheck, Edit } from 'lucide-react';
+import {
+  Loader2,
+  Utensils,
+  MapPin,
+  Clock,
+  ChevronLeft,
+  Share2,
+  Bookmark,
+  BookmarkCheck,
+  Edit,
+} from 'lucide-react';
 import Layout from '../../../components/layout/Layout.js';
 import RestaurantCard from '../../../components/restaurants/RestaurantCard.js';
 import CollectionCard from '../../../components/collections/CollectionCard.js';
@@ -13,12 +24,15 @@ import { useCountry, useAuth } from '../../../contexts/index.js';
 const mockCollection = {
   id: '1',
   title: 'Best Nasi Lemak in Kuala Lumpur',
-  description: 'Discover the most authentic and delicious Nasi Lemak dishes in Kuala Lumpur, from traditional street food stalls to upscale restaurants. This collection features establishments known for their perfectly cooked rice, flavorful sambal, and crispy fried chicken or other accompaniments that make Nasi Lemak Malaysia\'s beloved national dish.',
-  imageUrl: 'https://images.unsplash.com/photo-1627308595171-d1b5d95d051d?q=80&w=1200&h=600&fit=crop',
+  description:
+    "Discover the most authentic and delicious Nasi Lemak dishes in Kuala Lumpur, from traditional street food stalls to upscale restaurants. This collection features establishments known for their perfectly cooked rice, flavorful sambal, and crispy fried chicken or other accompaniments that make Nasi Lemak Malaysia's beloved national dish.",
+  imageUrl:
+    'https://images.unsplash.com/photo-1627308595171-d1b5d95d051d?q=80&w=1200&h=600&fit=crop',
   restaurantCount: 12,
   location: 'Kuala Lumpur',
   curator: 'Sarah Chen',
-  curatorImage: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200&h=200&fit=crop',
+  curatorImage:
+    'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200&h=200&fit=crop',
   createdAt: '2023-03-15T00:00:00Z',
   updatedAt: '2023-05-20T00:00:00Z',
   isFeatured: true,
@@ -29,7 +43,8 @@ const mockCollection = {
     {
       id: '1',
       name: 'Village Park Restaurant',
-      imageUrl: 'https://images.unsplash.com/photo-1627308595171-d1b5d95d051d?q=80&w=600&h=400&fit=crop',
+      imageUrl:
+        'https://images.unsplash.com/photo-1627308595171-d1b5d95d051d?q=80&w=600&h=400&fit=crop',
       rating: 4.8,
       reviewCount: 324,
       cuisine: 'Malaysian',
@@ -38,12 +53,14 @@ const mockCollection = {
       distance: '3.2 km',
       isOpen: true,
       isVerified: true,
-      description: 'Famous for their signature Nasi Lemak with crispy fried chicken. Often crowded during peak hours.',
+      description:
+        'Famous for their signature Nasi Lemak with crispy fried chicken. Often crowded during peak hours.',
     },
     {
       id: '2',
       name: 'Nasi Lemak Antarabangsa',
-      imageUrl: 'https://images.unsplash.com/photo-1626509653291-0d0162a9f664?q=80&w=600&h=400&fit=crop',
+      imageUrl:
+        'https://images.unsplash.com/photo-1626509653291-0d0162a9f664?q=80&w=600&h=400&fit=crop',
       rating: 4.6,
       reviewCount: 256,
       cuisine: 'Malaysian',
@@ -52,12 +69,14 @@ const mockCollection = {
       distance: '1.8 km',
       isOpen: true,
       isVerified: false,
-      description: 'A local favorite serving authentic Nasi Lemak 24 hours a day. Known for their spicy sambal.',
+      description:
+        'A local favorite serving authentic Nasi Lemak 24 hours a day. Known for their spicy sambal.',
     },
     {
       id: '3',
       name: 'Ali, Muthu & Ah Hock',
-      imageUrl: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=80&w=600&h=400&fit=crop',
+      imageUrl:
+        'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=80&w=600&h=400&fit=crop',
       rating: 4.5,
       reviewCount: 189,
       cuisine: 'Malaysian',
@@ -66,12 +85,14 @@ const mockCollection = {
       distance: '4.5 km',
       isOpen: false,
       isVerified: true,
-      description: 'Modern kopitiam serving a variety of Malaysian dishes including their popular Nasi Lemak with Rendang.',
+      description:
+        'Modern kopitiam serving a variety of Malaysian dishes including their popular Nasi Lemak with Rendang.',
     },
     {
       id: '4',
       name: 'Nasi Lemak Tanglin',
-      imageUrl: 'https://images.unsplash.com/photo-1628294895950-9805252327bc?q=80&w=600&h=400&fit=crop',
+      imageUrl:
+        'https://images.unsplash.com/photo-1628294895950-9805252327bc?q=80&w=600&h=400&fit=crop',
       rating: 4.7,
       reviewCount: 210,
       cuisine: 'Malaysian',
@@ -80,15 +101,18 @@ const mockCollection = {
       distance: '2.3 km',
       isOpen: true,
       isVerified: false,
-      description: 'One of the oldest Nasi Lemak stalls in KL, operating since 1948. Known for their rich coconut rice.',
+      description:
+        'One of the oldest Nasi Lemak stalls in KL, operating since 1948. Known for their rich coconut rice.',
     },
   ],
   relatedCollections: [
     {
       id: '2',
       title: 'Hidden Gems in Kuala Lumpur',
-      description: 'Explore the lesser-known culinary treasures of Kuala Lumpur, featuring local favorites that tourists often miss.',
-      imageUrl: 'https://images.unsplash.com/photo-1555126634-323283e090fa?q=80&w=600&h=400&fit=crop',
+      description:
+        'Explore the lesser-known culinary treasures of Kuala Lumpur, featuring local favorites that tourists often miss.',
+      imageUrl:
+        'https://images.unsplash.com/photo-1555126634-323283e090fa?q=80&w=600&h=400&fit=crop',
       restaurantCount: 8,
       location: 'Kuala Lumpur',
       curator: 'Mike Wong',
@@ -100,8 +124,10 @@ const mockCollection = {
     {
       id: '4',
       title: 'Vegetarian Delights in Kuala Lumpur',
-      description: 'The best vegetarian and vegan-friendly restaurants in Kuala Lumpur, offering delicious plant-based options.',
-      imageUrl: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=600&h=400&fit=crop',
+      description:
+        'The best vegetarian and vegan-friendly restaurants in Kuala Lumpur, offering delicious plant-based options.',
+      imageUrl:
+        'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=600&h=400&fit=crop',
       restaurantCount: 15,
       location: 'Kuala Lumpur',
       curator: 'Sarah Lee',
@@ -122,17 +148,24 @@ export default function CollectionDetailPage() {
   const router = useRouter();
   const { id } = router.query;
   const { currentCountry, isInitialized } = useCountry();
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated } = useAuth();
   const [isSaved, setIsSaved] = React.useState(false);
 
   // Function to generate country-specific links
-  const getCountryLink = useCallback((path) => {
-    if (!isInitialized || !currentCountry?.code) return path;
-    return `/${currentCountry.code}${path}`;
-  }, [currentCountry, isInitialized]);
+  const getCountryLink = useCallback(
+    path => {
+      if (!isInitialized || !currentCountry?.code) return path;
+      return `/${currentCountry.code}${path}`;
+    },
+    [currentCountry, isInitialized],
+  );
 
   // Fetch collection data
-  const { data: collection, isLoading, error } = useQuery({
+  const {
+    data: collection,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ['collection', id, currentCountry?.code],
     queryFn: () => {
       // In a real app, this would fetch data from an API with the collection ID
@@ -145,7 +178,7 @@ export default function CollectionDetailPage() {
   });
 
   // Format date for display
-  const formatDate = (dateString) => {
+  const formatDate = dateString => {
     if (!dateString) return '';
 
     try {
@@ -171,13 +204,15 @@ export default function CollectionDetailPage() {
   const handleShare = () => {
     // In a real app, this would open a share dialog
     if (navigator.share) {
-      navigator.share({
-        title: collection.title,
-        text: collection.description,
-        url: window.location.href,
-      }).catch(err => {
-        console.error('Error sharing:', err);
-      });
+      navigator
+        .share({
+          title: collection.title,
+          text: collection.description,
+          url: window.location.href,
+        })
+        .catch(err => {
+          console.error('Error sharing:', err);
+        });
     } else {
       // Fallback for browsers that don't support the Web Share API
       alert('Share URL copied to clipboard!');
@@ -215,9 +250,12 @@ export default function CollectionDetailPage() {
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex flex-col items-center justify-center min-h-[60vh]">
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 text-center max-w-md">
-              <h1 className="text-2xl font-bold text-red-600 mb-4">Collection Not Found</h1>
+              <h1 className="text-2xl font-bold text-red-600 mb-4">
+                Collection Not Found
+              </h1>
               <p className="text-gray-700 dark:text-gray-300 mb-6">
-                The collection you're looking for doesn't exist or has been removed.
+                The collection you&apos;re looking for doesn&apos;t exist or has been
+                removed.
               </p>
               <Link
                 href={getCountryLink('/collections')}
@@ -244,33 +282,29 @@ export default function CollectionDetailPage() {
             href={getCountryLink('/collections')}
             className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
           >
-            <LucideClientIcon icon={ChevronLeft} className="w-4 h-4 mr-1" aria-hidden="true" />
+            <LucideClientIcon
+              icon={ChevronLeft}
+              className="w-4 h-4 mr-1"
+              aria-hidden="true"
+            />
             Back to Collections
           </Link>
         </div>
 
         {/* Collection Header */}
         <div className="relative mb-8">
-          {/* Hero Image */}
-          <div className="relative h-64 md:h-80 lg:h-96 rounded-xl overflow-hidden mb-6">
-            {collection.imageUrl ? (
-              <img
+          {/* Collection Cover Image */}
+          <div className="relative h-64 md:h-80 lg:h-96 bg-gray-200 dark:bg-gray-700">
+            {collection.imageUrl && (
+              <Image
                 src={collection.imageUrl}
                 alt={collection.title}
-                className="w-full h-full object-cover"
+                layout="fill"
+                objectFit="cover"
+                priority
               />
-            ) : (
-              <div className="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-                <LucideClientIcon
-                  icon={Utensils}
-                  className="w-16 h-16 text-gray-400 dark:text-gray-500"
-                  aria-hidden="true"
-                />
-              </div>
             )}
-
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
 
             {/* Title overlay */}
             <div className="absolute bottom-0 left-0 right-0 p-6">
@@ -280,20 +314,37 @@ export default function CollectionDetailPage() {
 
               <div className="flex flex-wrap gap-y-2 text-white/80 text-sm">
                 <div className="flex items-center mr-4">
-                  <LucideClientIcon icon={Utensils} className="w-4 h-4 mr-1.5" aria-hidden="true" />
-                  <span>{collection.restaurantCount} {collection.restaurantCount === 1 ? 'Restaurant' : 'Restaurants'}</span>
+                  <LucideClientIcon
+                    icon={Utensils}
+                    className="w-4 h-4 mr-1.5"
+                    aria-hidden="true"
+                  />
+                  <span>
+                    {collection.restaurantCount}{' '}
+                    {collection.restaurantCount === 1
+                      ? 'Restaurant'
+                      : 'Restaurants'}
+                  </span>
                 </div>
 
                 {collection.location && (
                   <div className="flex items-center mr-4">
-                    <LucideClientIcon icon={MapPin} className="w-4 h-4 mr-1.5" aria-hidden="true" />
+                    <LucideClientIcon
+                      icon={MapPin}
+                      className="w-4 h-4 mr-1.5"
+                      aria-hidden="true"
+                    />
                     <span>{collection.location}</span>
                   </div>
                 )}
 
                 {collection.updatedAt && (
                   <div className="flex items-center">
-                    <LucideClientIcon icon={Clock} className="w-4 h-4 mr-1.5" aria-hidden="true" />
+                    <LucideClientIcon
+                      icon={Clock}
+                      className="w-4 h-4 mr-1.5"
+                      aria-hidden="true"
+                    />
                     <span>Updated {formatDate(collection.updatedAt)}</span>
                   </div>
                 )}
@@ -305,23 +356,19 @@ export default function CollectionDetailPage() {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
             {/* Curator Info */}
             <div className="flex items-center">
-              <div className="w-10 h-10 rounded-full overflow-hidden mr-3">
-                {collection.curatorImage ? (
-                  <img
+              {collection.curatorImage && (
+                <div className="flex-shrink-0 mr-3">
+                  <Image
                     src={collection.curatorImage}
                     alt={collection.curator}
-                    className="w-full h-full object-cover"
+                    width={40}
+                    height={40}
+                    objectFit="cover"
+                    className="rounded-full"
+                    loading="lazy"
                   />
-                ) : (
-                  <div className="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-                    <LucideClientIcon
-                      icon={User}
-                      className="w-5 h-5 text-gray-400 dark:text-gray-500"
-                      aria-hidden="true"
-                    />
-                  </div>
-                )}
-              </div>
+                </div>
+              )}
 
               <div>
                 <div className="text-sm text-gray-500 dark:text-gray-400">
@@ -399,7 +446,7 @@ export default function CollectionDetailPage() {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {collection.restaurants.map((restaurant) => (
+            {collection.restaurants.map(restaurant => (
               <RestaurantCard
                 key={restaurant.id}
                 id={restaurant.id}
@@ -422,33 +469,36 @@ export default function CollectionDetailPage() {
         </div>
 
         {/* Related Collections */}
-        {collection.relatedCollections && collection.relatedCollections.length > 0 && (
-          <div>
-            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
-              Related Collections
-            </h2>
+        {collection.relatedCollections &&
+          collection.relatedCollections.length > 0 && (
+            <div>
+              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
+                Related Collections
+              </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {collection.relatedCollections.map((relatedCollection) => (
-                <CollectionCard
-                  key={relatedCollection.id}
-                  id={relatedCollection.id}
-                  title={relatedCollection.title}
-                  description={relatedCollection.description}
-                  imageUrl={relatedCollection.imageUrl}
-                  restaurantCount={relatedCollection.restaurantCount}
-                  location={relatedCollection.location}
-                  curator={relatedCollection.curator}
-                  updatedAt={relatedCollection.updatedAt || relatedCollection.createdAt}
-                  isFeatured={relatedCollection.isFeatured}
-                  isNew={relatedCollection.isNew}
-                  getCountryLink={getCountryLink}
-                  variant="horizontal"
-                />
-              ))}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {collection.relatedCollections.map(relatedCollection => (
+                  <CollectionCard
+                    key={relatedCollection.id}
+                    id={relatedCollection.id}
+                    title={relatedCollection.title}
+                    description={relatedCollection.description}
+                    imageUrl={relatedCollection.imageUrl}
+                    restaurantCount={relatedCollection.restaurantCount}
+                    location={relatedCollection.location}
+                    curator={relatedCollection.curator}
+                    updatedAt={
+                      relatedCollection.updatedAt || relatedCollection.createdAt
+                    }
+                    isFeatured={relatedCollection.isFeatured}
+                    isNew={relatedCollection.isNew}
+                    getCountryLink={getCountryLink}
+                    variant="horizontal"
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
       </div>
     </Layout>
   );

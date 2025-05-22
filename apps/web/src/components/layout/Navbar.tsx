@@ -2,9 +2,18 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useTheme } from 'next-themes';
-import { Search, Menu, X, Sun, Moon, MapPin, Compass, Users, Home } from 'lucide-react';
+import {
+  Search,
+  Menu,
+  X,
+  Sun,
+  Moon,
+  MapPin,
+  Compass,
+  Users,
+  Home,
+} from 'lucide-react';
 import { Button } from '@/components/ui/Button';
-import { Avatar } from '@/components/ui/Avatar';
 import { Badge } from '@/components/ui/Badge';
 
 const Navbar: React.FC = () => {
@@ -106,7 +115,9 @@ const Navbar: React.FC = () => {
               >
                 <Compass className="w-4 h-4 mr-1.5" />
                 Explore
-                <Badge variant="new" size="xs" className="ml-2">New</Badge>
+                <Badge variant="new" size="xs" className="ml-2">
+                  New
+                </Badge>
               </Link>
 
               <Link
@@ -131,7 +142,7 @@ const Navbar: React.FC = () => {
                 placeholder="Search restaurants, dishes..."
                 className="pl-10 pr-4 py-2 w-64 bg-neutral-50 dark:bg-neutral-700/50 border border-neutral-200 dark:border-neutral-600 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-transparent transition-all"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={e => setSearchQuery(e.target.value)}
               />
               <Search className="absolute left-3.5 top-1/2 transform -translate-y-1/2 text-neutral-400 w-4 h-4" />
             </form>
@@ -141,19 +152,24 @@ const Navbar: React.FC = () => {
               size="icon.sm"
               shape="rounded"
               onClick={toggleTheme}
-              aria-label={resolvedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              aria-label={
+                resolvedTheme === 'dark'
+                  ? 'Switch to light mode'
+                  : 'Switch to dark mode'
+              }
               className="text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400"
             >
-              {mounted && (resolvedTheme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />)}
+              {mounted &&
+                (resolvedTheme === 'dark' ? (
+                  <Sun className="h-5 w-5" />
+                ) : (
+                  <Moon className="h-5 w-5" />
+                ))}
             </Button>
 
             <div className="flex items-center space-x-3">
               <Link href="/signin">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="font-medium"
-                >
+                <Button variant="outline" size="sm" className="font-medium">
                   Sign In
                 </Button>
               </Link>
@@ -177,10 +193,19 @@ const Navbar: React.FC = () => {
               size="icon.sm"
               shape="rounded"
               onClick={toggleTheme}
-              aria-label={resolvedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              aria-label={
+                resolvedTheme === 'dark'
+                  ? 'Switch to light mode'
+                  : 'Switch to dark mode'
+              }
               className="text-neutral-600 dark:text-neutral-400"
             >
-              {mounted && (resolvedTheme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />)}
+              {mounted &&
+                (resolvedTheme === 'dark' ? (
+                  <Sun className="h-5 w-5" />
+                ) : (
+                  <Moon className="h-5 w-5" />
+                ))}
             </Button>
 
             <Button
@@ -190,7 +215,7 @@ const Navbar: React.FC = () => {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
-              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
               className="text-neutral-600 dark:text-neutral-400"
             >
               {isMenuOpen ? (
@@ -217,12 +242,15 @@ const Navbar: React.FC = () => {
               placeholder="Search restaurants, dishes..."
               className="pl-10 pr-4 py-2.5 w-full bg-neutral-50 dark:bg-neutral-700/50 border border-neutral-200 dark:border-neutral-600 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-transparent transition-all"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={e => setSearchQuery(e.target.value)}
             />
             <Search className="absolute left-3.5 top-1/2 transform -translate-y-1/2 text-neutral-400 w-4 h-4" />
           </form>
 
-          <nav className="flex flex-col space-y-1" aria-label="Mobile navigation">
+          <nav
+            className="flex flex-col space-y-1"
+            aria-label="Mobile navigation"
+          >
             <Link
               href="/"
               className={`flex items-center px-3 py-3 text-base font-medium rounded-md transition-colors ${
@@ -260,7 +288,9 @@ const Navbar: React.FC = () => {
             >
               <Compass className="w-5 h-5 mr-3" />
               Explore
-              <Badge variant="new" size="xs" className="ml-2">New</Badge>
+              <Badge variant="new" size="xs" className="ml-2">
+                New
+              </Badge>
             </Link>
 
             <Link
@@ -279,11 +309,7 @@ const Navbar: React.FC = () => {
 
           <div className="pt-5 border-t border-neutral-200 dark:border-neutral-700 flex flex-col space-y-3">
             <Link href="/signin" className="w-full">
-              <Button
-                variant="outline"
-                width="full"
-                className="py-2.5"
-              >
+              <Button variant="outline" width="full" className="py-2.5">
                 Sign In
               </Button>
             </Link>

@@ -69,12 +69,7 @@ export const cognitoAuthService = {
   },
 
   // Sign up a new user
-  signUp: async (
-    username,
-    password,
-    email,
-    nickname,
-  ) => {
+  signUp: async (username, password, email, nickname) => {
     try {
       // Create user attributes array
       const userAttributes = [
@@ -128,7 +123,7 @@ export const cognitoAuthService = {
   },
 
   // Resend confirmation code
-  resendConfirmationCode: async (username) => {
+  resendConfirmationCode: async username => {
     try {
       const command = new ResendConfirmationCodeCommand({
         ClientId: CLIENT_ID,
@@ -144,7 +139,7 @@ export const cognitoAuthService = {
   },
 
   // Forgot password
-  forgotPassword: async (username) => {
+  forgotPassword: async username => {
     try {
       const command = new ForgotPasswordCommand({
         ClientId: CLIENT_ID,
@@ -160,11 +155,7 @@ export const cognitoAuthService = {
   },
 
   // Confirm forgot password with new password and code
-  confirmForgotPassword: async (
-    username,
-    code,
-    newPassword,
-  ) => {
+  confirmForgotPassword: async (username, code, newPassword) => {
     try {
       const command = new ConfirmForgotPasswordCommand({
         ClientId: CLIENT_ID,

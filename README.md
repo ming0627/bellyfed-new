@@ -19,8 +19,8 @@ A sophisticated, production-ready monorepo built with Turborepo, combining multi
 - **Code generators**: Scaffolding tools for common patterns
 - **Developer experience**: Fast builds, strict typechecking, and linting
 
-
 ## Repository Structure
+
 ```bash
 
 ├── apps/                  # Application directory
@@ -42,14 +42,13 @@ A sophisticated, production-ready monorepo built with Turborepo, combining multi
 └── turbo.json             # Turborepo configuration
 ```
 
-
 ## Getting Started
+
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/en) (v18 or later)
 - [pnpm](https://pnpm.io/) (v8 or later)
 - PostgreSQL, MySQL, or SQLite database (depending on your preference)
-
 
 ### Installation
 
@@ -73,9 +72,9 @@ DATABASE_URL="postgresql://username:password@localhost:5432/mydb"
 # Or for **SQLite**
 # DATABASE_URL="file:./dev.db"
 ```
-2. Initialize your database:
-> **Important**: Ensure you have a running instance of your chosen database before proceeding with the configuration steps. For PostgreSQL or MySQL, make sure the database service is running on your machine or server.
 
+2. Initialize your database:
+   > **Important**: Ensure you have a running instance of your chosen database before proceeding with the configuration steps. For PostgreSQL or MySQL, make sure the database service is running on your machine or server.
 
 ```bash
 # Generate Prisma client
@@ -89,14 +88,15 @@ pnpm --filter @repo/db db:migrate
 ```
 
 #### Database Exploration with Prisma Studio
+
 To explore and manipulate your database, you can use Prisma Studio:
 
 ```bash
 pnpm --filter @repo/db studio
 ```
 
-
 ### Development
+
 ```bash
 # Run all applications in development mode
 pnpm dev (Alternatively, use turbo dev)
@@ -106,12 +106,15 @@ pnpm --filter docs dev
 pnpm --filter web dev
 pnpm --filter backend dev
 ```
+
 ### Development servers:
+
 - Web: http://localhost:3000
 - Docs: http://localhost:3001
 - Backend: http://localhost:4000
 
 ### Build
+
 ```bash
 # Build all applications and packages
 pnpm build
@@ -122,6 +125,7 @@ pnpm --filter docs build
 ```
 
 ### Lint
+
 ```bash
 # Lint all applications and packages
 pnpm lint
@@ -131,6 +135,7 @@ pnpm --filter web lint
 ```
 
 ### Type Checking
+
 ```bash
 # Type check all applications and packages
 pnpm check-types
@@ -140,7 +145,9 @@ pnpm --filter web check-types
 ```
 
 ## Working with the Monorepo
+
 ### Adding a New Package Dependency
+
 ```bash
 # Add a dependency to a specific package or app
 pnpm --filter <package-name> add <dependency-name>
@@ -150,6 +157,7 @@ pnpm --filter web add axios
 ```
 
 ### Using Shared Packages
+
 Shared packages are available as dependencies to all applications. For example, to use the UI package:
 
 ```bash
@@ -161,19 +169,23 @@ export default function MyComponent() {
 ```
 
 ### Using Generators
+
 This project includes several code generators to help you scaffold components and routes quickly.
 
 #### Generating Components
+
 ##### Web Application Components
+
 Generate components in the web application:
 
-This creates a new component in apps/web/app/_components/ with:
+This creates a new component in apps/web/app/\_components/ with:
 
 - **Component file** (ComponentName.tsx)
 - **Styles file** (ComponentName.module.scss)
 - **Test file** (ComponentName.spec.tsx)
 
 ##### UI Library Components
+
 Generate shared components in the UI package:
 
 This creates a new component in components with:
@@ -184,6 +196,7 @@ This creates a new component in components with:
 - Automatically exports the component from the index file (optional)
 
 #### Generating Routes
+
 Create new routes in the web application with Next.js App Router structure:
 
 When running the command, you'll be prompted for:
@@ -205,7 +218,8 @@ The generator will create the appropriate files based on your selections, with:
 - Any selected optional files
 
 Example Usage:
-```bash 
+
+```bash
 # Generate a new route
 pnpm --filter web generate:route
 # > What is the name of the route? dashboard
@@ -227,6 +241,7 @@ This would generate:
 - A UserProfile component with all associated files
 
 ## Learn More
+
 [Turborepo Documentation](https://turbo.build/)
 [Next.js Documentation](https://nextjs.org/)
 [tRPC Documentation](https://trpc.io/docs)

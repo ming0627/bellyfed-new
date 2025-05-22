@@ -1,52 +1,57 @@
 import React, { useState, useCallback, memo } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import Image from 'next/image';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useRouter } from 'next/router';
-import { 
-  Upload, 
-  X, 
-  Image as ImageIcon, 
-  Search, 
-  Plus, 
-  Trash2, 
-  AlertCircle 
+import {
+  X,
+  Image as ImageIcon,
+  Search,
+  Plus,
+  Trash2,
+  AlertCircle,
 } from 'lucide-react';
 import { LucideClientIcon } from '../ui/lucide-icon.js';
-import { useCountry, useAuth } from '../../contexts/index.js';
 
 // Define the validation schema using zod
 const collectionSchema = z.object({
-  title: z.string()
+  title: z
+    .string()
     .min(3, { message: 'Title must be at least 3 characters long' })
     .max(100, { message: 'Title must be at most 100 characters long' }),
-  description: z.string()
+  description: z
+    .string()
     .min(10, { message: 'Description must be at least 10 characters long' })
     .max(500, { message: 'Description must be at most 500 characters long' }),
-  location: z.string()
+  location: z
+    .string()
     .min(2, { message: 'Location must be at least 2 characters long' })
     .max(100, { message: 'Location must be at most 100 characters long' }),
   imageUrl: z.string().optional(),
-  restaurants: z.array(
-    z.object({
-      id: z.string(),
-      name: z.string(),
-      imageUrl: z.string().optional(),
-      cuisine: z.string().optional(),
-      location: z.string().optional(),
-    })
-  ).min(1, { message: 'Please add at least one restaurant to your collection' }),
+  restaurants: z
+    .array(
+      z.object({
+        id: z.string(),
+        name: z.string(),
+        imageUrl: z.string().optional(),
+        cuisine: z.string().optional(),
+        location: z.string().optional(),
+      }),
+    )
+    .min(1, {
+      message: 'Please add at least one restaurant to your collection',
+    }),
 });
 
 /**
  * CollectionForm component for creating or editing a collection
- * 
+ *
  * @param {Object} props - Component props
  * @param {Object} props.initialData - Initial collection data for editing (optional)
  * @param {Function} props.onSubmit - Function to handle form submission
  * @param {boolean} props.isSubmitting - Whether the form is currently submitting
  * @param {string} props.submitButtonText - Text for the submit button
- * @param {Function} props.getCountryLink - Function to generate country-specific links
  * @returns {JSX.Element} - Rendered component
  */
 const CollectionForm = memo(function CollectionForm({
@@ -54,20 +59,17 @@ const CollectionForm = memo(function CollectionForm({
   onSubmit,
   isSubmitting = false,
   submitButtonText = 'Create Collection',
-  getCountryLink,
 }) {
   const router = useRouter();
-  const { user } = useAuth();
   const [imagePreview, setImagePreview] = useState(initialData?.imageUrl || '');
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
-  
+
   // Initialize form with react-hook-form
-  const { 
-    register, 
-    handleSubmit, 
-    control,
+  const {
+    register,
+    handleSubmit,
     formState: { errors },
     setValue,
     watch,
@@ -81,76 +83,83 @@ const CollectionForm = memo(function CollectionForm({
       restaurants: initialData?.restaurants || [],
     },
   });
-  
+
   // Watch the restaurants array to update the UI
   const restaurants = watch('restaurants');
-  
+
   // Handle image upload
-  const handleImageUpload = useCallback((e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    
-    // In a real app, this would upload the file to a server
-    // For now, we'll just create a local URL
-    const reader = new FileReader();
-    reader.onload = () => {
-      const imageUrl = reader.result;
-      setImagePreview(imageUrl);
-      setValue('imageUrl', imageUrl);
-    };
-    reader.readAsDataURL(file);
-  }, [setValue]);
-  
+  const handleImageUpload = useCallback(
+    e => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      // In a real app, this would upload the file to a server
+      // For now, we'll just create a local URL
+      const reader = new FileReader();
+      reader.onload = () => {
+        const imageUrl = reader.result;
+        setImagePreview(imageUrl);
+        setValue('imageUrl', imageUrl);
+      };
+      reader.readAsDataURL(file);
+    },
+    [setValue],
+  );
+
   // Handle image removal
   const handleRemoveImage = useCallback(() => {
     setImagePreview('');
     setValue('imageUrl', '');
   }, [setValue]);
-  
+
   // Handle restaurant search
-  const handleSearchRestaurants = useCallback(async (query) => {
+  const handleSearchRestaurants = useCallback(async query => {
     setSearchQuery(query);
-    
+
     if (query.length < 2) {
       setSearchResults([]);
       return;
     }
-    
+
     setIsSearching(true);
-    
+
     try {
       // In a real app, this would call an API to search for restaurants
       // For now, we'll use mock data
       await new Promise(resolve => setTimeout(resolve, 500));
-      
+
       // Mock search results
       const results = [
         {
           id: '1',
           name: 'Spice Garden',
-          imageUrl: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=200&h=200&fit=crop',
+          imageUrl:
+            'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=200&h=200&fit=crop',
           cuisine: 'Indian',
           location: 'Kuala Lumpur',
         },
         {
           id: '2',
           name: 'Sushi Express',
-          imageUrl: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=200&h=200&fit=crop',
+          imageUrl:
+            'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=200&h=200&fit=crop',
           cuisine: 'Japanese',
           location: 'Kuala Lumpur',
         },
         {
           id: '3',
           name: 'Pasta Paradise',
-          imageUrl: 'https://images.unsplash.com/photo-1546549032-9571cd6b27df?q=80&w=200&h=200&fit=crop',
+          imageUrl:
+            'https://images.unsplash.com/photo-1546549032-9571cd6b27df?q=80&w=200&h=200&fit=crop',
           cuisine: 'Italian',
           location: 'Kuala Lumpur',
         },
-      ].filter(r => 
-        r.name.toLowerCase().includes(query.toLowerCase()) || 
-        r.cuisine.toLowerCase().includes(query.toLowerCase())
+      ].filter(
+        r =>
+          r.name.toLowerCase().includes(query.toLowerCase()) ||
+          r.cuisine.toLowerCase().includes(query.toLowerCase()),
       );
-      
+
       setSearchResults(results);
     } catch (error) {
       console.error('Error searching restaurants:', error);
@@ -158,44 +167,59 @@ const CollectionForm = memo(function CollectionForm({
       setIsSearching(false);
     }
   }, []);
-  
+
   // Handle adding a restaurant to the collection
-  const handleAddRestaurant = useCallback((restaurant) => {
-    const currentRestaurants = watch('restaurants') || [];
-    
-    // Check if restaurant is already in the collection
-    if (currentRestaurants.some(r => r.id === restaurant.id)) {
-      return;
-    }
-    
-    setValue('restaurants', [...currentRestaurants, restaurant]);
-    setSearchQuery('');
-    setSearchResults([]);
-  }, [watch, setValue]);
-  
+  const handleAddRestaurant = useCallback(
+    restaurant => {
+      const currentRestaurants = watch('restaurants') || [];
+
+      // Check if restaurant is already in the collection
+      if (currentRestaurants.some(r => r.id === restaurant.id)) {
+        return;
+      }
+
+      setValue('restaurants', [...currentRestaurants, restaurant]);
+      setSearchQuery('');
+      setSearchResults([]);
+    },
+    [watch, setValue],
+  );
+
   // Handle removing a restaurant from the collection
-  const handleRemoveRestaurant = useCallback((restaurantId) => {
-    const currentRestaurants = watch('restaurants') || [];
-    setValue('restaurants', currentRestaurants.filter(r => r.id !== restaurantId));
-  }, [watch, setValue]);
-  
+  const handleRemoveRestaurant = useCallback(
+    restaurantId => {
+      const currentRestaurants = watch('restaurants') || [];
+      setValue(
+        'restaurants',
+        currentRestaurants.filter(r => r.id !== restaurantId),
+      );
+    },
+    [watch, setValue],
+  );
+
   // Handle form submission
-  const handleFormSubmit = useCallback((data) => {
-    if (onSubmit) {
-      onSubmit(data);
-    }
-  }, [onSubmit]);
-  
+  const handleFormSubmit = useCallback(
+    data => {
+      if (onSubmit) {
+        onSubmit(data);
+      }
+    },
+    [onSubmit],
+  );
+
   // Handle cancel
   const handleCancel = useCallback(() => {
     router.back();
   }, [router]);
-  
+
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-8">
       {/* Collection Title */}
       <div>
-        <label htmlFor="title" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="title"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           Collection Title <span className="text-red-500">*</span>
         </label>
         <input
@@ -212,10 +236,13 @@ const CollectionForm = memo(function CollectionForm({
           </p>
         )}
       </div>
-      
+
       {/* Collection Description */}
       <div>
-        <label htmlFor="description" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="description"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           Description <span className="text-red-500">*</span>
         </label>
         <textarea
@@ -232,10 +259,13 @@ const CollectionForm = memo(function CollectionForm({
           </p>
         )}
       </div>
-      
+
       {/* Collection Location */}
       <div>
-        <label htmlFor="location" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label
+          htmlFor="location"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+        >
           Location <span className="text-red-500">*</span>
         </label>
         <input
@@ -252,21 +282,22 @@ const CollectionForm = memo(function CollectionForm({
           </p>
         )}
       </div>
-      
+
       {/* Collection Image */}
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Cover Image
         </label>
-        
+
         <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 dark:border-gray-700 border-dashed rounded-md">
           <div className="space-y-1 text-center">
             {imagePreview ? (
-              <div className="relative">
-                <img
+              <div className="relative mx-auto h-64 w-full rounded-md overflow-hidden">
+                <Image
                   src={imagePreview}
                   alt="Collection cover"
-                  className="mx-auto h-64 w-full object-cover rounded-md"
+                  layout="fill"
+                  objectFit="cover"
                 />
                 <button
                   type="button"
@@ -308,13 +339,13 @@ const CollectionForm = memo(function CollectionForm({
           </div>
         </div>
       </div>
-      
+
       {/* Restaurant Search */}
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           Add Restaurants <span className="text-red-500">*</span>
         </label>
-        
+
         <div className="relative">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <LucideClientIcon
@@ -328,15 +359,15 @@ const CollectionForm = memo(function CollectionForm({
             placeholder="Search for restaurants..."
             className="pl-10 pr-4 py-2 w-full border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
             value={searchQuery}
-            onChange={(e) => handleSearchRestaurants(e.target.value)}
+            onChange={e => handleSearchRestaurants(e.target.value)}
           />
         </div>
-        
+
         {/* Search Results */}
         {searchResults.length > 0 && (
           <div className="mt-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 shadow-lg max-h-60 overflow-y-auto">
             <ul className="py-1">
-              {searchResults.map((restaurant) => (
+              {searchResults.map(restaurant => (
                 <li
                   key={restaurant.id}
                   className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer flex items-center justify-between"
@@ -344,10 +375,13 @@ const CollectionForm = memo(function CollectionForm({
                 >
                   <div className="flex items-center">
                     {restaurant.imageUrl ? (
-                      <img
+                      <Image
                         src={restaurant.imageUrl}
                         alt={restaurant.name}
-                        className="w-10 h-10 rounded-full object-cover mr-3"
+                        width={40}
+                        height={40}
+                        objectFit="cover"
+                        className="rounded-full mr-3"
                       />
                     ) : (
                       <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center mr-3">
@@ -358,7 +392,9 @@ const CollectionForm = memo(function CollectionForm({
                       </div>
                     )}
                     <div>
-                      <p className="font-medium text-gray-900 dark:text-white">{restaurant.name}</p>
+                      <p className="font-medium text-gray-900 dark:text-white">
+                        {restaurant.name}
+                      </p>
                       <p className="text-sm text-gray-500 dark:text-gray-400">
                         {restaurant.cuisine} • {restaurant.location}
                       </p>
@@ -375,32 +411,35 @@ const CollectionForm = memo(function CollectionForm({
             </ul>
           </div>
         )}
-        
+
         {isSearching && (
           <div className="mt-2 text-center py-2 text-gray-500 dark:text-gray-400">
             Searching...
           </div>
         )}
-        
+
         {/* Selected Restaurants */}
         <div className="mt-4">
           <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Selected Restaurants ({restaurants?.length || 0})
           </h3>
-          
+
           {restaurants?.length > 0 ? (
             <ul className="space-y-2">
-              {restaurants.map((restaurant) => (
+              {restaurants.map(restaurant => (
                 <li
                   key={restaurant.id}
                   className="flex items-center justify-between p-3 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800"
                 >
                   <div className="flex items-center">
                     {restaurant.imageUrl ? (
-                      <img
+                      <Image
                         src={restaurant.imageUrl}
                         alt={restaurant.name}
-                        className="w-10 h-10 rounded-full object-cover mr-3"
+                        width={40}
+                        height={40}
+                        objectFit="cover"
+                        className="rounded-full mr-3"
                       />
                     ) : (
                       <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center mr-3">
@@ -411,10 +450,14 @@ const CollectionForm = memo(function CollectionForm({
                       </div>
                     )}
                     <div>
-                      <p className="font-medium text-gray-900 dark:text-white">{restaurant.name}</p>
+                      <p className="font-medium text-gray-900 dark:text-white">
+                        {restaurant.name}
+                      </p>
                       {(restaurant.cuisine || restaurant.location) && (
                         <p className="text-sm text-gray-500 dark:text-gray-400">
-                          {restaurant.cuisine} {restaurant.cuisine && restaurant.location && '•'} {restaurant.location}
+                          {restaurant.cuisine}{' '}
+                          {restaurant.cuisine && restaurant.location && '•'}{' '}
+                          {restaurant.location}
                         </p>
                       )}
                     </div>
@@ -432,11 +475,12 @@ const CollectionForm = memo(function CollectionForm({
           ) : (
             <div className="text-center py-4 border border-gray-300 dark:border-gray-700 border-dashed rounded-md">
               <p className="text-gray-500 dark:text-gray-400">
-                No restaurants added yet. Search and add restaurants to your collection.
+                No restaurants added yet. Search and add restaurants to your
+                collection.
               </p>
             </div>
           )}
-          
+
           {errors.restaurants && (
             <p className="mt-1 text-sm text-red-600 dark:text-red-400 flex items-center">
               <LucideClientIcon icon={AlertCircle} className="w-4 h-4 mr-1" />
@@ -445,7 +489,7 @@ const CollectionForm = memo(function CollectionForm({
           )}
         </div>
       </div>
-      
+
       {/* Form Actions */}
       <div className="flex justify-end space-x-4">
         <button

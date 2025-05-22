@@ -1,7 +1,7 @@
-import { z } from "zod";
-import { publicProcedure, privateProcedure } from "../procedures/index.js";
-import { router } from "../trpc.js";
-import { Context } from "../context.js";
+import { z } from 'zod';
+import { publicProcedure, privateProcedure } from '../procedures/index.js';
+import { router } from '../trpc.js';
+import { Context } from '../context.js';
 
 export const userRouter = router({
   // Public procedures
@@ -16,11 +16,8 @@ export const userRouter = router({
     // In a real app, you'd get the user ID from the auth token
     // For demo purposes, using a hardcoded ID:
     // const userId = "current-user-id";
-
     // return ctx.prisma.user.findUnique({
     //   where: { id: userId }
     // });
   }),
-
-
 });

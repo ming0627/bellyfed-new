@@ -73,11 +73,16 @@ const Layout: React.FC<LayoutProps> = ({
   // Determine spacing classes
   const getSpacingClasses = () => {
     switch (spacing) {
-      case 'none': return '';
-      case 'small': return 'py-4 px-4 sm:px-4 lg:px-6';
-      case 'default': return 'py-8 px-4 sm:px-6 lg:px-8';
-      case 'large': return 'py-12 px-4 sm:px-6 lg:px-8';
-      default: return 'py-8 px-4 sm:px-6 lg:px-8';
+      case 'none':
+        return '';
+      case 'small':
+        return 'py-4 px-4 sm:px-4 lg:px-6';
+      case 'default':
+        return 'py-8 px-4 sm:px-6 lg:px-8';
+      case 'large':
+        return 'py-12 px-4 sm:px-6 lg:px-8';
+      default:
+        return 'py-8 px-4 sm:px-6 lg:px-8';
     }
   };
 
@@ -101,29 +106,33 @@ const Layout: React.FC<LayoutProps> = ({
         {meta?.keywords && <meta name="keywords" content={meta.keywords} />}
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
-        <meta property="og:url" content={`https://bellyfed.com${router.asPath}`} />
+        <meta
+          property="og:url"
+          content={`https://bellyfed.com${router.asPath}`}
+        />
         <meta property="og:type" content={meta?.ogType || 'website'} />
-        <meta property="og:image" content={meta?.ogImage || 'https://bellyfed.com/og-image.jpg'} />
-        <meta name="twitter:card" content={meta?.twitterCard || 'summary_large_image'} />
+        <meta
+          property="og:image"
+          content={meta?.ogImage || 'https://bellyfed.com/og-image.jpg'}
+        />
+        <meta
+          name="twitter:card"
+          content={meta?.twitterCard || 'summary_large_image'}
+        />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
-
-        {/* Preload fonts */}
-        <link
-          rel="preload"
-          href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Caveat:wght@400;500;600&display=swap"
-          as="style"
-        />
       </Head>
 
-      <div className={`flex flex-col min-h-screen bg-neutral-background dark:bg-neutral-900 ${getPatternClasses()}`}>
+      <div
+        className={`flex flex-col min-h-screen bg-neutral-background dark:bg-neutral-900 ${getPatternClasses()}`}
+      >
         <Navbar />
 
-        <main className={`flex-grow ${withPadding ? getSpacingClasses() : ''} ${withTransition ? 'animate-fade-in' : ''}`}>
+        <main
+          className={`flex-grow ${withPadding ? getSpacingClasses() : ''} ${withTransition ? 'animate-fade-in' : ''}`}
+        >
           {withPadding ? (
-            <div className={`${maxWidth} mx-auto`}>
-              {children}
-            </div>
+            <div className={`${maxWidth} mx-auto`}>{children}</div>
           ) : (
             children
           )}

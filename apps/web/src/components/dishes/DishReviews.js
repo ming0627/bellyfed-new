@@ -1,59 +1,64 @@
 import React, { useState, memo } from 'react';
+import Image from 'next/image';
 import { Star, ThumbsUp, MessageSquare, Flag } from 'lucide-react';
 import { LucideClientIcon } from '../ui/lucide-icon.js';
 import Link from 'next/link';
 
 /**
  * DishReviews component for displaying reviews of a dish
- * 
+ *
  * @param {Object} props - Component props
  * @param {Object} props.dish - Dish data object
  * @param {Function} props.getCountryLink - Function to generate country-specific links
  * @returns {JSX.Element} - Rendered component
  */
-const DishReviews = memo(function DishReviews({
-  dish,
-  getCountryLink,
-}) {
+const DishReviews = memo(function DishReviews({ dish, getCountryLink }) {
   const [activeFilter, setActiveFilter] = useState('all');
   const [expandedReviews, setExpandedReviews] = useState([]);
-  
+
   // If no reviews, don't render the component
   if (!dish.reviews || dish.reviews.length === 0) {
     return null;
   }
-  
+
   // Toggle review expansion
-  const toggleReviewExpansion = (reviewId) => {
-    setExpandedReviews(prev => 
+  const toggleReviewExpansion = reviewId => {
+    setExpandedReviews(prev =>
       prev.includes(reviewId)
         ? prev.filter(id => id !== reviewId)
-        : [...prev, reviewId]
+        : [...prev, reviewId],
     );
   };
-  
+
   // Filter reviews based on active filter
   const filteredReviews = dish.reviews.filter(review => {
     if (activeFilter === 'all') return true;
     if (activeFilter === 'positive' && review.rating >= 4) return true;
     if (activeFilter === 'critical' && review.rating < 4) return true;
-    if (activeFilter === 'with-photos' && review.photos && review.photos.length > 0) return true;
+    if (
+      activeFilter === 'with-photos' &&
+      review.photos &&
+      review.photos.length > 0
+    )
+      return true;
     return false;
   });
-  
+
   // Calculate rating distribution
   const ratingDistribution = [5, 4, 3, 2, 1].map(rating => {
-    const count = dish.reviews.filter(review => Math.floor(review.rating) === rating).length;
+    const count = dish.reviews.filter(
+      review => Math.floor(review.rating) === rating,
+    ).length;
     const percentage = (count / dish.reviews.length) * 100;
     return { rating, count, percentage };
   });
-  
+
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-8">
       <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
         Reviews
       </h2>
-      
+
       {/* Rating Summary */}
       <div className="flex flex-col md:flex-row md:items-center mb-6 gap-6">
         <div className="flex flex-col items-center">
@@ -61,7 +66,7 @@ const DishReviews = memo(function DishReviews({
             {dish.rating.toFixed(1)}
           </div>
           <div className="flex items-center mt-1">
-            {[1, 2, 3, 4, 5].map((star) => (
+            {[1, 2, 3, 4, 5].map(star => (
               <LucideClientIcon
                 key={star}
                 icon={Star}
@@ -78,9 +83,9 @@ const DishReviews = memo(function DishReviews({
             {dish.reviewCount} reviews
           </div>
         </div>
-        
+
         <div className="flex-grow">
-          {ratingDistribution.map((item) => (
+          {ratingDistribution.map(item => (
             <div key={item.rating} className="flex items-center mb-1">
               <div className="w-12 text-sm text-gray-600 dark:text-gray-400">
                 {item.rating} stars
@@ -98,7 +103,7 @@ const DishReviews = memo(function DishReviews({
           ))}
         </div>
       </div>
-      
+
       {/* Review Filters */}
       <div className="flex flex-wrap gap-2 mb-6">
         <button
@@ -142,20 +147,29 @@ const DishReviews = memo(function DishReviews({
           With Photos
         </button>
       </div>
-      
+
       {/* Reviews List */}
       <div className="space-y-6">
         {filteredReviews.length > 0 ? (
-          filteredReviews.map((review) => (
-            <div key={review.id} className="border-b border-gray-200 dark:border-gray-700 pb-6 last:border-0">
+          filteredReviews.map(review => (
+            <div
+              key={review.id}
+              className="border-b border-gray-200 dark:border-gray-700 pb-6 last:border-0"
+            >
               {/* Review Header */}
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center">
-                  <Link href={getCountryLink(`/profile/${review.user.username}`)} className="flex-shrink-0">
-                    <img
+                  <Link
+                    href={getCountryLink(`/profile/${review.user.username}`)}
+                    className="flex-shrink-0"
+                  >
+                    <Image
                       src={review.user.profilePicture}
                       alt={review.user.name}
-                      className="w-10 h-10 rounded-full object-cover"
+                      width={40}
+                      height={40}
+                      objectFit="cover"
+                      className="rounded-full"
                     />
                   </Link>
                   <div className="ml-3">
@@ -170,9 +184,9 @@ const DishReviews = memo(function DishReviews({
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center">
-                  {[1, 2, 3, 4, 5].map((star) => (
+                  {[1, 2, 3, 4, 5].map(star => (
                     <LucideClientIcon
                       key={star}
                       icon={Star}
@@ -186,10 +200,11 @@ const DishReviews = memo(function DishReviews({
                   ))}
                 </div>
               </div>
-              
+
               {/* Review Content */}
               <div className="mb-3">
-                {review.content.length > 200 && !expandedReviews.includes(review.id) ? (
+                {review.content.length > 200 &&
+                !expandedReviews.includes(review.id) ? (
                   <>
                     <p className="text-gray-700 dark:text-gray-300">
                       {review.content.substring(0, 200)}...
@@ -217,35 +232,51 @@ const DishReviews = memo(function DishReviews({
                   </>
                 )}
               </div>
-              
+
               {/* Review Photos */}
               {review.photos && review.photos.length > 0 && (
                 <div className="grid grid-cols-3 gap-2 mb-3">
                   {review.photos.map((photo, index) => (
-                    <div key={index} className="aspect-w-1 aspect-h-1 rounded-md overflow-hidden">
-                      <img
+                    <div
+                      key={index}
+                      className="aspect-w-1 aspect-h-1 rounded-md overflow-hidden relative"
+                    >
+                      <Image
                         src={photo}
                         alt={`Review photo ${index + 1}`}
-                        className="w-full h-full object-cover"
+                        layout="fill"
+                        objectFit="cover"
                         loading="lazy"
                       />
                     </div>
                   ))}
                 </div>
               )}
-              
+
               {/* Review Actions */}
               <div className="flex items-center space-x-4 text-sm">
                 <button className="flex items-center text-gray-600 dark:text-gray-400 hover:text-orange-500 transition-colors">
-                  <LucideClientIcon icon={ThumbsUp} className="w-4 h-4 mr-1" aria-hidden="true" />
+                  <LucideClientIcon
+                    icon={ThumbsUp}
+                    className="w-4 h-4 mr-1"
+                    aria-hidden="true"
+                  />
                   <span>Helpful ({review.helpfulCount || 0})</span>
                 </button>
                 <button className="flex items-center text-gray-600 dark:text-gray-400 hover:text-orange-500 transition-colors">
-                  <LucideClientIcon icon={MessageSquare} className="w-4 h-4 mr-1" aria-hidden="true" />
+                  <LucideClientIcon
+                    icon={MessageSquare}
+                    className="w-4 h-4 mr-1"
+                    aria-hidden="true"
+                  />
                   <span>Comment ({review.commentCount || 0})</span>
                 </button>
                 <button className="flex items-center text-gray-600 dark:text-gray-400 hover:text-orange-500 transition-colors">
-                  <LucideClientIcon icon={Flag} className="w-4 h-4 mr-1" aria-hidden="true" />
+                  <LucideClientIcon
+                    icon={Flag}
+                    className="w-4 h-4 mr-1"
+                    aria-hidden="true"
+                  />
                   <span>Report</span>
                 </button>
               </div>
@@ -265,11 +296,13 @@ const DishReviews = memo(function DishReviews({
           </div>
         )}
       </div>
-      
+
       {/* Write Review Button */}
       <div className="mt-6 text-center">
         <Link
-          href={getCountryLink(`/restaurants/${dish.restaurant.id}/review?dishId=${dish.id}`)}
+          href={getCountryLink(
+            `/restaurants/${dish.restaurant.id}/review?dishId=${dish.id}`,
+          )}
           className="inline-block px-6 py-3 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors font-medium"
         >
           Write a Review

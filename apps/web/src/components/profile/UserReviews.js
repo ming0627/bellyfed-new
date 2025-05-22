@@ -1,6 +1,14 @@
 import React, { useState, memo } from 'react';
 import Link from 'next/link';
-import { Star, ThumbsUp, MessageSquare, Calendar, Filter, Search } from 'lucide-react';
+import Image from 'next/image';
+import {
+  Star,
+  ThumbsUp,
+  MessageSquare,
+  Calendar,
+  Filter,
+  Search,
+} from 'lucide-react';
 import { LucideClientIcon } from '../ui/lucide-icon.js';
 
 // Mock data for user reviews
@@ -9,10 +17,12 @@ const mockUserReviews = [
     id: '1',
     restaurantId: '1',
     restaurantName: 'Nasi Lemak House',
-    restaurantImage: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=200&h=200&fit=crop',
+    restaurantImage:
+      'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=200&h=200&fit=crop',
     rating: 5,
     title: 'Best Nasi Lemak in KL!',
-    content: 'I have tried many Nasi Lemak places in KL, but this one tops them all. The sambal is perfectly balanced - spicy but not overwhelming. The chicken was crispy on the outside and juicy inside. Will definitely be back!',
+    content:
+      'I have tried many Nasi Lemak places in KL, but this one tops them all. The sambal is perfectly balanced - spicy but not overwhelming. The chicken was crispy on the outside and juicy inside. Will definitely be back!',
     visitDate: '2023-04-15',
     createdAt: '2023-04-16T14:23:00Z',
     helpfulCount: 24,
@@ -34,10 +44,12 @@ const mockUserReviews = [
     id: '2',
     restaurantId: '2',
     restaurantName: 'Sushi Sensation',
-    restaurantImage: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=200&h=200&fit=crop',
+    restaurantImage:
+      'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=200&h=200&fit=crop',
     rating: 4.5,
     title: 'Great sushi, a bit pricey',
-    content: 'The sushi here is incredibly fresh and well-prepared. The chef clearly knows what they\'re doing. My only complaint is that it\'s a bit on the expensive side, but for a special occasion, it\'s worth it.',
+    content:
+      "The sushi here is incredibly fresh and well-prepared. The chef clearly knows what they're doing. My only complaint is that it's a bit on the expensive side, but for a special occasion, it's worth it.",
     visitDate: '2023-03-20',
     createdAt: '2023-03-21T18:45:00Z',
     helpfulCount: 18,
@@ -60,34 +72,33 @@ const mockUserReviews = [
  * @param {Function} props.getCountryLink - Function to generate country-specific links
  * @returns {JSX.Element} - Rendered component
  */
-const UserReviews = memo(function UserReviews({
-  user,
-  getCountryLink,
-}) {
-  const [reviews, setReviews] = useState(mockUserReviews);
+const UserReviews = memo(function UserReviews({ user, getCountryLink }) {
+  const [reviews] = useState(mockUserReviews);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterRating, setFilterRating] = useState('all');
 
   // Handle search input change
-  const handleSearchChange = (e) => {
+  const handleSearchChange = e => {
     setSearchQuery(e.target.value);
   };
 
   // Handle rating filter change
-  const handleRatingFilterChange = (e) => {
+  const handleRatingFilterChange = e => {
     setFilterRating(e.target.value);
   };
 
   // Filter reviews based on search query and rating filter
-  const filteredReviews = reviews.filter((review) => {
+  const filteredReviews = reviews.filter(review => {
     // Search filter
-    const searchMatch = searchQuery === '' ||
+    const searchMatch =
+      searchQuery === '' ||
       review.restaurantName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       review.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       review.content.toLowerCase().includes(searchQuery.toLowerCase());
 
     // Rating filter
-    const ratingMatch = filterRating === 'all' ||
+    const ratingMatch =
+      filterRating === 'all' ||
       (filterRating === '5' && review.rating === 5) ||
       (filterRating === '4' && review.rating >= 4 && review.rating < 5) ||
       (filterRating === '3' && review.rating >= 3 && review.rating < 4) ||
@@ -98,7 +109,7 @@ const UserReviews = memo(function UserReviews({
   });
 
   // Format date for display
-  const formatDate = (dateString) => {
+  const formatDate = dateString => {
     try {
       const date = new Date(dateString);
       return date.toLocaleDateString('en-US', {
@@ -112,7 +123,7 @@ const UserReviews = memo(function UserReviews({
   };
 
   // Generate stars for rating
-  const renderStars = (rating) => {
+  const renderStars = rating => {
     const stars = [];
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 >= 0.5;
@@ -125,7 +136,7 @@ const UserReviews = memo(function UserReviews({
             icon={Star}
             className="w-4 h-4 text-yellow-500 fill-current"
             aria-hidden="true"
-          />
+          />,
         );
       } else if (i === fullStars && hasHalfStar) {
         stars.push(
@@ -142,7 +153,7 @@ const UserReviews = memo(function UserReviews({
                 aria-hidden="true"
               />
             </span>
-          </span>
+          </span>,
         );
       } else {
         stars.push(
@@ -151,7 +162,7 @@ const UserReviews = memo(function UserReviews({
             icon={Star}
             className="w-4 h-4 text-gray-300 dark:text-gray-600"
             aria-hidden="true"
-          />
+          />,
         );
       }
     }
@@ -213,21 +224,28 @@ const UserReviews = memo(function UserReviews({
       {/* Reviews List */}
       {filteredReviews.length > 0 ? (
         <div className="space-y-6">
-          {filteredReviews.map((review) => (
-            <div key={review.id} className="border-b border-gray-200 dark:border-gray-700 pb-6 last:border-0">
+          {filteredReviews.map(review => (
+            <div
+              key={review.id}
+              className="border-b border-gray-200 dark:border-gray-700 pb-6 last:border-0"
+            >
               {/* Restaurant Info */}
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 rounded-md overflow-hidden mr-3">
                   {review.restaurantImage ? (
-                    <img
+                    <Image
                       src={review.restaurantImage}
                       alt={review.restaurantName}
-                      className="w-full h-full object-cover"
+                      width={48}
+                      height={48}
+                      objectFit="cover"
                       loading="lazy"
                     />
                   ) : (
                     <div className="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-                      <span className="text-gray-500 dark:text-gray-400 text-xs">No Image</span>
+                      <span className="text-gray-500 dark:text-gray-400 text-xs">
+                        No Image
+                      </span>
                     </div>
                   )}
                 </div>
@@ -241,11 +259,13 @@ const UserReviews = memo(function UserReviews({
                   </Link>
 
                   <div className="flex items-center mt-1">
-                    <div className="flex">
-                      {renderStars(review.rating)}
-                    </div>
+                    <div className="flex">{renderStars(review.rating)}</div>
                     <span className="ml-2 text-sm text-gray-500 dark:text-gray-400">
-                      <LucideClientIcon icon={Calendar} className="w-3.5 h-3.5 inline mr-1" aria-hidden="true" />
+                      <LucideClientIcon
+                        icon={Calendar}
+                        className="w-3.5 h-3.5 inline mr-1"
+                        aria-hidden="true"
+                      />
                       {formatDate(review.visitDate)}
                     </span>
                   </div>
@@ -265,13 +285,18 @@ const UserReviews = memo(function UserReviews({
 
               {/* Review Images */}
               {review.images && review.images.length > 0 && (
-                <div className="flex space-x-2 mb-4 overflow-x-auto pb-2">
-                  {review.images.map((image) => (
-                    <div key={image.id} className="flex-shrink-0 w-24 h-24">
-                      <img
+                <div className="mt-4 flex space-x-3 overflow-x-auto pb-2">
+                  {review.images.map(image => (
+                    <div
+                      key={image.id}
+                      className="w-20 h-20 rounded-md overflow-hidden flex-shrink-0"
+                    >
+                      <Image
                         src={image.url}
                         alt={image.caption || 'Review image'}
-                        className="w-full h-full object-cover rounded-md"
+                        width={80}
+                        height={80}
+                        objectFit="cover"
                         loading="lazy"
                       />
                     </div>
@@ -282,12 +307,20 @@ const UserReviews = memo(function UserReviews({
               {/* Review Actions */}
               <div className="flex items-center space-x-4 text-sm">
                 <div className="flex items-center text-gray-500 dark:text-gray-400">
-                  <LucideClientIcon icon={ThumbsUp} className="w-4 h-4 mr-1" aria-hidden="true" />
+                  <LucideClientIcon
+                    icon={ThumbsUp}
+                    className="w-4 h-4 mr-1"
+                    aria-hidden="true"
+                  />
                   <span>Helpful ({review.helpfulCount})</span>
                 </div>
 
                 <div className="flex items-center text-gray-500 dark:text-gray-400">
-                  <LucideClientIcon icon={MessageSquare} className="w-4 h-4 mr-1" aria-hidden="true" />
+                  <LucideClientIcon
+                    icon={MessageSquare}
+                    className="w-4 h-4 mr-1"
+                    aria-hidden="true"
+                  />
                   <span>Comments ({review.comments})</span>
                 </div>
 

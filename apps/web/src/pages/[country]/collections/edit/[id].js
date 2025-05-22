@@ -11,7 +11,7 @@ import { useCountry, useAuth } from '../../../../contexts/index.js';
 /**
  * EditCollectionPage component for editing an existing collection
  * This page is protected by authentication middleware
- * 
+ *
  * @returns {JSX.Element} - Rendered component
  */
 export default function EditCollectionPage() {
@@ -20,40 +20,51 @@ export default function EditCollectionPage() {
   const { currentCountry, isInitialized } = useCountry();
   const { user } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   // Function to generate country-specific links
-  const getCountryLink = useCallback((path) => {
-    if (!isInitialized || !currentCountry?.code) return path;
-    return `/${currentCountry.code}${path}`;
-  }, [currentCountry, isInitialized]);
-  
+  const getCountryLink = useCallback(
+    path => {
+      if (!isInitialized || !currentCountry?.code) return path;
+      return `/${currentCountry.code}${path}`;
+    },
+    [currentCountry, isInitialized],
+  );
+
   // Fetch collection data
-  const { data: collection, isLoading, error } = useQuery({
+  const {
+    data: collection,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ['collection', id],
     queryFn: async () => {
       // In a real app, this would call an API to fetch the collection
       // For now, we'll use mock data
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       // Mock collection data
       return {
         id,
         title: 'Best Brunch Spots in KL',
-        description: 'A curated list of the best places to enjoy brunch in Kuala Lumpur, from classic breakfast joints to trendy cafes.',
+        description:
+          'A curated list of the best places to enjoy brunch in Kuala Lumpur, from classic breakfast joints to trendy cafes.',
         location: 'Kuala Lumpur',
-        imageUrl: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=600&h=400&fit=crop',
+        imageUrl:
+          'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=600&h=400&fit=crop',
         restaurants: [
           {
             id: '1',
             name: 'Spice Garden',
-            imageUrl: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=200&h=200&fit=crop',
+            imageUrl:
+              'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=200&h=200&fit=crop',
             cuisine: 'Indian',
             location: 'Kuala Lumpur',
           },
           {
             id: '2',
             name: 'Sushi Express',
-            imageUrl: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=200&h=200&fit=crop',
+            imageUrl:
+              'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=200&h=200&fit=crop',
             cuisine: 'Japanese',
             location: 'Kuala Lumpur',
           },
@@ -65,31 +76,34 @@ export default function EditCollectionPage() {
     },
     enabled: !!id,
   });
-  
+
   // Handle form submission
-  const handleSubmit = useCallback(async (data) => {
-    try {
-      setIsSubmitting(true);
-      
-      // In a real app, this would call an API to update the collection
-      console.log('Updating collection:', data);
-      
-      // Mock API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Show success message
-      alert('Collection updated successfully!');
-      
-      // Redirect to collection page
-      router.push(getCountryLink(`/collections/${id}`));
-    } catch (error) {
-      console.error('Error updating collection:', error);
-      alert('Failed to update collection. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  }, [router, getCountryLink, id]);
-  
+  const handleSubmit = useCallback(
+    async data => {
+      try {
+        setIsSubmitting(true);
+
+        // In a real app, this would call an API to update the collection
+        console.log('Updating collection:', data);
+
+        // Mock API call
+        await new Promise(resolve => setTimeout(resolve, 1500));
+
+        // Show success message
+        alert('Collection updated successfully!');
+
+        // Redirect to collection page
+        router.push(getCountryLink(`/collections/${id}`));
+      } catch (error) {
+        console.error('Error updating collection:', error);
+        alert('Failed to update collection. Please try again.');
+      } finally {
+        setIsSubmitting(false);
+      }
+    },
+    [router, getCountryLink, id],
+  );
+
   return (
     <Layout
       title="Edit Collection | Bellyfed"
@@ -104,7 +118,7 @@ export default function EditCollectionPage() {
           <LucideClientIcon icon={ChevronLeft} className="w-4 h-4 mr-1" />
           Back to Collection
         </Link>
-        
+
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
@@ -114,13 +128,18 @@ export default function EditCollectionPage() {
             Update your curated collection of restaurants.
           </p>
         </div>
-        
+
         {/* Collection Form */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
           {isLoading ? (
             <div className="flex items-center justify-center py-12">
-              <LucideClientIcon icon={Loader2} className="w-8 h-8 text-orange-500 animate-spin" />
-              <span className="ml-2 text-gray-600 dark:text-gray-400">Loading collection...</span>
+              <LucideClientIcon
+                icon={Loader2}
+                className="w-8 h-8 text-orange-500 animate-spin"
+              />
+              <span className="ml-2 text-gray-600 dark:text-gray-400">
+                Loading collection...
+              </span>
             </div>
           ) : error ? (
             <div className="text-center py-12">

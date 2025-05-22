@@ -35,10 +35,16 @@ const RankingCard = memo(function RankingCard({
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
-      <div className={`bg-gradient-to-r from-${gradientFrom} to-${gradientTo} px-4 py-3 text-white`}>
+      <div
+        className={`bg-gradient-to-r from-${gradientFrom} to-${gradientTo} px-4 py-3 text-white`}
+      >
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <LucideClientIcon icon={icon} className="w-5 h-5 mr-2" aria-hidden="true" />
+            <LucideClientIcon
+              icon={icon}
+              className="w-5 h-5 mr-2"
+              aria-hidden="true"
+            />
             <h3 className="font-semibold">{title}</h3>
           </div>
           <Link
@@ -47,7 +53,11 @@ const RankingCard = memo(function RankingCard({
             aria-label={viewAllLabel}
           >
             View All
-            <LucideClientIcon icon={ArrowRight} className="w-4 h-4 ml-1" aria-hidden="true" />
+            <LucideClientIcon
+              icon={ArrowRight}
+              className="w-4 h-4 ml-1"
+              aria-hidden="true"
+            />
           </Link>
         </div>
       </div>
@@ -71,11 +81,17 @@ const RankingCard = memo(function RankingCard({
               </div>
               <div className="text-right">
                 <span className="text-gray-900 font-semibold">
-                  {typeof item.value === 'number' ? item.value.toLocaleString() : item.value}
+                  {typeof item.value === 'number'
+                    ? item.value.toLocaleString()
+                    : item.value}
                 </span>
-                <span className="text-gray-500 text-sm ml-1">{itemValueLabel}</span>
+                <span className="text-gray-500 text-sm ml-1">
+                  {itemValueLabel}
+                </span>
                 {item.trend && (
-                  <span className="ml-2 text-xs text-green-600">{item.trend}</span>
+                  <span className="ml-2 text-xs text-green-600">
+                    {item.trend}
+                  </span>
                 )}
               </div>
             </li>
@@ -105,7 +121,13 @@ export const TopFoodies = memo(function TopFoodies({
   getCountryLink,
 }) {
   // Validate required props
-  if (!reviewers || !dishes || !locations || !countryName || typeof getCountryLink !== 'function') {
+  if (
+    !reviewers ||
+    !dishes ||
+    !locations ||
+    !countryName ||
+    typeof getCountryLink !== 'function'
+  ) {
     console.error('TopFoodies component missing required props');
     return null;
   }
@@ -131,7 +153,9 @@ export const TopFoodies = memo(function TopFoodies({
 
   return (
     <section className="mb-12" aria-labelledby="top-foodies-heading">
-      <h2 id="top-foodies-heading" className="sr-only">Top Food Statistics in {countryName}</h2>
+      <h2 id="top-foodies-heading" className="sr-only">
+        Top Food Statistics in {countryName}
+      </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Top Reviewers */}
         <RankingCard

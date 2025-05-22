@@ -1,10 +1,10 @@
 import React, { useState, useEffect, memo } from 'react';
-import { ChevronDown, ChevronUp, Check, X } from 'lucide-react';
+import { ChevronDown, ChevronUp, X } from 'lucide-react';
 import { LucideClientIcon } from '../ui/lucide-icon.js';
 
 /**
  * FilterSection component for displaying a collapsible filter section
- * 
+ *
  * @param {Object} props - Component props
  * @param {string} props.title - Section title
  * @param {React.ReactNode} props.children - Section content
@@ -17,12 +17,12 @@ const FilterSection = memo(function FilterSection({
   defaultExpanded = true,
 }) {
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
-  
+
   // Toggle section expansion
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
-  
+
   return (
     <div className="border-b border-gray-200 dark:border-gray-700 py-4 last:border-0">
       <button
@@ -39,19 +39,15 @@ const FilterSection = memo(function FilterSection({
           aria-hidden="true"
         />
       </button>
-      
-      {isExpanded && (
-        <div className="mt-4">
-          {children}
-        </div>
-      )}
+
+      {isExpanded && <div className="mt-4">{children}</div>}
     </div>
   );
 });
 
 /**
  * SearchFilters component for filtering search results
- * 
+ *
  * @param {Object} props - Component props
  * @param {Function} props.onFilterChange - Function to handle filter changes
  * @returns {JSX.Element} - Rendered component
@@ -68,47 +64,50 @@ const SearchFilters = memo(function SearchFilters({ onFilterChange }) {
     offerDelivery: false,
     offerTakeout: false,
   });
-  
+
   // Active filters count
-  const activeFiltersCount = Object.entries(filters).reduce((count, [key, value]) => {
-    if (Array.isArray(value)) {
-      return count + value.length;
-    }
-    return count + (value ? 1 : 0);
-  }, 0);
-  
+  const activeFiltersCount = Object.entries(filters).reduce(
+    (count, [key, value]) => {
+      if (Array.isArray(value)) {
+        return count + value.length;
+      }
+      return count + (value ? 1 : 0);
+    },
+    0,
+  );
+
   // Update parent component when filters change
   useEffect(() => {
     if (onFilterChange) {
       onFilterChange(filters);
     }
   }, [filters, onFilterChange]);
-  
+
   // Handle checkbox filter change
   const handleCheckboxChange = (filterType, value) => {
-    setFilters((prevFilters) => {
+    setFilters(prevFilters => {
       const currentValues = prevFilters[filterType] || [];
-      
+
       // Toggle value
       const newValues = currentValues.includes(value)
-        ? currentValues.filter((v) => v !== value)
+        ? currentValues.filter(v => v !== value)
         : [...currentValues, value];
-      
+
       return {
         ...prevFilters,
         [filterType]: newValues,
       };
     });
   };
-  
+
   // Handle boolean filter change
-  const handleBooleanChange = (filterType) => {
-    setFilters((prevFilters) => ({
+  const handleBooleanChange = filterType => {
+    setFilters(prevFilters => ({
       ...prevFilters,
       [filterType]: !prevFilters[filterType],
     }));
   };
-  
+
   // Clear all filters
   const clearAllFilters = () => {
     setFilters({
@@ -122,15 +121,7 @@ const SearchFilters = memo(function SearchFilters({ onFilterChange }) {
       offerTakeout: false,
     });
   };
-  
-  // Clear specific filter type
-  const clearFilterType = (filterType) => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [filterType]: Array.isArray(prevFilters[filterType]) ? [] : false,
-    }));
-  };
-  
+
   // Mock cuisine types for demo
   const cuisineTypes = [
     'Malaysian',
@@ -144,7 +135,7 @@ const SearchFilters = memo(function SearchFilters({ onFilterChange }) {
     'Western',
     'Fusion',
   ];
-  
+
   // Mock dietary options for demo
   const dietaryOptions = [
     'Vegetarian',
@@ -154,7 +145,7 @@ const SearchFilters = memo(function SearchFilters({ onFilterChange }) {
     'Dairy-Free',
     'Nut-Free',
   ];
-  
+
   // Mock features for demo
   const features = [
     'Parking',
@@ -165,7 +156,7 @@ const SearchFilters = memo(function SearchFilters({ onFilterChange }) {
     'Family Friendly',
     'Pet Friendly',
   ];
-  
+
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
       {/* Filter Header */}
@@ -173,7 +164,7 @@ const SearchFilters = memo(function SearchFilters({ onFilterChange }) {
         <h2 className="text-xl font-bold text-gray-900 dark:text-white">
           Filters
         </h2>
-        
+
         {activeFiltersCount > 0 && (
           <button
             onClick={clearAllFilters}
@@ -183,7 +174,7 @@ const SearchFilters = memo(function SearchFilters({ onFilterChange }) {
           </button>
         )}
       </div>
-      
+
       {/* Active Filters */}
       {activeFiltersCount > 0 && (
         <div className="mb-6">
@@ -193,7 +184,7 @@ const SearchFilters = memo(function SearchFilters({ onFilterChange }) {
           <div className="flex flex-wrap gap-2">
             {Object.entries(filters).map(([key, value]) => {
               if (Array.isArray(value) && value.length > 0) {
-                return value.map((item) => (
+                return value.map(item => (
                   <div
                     key={`${key}-${item}`}
                     className="flex items-center bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 text-xs rounded-full px-3 py-1"
@@ -209,16 +200,17 @@ const SearchFilters = memo(function SearchFilters({ onFilterChange }) {
                   </div>
                 ));
               }
-              
+
               if (typeof value === 'boolean' && value) {
-                const label = key === 'openNow'
-                  ? 'Open Now'
-                  : key === 'offerDelivery'
-                    ? 'Offers Delivery'
-                    : key === 'offerTakeout'
-                      ? 'Offers Takeout'
-                      : key;
-                
+                const label =
+                  key === 'openNow'
+                    ? 'Open Now'
+                    : key === 'offerDelivery'
+                      ? 'Offers Delivery'
+                      : key === 'offerTakeout'
+                        ? 'Offers Takeout'
+                        : key;
+
                 return (
                   <div
                     key={key}
@@ -235,17 +227,17 @@ const SearchFilters = memo(function SearchFilters({ onFilterChange }) {
                   </div>
                 );
               }
-              
+
               return null;
             })}
           </div>
         </div>
       )}
-      
+
       {/* Price Range Filter */}
       <FilterSection title="Price Range">
         <div className="flex flex-wrap gap-2">
-          {['$', '$$', '$$$', '$$$$'].map((price) => (
+          {['$', '$$', '$$$', '$$$$'].map(price => (
             <button
               key={price}
               onClick={() => handleCheckboxChange('priceRange', price)}
@@ -261,15 +253,12 @@ const SearchFilters = memo(function SearchFilters({ onFilterChange }) {
           ))}
         </div>
       </FilterSection>
-      
+
       {/* Cuisine Types Filter */}
       <FilterSection title="Cuisine Types">
         <div className="space-y-2 max-h-48 overflow-y-auto pr-2">
-          {cuisineTypes.map((cuisine) => (
-            <label
-              key={cuisine}
-              className="flex items-center cursor-pointer"
-            >
+          {cuisineTypes.map(cuisine => (
+            <label key={cuisine} className="flex items-center cursor-pointer">
               <input
                 type="checkbox"
                 className="form-checkbox h-4 w-4 text-orange-500 rounded border-gray-300 focus:ring-orange-500"
@@ -283,15 +272,12 @@ const SearchFilters = memo(function SearchFilters({ onFilterChange }) {
           ))}
         </div>
       </FilterSection>
-      
+
       {/* Dietary Options Filter */}
       <FilterSection title="Dietary Options">
         <div className="space-y-2">
-          {dietaryOptions.map((option) => (
-            <label
-              key={option}
-              className="flex items-center cursor-pointer"
-            >
+          {dietaryOptions.map(option => (
+            <label key={option} className="flex items-center cursor-pointer">
               <input
                 type="checkbox"
                 className="form-checkbox h-4 w-4 text-orange-500 rounded border-gray-300 focus:ring-orange-500"
@@ -305,15 +291,12 @@ const SearchFilters = memo(function SearchFilters({ onFilterChange }) {
           ))}
         </div>
       </FilterSection>
-      
+
       {/* Ratings Filter */}
       <FilterSection title="Ratings">
         <div className="space-y-2">
-          {[5, 4, 3, 2, 1].map((rating) => (
-            <label
-              key={rating}
-              className="flex items-center cursor-pointer"
-            >
+          {[5, 4, 3, 2, 1].map(rating => (
+            <label key={rating} className="flex items-center cursor-pointer">
               <input
                 type="checkbox"
                 className="form-checkbox h-4 w-4 text-orange-500 rounded border-gray-300 focus:ring-orange-500"
@@ -343,15 +326,12 @@ const SearchFilters = memo(function SearchFilters({ onFilterChange }) {
           ))}
         </div>
       </FilterSection>
-      
+
       {/* Features Filter */}
       <FilterSection title="Features">
         <div className="space-y-2 max-h-48 overflow-y-auto pr-2">
-          {features.map((feature) => (
-            <label
-              key={feature}
-              className="flex items-center cursor-pointer"
-            >
+          {features.map(feature => (
+            <label key={feature} className="flex items-center cursor-pointer">
               <input
                 type="checkbox"
                 className="form-checkbox h-4 w-4 text-orange-500 rounded border-gray-300 focus:ring-orange-500"
@@ -365,7 +345,7 @@ const SearchFilters = memo(function SearchFilters({ onFilterChange }) {
           ))}
         </div>
       </FilterSection>
-      
+
       {/* Additional Filters */}
       <FilterSection title="Additional Filters">
         <div className="space-y-3">
@@ -380,7 +360,7 @@ const SearchFilters = memo(function SearchFilters({ onFilterChange }) {
               Open Now
             </span>
           </label>
-          
+
           <label className="flex items-center cursor-pointer">
             <input
               type="checkbox"
@@ -392,7 +372,7 @@ const SearchFilters = memo(function SearchFilters({ onFilterChange }) {
               Offers Delivery
             </span>
           </label>
-          
+
           <label className="flex items-center cursor-pointer">
             <input
               type="checkbox"

@@ -2,7 +2,7 @@ import { serialize } from 'cookie';
 
 /**
  * Logout API handler
- * 
+ *
  * @param {import('next').NextApiRequest} req - Next.js API request
  * @param {import('next').NextApiResponse} res - Next.js API response
  */
