@@ -1,0 +1,45 @@
+{
+  "name": "@bellyfed/services",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./auth": "./dist/auth/index.js",
+    "./googlePlaces": "./dist/googlePlaces.js",
+    "./photoUpload": "./dist/photoUpload.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "build:fast": "tsc --incremental",
+    "dev": "tsc --watch",
+    "lint": "eslint .",
+    "lint:strict": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix",
+    "type-check": "tsc --noEmit",
+    "type-check:strict": "tsc --noEmit --strict",
+    "test": "echo \"No tests specified\" && exit 0",
+    "clean": "rm -rf dist node_modules/.cache"
+  },
+  "dependencies": {
+    "@aws-sdk/client-cognito-identity-provider": "^3.812.0",
+    "@aws-sdk/client-s3": "^3.812.0",
+    "@bellyfed/types": "workspace:*",
+    "@bellyfed/utils": "workspace:*",
+    "axios": "^1.6.7",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "eslint-config-custom": "workspace:*",
+    "@bellyfed/typescript-config": "workspace:*",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8.57.1",
+    "next": "^14.1.0",
+    "react": "^18.2.0",
+    "typescript": "~5.3.3"
+  },
+  "type": "module"
+}

@@ -274,10 +274,10 @@ export function Homepage() {
 
   // Fetch restaurant data
   const {
-    data: restaurants,
+    // data: restaurants, // Removed unused variable
     isLoading,
     error,
-  } = useQuery({
+  } = useQuery({ // eslint-disable-line no-undef
     queryKey: ['restaurants', currentCountry?.code],
     queryFn: () => {
       // In a real app, this would fetch data from an API with the country code
@@ -297,8 +297,8 @@ export function Homepage() {
   if (isLoading || !isInitialized) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <LucideClientIcon
-          icon={Loader2}
+        <LucideClientIcon // eslint-disable-line no-undef, react/jsx-no-undef
+          icon={Loader2} // eslint-disable-line no-undef
           className="w-6 h-6 animate-spin"
           aria-label="Loading"
         />

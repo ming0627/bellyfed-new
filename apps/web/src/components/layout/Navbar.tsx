@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
+import { getCountryUrl } from '@bellyfed/utils';
 
 const Navbar: React.FC = () => {
   const router = useRouter();
@@ -23,6 +24,9 @@ const Navbar: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [scrolled, setScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
+
+  // Get the current country from the router or default to 'my'
+  const country = (router.query.country as string) || 'my';
 
   // After mounting, we can access the theme
   useEffect(() => {
@@ -58,7 +62,13 @@ const Navbar: React.FC = () => {
 
   // Check if the current route matches
   const isActive = (path: string) => {
-    return router.pathname === path;
+    if (path === '/') {
+      return router.pathname === '/' || router.pathname === '/[country]';
+    }
+
+    // For other paths, check if the current path matches the country-specific path
+    const countryPath = `/[country]${path}`;
+    return router.pathname === countryPath;
   };
 
   return (
@@ -73,7 +83,7 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between h-16">
           {/* Logo and Navigation Links */}
           <div className="flex items-center">
-            <Link href="/" className="flex-shrink-0 flex items-center">
+            <Link href={getCountryUrl(country, '')} className="flex-shrink-0 flex items-center">
               <span className="text-2xl font-heading font-bold bg-gradient-to-r from-primary-600 to-secondary-500 bg-clip-text text-transparent">
                 Bellyfed
               </span>
@@ -82,7 +92,7 @@ const Navbar: React.FC = () => {
             {/* Desktop Navigation */}
             <div className="hidden md:ml-10 md:flex md:space-x-8">
               <Link
-                href="/"
+                href={getCountryUrl(country, '')}
                 className={`inline-flex items-center px-1 py-2 text-sm font-medium border-b-2 transition-all duration-200 ${
                   isActive('/')
                     ? 'border-primary-500 text-primary-700 dark:text-primary-400'
@@ -94,7 +104,7 @@ const Navbar: React.FC = () => {
               </Link>
 
               <Link
-                href="/restaurants"
+                href={getCountryUrl(country, 'restaurants')}
                 className={`inline-flex items-center px-1 py-2 text-sm font-medium border-b-2 transition-all duration-200 ${
                   isActive('/restaurants')
                     ? 'border-primary-500 text-primary-700 dark:text-primary-400'
@@ -106,7 +116,7 @@ const Navbar: React.FC = () => {
               </Link>
 
               <Link
-                href="/explore"
+                href={getCountryUrl(country, 'explore')}
                 className={`inline-flex items-center px-1 py-2 text-sm font-medium border-b-2 transition-all duration-200 ${
                   isActive('/explore')
                     ? 'border-primary-500 text-primary-700 dark:text-primary-400'
@@ -121,7 +131,7 @@ const Navbar: React.FC = () => {
               </Link>
 
               <Link
-                href="/social"
+                href={getCountryUrl(country, 'social')}
                 className={`inline-flex items-center px-1 py-2 text-sm font-medium border-b-2 transition-all duration-200 ${
                   isActive('/social')
                     ? 'border-primary-500 text-primary-700 dark:text-primary-400'
@@ -252,7 +262,7 @@ const Navbar: React.FC = () => {
             aria-label="Mobile navigation"
           >
             <Link
-              href="/"
+              href={getCountryUrl(country, '')}
               className={`flex items-center px-3 py-3 text-base font-medium rounded-md transition-colors ${
                 isActive('/')
                   ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-400'
@@ -265,7 +275,7 @@ const Navbar: React.FC = () => {
             </Link>
 
             <Link
-              href="/restaurants"
+              href={getCountryUrl(country, 'restaurants')}
               className={`flex items-center px-3 py-3 text-base font-medium rounded-md transition-colors ${
                 isActive('/restaurants')
                   ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-400'
@@ -278,7 +288,7 @@ const Navbar: React.FC = () => {
             </Link>
 
             <Link
-              href="/explore"
+              href={getCountryUrl(country, 'explore')}
               className={`flex items-center px-3 py-3 text-base font-medium rounded-md transition-colors ${
                 isActive('/explore')
                   ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-400'
@@ -294,7 +304,7 @@ const Navbar: React.FC = () => {
             </Link>
 
             <Link
-              href="/social"
+              href={getCountryUrl(country, 'social')}
               className={`flex items-center px-3 py-3 text-base font-medium rounded-md transition-colors ${
                 isActive('/social')
                   ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-400'

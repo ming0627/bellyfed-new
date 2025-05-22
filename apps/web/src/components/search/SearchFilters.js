@@ -182,7 +182,7 @@ const SearchFilters = memo(function SearchFilters({ onFilterChange }) {
             Active Filters
           </h3>
           <div className="flex flex-wrap gap-2">
-            {Object.entries(filters).map(([key, value]) => {
+            {Object.entries(filters).map(([key, value]) => { // eslint-disable-line no-unused-vars
               if (Array.isArray(value) && value.length > 0) {
                 return value.map(item => (
                   <div

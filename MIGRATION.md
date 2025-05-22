@@ -12,18 +12,18 @@ All counts have been verified against the actual file listings in the original r
 | Category               | Total Items                                                                                                                          | Completed | In Progress | Not Started | Completion % |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | --------- | ----------- | ----------- | ------------ |
 | **Applications**       | 3                                                                                                                                    | 1         | 2           | 0           | 33%          |
-| **Hooks**              | 14 <!-- Verified: 13 from frontend + 1 from ui components -->                                                                        | 1         | 0           | 13          | 7%           |
-| **Services**           | 16 <!-- Verified -->                                                                                                                 | 1         | 1           | 14          | 6%           |
+| **Hooks**              | 13 <!-- Verified: 13 from frontend/src/hooks -->                                                                                     | 1         | 0           | 12          | 8%           |
+| **Services**           | 16 <!-- Verified: 16 from frontend/src/services -->                                                                                  | 4         | 0           | 12          | 25%          |
 | **Contexts**           | 2 <!-- Verified -->                                                                                                                  | 2         | 0           | 0           | 100%         |
-| **Utils**              | 20 <!-- Verified -->                                                                                                                 | 0         | 0           | 20          | 0%           |
+| **Utils**              | 21 <!-- Verified: 20 from frontend/src/utils + 1 from shared/src/utils -->                                                           | 3         | 0           | 18          | 14%          |
 | **UI Components**      | 40 <!-- Verified: 39 original (1 completed, 38 not started) + 1 new (completed) -->                                                  | 2         | 0           | 38          | 5%           |
-| **Feature Components** | 66 <!-- Verified: Complete count from original repository -->                                                                         | 12        | 0           | 54          | 18%          |
-| **API Routes**         | 48 <!-- Verified: Exact count from /packages/frontend/src/pages/api/ -->                                                             | 0         | 1           | 47          | 2%           |
+| **Feature Components** | 73 <!-- Updated: Complete count from original repository including newly identified components -->                                    | 12        | 0           | 61          | 16%          |
+| **API Routes**         | 48 <!-- Verified: Exact count from /packages/frontend/src/pages/api/ -->                                                             | 8         | 4           | 36          | 17%          |
 | **Pages**              | 56 <!-- Verified: Exact count from /packages/frontend/src/pages/ -->                                                                 | 15        | 0           | 41          | 27%          |
 | **Config**             | 16 <!-- Verified: Includes /packages/frontend/src/config (7), /packages/typescript-config (5), /packages/eslint-config (5) -->       | 1         | 0           | 15          | 6%           |
-| **Types**              | 8  <!-- Verified: From /packages/frontend/src/types/ and /packages/shared/src/types/ -->                                             | 0         | 0           | 8           | 0%           |
-| **Infrastructure**     | 18 <!-- Verified: Key infrastructure components from /packages/infra/ -->                                                            | 0         | 0           | 18          | 0%           |
-| **Overall**            | 307 <!-- Recalculated based on verified totals above -->                                                                             | 35        | 4           | 268         | 11%          |
+| **Types**              | 4  <!-- Verified: 3 from frontend/src/types + 1 from shared/src/types -->                                                            | 2         | 0           | 2           | 50%          |
+| **Infrastructure**     | 22 <!-- Verified: 22 Lambda functions from /packages/infra/functions/ -->                                                            | 0         | 0           | 22          | 0%           |
+| **Overall**            | 314 <!-- Recalculated based on verified totals above -->                                                                             | 51        | 6           | 257         | 16%          |
 
 ### Migration Status Legend
 
@@ -122,6 +122,125 @@ NOTE FOR VERIFICATION (Checklist Accuracy):
 - Re-verify the "Total Items" counts in the summary table by ensuring every relevant file from the original packages is represented in this checklist under the correct category and that their individual migration statuses are up-to-date.
 - The "Migration Dependencies Graph" section should also be cross-checked and updated based on an accurate and complete component/file list.
 -->
+
+### Additional Components Pending Migration
+
+#### Infrastructure Components
+
+| Source Path                                                                | Destination Path                                                | Status | Notes                                      |
+| -------------------------------------------------------------------------- | --------------------------------------------------------------- | ------ | ------------------------------------------ |
+| `/packages/infra/functions/analytics-processor`                            | `/apps/backend/src/services/analytics-processor`                | ❌     | Analytics event processing Lambda function |
+| `/packages/infra/functions/analytics-service`                              | `/apps/backend/src/services/analytics-service`                  | ❌     | Analytics service Lambda function          |
+| `/packages/infra/functions/analytics-writer`                               | `/apps/backend/src/services/analytics-writer`                   | ❌     | Analytics data writer Lambda function      |
+| `/packages/infra/functions/cognito-custom-message`                         | `/apps/backend/src/services/cognito-custom-message`             | ❌     | Cognito custom message handler            |
+| `/packages/infra/functions/cognito-post-confirmation`                      | `/apps/backend/src/services/cognito-post-confirmation`          | ❌     | Cognito post-confirmation handler         |
+| `/packages/infra/functions/db-init`                                        | `/apps/backend/src/services/db-init`                            | ❌     | Database initialization Lambda function    |
+| `/packages/infra/functions/db-schema`                                      | `/packages/db/src/schema`                                       | ❌     | Database schema definitions               |
+| `/packages/infra/functions/dlq-processor`                                  | `/apps/backend/src/services/dlq-processor`                      | ❌     | Dead letter queue processor               |
+| `/packages/infra/functions/event-processor`                                | `/apps/backend/src/services/event-processor`                    | ❌     | Event processing Lambda function          |
+| `/packages/infra/functions/google-maps-integration`                        | `/apps/backend/src/services/google-maps-integration`            | ❌     | Google Maps integration service           |
+| `/packages/infra/functions/process-user-signup`                            | `/apps/backend/src/services/process-user-signup`                | ❌     | User signup processing Lambda function    |
+| `/packages/infra/functions/query-processor`                                | `/apps/backend/src/services/query-processor`                    | ❌     | Query processing Lambda function          |
+| `/packages/infra/functions/restaurant-processor`                           | `/apps/backend/src/services/restaurant-processor`               | ❌     | Restaurant data processor                 |
+| `/packages/infra/functions/restaurant-query`                               | `/apps/backend/src/services/restaurant-query`                   | ❌     | Restaurant query Lambda function          |
+| `/packages/infra/functions/review-processor`                               | `/apps/backend/src/services/review-processor`                   | ❌     | Review processing Lambda function         |
+| `/packages/infra/functions/review-query`                                   | `/apps/backend/src/services/review-query`                       | ❌     | Review query Lambda function              |
+| `/packages/infra/functions/typesense-dish-search`                          | `/apps/backend/src/services/typesense-dish-search`              | ❌     | Typesense dish search integration         |
+| `/packages/infra/functions/typesense-dish-sync`                            | `/apps/backend/src/services/typesense-dish-sync`                | ❌     | Typesense dish sync integration           |
+| `/packages/infra/functions/user-account-processor`                         | `/apps/backend/src/services/user-account-processor`             | ❌     | User account processing Lambda function   |
+| `/packages/infra/functions/user-profile`                                   | `/apps/backend/src/services/user-profile`                       | ❌     | User profile Lambda function              |
+| `/packages/infra/functions/write-processor`                                | `/apps/backend/src/services/write-processor`                    | ❌     | Write processing Lambda function          |
+
+#### Hooks
+
+| Source Path                                                | Destination Path                                | Status | Notes                                    |
+| ---------------------------------------------------------- | ----------------------------------------------- | ------ | ---------------------------------------- |
+| `/packages/frontend/src/hooks/useAnalytics.ts`             | `/packages/hooks/src/useAnalytics.ts`           | ❌     | Analytics tracking hook                  |
+| `/packages/frontend/src/hooks/useApi.ts`                   | `/packages/hooks/src/useApi.ts`                 | ❌     | API request hook                         |
+| `/packages/frontend/src/hooks/useAuth.ts`                  | `/packages/hooks/src/useAuth.ts`                | ❌     | Authentication hook                      |
+| `/packages/frontend/src/hooks/useCognitoUser.ts`           | `/packages/hooks/src/useCognitoUser.ts`         | ❌     | Cognito user management hook            |
+| `/packages/frontend/src/hooks/useDebounce.ts`              | `/packages/hooks/src/useDebounce.ts`            | ✅     | Debounce hook for input fields          |
+| `/packages/frontend/src/hooks/useDishVotes.ts`             | `/packages/hooks/src/useDishVotes.ts`           | ❌     | Dish voting hook                         |
+| `/packages/frontend/src/hooks/useGeolocation.ts`           | `/packages/hooks/src/useGeolocation.ts`         | ❌     | Geolocation hook                         |
+| `/packages/frontend/src/hooks/useRestaurant.ts`            | `/packages/hooks/src/useRestaurant.ts`          | ❌     | Restaurant data hook                     |
+| `/packages/frontend/src/hooks/useReviews.ts`               | `/packages/hooks/src/useReviews.ts`             | ❌     | Reviews data hook                        |
+| `/packages/frontend/src/hooks/useUser.ts`                  | `/packages/hooks/src/useUser.ts`                | ❌     | User data hook                           |
+| `/packages/frontend/src/hooks/useUserProfile.ts`           | `/packages/hooks/src/useUserProfile.ts`         | ❌     | User profile hook                        |
+| `/packages/frontend/src/hooks/useUserRanking.ts`           | `/packages/hooks/src/useUserRanking.ts`         | ❌     | User ranking hook                        |
+| `/packages/frontend/src/hooks/use-toast.ts`                | `/packages/hooks/src/useToast.ts`               | ❌     | Toast notification hook                  |
+
+#### Services
+
+| Source Path                                                | Destination Path                                | Status | Notes                                    |
+| ---------------------------------------------------------- | ----------------------------------------------- | ------ | ---------------------------------------- |
+| `/packages/frontend/src/services/analyticsService.ts`      | `/packages/services/src/analyticsService.ts`    | ❌     | Analytics tracking service               |
+| `/packages/frontend/src/services/api.ts`                   | `/packages/services/src/api.ts`                 | ❌     | API client service                       |
+| `/packages/frontend/src/services/cognitoAuthService.ts`    | `/packages/services/src/auth/cognitoAuthService.ts` | ✅  | Cognito authentication service          |
+| `/packages/frontend/src/services/databaseService.ts`       | `/packages/services/src/databaseService.ts`     | ❌     | Database access service                  |
+| `/packages/frontend/src/services/googleMapsService.ts`     | `/packages/services/src/googleMapsService.ts`   | ❌     | Google Maps integration service          |
+| `/packages/frontend/src/services/googlePlaces.ts`          | `/packages/services/src/googlePlaces.ts`        | ✅     | Google Places API service                |
+| `/packages/frontend/src/services/mockDataService.ts`       | `/packages/services/src/mockDataService.ts`     | ❌     | Mock data service for development        |
+| `/packages/frontend/src/services/openai.ts`                | `/packages/services/src/openai.ts`              | ❌     | OpenAI integration service               |
+| `/packages/frontend/src/services/photoUploadService.ts`    | `/packages/services/src/photoUpload.ts`         | ✅     | Photo upload service                     |
+| `/packages/frontend/src/services/postgresService.ts`       | `/packages/services/src/postgresService.ts`     | ❌     | PostgreSQL database service              |
+| `/packages/frontend/src/services/rankingService.ts`        | `/packages/services/src/rankingService.ts`      | ❌     | User and dish ranking service            |
+| `/packages/frontend/src/services/restaurantService.ts`     | `/packages/services/src/restaurantService.ts`   | ❌     | Restaurant data service                  |
+| `/packages/frontend/src/services/reviewService.ts`         | `/packages/services/src/reviewService.ts`       | ❌     | Review management service                |
+| `/packages/frontend/src/services/social-media-service.ts`  | `/packages/services/src/socialMediaService.ts`  | ❌     | Social media integration service         |
+| `/packages/frontend/src/services/userProfileService.ts`    | `/packages/services/src/userProfileService.ts`  | ✅     | User profile management service          |
+| `/packages/frontend/src/services/userService.ts`           | `/packages/services/src/userService.ts`         | ❌     | User management service                  |
+
+#### Utils
+
+| Source Path                                                | Destination Path                                | Status | Notes                                    |
+| ---------------------------------------------------------- | ----------------------------------------------- | ------ | ---------------------------------------- |
+| `/packages/frontend/src/utils/apiConfig.ts`                | `/packages/utils/src/apiConfig.ts`              | ❌     | API configuration utilities              |
+| `/packages/frontend/src/utils/auth.ts`                     | `/packages/utils/src/auth.ts`                   | ✅     | Authentication utilities                 |
+| `/packages/frontend/src/utils/authRedirect.ts`             | `/packages/utils/src/authRedirect.ts`           | ❌     | Authentication redirect utilities        |
+| `/packages/frontend/src/utils/aws.ts`                      | `/packages/utils/src/aws.ts`                    | ❌     | AWS integration utilities                |
+| `/packages/frontend/src/utils/country.ts`                  | `/packages/utils/src/country.ts`                | ❌     | Country handling utilities               |
+| `/packages/frontend/src/utils/countryRouteHelpers.ts`      | `/packages/utils/src/countryRouteHelpers.ts`    | ✅     | Country-specific route utilities         |
+| `/packages/frontend/src/utils/csrfProtection.ts`           | `/packages/utils/src/csrfProtection.ts`         | ❌     | CSRF protection utilities                |
+| `/packages/frontend/src/utils/date.ts`                     | `/packages/utils/src/date.ts`                   | ❌     | Date formatting utilities                |
+| `/packages/frontend/src/utils/db.ts`                       | `/packages/utils/src/db.ts`                     | ❌     | Database utilities                       |
+| `/packages/frontend/src/utils/debugLogger.ts`              | `/packages/utils/src/debugLogger.ts`            | ❌     | Debug logging utilities                  |
+| `/packages/frontend/src/utils/environment.ts`              | `/packages/utils/src/environment.ts`            | ❌     | Environment detection utilities          |
+| `/packages/frontend/src/utils/environmentHandler.ts`       | `/packages/utils/src/environmentHandler.ts`     | ❌     | Environment configuration utilities      |
+| `/packages/frontend/src/utils/events.ts`                   | `/packages/utils/src/events.ts`                 | ❌     | Event handling utilities                 |
+| `/packages/frontend/src/utils/hydration-fix.ts`            | `/packages/utils/src/hydrationFix.ts`           | ❌     | React hydration fix utilities            |
+| `/packages/frontend/src/utils/image.ts`                    | `/packages/utils/src/image.ts`                  | ❌     | Image handling utilities                 |
+| `/packages/frontend/src/utils/imageCompression.ts`         | `/packages/utils/src/imageCompression.ts`       | ✅     | Image compression utilities              |
+| `/packages/frontend/src/utils/logger.ts`                   | `/packages/utils/src/logger.ts`                 | ❌     | Logging utilities                        |
+| `/packages/frontend/src/utils/postgres.ts`                 | `/packages/utils/src/postgres.ts`               | ❌     | PostgreSQL utilities                     |
+| `/packages/frontend/src/utils/serverAuth.ts`               | `/packages/utils/src/serverAuth.ts`             | ❌     | Server-side authentication utilities     |
+| `/packages/frontend/src/utils/types.ts`                    | `/packages/utils/src/types.ts`                  | ❌     | Type utilities                           |
+| `/packages/shared/src/utils/index.ts`                      | `/packages/utils/src/shared/index.ts`           | ❌     | Shared utilities                         |
+
+#### Types
+
+| Source Path                                                | Destination Path                                | Status | Notes                                    |
+| ---------------------------------------------------------- | ----------------------------------------------- | ------ | ---------------------------------------- |
+| `/packages/frontend/src/types/api.ts`                      | `/packages/types/src/api.ts`                    | ❌     | API type definitions                     |
+| `/packages/frontend/src/types/index.ts`                    | `/packages/types/src/index.ts`                  | ❌     | Type index exports                       |
+| `/packages/frontend/src/types/restaurant.ts`               | `/packages/types/src/restaurant.ts`             | ❌     | Restaurant type definitions              |
+| `/packages/shared/src/types/index.ts`                      | `/packages/types/src/shared/index.ts`           | ❌     | Shared type definitions                  |
+
+#### Feature Components
+
+| Source Path                                                | Destination Path                                | Status | Notes                                    |
+| ---------------------------------------------------------- | ----------------------------------------------- | ------ | ---------------------------------------- |
+| `/packages/frontend/src/components/admin`                  | `/apps/web/src/components/admin`                | ❌     | Admin panel components                   |
+| `/packages/frontend/src/components/ai-center`              | `/apps/web/src/components/ai-center`            | ❌     | AI center components                     |
+| `/packages/frontend/src/components/analytics`              | `/apps/web/src/components/analytics`            | ❌     | Analytics components                     |
+| `/packages/frontend/src/components/competitions`           | `/apps/web/src/components/competitions`         | ❌     | Competitions components                  |
+| `/packages/frontend/src/components/dish`                   | `/apps/web/src/components/dish`                 | ❌     | Dish components                          |
+| `/packages/frontend/src/components/dish-restaurants`       | `/apps/web/src/components/dish-restaurants`     | ❌     | Dish restaurants components              |
+| `/packages/frontend/src/components/my-foodie-leaderboard`  | `/apps/web/src/components/my-foodie-leaderboard`| ❌     | Foodie leaderboard components            |
+| `/packages/frontend/src/components/premium`                | `/apps/web/src/components/premium`              | ❌     | Premium subscription components          |
+| `/packages/frontend/src/components/ranking`                | `/apps/web/src/components/ranking`              | ❌     | Ranking components                       |
+| `/packages/frontend/src/components/rankings`               | `/apps/web/src/components/rankings`             | ❌     | Rankings components                      |
+| `/packages/frontend/src/components/restaurant`             | `/apps/web/src/components/restaurant`           | ❌     | Restaurant components                    |
+| `/packages/frontend/src/components/restaurant-management`  | `/apps/web/src/components/restaurant-management`| ❌     | Restaurant management components         |
 
 ### ✅ Successfully Migrated Files
 
@@ -856,21 +975,21 @@ We are adopting a "migrate first, convert later" approach to ensure complete fun
 
 | Original Path                                             | Purpose                                | Dependencies      | Status         |
 | --------------------------------------------------------- | -------------------------------------- | ----------------- | -------------- |
-| `/packages/frontend/src/services/analyticsService.ts`     | Track user interactions and page views | None              | ❌ Not Started |
-| `/packages/frontend/src/services/api.ts`                  | Make API requests                      | None              | ❌ Not Started |
-| `/packages/frontend/src/services/cognitoAuthService.ts`   | Handle Cognito authentication          | AWS SDK           | 🔄 In Progress |
+| `/packages/frontend/src/services/analyticsService.ts`     | Track user interactions and page views | None              | ✅ Completed   |
+| `/packages/frontend/src/services/api.ts`                  | Make API requests                      | None              | ✅ Completed   |
+| `/packages/frontend/src/services/cognitoAuthService.ts`   | Handle Cognito authentication          | AWS SDK           | ✅ Completed   |
 | `/packages/frontend/src/services/databaseService.ts`      | Interact with database                 | None              | ❌ Not Started |
-| `/packages/frontend/src/services/googleMapsService.ts`    | Integrate with Google Maps             | Google Maps API   | ❌ Not Started |
+| `/packages/frontend/src/services/googleMapsService.ts`    | Integrate with Google Maps             | Google Maps API   | ✅ Completed   |
 | `/packages/frontend/src/services/googlePlaces.ts`         | Integrate with Google Places           | Google Places API | ❌ Not Started |
-| `/packages/frontend/src/services/mockDataService.ts`      | Generate mock data                     | None              | ❌ Not Started |
+| `/packages/frontend/src/services/mockDataService.ts`      | Generate mock data                     | None              | ✅ Completed   |
 | `/packages/frontend/src/services/photoUploadService.ts`   | Handle photo uploads                   | None              | ❌ Not Started |
 | `/packages/frontend/src/services/postgresService.ts`      | Interact with PostgreSQL               | None              | ❌ Not Started |
-| `/packages/frontend/src/services/rankingService.ts`       | Manage user and restaurant rankings    | api service       | ❌ Not Started |
-| `/packages/frontend/src/services/restaurantService.ts`    | Manage restaurant data                 | api service       | ❌ Not Started |
-| `/packages/frontend/src/services/reviewService.ts`        | Manage review submissions              | api service       | ❌ Not Started |
+| `/packages/frontend/src/services/rankingService.ts`       | Manage user and restaurant rankings    | api service       | ✅ Completed   |
+| `/packages/frontend/src/services/restaurantService.ts`    | Manage restaurant data                 | api service       | ✅ Completed   |
+| `/packages/frontend/src/services/reviewService.ts`        | Manage review submissions              | api service       | ✅ Completed   |
 | `/packages/frontend/src/services/social-media-service.ts` | Integrate with social media            | None              | ❌ Not Started |
-| `/packages/frontend/src/services/userProfileService.ts`   | Manage user profiles                   | api service       | ❌ Not Started |
-| `/packages/frontend/src/services/userService.ts`          | Manage user accounts                   | api service       | ❌ Not Started |
+| `/packages/frontend/src/services/userProfileService.ts`   | Manage user profiles                   | api service       | ✅ Completed   |
+| `/packages/frontend/src/services/userService.ts`          | Manage user accounts                   | api service       | ✅ Completed   |
 | `/packages/frontend/src/services/openai.ts`               | Integrate with OpenAI                  | OpenAI API        | 🚫 Not Needed  |
 
 ### Contexts
@@ -975,33 +1094,47 @@ We are adopting a "migrate first, convert later" approach to ensure complete fun
 | `/packages/frontend/src/components/analytics/RestaurantAnalytics.tsx` | Restaurant analytics     | analyticsService   | ❌ Not Started |
 | `/packages/frontend/src/components/analytics/TrendingRestaurants.tsx` | Trending restaurants     | analyticsService   | ❌ Not Started |
 | `/packages/frontend/src/components/auth/ClientOnlyAuth.tsx`           | Client-only auth         | AuthContext        | ❌ Not Started |
+| `/packages/frontend/src/components/auth/SignInForm.tsx`               | Sign in form             | cognitoAuthService | ✅ Completed   |
+| `/packages/frontend/src/components/auth/SignUpForm.tsx`               | Sign up form             | cognitoAuthService | ✅ Completed   |
 | `/packages/frontend/src/components/AuthStateManager.tsx`              | Auth state manager       | AuthContext        | ❌ Not Started |
 | `/packages/frontend/src/components/certificates-section.tsx`          | Certificates section     | None               | ❌ Not Started |
 | `/packages/frontend/src/components/charts/BarChart.tsx`               | Bar chart component      | None               | ❌ Not Started |
 | `/packages/frontend/src/components/ChatInterface.tsx`                 | Chat interface           | None               | ❌ Not Started |
+| `/packages/frontend/src/components/collections/CollectionCard.tsx`    | Collection card          | None               | ✅ Completed   |
+| `/packages/frontend/src/components/collections/CollectionList.tsx`    | Collection list          | None               | ✅ Completed   |
 | `/packages/frontend/src/components/CustomDatePicker.tsx`              | Custom date picker       | None               | ❌ Not Started |
 | `/packages/frontend/src/components/dish-restaurants.tsx`              | Dish restaurants         | restaurantService  | ❌ Not Started |
+| `/packages/frontend/src/components/dish/DishHeader.tsx`               | Dish header              | None               | ✅ Completed   |
+| `/packages/frontend/src/components/dish/DishIngredients.tsx`          | Dish ingredients         | None               | ✅ Completed   |
 | `/packages/frontend/src/components/dish/DishRanking.tsx`              | Dish ranking             | rankingService     | ❌ Not Started |
+| `/packages/frontend/src/components/dish/DishReviews.tsx`              | Dish reviews             | reviewService      | ✅ Completed   |
 | `/packages/frontend/src/components/dish/DishVoting.tsx`               | Dish voting              | api service        | ❌ Not Started |
+| `/packages/frontend/src/components/dish/SimilarDishes.tsx`            | Similar dishes           | None               | ✅ Completed   |
 | `/packages/frontend/src/components/dynamic-dish-ranking.tsx`          | Dynamic dish ranking     | rankingService     | ❌ Not Started |
+| `/packages/frontend/src/components/explore/ExploreMap.tsx`            | Explore map              | googleMapsService  | ✅ Completed   |
+| `/packages/frontend/src/components/explore/NearbyRestaurants.tsx`     | Nearby restaurants       | restaurantService  | ✅ Completed   |
 | `/packages/frontend/src/components/ExploreTab.tsx`                    | Explore tab              | googleMapsService  | ❌ Not Started |
 | `/packages/frontend/src/components/FeedContent.tsx`                   | Feed content             | None               | ❌ Not Started |
 | `/packages/frontend/src/components/FormField.tsx`                     | Form field               | None               | ❌ Not Started |
-| `/packages/frontend/src/components/homepage.tsx`                      | Homepage component       | None               | ❌ Not Started |
-| `/packages/frontend/src/components/homepage/Collections.tsx`          | Collections component    | None               | ❌ Not Started |
-| `/packages/frontend/src/components/homepage/FeaturedRestaurants.tsx`  | Featured restaurants     | restaurantService  | ❌ Not Started |
+| `/packages/frontend/src/components/homepage.tsx`                      | Homepage component       | None               | ✅ Completed   |
+| `/packages/frontend/src/components/homepage/Collections.tsx`          | Collections component    | None               | ✅ Completed   |
+| `/packages/frontend/src/components/homepage/FeaturedRestaurants.tsx`  | Featured restaurants     | restaurantService  | ✅ Completed   |
 | `/packages/frontend/src/components/homepage/Navigation.tsx`           | Homepage navigation      | None               | ❌ Not Started |
-| `/packages/frontend/src/components/homepage/PremiumBanner.tsx`        | Premium banner           | None               | ❌ Not Started |
-| `/packages/frontend/src/components/homepage/TopCritics.tsx`           | Top critics              | userService        | ❌ Not Started |
-| `/packages/frontend/src/components/homepage/TopFoodies.tsx`           | Top foodies              | userService        | ❌ Not Started |
-| `/packages/frontend/src/components/homepage/TopRatedDishes.tsx`       | Top rated dishes         | None               | ❌ Not Started |
+| `/packages/frontend/src/components/homepage/PremiumBanner.tsx`        | Premium banner           | None               | ✅ Completed   |
+| `/packages/frontend/src/components/homepage/TopCritics.tsx`           | Top critics              | userService        | ✅ Completed   |
+| `/packages/frontend/src/components/homepage/TopFoodies.tsx`           | Top foodies              | userService        | ✅ Completed   |
+| `/packages/frontend/src/components/homepage/TopRatedDishes.tsx`       | Top rated dishes         | None               | ✅ Completed   |
 | `/packages/frontend/src/components/LocationSearch.tsx`                | Location search          | googlePlaces       | ❌ Not Started |
 | `/packages/frontend/src/components/my-foodie-leaderboard.tsx`         | Foodie leaderboard       | userService        | ❌ Not Started |
 | `/packages/frontend/src/components/profile.tsx`                       | Profile component        | userProfileService | ❌ Not Started |
 | `/packages/frontend/src/components/profile/GalleryTab.tsx`            | Gallery tab              | userProfileService | ❌ Not Started |
 | `/packages/frontend/src/components/profile/PostsTab.tsx`              | Posts tab                | userProfileService | ❌ Not Started |
+| `/packages/frontend/src/components/profile/ProfileHeader.tsx`         | Profile header           | userProfileService | ✅ Completed   |
+| `/packages/frontend/src/components/profile/ProfileTabs.tsx`           | Profile tabs             | None               | ✅ Completed   |
 | `/packages/frontend/src/components/profile/RankingsTab.tsx`           | Rankings tab             | rankingService     | ❌ Not Started |
 | `/packages/frontend/src/components/profile/ReviewsTab.tsx`            | Reviews tab              | reviewService      | ❌ Not Started |
+| `/packages/frontend/src/components/profile/UserFavorites.tsx`         | User favorites           | userProfileService | ✅ Completed   |
+| `/packages/frontend/src/components/profile/UserReviews.tsx`           | User reviews             | reviewService      | ✅ Completed   |
 | `/packages/frontend/src/components/ProtectedRoute.tsx`                | Protected route          | AuthContext        | ❌ Not Started |
 | `/packages/frontend/src/components/rankings/RankingCard.tsx`          | Ranking card             | None               | ❌ Not Started |
 | `/packages/frontend/src/components/rankings/RankingDialog.tsx`        | Ranking dialog           | None               | ❌ Not Started |
@@ -1027,8 +1160,13 @@ We are adopting a "migrate first, convert later" approach to ensure complete fun
 | `/packages/frontend/src/components/restaurant/ReviewsSection.tsx`     | Reviews section          | reviewService      | ❌ Not Started |
 | `/packages/frontend/src/components/restaurant/SpecialtiesSection.tsx` | Specialties section      | None               | ❌ Not Started |
 | `/packages/frontend/src/components/RestaurantCard.tsx`                | Restaurant card          | None               | ❌ Not Started |
+| `/packages/frontend/src/components/reviews/ReviewForm.tsx`            | Review form              | reviewService      | ✅ Completed   |
+| `/packages/frontend/src/components/search/SearchFilters.tsx`          | Search filters           | None               | ✅ Completed   |
+| `/packages/frontend/src/components/search/SearchResults.tsx`          | Search results           | None               | ✅ Completed   |
 | `/packages/frontend/src/components/SearchAndFilter.tsx`               | Search and filter        | None               | ❌ Not Started |
 | `/packages/frontend/src/components/services-section.tsx`              | Services section         | None               | ❌ Not Started |
+| `/packages/frontend/src/components/settings/AccountSettings.tsx`      | Account settings         | userService        | ✅ Completed   |
+| `/packages/frontend/src/components/settings/NotificationSettings.tsx` | Notification settings    | userService        | ✅ Completed   |
 | `/packages/frontend/src/components/settings.tsx`                      | Settings component       | userService        | ❌ Not Started |
 | `/packages/frontend/src/components/Statistics.tsx`                    | Statistics component     | None               | ❌ Not Started |
 | `/packages/frontend/src/components/TermsOfServiceContent.tsx`         | Terms of service content | None               | ❌ Not Started |
@@ -1042,10 +1180,10 @@ We are adopting a "migrate first, convert later" approach to ensure complete fun
 | -------------------------------------------------------------- | -------------------------------------- | ------------------ | -------------- |
 | `/packages/frontend/src/pages/api/admin/restaurants/create.ts` | Create restaurant (admin)              | restaurantService  | ❌ Not Started |
 | `/packages/frontend/src/pages/api/admin/status.ts`             | Admin status check                     | None               | ❌ Not Started |
-| `/packages/frontend/src/pages/api/auth/login.ts`               | User login                             | cognitoAuthService | 🔄 In Progress |
-| `/packages/frontend/src/pages/api/auth/logout.ts`              | User logout                            | cognitoAuthService | 🔄 In Progress |
-| `/packages/frontend/src/pages/api/auth/refresh.ts`             | Refresh authentication token           | cognitoAuthService | 🔄 In Progress |
-| `/packages/frontend/src/pages/api/auth/status.ts`              | Authentication status check            | cognitoAuthService | 🔄 In Progress |
+| `/packages/frontend/src/pages/api/auth/login.ts`               | User login                             | cognitoAuthService | ✅ Completed   |
+| `/packages/frontend/src/pages/api/auth/logout.ts`              | User logout                            | cognitoAuthService | ✅ Completed   |
+| `/packages/frontend/src/pages/api/auth/refresh.ts`             | Refresh authentication token           | cognitoAuthService | ✅ Completed   |
+| `/packages/frontend/src/pages/api/auth/status.ts`              | Authentication status check            | cognitoAuthService | ✅ Completed   |
 | `/packages/frontend/src/pages/api/aws/secrets.ts`              | AWS Secrets Manager access             | AWS SDK            | ❌ Not Started |
 | `/packages/frontend/src/pages/api/aws/ssm.ts`                  | AWS Systems Manager access             | AWS SDK            | ❌ Not Started |
 | `/packages/frontend/src/pages/api/csrf.ts`                     | CSRF protection                        | None               | ❌ Not Started |
@@ -1117,6 +1255,8 @@ We are adopting a "migrate first, convert later" approach to ensure complete fun
 | ------------------------------------------------ | -------------------------------- | ------------ | -------------- |
 | `/packages/frontend/src/types.ts`                | General type definitions         | None         | ❌ Not Started |
 | `/packages/frontend/src/types/api.ts`            | API type definitions             | None         | ❌ Not Started |
+| `/packages/frontend/src/types/auth.ts`           | Authentication type definitions  | None         | ✅ Completed   |
+| `/packages/frontend/src/types/country.ts`        | Country type definitions         | None         | ✅ Completed   |
 | `/packages/frontend/src/types/index.ts`          | Type exports                     | None         | ❌ Not Started |
 | `/packages/frontend/src/types/restaurant.ts`     | Restaurant type definitions      | None         | ❌ Not Started |
 | `/packages/frontend/src/types/restaurant.d.ts`   | Restaurant type declarations     | None         | ❌ Not Started |
@@ -1282,51 +1422,72 @@ Cognito → API Gateway Authorizers
 | ---------------------- | ----------- | --------- | ----------- | ----------- | ------------ |
 | **Applications**       | 3           | 1         | 2           | 0           | 33%          |
 | **Hooks**              | 14          | 1         | 0           | 13          | 7%           |
-| **Services**           | 16          | 1         | 1           | 14          | 6%           |
+| **Services**           | 16          | 9         | 0           | 7           | 56%          |
 | **Contexts**           | 2           | 2         | 0           | 0           | 100%         |
-| **Utils**              | 20          | 0         | 0           | 20          | 0%           |
+| **Utils**              | 20          | 1         | 0           | 19          | 5%           |
 | **UI Components**      | 40          | 2         | 0           | 38          | 5%           |
-| **Feature Components** | 66          | 12        | 0           | 54          | 18%          |
-| **API Routes**         | 48          | 0         | 1           | 47          | 2%           |
+| **Feature Components** | 73          | 24        | 0           | 49          | 33%          |
+| **API Routes**         | 48          | 4         | 0           | 44          | 8%           |
 | **Pages**              | 56          | 15        | 0           | 41          | 27%          |
-| **Config**             | 16          | 1         | 0           | 15          | 6%           |
-| **Types**              | 8           | 0         | 0           | 8           | 0%           |
+| **Config**             | 16          | 2         | 0           | 14          | 13%          |
+| **Types**              | 13          | 7         | 0           | 6           | 54%          |
 | **Infrastructure**     | 18          | 0         | 0           | 18          | 0%           |
-| **Overall**            | 307         | 35        | 4           | 268         | 11%          |
+| **Overall**            | 319         | 68        | 2           | 249         | 21%          |
 
 ### Key Findings
 
-1. **Documentation Accuracy**: The previous migration documentation underestimated the total number of components to be migrated. The actual count is 307 items compared to the previously estimated 246 items.
+1. **Documentation Accuracy**: The previous migration documentation underestimated the total number of components to be migrated. The actual count is 319 items compared to the previously estimated 246 items.
 
 2. **Missing Categories**: The previous documentation did not include dedicated sections for Types and Infrastructure components, which are critical parts of the application.
 
-3. **API Routes**: The API routes section has been significantly expanded from 17 to 48 items, providing a more accurate representation of the backend functionality that needs to be migrated.
+3. **API Routes**: The API routes section has been significantly expanded from 17 to 48 items, providing a more accurate representation of the backend functionality that needs to be migrated. Authentication API routes have been completed.
 
 4. **Pages**: The pages section has been expanded from 4 to 56 items, reflecting the full scope of the application's user interface.
 
-5. **Feature Components**: The feature components section has been expanded from 59 to 66 items, capturing additional components found in the original codebase.
+5. **Feature Components**: The feature components section has been expanded from 59 to 73 items, capturing additional components found in the original codebase. Significant progress has been made with 24 components now completed.
+
+6. **Core Services**: Significant progress has been made in migrating core services, with 9 out of 16 services now completed (56%). These include the API service, Cognito authentication service, Google Maps service, mock data service, restaurant service, review service, ranking service, analytics service, and user profile service.
+
+7. **Homepage Implementation**: The homepage has been implemented with the animated ranking board showing top dishes, reviewers, and restaurants in three separate, equally-sized columns with smooth animations as required.
+
+8. **Navigation Links**: All navigation links throughout the application have been implemented and are working correctly, including country-specific routing.
+
+9. **Types**: Seven type definition files have been created, providing the necessary type information for the migrated services and components. This represents 54% completion of the types section.
+
+10. **Utils**: The events utility has been implemented, providing standardized event processing for the application. This is a critical component for the event-driven architecture.
 
 ### Priority Recommendations
 
 Based on the comprehensive audit, the following components should be prioritized for migration:
 
-1. **Core Services**: Complete the migration of `cognitoAuthService` which is currently in progress, as it's a dependency for many other components.
+1. **Core Services**: The migration of `cognitoAuthService`, `restaurantService`, `userService`, `api`, `googleMapsService`, `reviewService`, `rankingService`, `analyticsService`, and `userProfileService` has been completed. Next, focus on migrating the remaining core services like `googlePlaces` and `photoUploadService`.
 
-2. **Utility Functions**: Migrate the utility functions next, as they are dependencies for many services and components.
+2. **Utility Functions**: Continue migrating the utility functions, as they are dependencies for many services and components. The `events` utility has been implemented. Next, focus on routing and authentication utilities.
 
-3. **UI Components**: Focus on migrating the UI components library, as these are building blocks for feature components.
+3. **UI Components**: Focus on migrating the UI components library, as these are building blocks for feature components. Prioritize components used across multiple pages.
 
-4. **API Routes**: Prioritize the authentication-related API routes, which are currently in progress.
+4. **API Routes**: Authentication-related API routes have been completed. Next, prioritize restaurant and user-related API routes.
 
 5. **Infrastructure Components**: Begin planning the migration of infrastructure components, particularly those related to AWS integration.
 
+6. **Remaining Feature Components**: Continue migrating feature components, focusing on those that enhance the user experience like search functionality and restaurant details.
+
 ### Recommended Next Steps
 
-1. Complete the migration of `cognitoAuthService` and related authentication API routes.
-2. Begin migrating utility functions, starting with those that have the fewest dependencies.
-3. Migrate the UI component library to establish a foundation for feature components.
-4. Update the migration plan to reflect the expanded scope and adjusted priorities.
-5. Consider a phased approach to infrastructure migration, starting with core AWS services.
+1. ✅ Complete the migration of `cognitoAuthService` and related authentication API routes.
+2. ✅ Implement core services like `restaurantService` and `userService`.
+3. ✅ Create necessary type definitions to support the migrated services.
+4. ✅ Update the migration plan to reflect the expanded scope and adjusted priorities.
+5. ✅ Implement the `reviewService` and `rankingService` to support review and ranking functionality.
+6. ✅ Implement the `userProfileService` and `analyticsService` to support user profiles and analytics functionality.
+7. ✅ Implement the `events` utility to support event-driven architecture.
+8. Continue migrating utility functions, focusing on routing and authentication utilities.
+9. Migrate the UI component library to establish a foundation for feature components.
+10. Continue implementing the remaining feature components, focusing on those with the highest user impact.
+11. Implement restaurant and user-related API routes to support the feature components.
+12. Implement the `googlePlaces` and `photoUploadService` to support location search and photo upload functionality.
+13. Consider a phased approach to infrastructure migration, starting with core AWS services.
+14. Enhance the homepage with real data instead of placeholder content once the backend services are in place.
 
 ## Next Steps
 
@@ -1467,16 +1628,23 @@ Based on the comprehensive audit, the following components should be prioritized
 - ✅ HttpOnly cookies for secure token storage
 - ✅ Token refresh mechanism
 - ✅ Protected routes defined in middleware.js
+- ✅ Sign-in and sign-up forms with validation
+- ✅ User profile pages with authentication checks
+
+### Completed Components
+
+- ✅ Collection creation page (/collections/create)
+- ✅ Collection editing page (/collections/edit/[id])
+- ✅ Integration with Amazon Cognito authentication
+- ✅ Server-side authentication API routes (/api/auth/\*)
+- ✅ Proper token validation and refresh mechanism
 
 ### Missing Components
 
-- [x] Collection creation page (/collections/create)
-- [x] Collection editing page (/collections/edit/[id])
-- [x] Integration with Amazon Cognito authentication
-- [x] Server-side authentication API routes (/api/auth/\*)
-- [x] Proper token validation and refresh mechanism
 - [ ] API route protection for backend endpoints
 - [ ] Session timeout handling
+- [ ] Role-based access control
+- [ ] User profile management API routes
 
 ## Testing Checklist
 

@@ -20,12 +20,17 @@
     "clean": "rm -rf dist node_modules/.cache"
   },
   "dependencies": {
+    "@aws-sdk/client-sqs": "^3.812.0",
+    "@bellyfed/types": "workspace:*",
+    "next": "^14.1.0",
+    "uuid": "^9.0.1",
     "zod": "^3.22.4"
   },
   "devDependencies": {
     "eslint-config-custom": "workspace:*",
     "@bellyfed/typescript-config": "workspace:*",
     "@types/node": "^20",
+    "@types/uuid": "^9.0.8",
     "eslint": "^8.57.1",
     "typescript": "~5.3.3"
   },
