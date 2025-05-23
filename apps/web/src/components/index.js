@@ -81,6 +81,21 @@ export * from './modals/index.js';
 // Tables Components
 export * from './tables/index.js';
 
+// Booking Components
+export * from './booking/index.js';
+
+// Payment Components
+export * from './payment/index.js';
+
+// Dashboard Components
+export * from './dashboard/index.js';
+
+// Cards Components
+export * from './cards/index.js';
+
+// Widgets Components
+export * from './widgets/index.js';
+
 // Competitions Components
 export * from './competitions/index.js';
 

@@ -123,6 +123,21 @@ import {
 import {
   DataTable
 } from '../components/tables/index.js';
+import {
+  ReservationForm
+} from '../components/booking/index.js';
+import {
+  PaymentForm
+} from '../components/payment/index.js';
+import {
+  DashboardWidget
+} from '../components/dashboard/index.js';
+import {
+  InfoCard
+} from '../components/cards/index.js';
+import {
+  StatsWidget
+} from '../components/widgets/index.js';
 
 // Mock data for testing
 const mockCompetitions = [
@@ -192,7 +207,12 @@ const TestFeatureComponents = () => {
     { id: 'forms', title: 'Form Components', icon: '📝' },
     { id: 'gallery', title: 'Gallery Components', icon: '🖼️' },
     { id: 'modals', title: 'Modal Components', icon: '🪟' },
-    { id: 'tables', title: 'Table Components', icon: '📊' }
+    { id: 'tables', title: 'Table Components', icon: '📊' },
+    { id: 'booking', title: 'Booking Components', icon: '📅' },
+    { id: 'payment', title: 'Payment Components', icon: '💳' },
+    { id: 'dashboard', title: 'Dashboard Components', icon: '📈' },
+    { id: 'cards', title: 'Card Components', icon: '🃏' },
+    { id: 'widgets', title: 'Widget Components', icon: '📊' }
   ];
 
   const renderAnalyticsSection = () => (
@@ -1460,6 +1480,193 @@ const TestFeatureComponents = () => {
     );
   };
 
+  const renderBookingSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Reservation Form</h3>
+        <ReservationForm
+          restaurantId="restaurant-123"
+          restaurantName="Nasi Lemak Wanjo"
+          minPartySize={1}
+          maxPartySize={12}
+          advanceBookingDays={30}
+          timeSlotInterval={30}
+          operatingHours={{ open: '11:00', close: '22:00' }}
+          onReservationComplete={(result) => console.log('Reservation:', result)}
+        />
+      </Card>
+    </div>
+  );
+
+  const renderPaymentSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Payment Form</h3>
+        <PaymentForm
+          amount={45.50}
+          currency="USD"
+          orderDetails={{
+            items: [
+              { name: 'Nasi Lemak', quantity: 2, price: 15.50 },
+              { name: 'Teh Tarik', quantity: 2, price: 7.25 }
+            ]
+          }}
+          onPaymentSuccess={(result) => console.log('Payment success:', result)}
+          onPaymentError={(error) => console.log('Payment error:', error)}
+          showBillingAddress={true}
+          acceptedMethods={['card', 'paypal']}
+        />
+      </Card>
+    </div>
+  );
+
+  const renderDashboardSection = () => (
+    <div className="space-y-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <DashboardWidget
+          title="Restaurant Analytics"
+          subtitle="Monthly performance overview"
+          icon="📊"
+          actions={[
+            { id: 'view', label: 'View Details', icon: '👁️' },
+            { id: 'export', label: 'Export', icon: '📤' }
+          ]}
+          onRefresh={() => console.log('Refreshing analytics...')}
+        >
+          <div className="space-y-4">
+            <div className="flex justify-between">
+              <span>Total Orders</span>
+              <span className="font-semibold">1,234</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Revenue</span>
+              <span className="font-semibold">$12,345</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Avg Rating</span>
+              <span className="font-semibold">4.8 ⭐</span>
+            </div>
+          </div>
+        </DashboardWidget>
+
+        <DashboardWidget
+          title="Recent Activity"
+          icon="🔔"
+          loading={false}
+          size="default"
+          variant="highlighted"
+        >
+          <div className="space-y-3">
+            <div className="text-sm">
+              <span className="font-medium">New review</span> from John D.
+            </div>
+            <div className="text-sm">
+              <span className="font-medium">Order #1234</span> completed
+            </div>
+            <div className="text-sm">
+              <span className="font-medium">Menu updated</span> - 3 new items
+            </div>
+          </div>
+        </DashboardWidget>
+      </div>
+    </div>
+  );
+
+  const renderCardsSection = () => (
+    <div className="space-y-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <InfoCard
+          title="Nasi Lemak Wanjo"
+          subtitle="Traditional Malaysian Cuisine"
+          description="Authentic nasi lemak served with sambal, anchovies, and boiled egg. A must-try local favorite!"
+          image="https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=300"
+          status="active"
+          badges={['Halal', 'Local Favorite', 'Spicy']}
+          actions={[
+            { label: 'View Menu', icon: '📋' },
+            { label: 'Reserve', icon: '📅' }
+          ]}
+          layout="vertical"
+          size="default"
+        />
+
+        <InfoCard
+          title="Din Tai Fung"
+          subtitle="Chinese Dim Sum"
+          description="World-famous xiaolongbao and authentic Chinese cuisine in an elegant setting."
+          icon="🥟"
+          status="active"
+          badges={['Premium', 'Dim Sum']}
+          actions={[
+            { label: 'Order Now', icon: '🛒', variant: 'default' }
+          ]}
+          layout="vertical"
+          size="default"
+        />
+
+        <InfoCard
+          title="Quick Stats"
+          description="Restaurant performance overview"
+          icon="📈"
+          layout="horizontal"
+          size="small"
+          actions={[
+            { label: 'Details', size: 'sm' }
+          ]}
+        />
+      </div>
+    </div>
+  );
+
+  const renderWidgetsSection = () => (
+    <div className="space-y-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <StatsWidget
+          title="Total Revenue"
+          value={12345.67}
+          previousValue={10234.56}
+          format="currency"
+          showTrend={true}
+          icon="💰"
+          color="green"
+          size="default"
+        />
+
+        <StatsWidget
+          title="Orders Today"
+          value={89}
+          previousValue={76}
+          showTrend={true}
+          icon="📦"
+          color="blue"
+          size="default"
+        />
+
+        <StatsWidget
+          title="Customer Rating"
+          value={4.8}
+          previousValue={4.6}
+          unit="/5"
+          showTrend={true}
+          icon="⭐"
+          color="yellow"
+          size="default"
+        />
+
+        <StatsWidget
+          title="Goal Progress"
+          value={75}
+          format="percentage"
+          showProgress={true}
+          progressMax={100}
+          icon="🎯"
+          color="purple"
+          size="default"
+        />
+      </div>
+    </div>
+  );
+
   return (
     <AnalyticsProvider
       enableAutoTracking={true}
@@ -1532,6 +1739,11 @@ const TestFeatureComponents = () => {
             {activeSection === 'gallery' && renderGallerySection()}
             {activeSection === 'modals' && renderModalsSection()}
             {activeSection === 'tables' && renderTablesSection()}
+            {activeSection === 'booking' && renderBookingSection()}
+            {activeSection === 'payment' && renderPaymentSection()}
+            {activeSection === 'dashboard' && renderDashboardSection()}
+            {activeSection === 'cards' && renderCardsSection()}
+            {activeSection === 'widgets' && renderWidgetsSection()}
           </div>
         </div>
       </div>
