@@ -155,3 +155,7 @@ export class UserProfileService {
     );
   }
 }
+
+// Default export for compatibility
+export const userProfileService = UserProfileService;
+export default UserProfileService;

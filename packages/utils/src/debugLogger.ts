@@ -63,9 +63,9 @@ export interface LoggerConfig {
 // Default configuration
 const defaultConfig: LoggerConfig = {
   logLevel: LogLevel.INFO,
-  logToServer: true,
+  logToServer: false, // Disable server logging by default to avoid 404s
   logToConsole: true,
-  serverEndpoint: '/api/debug-logs',
+  serverEndpoint: '/api/debug/logs',
   includeSessionId: true,
   includeUserId: true,
   maxRetries: 3,

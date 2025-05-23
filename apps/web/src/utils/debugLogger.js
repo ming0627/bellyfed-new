@@ -39,13 +39,13 @@ export const LogLevelNames = {
 export const LoggerConfig = {
   logLevel: isDevelopmentEnvironment() ? LogLevel.DEBUG : LogLevel.INFO,
   logToConsole: true,
-  logToServer: false,
+  logToServer: false, // Disabled to avoid 404 errors
   includeStackTrace: isDevelopmentEnvironment(),
   includeSessionId: true,
   includeUserId: false,
   includeTimestamp: true,
   includeCategory: true,
-  serverEndpoint: '/api/logs',
+  serverEndpoint: '/api/debug/logs',
   maxRetries: 3,
   retryDelay: 1000
 }
@@ -216,7 +216,7 @@ export function log(level, category, message, data) {
  */
 function logToConsole(entry) {
   const { level, levelName, category, message, data, timestamp } = entry
-  
+
   // Choose console method and styling based on log level
   let consoleMethod = 'log'
   let emoji = '📝'
@@ -288,7 +288,7 @@ function logToConsole(entry) {
  */
 function storeLog(entry) {
   logStorage.push(entry)
-  
+
   // Remove old logs if we exceed the maximum
   if (logStorage.length > maxStoredLogs) {
     logStorage.shift()
@@ -318,7 +318,7 @@ async function sendLogToServer(entry) {
   } catch (error) {
     // Add to failed logs queue for retry
     failedLogs.push(entry)
-    
+
     // Log the error (but don't send to server to avoid infinite loop)
     console.error('Failed to send log to server:', error)
   }
@@ -349,13 +349,13 @@ export function exportLogs() {
   const logs = getLogs()
   const dataStr = JSON.stringify(logs, null, 2)
   const dataBlob = new Blob([dataStr], { type: 'application/json' })
-  
+
   const url = URL.createObjectURL(dataBlob)
   const link = document.createElement('a')
   link.href = url
   link.download = `bellyfed-debug-logs-${new Date().toISOString().split('T')[0]}.json`
   link.click()
-  
+
   URL.revokeObjectURL(url)
 }
 
@@ -420,7 +420,7 @@ const debugLogger = {
   warn: (message, data) => warn('Debug', message, data),
   error: (message, data) => error('Debug', message, data),
   fatal: (message, data) => fatal('Debug', message, data),
-  
+
   // Configuration methods
   configure,
   setLogLevel,
@@ -436,7 +436,7 @@ const debugLogger = {
   exportLogs,
   retryFailedLogs,
   initializeDebugLogger,
-  
+
   // Constants
   LogLevel,
   LogLevelNames

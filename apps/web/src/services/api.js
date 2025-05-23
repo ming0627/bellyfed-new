@@ -136,3 +136,7 @@ export class ApiService {
     return response.json();
   }
 }
+
+// Default export for compatibility
+export const apiService = ApiService;
+export default ApiService;

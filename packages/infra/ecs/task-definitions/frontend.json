@@ -1,0 +1,102 @@
+{
+  "family": "bellyfed-frontend",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::${AWS_ACCOUNT_ID}:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::${AWS_ACCOUNT_ID}:role/bellyfed-frontend-task-role",
+  "containerDefinitions": [
+    {
+      "name": "frontend",
+      "image": "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/bellyfed-frontend:latest",
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "protocol": "tcp",
+          "name": "http"
+        }
+      ],
+      "essential": true,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/bellyfed-frontend",
+          "awslogs-region": "${AWS_REGION}",
+          "awslogs-stream-prefix": "ecs",
+          "awslogs-create-group": "true"
+        }
+      },
+      "environment": [
+        {
+          "name": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "name": "PORT",
+          "value": "3000"
+        },
+        {
+          "name": "NEXT_TELEMETRY_DISABLED",
+          "value": "1"
+        }
+      ],
+      "secrets": [
+        {
+          "name": "NEXT_PUBLIC_API_URL",
+          "valueFrom": "arn:aws:ssm:${AWS_REGION}:${AWS_ACCOUNT_ID}:parameter/bellyfed/api-url"
+        },
+        {
+          "name": "NEXT_PUBLIC_DOCS_URL",
+          "valueFrom": "arn:aws:ssm:${AWS_REGION}:${AWS_ACCOUNT_ID}:parameter/bellyfed/docs-url"
+        }
+      ],
+      "healthCheck": {
+        "command": ["CMD-SHELL", "node healthcheck.js || exit 1"],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 60
+      },
+      "stopTimeout": 30,
+      "startTimeout": 120,
+      "ulimits": [
+        {
+          "name": "nofile",
+          "softLimit": 65536,
+          "hardLimit": 65536
+        }
+      ],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "linuxParameters": {
+        "initProcessEnabled": true
+      },
+      "firelensConfiguration": null,
+      "dependsOn": [],
+      "disableNetworking": false,
+      "interactive": false,
+      "pseudoTerminal": false,
+      "readonlyRootFilesystem": false,
+      "privileged": false,
+      "workingDirectory": "/app",
+      "user": "nextjs"
+    }
+  ],
+  "volumes": [],
+  "placementConstraints": [],
+  "tags": [
+    {
+      "key": "Environment",
+      "value": "${ENVIRONMENT}"
+    },
+    {
+      "key": "Application",
+      "value": "bellyfed"
+    },
+    {
+      "key": "Component",
+      "value": "frontend"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "serviceName": "bellyfed-backend-${ENVIRONMENT}",
+  "cluster": "bellyfed-cluster-${ENVIRONMENT}",
+  "taskDefinition": "bellyfed-backend:LATEST",
+  "desiredCount": 2,
+  "launchType": "FARGATE",
+  "platformVersion": "LATEST",
+  "networkConfiguration": {
+    "awsvpcConfiguration": {
+      "subnets": [
+        "${PRIVATE_SUBNET_1}",
+        "${PRIVATE_SUBNET_2}"
+      ],
+      "securityGroups": [
+        "${ECS_SECURITY_GROUP}"
+      ],
+      "assignPublicIp": "DISABLED"
+    }
+  },
+  "loadBalancers": [
+    {
+      "targetGroupArn": "${BACKEND_TARGET_GROUP_ARN}",
+      "containerName": "backend",
+      "containerPort": 4000
+    }
+  ],
+  "serviceRegistries": [
+    {
+      "registryArn": "${SERVICE_DISCOVERY_ARN}",
+      "containerName": "backend",
+      "containerPort": 4000
+    }
+  ],
+  "deploymentConfiguration": {
+    "maximumPercent": 200,
+    "minimumHealthyPercent": 50,
+    "deploymentCircuitBreaker": {
+      "enable": true,
+      "rollback": true
+    }
+  },
+  "capacityProviderStrategy": [
+    {
+      "capacityProvider": "FARGATE",
+      "weight": 1,
+      "base": 1
+    },
+    {
+      "capacityProvider": "FARGATE_SPOT",
+      "weight": 2
+    }
+  ],
+  "enableExecuteCommand": true,
+  "enableLogging": true,
+  "propagateTags": "SERVICE",
+  "tags": [
+    {
+      "key": "Environment",
+      "value": "${ENVIRONMENT}"
+    },
+    {
+      "key": "Application",
+      "value": "bellyfed"
+    },
+    {
+      "key": "Component",
+      "value": "backend"
+    },
+    {
+      "key": "Service",
+      "value": "api"
+    }
+  ]
+}
