@@ -17,7 +17,7 @@ All counts have been verified against the actual file listings in the original r
 | **Contexts**           | 2 <!-- Verified -->                                                                                                                  | 2         | 0           | 0           | 100%         |
 | **Utils**              | 21 <!-- Verified: 20 from frontend/src/utils + 1 from shared/src/utils -->                                                           | 21        | 0           | 0           | 100%         |
 | **UI Components**      | 40 <!-- Verified: 39 original (1 completed, 38 not started) + 1 new (completed) -->                                                  | 40        | 0           | 0           | 100%         |
-| **Feature Components** | 73 <!-- Updated: Complete count from original repository including newly identified components -->                                    | 16        | 0           | 57          | 22%          |
+| **Feature Components** | 73 <!-- Updated: Complete count from original repository including newly identified components -->                                    | 20        | 0           | 53          | 27%          |
 | **API Routes**         | 48 <!-- Verified: Exact count from /packages/frontend/src/pages/api/ -->                                                             | 8         | 4           | 36          | 17%          |
 | **Pages**              | 56 <!-- Verified: Exact count from /packages/frontend/src/pages/ -->                                                                 | 35        | 0           | 21          | 63%          |
 | **Config**             | 16 <!-- Verified: Includes /packages/frontend/src/config (7), /packages/typescript-config (5), /packages/eslint-config (5) -->       | 16        | 0           | 0           | 100%         |
@@ -230,17 +230,17 @@ NOTE FOR VERIFICATION (Checklist Accuracy):
 | Source Path                                                | Destination Path                                | Status | Notes                                    |
 | ---------------------------------------------------------- | ----------------------------------------------- | ------ | ---------------------------------------- |
 | `/packages/frontend/src/components/admin`                  | `/apps/web/src/components/admin`                | ✅     | Admin panel components (AdminGuard, AdminDashboard) |
-| `/packages/frontend/src/components/ai-center`              | `/apps/web/src/components/ai-center`            | ❌     | AI center components                     |
+| `/packages/frontend/src/components/ai-center`              | `/apps/web/src/components/ai-center`            | ✅     | AI center components (AIRecommendations, AIChat) |
 | `/packages/frontend/src/components/analytics`              | `/apps/web/src/components/analytics`            | ✅     | Analytics components (AnalyticsProvider, PageView, RestaurantAnalytics, TrendingRestaurants) |
 | `/packages/frontend/src/components/competitions`           | `/apps/web/src/components/competitions`         | ✅     | Competitions components (CompetitionCard, CompetitionList) |
 | `/packages/frontend/src/components/dish`                   | `/apps/web/src/components/dish`                 | ❌     | Dish components                          |
-| `/packages/frontend/src/components/dish-restaurants`       | `/apps/web/src/components/dish-restaurants`     | ❌     | Dish restaurants components              |
-| `/packages/frontend/src/components/my-foodie-leaderboard`  | `/apps/web/src/components/my-foodie-leaderboard`| ❌     | Foodie leaderboard components            |
+| `/packages/frontend/src/components/dish-restaurants`       | `/apps/web/src/components/dish-restaurants`     | ✅     | Dish restaurants components (DishRestaurantList, DishComparison) |
+| `/packages/frontend/src/components/my-foodie-leaderboard`  | `/apps/web/src/components/my-foodie-leaderboard`| ✅     | Foodie leaderboard components (FoodieLeaderboard, UserAchievements) |
 | `/packages/frontend/src/components/premium`                | `/apps/web/src/components/premium`              | ✅     | Premium subscription components (PremiumBanner, PremiumFeatures) |
 | `/packages/frontend/src/components/ranking`                | `/apps/web/src/components/ranking`              | ❌     | Ranking components                       |
 | `/packages/frontend/src/components/rankings`               | `/apps/web/src/components/rankings`             | ❌     | Rankings components                      |
 | `/packages/frontend/src/components/restaurant`             | `/apps/web/src/components/restaurant`           | ❌     | Restaurant components                    |
-| `/packages/frontend/src/components/restaurant-management`  | `/apps/web/src/components/restaurant-management`| ❌     | Restaurant management components         |
+| `/packages/frontend/src/components/restaurant-management`  | `/apps/web/src/components/restaurant-management`| ✅     | Restaurant management components (RestaurantDashboard, MenuManager) |
 
 ### ✅ Successfully Migrated Files
 
