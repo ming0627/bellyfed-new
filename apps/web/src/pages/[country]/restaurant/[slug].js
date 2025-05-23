@@ -14,16 +14,20 @@ export default function RestaurantPage() {
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center">
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            {slug?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'Restaurant'}
+            {slug?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) ||
+              'Restaurant'}
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
             Restaurant details and reviews coming soon.
           </p>
 
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Restaurant Details</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              Restaurant Details
+            </h2>
             <p className="text-gray-600">
-              We're working on bringing you detailed restaurant information, reviews, and photos.
+              We're working on bringing you detailed restaurant information,
+              reviews, and photos.
             </p>
           </div>
         </div>
@@ -32,21 +36,24 @@ export default function RestaurantPage() {
   );
 }
 
-export async function getServerSideProps({ params }) {
-  const { country, slug } = params;
+// Pre-render these paths
+export async function getStaticPaths() {
+  return {
+    paths: [
+      { params: { country: 'my', slug: 'sample-restaurant' } },
+      { params: { country: 'sg', slug: 'sample-restaurant' } },
+    ],
+    fallback: true, // Generate pages for paths not returned by getStaticPaths
+  };
+}
 
-  // Validate country
-  const supportedCountries = ['us', 'my', 'sg', 'jp'];
-  if (!supportedCountries.includes(country)) {
-    return {
-      notFound: true,
-    };
-  }
-
+export async function getStaticProps({ params }) {
   return {
     props: {
-      country,
-      slug,
+      country: params.country,
+      slug: params.slug,
     },
+    // Revalidate every hour
+    revalidate: 3600,
   };
 }

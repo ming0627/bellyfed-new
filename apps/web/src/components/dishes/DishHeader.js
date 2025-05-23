@@ -50,8 +50,8 @@ const DishHeader = memo(function DishHeader({ dish, getCountryLink }) {
             <Image
               src={dish.imageUrl}
               alt={dish.name}
-              layout="fill"
-              objectFit="cover"
+              fill
+              style={{ objectFit: 'cover' }}
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">

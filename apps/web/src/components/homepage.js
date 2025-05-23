@@ -2,17 +2,80 @@ import { useCallback, useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 
-import { useCountry } from '../contexts/CountryContext.js';
+import { useCountry } from '../contexts/index.js';
+import { getCountryLink } from '../utils/routing.js';
 
 // Import components
-import ActivityFeed from './homepage/ActivityFeed.js';
 import Collections from './homepage/Collections.js';
-import FeaturedContent from './homepage/FeaturedContent.js';
 import FeaturedRestaurants from './homepage/FeaturedRestaurants.js';
 import PremiumBanner from './homepage/PremiumBanner.js';
-import TopCritics from './homepage/TopCritics.js';
+import { TopCritics } from './homepage/TopCritics.js';
 import TopFoodies from './homepage/TopFoodies.js';
 import TopRatedDishes from './homepage/TopRatedDishes.js';
+
+// Mock data for restaurants - in a real app, this would be fetched from an API
+const mockRestaurants = [
+  {
+    id: '1',
+    name: 'Nasi Lemak House',
+    description: 'Authentic Malaysian cuisine specializing in Nasi Lemak',
+    address: {
+      street: '123 Jalan Bukit Bintang',
+      city: 'Kuala Lumpur',
+      state: 'Wilayah Persekutuan',
+      postalCode: '50200',
+      country: 'Malaysia',
+      countryCode: 'my',
+    },
+    location: {
+      latitude: 3.1478,
+      longitude: 101.7068,
+    },
+    cuisineTypes: ['Malaysian', 'Halal'],
+    priceRange: '$$',
+    rating: 4.7,
+    reviewCount: 256,
+    ranking: {
+      totalScore: 4.7,
+      foodScore: 4.8,
+      serviceScore: 4.6,
+      ambienceScore: 4.5,
+      valueScore: 4.7,
+    },
+    isFeatured: true,
+    isVerified: true,
+  },
+  {
+    id: '2',
+    name: 'Sushi Sensation',
+    description: 'Premium Japanese sushi and sashimi restaurant',
+    address: {
+      street: '45 Jalan Sultan Ismail',
+      city: 'Kuala Lumpur',
+      state: 'Wilayah Persekutuan',
+      postalCode: '50250',
+      country: 'Malaysia',
+      countryCode: 'my',
+    },
+    location: {
+      latitude: 3.1516,
+      longitude: 101.7092,
+    },
+    cuisineTypes: ['Japanese', 'Seafood'],
+    priceRange: '$$$',
+    rating: 4.8,
+    reviewCount: 189,
+    ranking: {
+      totalScore: 4.8,
+      foodScore: 4.9,
+      serviceScore: 4.7,
+      ambienceScore: 4.8,
+      valueScore: 4.6,
+    },
+    isFeatured: true,
+    isVerified: true,
+  },
+];
 
 // Mock data for top reviewers - in a real app, this would be fetched from an API
 const mockTopReviewers = [
@@ -71,25 +134,122 @@ const mockTopReviewers = [
  *
  * @returns {JSX.Element} - Rendered component
  */
-export default function Homepage() {
-  const { currentCountry, isInitialized, updateRankingData } = useCountry();
+export function Homepage() {
+  const { currentCountry, isInitialized } = useCountry();
   const [showPremiumBanner, setShowPremiumBanner] = useState(true);
+
+  // Initialize state with default values
+  const [reviewers, setReviewers] = useState([]);
+  const [dishes, setDishes] = useState([]);
+  const [locations, setLocations] = useState([]);
   const [topReviewers, setTopReviewers] = useState(mockTopReviewers);
 
+  // Update data when country changes
+  useEffect(() => {
+    if (!currentCountry || !currentCountry.reviewers) return;
+
+    setReviewers(
+      currentCountry.reviewers.map(r => ({ ...r, highlight: false })),
+    );
+
+    if (currentCountry.dishes) {
+      setDishes(
+        currentCountry.dishes.map(d => ({
+          ...d,
+          highlight: false,
+          dish: d.name,
+        })),
+      );
+    }
+
+    if (currentCountry.locations) {
+      setLocations(
+        currentCountry.locations.map(l => ({
+          ...l,
+          highlight: false,
+          area: l.name,
+          new: l.newCount,
+        })),
+      );
+    }
+  }, [currentCountry]);
+
   // Memoize the country link generator to prevent unnecessary re-renders
-  const getCountryLink = useCallback(
+  const createCountryLink = useCallback(
     path => {
-      if (!currentCountry || !currentCountry.code) return path;
-      return `/${currentCountry.code}${path}`;
+      return getCountryLink(path, currentCountry?.code);
     },
     [currentCountry],
   );
 
   // Function to randomly update stats - memoized to prevent unnecessary re-renders
   const updateStats = useCallback(() => {
-    // Use the context method to update ranking data with animations
-    updateRankingData();
-  }, [updateRankingData]);
+    // Update reviewers with error handling
+    setReviewers(prev => {
+      if (!prev || !Array.isArray(prev)) return [];
+
+      try {
+        const newReviews = prev.map(reviewer => {
+          const newReviews = reviewer.reviews + Math.floor(Math.random() * 8);
+          return {
+            ...reviewer,
+            reviews: newReviews,
+            highlight: newReviews !== reviewer.reviews,
+          };
+        });
+        return [...newReviews].sort((a, b) => b.reviews - a.reviews);
+      } catch (error) {
+        console.error('Error updating reviewers:', error);
+        return prev;
+      }
+    });
+
+    // Update dishes with error handling
+    setDishes(prev => {
+      if (!prev || !Array.isArray(prev)) return [];
+
+      try {
+        const newDishes = prev.map(dish => {
+          const change = Math.floor(Math.random() * 15);
+          const newVotes = dish.votes + change;
+          const newTrend = `↑ ${Math.floor(Math.random() * 15 + 5)}%`;
+          return {
+            ...dish,
+            votes: newVotes,
+            trend: newTrend,
+            highlight: newVotes !== dish.votes,
+          };
+        });
+        return [...newDishes].sort((a, b) => b.votes - a.votes);
+      } catch (error) {
+        console.error('Error updating dishes:', error);
+        return prev;
+      }
+    });
+
+    // Update locations with error handling
+    setLocations(prev => {
+      if (!prev || !Array.isArray(prev)) return [];
+
+      try {
+        const newLocations = prev.map(location => {
+          const newRestaurants = Math.floor(Math.random() * 5);
+          const newTotal = location.restaurants + newRestaurants;
+          const newAdded = `+${Math.floor(Math.random() * 8 + 1)} this month`;
+          return {
+            ...location,
+            restaurants: newTotal,
+            new: newAdded,
+            highlight: newTotal !== location.restaurants,
+          };
+        });
+        return [...newLocations].sort((a, b) => b.restaurants - a.restaurants);
+      } catch (error) {
+        console.error('Error updating locations:', error);
+        return prev;
+      }
+    });
+  }, []);
 
   // Update stats periodically
   useEffect(() => {
@@ -136,7 +296,7 @@ export default function Homepage() {
   });
 
   // Show loading state
-  if (!isInitialized) {
+  if (isLoading || !isInitialized) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <Loader2 className="w-6 h-6 animate-spin" />
@@ -167,54 +327,35 @@ export default function Homepage() {
 
   return (
     <>
-      {/* Modern gradient background */}
-      <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-primary-50/30 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         <PremiumBanner
           showPremiumBanner={showPremiumBanner}
           setShowPremiumBanner={setShowPremiumBanner}
         />
 
-        {/* Main Content with enhanced spacing */}
-        <main className="w-full relative">
-          {/* Subtle background pattern */}
-          <div className="absolute inset-0 opacity-40" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FF9966' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
-          }}></div>
-
-          <div className="relative container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+        {/* Main Content */}
+        <main className="w-full">
+          <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
             <TopFoodies
-              reviewers={currentCountry?.reviewers || []}
-              dishes={currentCountry?.dishes || []}
-              locations={currentCountry?.locations || []}
+              reviewers={reviewers}
+              dishes={dishes}
+              locations={locations}
               countryName={currentCountry?.name || 'Your Country'}
-              getCountryLink={getCountryLink}
+              getCountryLink={createCountryLink}
             />
-
-            <FeaturedContent
-              countryName={currentCountry?.name || 'Your Country'}
-              getCountryLink={getCountryLink}
-            />
-
-            {/* Two-column layout for activity and content */}
-            <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 mb-16">
-              <div className="xl:col-span-2">
-                <TopRatedDishes />
-              </div>
-              <div className="xl:col-span-1">
-                <ActivityFeed countryName={currentCountry?.name || 'Your Country'} />
-              </div>
-            </div>
 
             <TopCritics topReviewers={topReviewers} />
 
+            <TopRatedDishes />
+
             <Collections
               countryName={currentCountry?.name || 'Your Country'}
-              getCountryLink={getCountryLink}
+              getCountryLink={createCountryLink}
             />
 
             <FeaturedRestaurants
               countryName={currentCountry?.name || 'Your Country'}
-              getCountryLink={getCountryLink}
+              getCountryLink={createCountryLink}
             />
           </div>
         </main>

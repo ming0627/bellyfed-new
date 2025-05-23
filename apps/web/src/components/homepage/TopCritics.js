@@ -44,7 +44,7 @@ export const TopCritics = memo(function TopCritics({ topReviewers }) {
                   alt={`${reviewer.name}'s profile`}
                   width={48}
                   height={48}
-                  objectFit="cover"
+                  style={{ objectFit: 'cover' }}
                   className="rounded-full"
                   loading="lazy"
                 />

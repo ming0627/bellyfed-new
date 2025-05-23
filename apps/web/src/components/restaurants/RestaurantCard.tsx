@@ -98,8 +98,8 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
               <Image
                 src={imageUrl}
                 alt={name}
-                layout="fill"
-                objectFit="cover"
+                fill
+                style={{ objectFit: 'cover' }}
                 className="transition-transform duration-500 group-hover:scale-105"
               />
             </div>
@@ -257,7 +257,7 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
               alt={name}
               width={96}
               height={96}
-              objectFit="cover"
+              style={{ objectFit: 'cover' }}
               className="transition-transform duration-500 group-hover:scale-105"
             />
           </div>
@@ -327,8 +327,8 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
           <Image
             src={imageUrl}
             alt={name}
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: 'cover' }}
             className="transition-transform duration-500 group-hover:scale-105"
           />
         </div>
@@ -360,9 +360,7 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
         <button
           onClick={handleFavoriteToggle}
           className="absolute top-3 right-3 p-2 bg-white/90 dark:bg-neutral-800/90 rounded-full shadow-md hover:bg-white dark:hover:bg-neutral-700 transition-all hover:scale-110 focus:outline-none"
-          aria-label={
-            isFavorite ? 'Remove from favorites' : 'Add to favorites'
-          }
+          aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
         >
           <Heart
             size={18}

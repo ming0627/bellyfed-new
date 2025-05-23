@@ -6,7 +6,7 @@ import { LucideClientIcon } from '../ui/lucide-icon.js';
 
 /**
  * Restaurant card component for displaying restaurant information
- * 
+ *
  * @param {Object} props - Component props
  * @param {string} props.id - Restaurant ID
  * @param {string} props.name - Restaurant name
@@ -38,12 +38,12 @@ export default function RestaurantCard({
   isVerified,
   description,
   onToggleFavorite,
-  getCountryLink = (path) => path,
+  getCountryLink = path => path,
 }) {
   const [isFavorite, setIsFavorite] = useState(false);
-  
+
   // Handle favorite toggle
-  const handleFavoriteClick = (e) => {
+  const handleFavoriteClick = e => {
     e.preventDefault();
     e.stopPropagation();
     setIsFavorite(!isFavorite);
@@ -51,12 +51,12 @@ export default function RestaurantCard({
       onToggleFavorite(id, !isFavorite);
     }
   };
-  
+
   // Format rating to display with one decimal place
   const formattedRating = rating ? rating.toFixed(1) : 'N/A';
-  
+
   return (
-    <Link 
+    <Link
       href={getCountryLink(`/restaurant/${id}`)}
       className="block h-full overflow-hidden rounded-lg bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-shadow"
     >
@@ -66,8 +66,8 @@ export default function RestaurantCard({
           <Image
             src={imageUrl}
             alt={name}
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: 'cover' }}
             className="transition-transform duration-300 hover:scale-105"
           />
         ) : (
@@ -75,36 +75,36 @@ export default function RestaurantCard({
             <span className="text-gray-500 dark:text-gray-400">No image</span>
           </div>
         )}
-        
+
         {/* Favorite Button */}
         <button
           onClick={handleFavoriteClick}
           className={`absolute top-2 right-2 p-2 rounded-full ${
-            isFavorite 
-              ? 'bg-orange-500 text-white' 
+            isFavorite
+              ? 'bg-orange-500 text-white'
               : 'bg-white/80 dark:bg-gray-800/80 text-gray-700 dark:text-gray-300'
           } hover:scale-110 transition-all`}
           aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
         >
-          <LucideClientIcon 
-            icon={Heart} 
-            className="h-5 w-5" 
-            fill={isFavorite ? 'currentColor' : 'none'} 
+          <LucideClientIcon
+            icon={Heart}
+            className="h-5 w-5"
+            fill={isFavorite ? 'currentColor' : 'none'}
           />
         </button>
-        
+
         {/* Open/Closed Status */}
         <div className="absolute bottom-2 left-2">
-          <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-            isOpen 
-              ? 'bg-green-500 text-white' 
-              : 'bg-gray-700 text-white'
-          }`}>
+          <span
+            className={`px-2 py-1 text-xs font-medium rounded-full ${
+              isOpen ? 'bg-green-500 text-white' : 'bg-gray-700 text-white'
+            }`}
+          >
             {isOpen ? 'Open Now' : 'Closed'}
           </span>
         </div>
       </div>
-      
+
       {/* Restaurant Info */}
       <div className="p-4">
         <div className="flex justify-between items-start">
@@ -112,14 +112,14 @@ export default function RestaurantCard({
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center">
               {name}
               {isVerified && (
-                <LucideClientIcon 
-                  icon={BadgeCheck} 
-                  className="h-4 w-4 ml-1 text-blue-500" 
-                  aria-label="Verified" 
+                <LucideClientIcon
+                  icon={BadgeCheck}
+                  className="h-4 w-4 ml-1 text-blue-500"
+                  aria-label="Verified"
                 />
               )}
             </h3>
-            
+
             <div className="mt-1 flex items-center">
               <div className="flex items-center text-orange-500">
                 <LucideClientIcon icon={Star} className="h-4 w-4 mr-1" />
@@ -132,27 +132,33 @@ export default function RestaurantCard({
               )}
             </div>
           </div>
-          
+
           <div className="text-right">
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
               {priceRange}
             </span>
           </div>
         </div>
-        
+
         <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
           <div className="flex items-start">
-            <LucideClientIcon icon={MapPin} className="h-4 w-4 mr-1 mt-0.5 flex-shrink-0" />
+            <LucideClientIcon
+              icon={MapPin}
+              className="h-4 w-4 mr-1 mt-0.5 flex-shrink-0"
+            />
             <span>{location}</span>
           </div>
           {distance && (
             <div className="flex items-center mt-1">
-              <LucideClientIcon icon={Clock} className="h-4 w-4 mr-1 flex-shrink-0" />
+              <LucideClientIcon
+                icon={Clock}
+                className="h-4 w-4 mr-1 flex-shrink-0"
+              />
               <span>{distance} away</span>
             </div>
           )}
         </div>
-        
+
         {cuisine && (
           <div className="mt-2">
             <span className="inline-block px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 rounded-full">
@@ -160,7 +166,7 @@ export default function RestaurantCard({
             </span>
           </div>
         )}
-        
+
         {description && (
           <p className="mt-3 text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
             {description}

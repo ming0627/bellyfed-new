@@ -1,16 +1,19 @@
-import { getCountryStaticPaths, getCountryStaticProps } from '../../../utils/countryHelpers.js';
+import {
+  getCountryStaticPaths,
+  getCountryStaticProps,
+} from '../../../utils/countryHelpers.js';
 
 /**
  * Restaurants listing page for a specific country
  */
 export default function RestaurantsPage({ country }) {
   // Get country name from code
-  const getCountryName = (code) => {
+  const getCountryName = code => {
     const countries = {
       us: 'United States',
       my: 'Malaysia',
       sg: 'Singapore',
-      jp: 'Japan'
+      jp: 'Japan',
     };
     return countries[code] || 'Your Country';
   };
@@ -30,7 +33,9 @@ export default function RestaurantsPage({ country }) {
           </p>
 
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Coming Soon!</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              Coming Soon!
+            </h2>
             <p className="text-gray-600">
               We're working hard to bring you the best restaurant listings.
               Check back soon for an amazing dining discovery experience.
@@ -42,21 +47,23 @@ export default function RestaurantsPage({ country }) {
   );
 }
 
-// Use server-side rendering instead of static generation to avoid build issues
-export async function getServerSideProps({ params }) {
-  const { country } = params;
+// Pre-render these paths
+export async function getStaticPaths() {
+  return {
+    paths: [
+      { params: { country: 'us' } },
+      { params: { country: 'my' } },
+      { params: { country: 'sg' } },
+      { params: { country: 'jp' } },
+    ],
+    fallback: false,
+  };
+}
 
-  // Validate country
-  const supportedCountries = ['us', 'my', 'sg', 'jp'];
-  if (!supportedCountries.includes(country)) {
-    return {
-      notFound: true,
-    };
-  }
-
+export async function getStaticProps({ params }) {
   return {
     props: {
-      country,
+      country: params.country,
     },
   };
 }

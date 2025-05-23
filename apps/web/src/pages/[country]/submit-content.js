@@ -1,16 +1,19 @@
-import { getCountryStaticPaths, getCountryStaticProps } from '../../utils/countryHelpers.js';
+import {
+  getCountryStaticPaths,
+  getCountryStaticProps,
+} from '../../utils/countryHelpers.js';
 
 /**
  * Submit content page for community contributions
  */
 export default function SubmitContentPage({ country }) {
   // Get country name from code
-  const getCountryName = (code) => {
+  const getCountryName = code => {
     const countries = {
       us: 'United States',
       my: 'Malaysia',
       sg: 'Singapore',
-      jp: 'Japan'
+      jp: 'Japan',
     };
     return countries[code] || 'Your Country';
   };
@@ -23,14 +26,17 @@ export default function SubmitContentPage({ country }) {
             Submit Your Content
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
-            Share your favorite restaurants, dishes, and food experiences with the community.
+            Share your favorite restaurants, dishes, and food experiences with
+            the community.
           </p>
 
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 p-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Coming Soon!</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              Coming Soon!
+            </h2>
             <p className="text-gray-600">
-              We're building an amazing content submission system.
-              Soon you'll be able to share your food discoveries with the community.
+              We're building an amazing content submission system. Soon you'll
+              be able to share your food discoveries with the community.
             </p>
           </div>
         </div>
@@ -39,21 +45,23 @@ export default function SubmitContentPage({ country }) {
   );
 }
 
-// Use server-side rendering instead of static generation to avoid build issues
-export async function getServerSideProps({ params }) {
-  const { country } = params;
+// Pre-render these paths
+export async function getStaticPaths() {
+  return {
+    paths: [
+      { params: { country: 'us' } },
+      { params: { country: 'my' } },
+      { params: { country: 'sg' } },
+      { params: { country: 'jp' } },
+    ],
+    fallback: false,
+  };
+}
 
-  // Validate country
-  const supportedCountries = ['us', 'my', 'sg', 'jp'];
-  if (!supportedCountries.includes(country)) {
-    return {
-      notFound: true,
-    };
-  }
-
+export async function getStaticProps({ params }) {
   return {
     props: {
-      country,
+      country: params.country,
     },
   };
 }

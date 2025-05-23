@@ -24,8 +24,8 @@ const DishCard = memo(function DishCard({ dish }) {
           <Image
             src={dish.imageUrl}
             alt={dish.name}
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: 'cover' }}
             loading="lazy"
             className="group-hover:scale-110 transition-transform duration-500"
           />
@@ -54,7 +54,9 @@ const DishCard = memo(function DishCard({ dish }) {
             icon={Star}
             className="w-4 h-4 text-yellow-400 fill-current"
           />
-          <span className="text-sm font-bold text-gray-800">{dish.rating.toFixed(1)}</span>
+          <span className="text-sm font-bold text-gray-800">
+            {dish.rating.toFixed(1)}
+          </span>
         </div>
       </div>
 
@@ -71,7 +73,9 @@ const DishCard = memo(function DishCard({ dish }) {
                 icon={Star}
                 className="w-4 h-4 text-yellow-400 fill-current"
               />
-              <span className="font-bold text-neutral-900">{dish.rating.toFixed(1)}</span>
+              <span className="font-bold text-neutral-900">
+                {dish.rating.toFixed(1)}
+              </span>
             </div>
             <span className="text-neutral-500 text-sm">
               ({dish.reviewCount.toLocaleString()} reviews)
@@ -162,10 +166,15 @@ export const TopRatedDishes = memo(function TopRatedDishes() {
             />
           </div>
           <div>
-            <h2 id="top-dishes-heading" className="font-heading text-2xl font-bold text-neutral-900">
+            <h2
+              id="top-dishes-heading"
+              className="font-heading text-2xl font-bold text-neutral-900"
+            >
               Top Rated Dishes
             </h2>
-            <p className="text-neutral-700 text-sm">Discover the most loved dishes in your area</p>
+            <p className="text-neutral-700 text-sm">
+              Discover the most loved dishes in your area
+            </p>
           </div>
         </div>
         <Link
@@ -173,7 +182,9 @@ export const TopRatedDishes = memo(function TopRatedDishes() {
           className="group flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-xl border border-primary-200 hover:border-primary-300 hover:bg-primary-50 transition-all duration-300 shadow-sm hover:shadow-md"
           aria-label="View all top rated dishes"
         >
-          <span className="text-sm font-medium text-neutral-700 group-hover:text-primary-600">View All</span>
+          <span className="text-sm font-medium text-neutral-700 group-hover:text-primary-600">
+            View All
+          </span>
           <LucideClientIcon
             icon={ArrowRight}
             className="w-4 h-4 text-neutral-400 group-hover:text-primary-500 group-hover:translate-x-1 transition-all duration-200"

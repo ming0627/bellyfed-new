@@ -80,8 +80,8 @@ const CollectionCard = memo(function CollectionCard({
               <Image
                 src={imageUrl}
                 alt={title}
-                layout="fill"
-                objectFit="cover"
+                fill
+                style={{ objectFit: 'cover' }}
                 className="w-full h-full"
               />
             ) : (
@@ -278,8 +278,8 @@ const CollectionCard = memo(function CollectionCard({
           <Image
             src={imageUrl}
             alt={title}
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: 'cover' }}
             className="w-full h-full"
           />
         ) : (
