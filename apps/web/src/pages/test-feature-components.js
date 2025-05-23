@@ -138,6 +138,51 @@ import {
 import {
   StatsWidget
 } from '../components/widgets/index.js';
+import {
+  Breadcrumb
+} from '../components/navigation/index.js';
+import {
+  PageHeader
+} from '../components/layout/index.js';
+import {
+  VideoPlayer
+} from '../components/media/index.js';
+import {
+  FeedbackForm
+} from '../components/feedback/index.js';
+import {
+  ProgressBar
+} from '../components/progress/index.js';
+import {
+  AlertBanner
+} from '../components/alerts/index.js';
+import {
+  Tooltip
+} from '../components/tooltips/index.js';
+import {
+  TabContainer
+} from '../components/tabs/index.js';
+import {
+  AccordionItem
+} from '../components/accordion/index.js';
+import {
+  ImageCarousel
+} from '../components/carousel/index.js';
+import {
+  DropdownMenu
+} from '../components/dropdowns/index.js';
+import {
+  SkeletonLoader
+} from '../components/skeleton/index.js';
+import {
+  StatusBadge
+} from '../components/badges/index.js';
+import {
+  EmptyState
+} from '../components/empty/index.js';
+import {
+  StepIndicator
+} from '../components/steps/index.js';
 
 // Mock data for testing
 const mockCompetitions = [
@@ -212,7 +257,22 @@ const TestFeatureComponents = () => {
     { id: 'payment', title: 'Payment Components', icon: '💳' },
     { id: 'dashboard', title: 'Dashboard Components', icon: '📈' },
     { id: 'cards', title: 'Card Components', icon: '🃏' },
-    { id: 'widgets', title: 'Widget Components', icon: '📊' }
+    { id: 'widgets', title: 'Widget Components', icon: '📊' },
+    { id: 'navigation', title: 'Navigation Components', icon: '🧭' },
+    { id: 'layout', title: 'Layout Components', icon: '📐' },
+    { id: 'media', title: 'Media Components', icon: '🎬' },
+    { id: 'feedback', title: 'Feedback Components', icon: '💬' },
+    { id: 'progress', title: 'Progress Components', icon: '📊' },
+    { id: 'alerts', title: 'Alert Components', icon: '🚨' },
+    { id: 'tooltips', title: 'Tooltip Components', icon: '💭' },
+    { id: 'tabs', title: 'Tab Components', icon: '📑' },
+    { id: 'accordion', title: 'Accordion Components', icon: '📋' },
+    { id: 'carousel', title: 'Carousel Components', icon: '🎠' },
+    { id: 'dropdowns', title: 'Dropdown Components', icon: '⬇️' },
+    { id: 'skeleton', title: 'Skeleton Components', icon: '💀' },
+    { id: 'badges', title: 'Badge Components', icon: '🏷️' },
+    { id: 'empty', title: 'Empty State Components', icon: '📭' },
+    { id: 'steps', title: 'Step Components', icon: '👣' }
   ];
 
   const renderAnalyticsSection = () => (
@@ -1667,6 +1727,420 @@ const TestFeatureComponents = () => {
     </div>
   );
 
+  // Render functions for all new components
+  const renderNavigationSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Breadcrumb Navigation</h3>
+        <div className="space-y-4">
+          <Breadcrumb
+            items={[
+              { label: 'Restaurants', href: '/restaurants' },
+              { label: 'Malaysian Cuisine', href: '/restaurants/malaysian' },
+              { label: 'Nasi Lemak Wanjo', href: null }
+            ]}
+          />
+          <Breadcrumb
+            items={[
+              { label: 'Dashboard', href: '/dashboard', icon: '📊' },
+              { label: 'Analytics', href: '/dashboard/analytics', icon: '📈' },
+              { label: 'Reports', href: null, icon: '📋' }
+            ]}
+            separator=">"
+            showHome={false}
+          />
+        </div>
+      </Card>
+    </div>
+  );
+
+  const renderLayoutSection = () => (
+    <div className="space-y-8">
+      <PageHeader
+        title="Restaurant Management"
+        subtitle="Manage your restaurant listings and analytics"
+        breadcrumbs={[
+          { label: 'Dashboard', href: '/dashboard' },
+          { label: 'Restaurants', href: '/restaurants' },
+          { label: 'Management', href: null }
+        ]}
+        actions={[
+          { label: 'Add Restaurant', icon: '➕', onClick: () => console.log('Add restaurant') },
+          { label: 'Export Data', icon: '📤', variant: 'outline', onClick: () => console.log('Export') }
+        ]}
+      />
+    </div>
+  );
+
+  const renderMediaSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Video Player</h3>
+        <VideoPlayer
+          src="https://www.w3schools.com/html/mov_bbb.mp4"
+          poster="https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400"
+          title="Restaurant Tour - Nasi Lemak Wanjo"
+          controls={true}
+        />
+      </Card>
+    </div>
+  );
+
+  const renderFeedbackSection = () => (
+    <div className="space-y-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <FeedbackForm
+          onSubmit={(data) => console.log('Feedback:', data)}
+          showRating={true}
+          placeholder="How was your dining experience?"
+        />
+        <FeedbackForm
+          onSubmit={(data) => console.log('Simple feedback:', data)}
+          showRating={false}
+          placeholder="Share your thoughts..."
+        />
+      </div>
+    </div>
+  );
+
+  const renderProgressSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Progress Bars</h3>
+        <div className="space-y-6">
+          <ProgressBar value={75} label="Order Completion" color="green" />
+          <ProgressBar value={45} label="Profile Setup" color="blue" size="large" />
+          <ProgressBar value={90} label="Restaurant Verification" color="yellow" size="small" />
+          <ProgressBar value={60} label="Loading..." color="purple" animated={true} />
+        </div>
+      </Card>
+    </div>
+  );
+
+  const renderAlertsSection = () => (
+    <div className="space-y-8">
+      <div className="space-y-4">
+        <AlertBanner
+          type="success"
+          title="Order Confirmed"
+          message="Your order has been successfully placed and is being prepared."
+          actions={[{ label: 'Track Order', onClick: () => console.log('Track order') }]}
+        />
+        <AlertBanner
+          type="warning"
+          title="Limited Availability"
+          message="Only 3 tables left for tonight. Book now to secure your spot."
+          actions={[
+            { label: 'Book Now', onClick: () => console.log('Book now') },
+            { label: 'View Alternatives', onClick: () => console.log('Alternatives') }
+          ]}
+        />
+        <AlertBanner
+          type="error"
+          title="Payment Failed"
+          message="There was an issue processing your payment. Please try again."
+          actions={[{ label: 'Retry Payment', onClick: () => console.log('Retry') }]}
+        />
+        <AlertBanner
+          type="info"
+          title="New Features Available"
+          message="Check out our new menu recommendations based on your preferences."
+          dismissible={false}
+        />
+      </div>
+    </div>
+  );
+
+  const renderTooltipsSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Tooltips</h3>
+        <div className="flex flex-wrap gap-4">
+          <Tooltip content="This shows restaurant information" position="top">
+            <Button>Hover for Top Tooltip</Button>
+          </Tooltip>
+          <Tooltip content="Click to see more details" position="bottom" trigger="click">
+            <Button variant="outline">Click for Bottom Tooltip</Button>
+          </Tooltip>
+          <Tooltip content="Focus to see help text" position="right" trigger="focus">
+            <input className="px-3 py-2 border rounded" placeholder="Focus me" />
+          </Tooltip>
+        </div>
+      </Card>
+    </div>
+  );
+
+  const renderTabsSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Tab Container</h3>
+        <TabContainer
+          tabs={[
+            {
+              label: 'Menu',
+              icon: '🍽️',
+              content: (
+                <div className="p-4">
+                  <h4 className="font-semibold mb-2">Restaurant Menu</h4>
+                  <p>Browse our delicious selection of authentic Malaysian dishes.</p>
+                </div>
+              )
+            },
+            {
+              label: 'Reviews',
+              icon: '⭐',
+              badge: '234',
+              content: (
+                <div className="p-4">
+                  <h4 className="font-semibold mb-2">Customer Reviews</h4>
+                  <p>See what our customers are saying about their dining experience.</p>
+                </div>
+              )
+            },
+            {
+              label: 'Location',
+              icon: '📍',
+              content: (
+                <div className="p-4">
+                  <h4 className="font-semibold mb-2">Restaurant Location</h4>
+                  <p>Find us easily with our detailed location and directions.</p>
+                </div>
+              )
+            }
+          ]}
+          variant="pills"
+        />
+      </Card>
+    </div>
+  );
+
+  const renderAccordionSection = () => (
+    <div className="space-y-8">
+      <div className="space-y-4">
+        <AccordionItem title="Restaurant Information" icon="🏪" defaultOpen={true}>
+          <p>Nasi Lemak Wanjo is a traditional Malaysian restaurant serving authentic local cuisine since 1985. Located in the heart of Kuala Lumpur, we pride ourselves on using fresh ingredients and traditional cooking methods.</p>
+        </AccordionItem>
+        <AccordionItem title="Menu Highlights" icon="🍽️">
+          <div className="space-y-2">
+            <p><strong>Nasi Lemak Special</strong> - Our signature dish with coconut rice, sambal, anchovies, and boiled egg</p>
+            <p><strong>Rendang Beef</strong> - Slow-cooked beef in rich coconut curry</p>
+            <p><strong>Satay Platter</strong> - Grilled skewered meat with peanut sauce</p>
+          </div>
+        </AccordionItem>
+        <AccordionItem title="Opening Hours" icon="🕐">
+          <div className="space-y-1">
+            <p>Monday - Friday: 11:00 AM - 10:00 PM</p>
+            <p>Saturday - Sunday: 10:00 AM - 11:00 PM</p>
+            <p>Public Holidays: 10:00 AM - 9:00 PM</p>
+          </div>
+        </AccordionItem>
+      </div>
+    </div>
+  );
+
+  const renderCarouselSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Image Carousel</h3>
+        <ImageCarousel
+          images={[
+            {
+              src: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=600',
+              alt: 'Nasi Lemak',
+              caption: 'Our signature Nasi Lemak with traditional accompaniments'
+            },
+            {
+              src: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600',
+              alt: 'Rendang',
+              caption: 'Slow-cooked beef rendang with aromatic spices'
+            },
+            {
+              src: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600',
+              alt: 'Restaurant Interior',
+              caption: 'Cozy dining atmosphere with traditional Malaysian decor'
+            }
+          ]}
+          autoPlay={true}
+          autoPlayInterval={4000}
+          showIndicators={true}
+          showNavigation={true}
+        />
+      </Card>
+    </div>
+  );
+
+  const renderDropdownsSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Dropdown Menus</h3>
+        <div className="flex flex-wrap gap-4">
+          <DropdownMenu
+            trigger={<Button>Restaurant Actions</Button>}
+            items={[
+              { label: 'View Details', icon: '👁️', onClick: () => console.log('View details') },
+              { label: 'Edit Restaurant', icon: '✏️', onClick: () => console.log('Edit') },
+              { type: 'divider' },
+              { label: 'Share', icon: '📤', onClick: () => console.log('Share') },
+              { label: 'Bookmark', icon: '🔖', onClick: () => console.log('Bookmark') },
+              { type: 'divider' },
+              { label: 'Delete', icon: '🗑️', danger: true, onClick: () => console.log('Delete') }
+            ]}
+            position="bottom-left"
+          />
+
+          <DropdownMenu
+            trigger={<Button variant="outline">User Menu</Button>}
+            items={[
+              { label: 'Profile', icon: '👤', description: 'Manage your account', onClick: () => console.log('Profile') },
+              { label: 'Settings', icon: '⚙️', description: 'App preferences', onClick: () => console.log('Settings') },
+              { label: 'Help', icon: '❓', description: 'Get support', shortcut: '⌘H', onClick: () => console.log('Help') },
+              { type: 'divider' },
+              { label: 'Sign Out', icon: '🚪', onClick: () => console.log('Sign out') }
+            ]}
+            position="bottom-right"
+          />
+        </div>
+      </Card>
+    </div>
+  );
+
+  const renderSkeletonSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Skeleton Loaders</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div>
+            <h4 className="font-medium mb-3">Text Skeleton</h4>
+            <SkeletonLoader type="text" lines={4} />
+          </div>
+
+          <div>
+            <h4 className="font-medium mb-3">Card Skeleton</h4>
+            <SkeletonLoader type="card" />
+          </div>
+
+          <div>
+            <h4 className="font-medium mb-3">Mixed Elements</h4>
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <SkeletonLoader type="circle" width="12" />
+                <SkeletonLoader type="text" lines={2} />
+              </div>
+              <SkeletonLoader type="rectangle" height="32" />
+            </div>
+          </div>
+        </div>
+      </Card>
+    </div>
+  );
+
+  const renderBadgesSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Status Badges</h3>
+        <div className="space-y-6">
+          <div>
+            <h4 className="font-medium mb-3">Filled Badges</h4>
+            <div className="flex flex-wrap gap-3">
+              <StatusBadge status="success" label="Open" icon="✅" />
+              <StatusBadge status="warning" label="Busy" icon="⚠️" />
+              <StatusBadge status="error" label="Closed" icon="❌" />
+              <StatusBadge status="info" label="New" icon="ℹ️" pulse={true} />
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-medium mb-3">Outline Badges</h4>
+            <div className="flex flex-wrap gap-3">
+              <StatusBadge status="success" label="Verified" variant="outline" />
+              <StatusBadge status="warning" label="Pending" variant="outline" />
+              <StatusBadge status="error" label="Rejected" variant="outline" />
+              <StatusBadge status="info" label="Draft" variant="outline" />
+            </div>
+          </div>
+
+          <div>
+            <h4 className="font-medium mb-3">Dot Indicators</h4>
+            <div className="space-y-2">
+              <StatusBadge status="success" label="Online" variant="dot" />
+              <StatusBadge status="warning" label="Away" variant="dot" />
+              <StatusBadge status="error" label="Offline" variant="dot" />
+              <StatusBadge status="info" label="Idle" variant="dot" pulse={true} />
+            </div>
+          </div>
+        </div>
+      </Card>
+    </div>
+  );
+
+  const renderEmptySection = () => (
+    <div className="space-y-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <EmptyState
+          icon="🍽️"
+          title="No Restaurants Found"
+          description="We couldn't find any restaurants matching your criteria. Try adjusting your filters or search terms."
+          actions={[
+            { label: 'Clear Filters', icon: '🔄', onClick: () => console.log('Clear filters') },
+            { label: 'Browse All', icon: '🔍', variant: 'outline', onClick: () => console.log('Browse all') }
+          ]}
+          size="default"
+        />
+
+        <EmptyState
+          icon="📝"
+          title="No Reviews Yet"
+          description="Be the first to share your dining experience!"
+          actions={[
+            { label: 'Write Review', icon: '✏️', onClick: () => console.log('Write review') }
+          ]}
+          size="small"
+        />
+      </div>
+    </div>
+  );
+
+  const renderStepsSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Step Indicators</h3>
+        <div className="space-y-8">
+          <div>
+            <h4 className="font-medium mb-4">Horizontal Steps</h4>
+            <StepIndicator
+              steps={[
+                { label: 'Choose Restaurant', description: 'Browse and select' },
+                { label: 'Make Reservation', description: 'Pick date and time' },
+                { label: 'Confirm Details', description: 'Review booking' },
+                { label: 'Payment', description: 'Complete transaction' },
+                { label: 'Confirmation', description: 'Booking confirmed' }
+              ]}
+              currentStep={2}
+              onStepClick={(step) => console.log('Navigate to step:', step)}
+              allowClickPrevious={true}
+              orientation="horizontal"
+            />
+          </div>
+
+          <div>
+            <h4 className="font-medium mb-4">Vertical Steps</h4>
+            <StepIndicator
+              steps={[
+                { label: 'Account Setup', description: 'Create your profile' },
+                { label: 'Restaurant Info', description: 'Add restaurant details' },
+                { label: 'Menu Upload', description: 'Upload your menu' },
+                { label: 'Verification', description: 'Verify your listing' }
+              ]}
+              currentStep={1}
+              onStepClick={(step) => console.log('Navigate to step:', step)}
+              orientation="vertical"
+            />
+          </div>
+        </div>
+      </Card>
+    </div>
+  );
+
   return (
     <AnalyticsProvider
       enableAutoTracking={true}
@@ -1744,6 +2218,21 @@ const TestFeatureComponents = () => {
             {activeSection === 'dashboard' && renderDashboardSection()}
             {activeSection === 'cards' && renderCardsSection()}
             {activeSection === 'widgets' && renderWidgetsSection()}
+            {activeSection === 'navigation' && renderNavigationSection()}
+            {activeSection === 'layout' && renderLayoutSection()}
+            {activeSection === 'media' && renderMediaSection()}
+            {activeSection === 'feedback' && renderFeedbackSection()}
+            {activeSection === 'progress' && renderProgressSection()}
+            {activeSection === 'alerts' && renderAlertsSection()}
+            {activeSection === 'tooltips' && renderTooltipsSection()}
+            {activeSection === 'tabs' && renderTabsSection()}
+            {activeSection === 'accordion' && renderAccordionSection()}
+            {activeSection === 'carousel' && renderCarouselSection()}
+            {activeSection === 'dropdowns' && renderDropdownsSection()}
+            {activeSection === 'skeleton' && renderSkeletonSection()}
+            {activeSection === 'badges' && renderBadgesSection()}
+            {activeSection === 'empty' && renderEmptySection()}
+            {activeSection === 'steps' && renderStepsSection()}
           </div>
         </div>
       </div>
