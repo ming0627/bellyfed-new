@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@bellyfed/types/*": ["../types/src/*"],
+      "@bellyfed/config/*": ["../config/src/*"],
+      "@bellyfed/utils/*": ["../utils/src/*"]
+    }
+  }
+}

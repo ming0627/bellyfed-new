@@ -1,4 +1,6 @@
-import axios from 'axios';
+/**
+ * Google Places API service for location-based features
+ */
 
 interface AddressComponent {
   long_name: string;
@@ -291,19 +293,20 @@ export class GooglePlacesService {
     placeId: string,
   ): Promise<PlaceDetails | undefined> {
     try {
-      const detailsResponse = await axios.get(this.PLACE_DETAILS_URL, {
-        params: {
-          place_id: placeId,
-          key: this.API_KEY,
-          fields: 'name,formatted_address,geometry,address_components,types',
-        },
-      });
+      const response = await fetch(
+        `${this.PLACE_DETAILS_URL}?place_id=${placeId}&key=${this.API_KEY}&fields=name,formatted_address,geometry,address_components,types`,
+      );
 
-      if (!detailsResponse.data.result) {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      if (!data.result) {
         return undefined;
       }
 
-      return detailsResponse.data.result;
+      return data.result;
     } catch (error: unknown) {
       console.error('Error getting place details:', error);
       return undefined;
@@ -314,20 +317,25 @@ export class GooglePlacesService {
     query: string,
   ): Promise<string | undefined> {
     try {
-      const searchResponse = await axios.get(this.PLACE_SEARCH_URL, {
-        params: {
-          query: `${query} malaysia`,
-          key: this.API_KEY,
-          region: 'my',
-          locationbias: `rectangle:${this.MALAYSIA_BOUNDS.south},${this.MALAYSIA_BOUNDS.west}|${this.MALAYSIA_BOUNDS.north},${this.MALAYSIA_BOUNDS.east}`,
-        },
+      const params = new URLSearchParams({
+        query: `${query} malaysia`,
+        key: this.API_KEY,
+        region: 'my',
+        locationbias: `rectangle:${this.MALAYSIA_BOUNDS.south},${this.MALAYSIA_BOUNDS.west}|${this.MALAYSIA_BOUNDS.north},${this.MALAYSIA_BOUNDS.east}`,
       });
 
-      if (!searchResponse.data.results?.length) {
+      const response = await fetch(`${this.PLACE_SEARCH_URL}?${params}`);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      if (!data.results?.length) {
         return undefined;
       }
 
-      return searchResponse.data.results[0].place_id;
+      return data.results[0].place_id;
     } catch (error: unknown) {
       console.error('Error searching place:', error);
       return undefined;
@@ -378,25 +386,29 @@ export class GooglePlacesService {
         console.log('🔍 Getting additional details for mall/landmark...');
         // Try to get more specific details using geocoding
         try {
-          const geocodeResponse = await axios.get(this.GEOCODING_URL, {
-            params: {
-              latlng: `${placeDetails.geometry.location.lat},${placeDetails.geometry.location.lng}`,
-              key: this.API_KEY,
-              result_type: 'street_address|premise',
-              location_type: 'ROOFTOP|GEOMETRIC_CENTER',
-              language: 'en',
-            },
+          const params = new URLSearchParams({
+            latlng: `${placeDetails.geometry.location.lat},${placeDetails.geometry.location.lng}`,
+            key: this.API_KEY,
+            result_type: 'street_address|premise',
+            location_type: 'ROOFTOP|GEOMETRIC_CENTER',
+            language: 'en',
           });
 
+          const response = await fetch(`${this.GEOCODING_URL}?${params}`);
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
           console.log('📍 Geocoding Response:', {
-            status: geocodeResponse.data.status,
-            resultsCount: geocodeResponse.data.results?.length,
+            status: data.status,
+            resultsCount: data.results?.length,
           });
 
-          if (geocodeResponse.data.results?.length > 0) {
+          if (data.results?.length > 0) {
             // Merge the geocoding results with our place details
-            const geocodeResult = geocodeResponse.data
-              .results[0] as GeocodeResult;
+            const geocodeResult = data.results[0] as GeocodeResult;
             console.log('📍 Geocode Result:', {
               formatted_address: geocodeResult.formatted_address,
               components: geocodeResult.address_components.map((comp) => ({

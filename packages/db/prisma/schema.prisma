@@ -13,10 +13,235 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// User model with profile information
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  name      String?
+  id             String   @id @default(uuid())
+  cognitoId      String?  @unique
+  email          String   @unique
+  name           String?
+  nickname       String?
+  bio            String?
+  location       String?
+  countryCode    String?
+  phone          String?
+  emailVerified  Boolean  @default(false)
+  profileImageUrl String?
+  avatarUrl      String?
+  preferences    Json?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // Relations
+  dishRankings DishRanking[]
+  followers    UserFollower[] @relation("UserFollowers")
+  following    UserFollower[] @relation("UserFollowing")
+  reviews      Review[]
+
+  // Indexes
+  @@index([cognitoId])
+}
+
+// User follower relationship
+model UserFollower {
+  id         String   @id @default(uuid())
+  followerId String
+  followedId String
+  createdAt  DateTime @default(now())
+
+  // Relations
+  follower User @relation("UserFollowing", fields: [followerId], references: [id])
+  followed User @relation("UserFollowers", fields: [followedId], references: [id])
+
+  // Indexes
+  @@unique([followerId, followedId])
+  @@index([followerId])
+  @@index([followedId])
+}
+
+// Dish ranking model
+model DishRanking {
+  id        String   @id @default(uuid())
+  userId    String
+  dishId    String
+  rating    Int
+  review    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id])
+
+  // Indexes
+  @@unique([userId, dishId])
+  @@index([userId])
+  @@index([dishId])
+}
+
+// Analytics event model
+model AnalyticsEvent {
+  id            String   @id @default(uuid())
+  type          String
+  action        String
+  timestamp     DateTime
+  userId        String?
+  traceId       String?
+  source        String
+  duration      Int?
+  status        String
+  errorType     String?
+  eventCategory String
+  properties    Json
+  createdAt     DateTime @default(now())
+
+  // Indexes
+  @@index([userId])
+  @@index([type])
+  @@index([action])
+  @@index([eventCategory])
+  @@index([timestamp])
+}
+
+// Analytics view model
+model AnalyticsView {
+  id            String   @id @default(uuid())
+  entityType    String
+  entityId      String
+  viewCount     Int      @default(0)
+  uniqueViewers Int      @default(0)
+  lastUpdated   DateTime @default(now())
+
+  // Indexes
+  @@unique([entityType, entityId])
+  @@index([entityType])
+  @@index([lastUpdated])
+}
+
+// Analytics viewer model
+model AnalyticsViewer {
+  id         String   @id @default(uuid())
+  entityType String
+  entityId   String
+  userId     String
+  date       DateTime @default(now())
+
+  // Indexes
+  @@unique([entityType, entityId, userId, date])
+  @@index([entityType, entityId])
+  @@index([date])
+}
+
+// Analytics engagement model
+model AnalyticsEngagement {
+  id             String   @id @default(uuid())
+  entityType     String
+  entityId       String
+  userId         String?
+  engagementType String
+  metadata       Json?
+  timestamp      DateTime @default(now())
+
+  // Indexes
+  @@index([entityType, entityId])
+  @@index([engagementType])
+  @@index([timestamp])
+}
+
+// Analytics engagement count model
+model AnalyticsEngagementCount {
+  id             String   @id @default(uuid())
+  entityType     String
+  entityId       String
+  engagementType String
+  count          Int      @default(0)
+  lastUpdated    DateTime @default(now())
+
+  // Indexes
+  @@unique([entityType, entityId, engagementType])
+  @@index([entityType])
+  @@index([engagementType])
+}
+
+// Analytics cache model
+model AnalyticsCache {
+  id          String   @id @default(uuid())
+  key         String   @unique
+  value       Json
+  lastUpdated DateTime @default(now())
+  expiresAt   DateTime?
+
+  // Indexes
+  @@index([expiresAt])
+}
+
+// Restaurant model
+model Restaurant {
+  id            String           @id @default(uuid())
+  googlePlaceId String           @unique
+  name          String
+  address       String
+  latitude      Float
+  longitude     Float
+  phone         String?
+  website       String?
+  rating        Float?
+  priceLevel    Int?
+  countryCode   String
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  photos        RestaurantPhoto[]
+  hours         RestaurantHour[]
+  reviews       Review[]
+
+  // Indexes
+  @@index([googlePlaceId])
+  @@index([name])
+  @@index([countryCode])
+}
+
+// Restaurant photo model
+model RestaurantPhoto {
+  id             String     @id @default(uuid())
+  restaurantId   String
+  photoUrl       String
+  photoReference String
+  width          Int
+  height         Int
+  restaurant     Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+
+  // Indexes
+  @@index([restaurantId])
+}
+
+// Restaurant hour model
+model RestaurantHour {
+  id           String     @id @default(uuid())
+  restaurantId String
+  dayOfWeek    Int
+  openTime     String
+  closeTime    String
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+
+  // Indexes
+  @@index([restaurantId])
+  @@index([dayOfWeek])
+}
+
+// Review model
+model Review {
+  id           String     @id @default(uuid())
+  reviewId     String     @unique
+  restaurantId String
+  userId       String
+  rating       Float
+  text         String?
+  visitStatus  String     @default("VISITED")
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Indexes
+  @@index([restaurantId])
+  @@index([userId])
+  @@index([rating])
 }

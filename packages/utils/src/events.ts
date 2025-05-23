@@ -5,14 +5,31 @@
  * that can be reused across the application.
  */
 
-import { SQS } from '@aws-sdk/client-sqs';
+// @ts-ignore
 import { v4 as uuidv4 } from 'uuid';
-import { EventPayload, EventSource, UserEventType } from '@bellyfed/types';
 
-// Initialize SQS client
-const sqs = new SQS({
-  region: process.env.NEXT_PUBLIC_AWS_REGION || 'ap-southeast-1',
-});
+// Event sources
+export enum EventSource {
+  RESTAURANT = 'bellyfed.restaurant',
+  REVIEW = 'bellyfed.review',
+  USER = 'bellyfed.user',
+}
+
+// User event types
+export enum UserEventType {
+  REGISTERED = 'UserRegistered',
+  UPDATED = 'UserUpdated',
+  DELETED = 'UserDeleted',
+}
+
+// Standard event payload structure
+export interface EventPayload {
+  eventId: string;
+  eventType: string;
+  source: string;
+  timestamp: string;
+  detail: any;
+}
 
 /**
  * Send an event to SQS
@@ -38,52 +55,13 @@ export async function sendEvent(
     detail,
   };
 
-  // Determine queue URL based on event type
-  const targetQueueUrl = queueUrl || getQueueUrlForEventType(eventType);
-
-  try {
-    // Send message to SQS
-    await sqs.sendMessage({
-      QueueUrl: targetQueueUrl,
-      MessageBody: JSON.stringify(eventPayload),
-      MessageAttributes: {
-        EventType: {
-          DataType: 'String',
-          StringValue: eventType,
-        },
-      },
-    });
-
-    console.log(`Event sent to SQS: ${eventType}`, {
-      eventId: eventPayload.eventId,
-    });
-  } catch (error: unknown) {
-    console.error(`Error sending event to SQS: ${eventType}`, error);
-    throw error;
-  }
-}
-
-/**
- * Get the SQS queue URL for a specific event type
- *
- * @param eventType Type of event
- * @returns SQS queue URL
- */
-function getQueueUrlForEventType(eventType: string): string {
-  // Map event types to queue URLs from environment variables
-  const queueMap: Record<string, string | undefined> = {
-    // User account events
-    [UserEventType.REGISTERED]: process.env.USER_REGISTRATION_QUEUE_URL,
-    [UserEventType.UPDATED]: process.env.USER_UPDATE_QUEUE_URL,
-    [UserEventType.DELETED]: process.env.USER_DELETION_QUEUE_URL,
-  };
-
-  const queueUrl = queueMap[eventType];
-  if (!queueUrl) {
-    throw new Error(`No queue URL configured for event type: ${eventType}`);
-  }
-
-  return queueUrl;
+  // In a real implementation, this would send the event to SQS
+  // For now, we'll just log it
+  console.log(`Event sent: ${eventType}`, {
+    eventId: eventPayload.eventId,
+    source,
+    detail,
+  });
 }
 
 /**

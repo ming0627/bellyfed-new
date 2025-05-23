@@ -1,12 +1,14 @@
 {
-  "extends": "@bellyfed/typescript-config/base.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
     "rootDir": "src",
-    "baseUrl": "."
+    "baseUrl": ".",
+    "composite": true,
+    "incremental": true
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules", "dist"]

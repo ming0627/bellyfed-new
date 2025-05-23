@@ -1,0 +1,96 @@
+{
+  "name": "@bellyfed/hooks",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./useDebounce": {
+      "import": "./dist/useDebounce.js",
+      "types": "./dist/useDebounce.d.ts"
+    },
+    "./useGeolocation": {
+      "import": "./dist/useGeolocation.js",
+      "types": "./dist/useGeolocation.d.ts"
+    },
+    "./useToast": {
+      "import": "./dist/useToast.js",
+      "types": "./dist/useToast.d.ts"
+    },
+    "./useAuth": {
+      "import": "./dist/useAuth.js",
+      "types": "./dist/useAuth.d.ts"
+    },
+    "./useApi": {
+      "import": "./dist/useApi.js",
+      "types": "./dist/useApi.d.ts"
+    },
+    "./useCognitoUser": {
+      "import": "./dist/useCognitoUser.js",
+      "types": "./dist/useCognitoUser.d.ts"
+    },
+    "./useAnalytics": {
+      "import": "./dist/useAnalytics.js",
+      "types": "./dist/useAnalytics.d.ts"
+    },
+    "./useDishVotes": {
+      "import": "./dist/useDishVotes.js",
+      "types": "./dist/useDishVotes.d.ts"
+    },
+    "./useCountry": {
+      "import": "./dist/useCountry.js",
+      "types": "./dist/useCountry.d.ts"
+    },
+    "./useRestaurant": {
+      "import": "./dist/useRestaurant.js",
+      "types": "./dist/useRestaurant.d.ts"
+    },
+    "./useUser": {
+      "import": "./dist/useUser.js",
+      "types": "./dist/useUser.d.ts"
+    },
+    "./useReviews": {
+      "import": "./dist/useReviews.js",
+      "types": "./dist/useReviews.d.ts"
+    },
+    "./useUserProfile": {
+      "import": "./dist/useUserProfile.js",
+      "types": "./dist/useUserProfile.d.ts"
+    },
+    "./useUserRanking": {
+      "import": "./dist/useUserRanking.js",
+      "types": "./dist/useUserRanking.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "build:fast": "tsc --incremental",
+    "clean": "rm -rf dist .turbo node_modules",
+    "dev": "tsc --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "lint:strict": "eslint --max-warnings=0 .",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@bellyfed/services": "workspace:*",
+    "@bellyfed/types": "workspace:*",
+    "@bellyfed/utils": "workspace:*",
+    "@tanstack/react-query": "^5.17.19",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.5.2"
+  },
+  "devDependencies": {
+    "@bellyfed/typescript-config": "workspace:*",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "eslint-config-custom": "workspace:*",
+    "typescript": "~5.3.3"
+  }
+}

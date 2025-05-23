@@ -3,43 +3,37 @@
   "version": "0.1.0",
   "private": true,
   "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "type": "module",
   "exports": {
     ".": "./dist/index.js",
-    "./auth": "./dist/auth/index.js",
-    "./googlePlaces": "./dist/googlePlaces.js",
-    "./photoUpload": "./dist/photoUpload.js"
+    "./auth/cognitoAuthService.js": "./dist/auth/cognitoAuthService.js",
+    "./api.js": "./dist/api.js",
+    "./analyticsService.js": "./dist/analyticsService.js",
+    "./restaurantService.js": "./dist/restaurantService.js",
+    "./reviewService.js": "./dist/reviewService.js",
+    "./userService.js": "./dist/userService.js",
+    "./userProfileService.js": "./dist/userProfileService.js"
   },
   "scripts": {
     "build": "tsc",
-    "build:fast": "tsc --incremental",
+    "clean": "rm -rf dist",
     "dev": "tsc --watch",
-    "lint": "eslint .",
-    "lint:strict": "eslint . --max-warnings=0",
-    "lint:fix": "eslint . --fix",
-    "type-check": "tsc --noEmit",
-    "type-check:strict": "tsc --noEmit --strict",
-    "test": "echo \"No tests specified\" && exit 0",
-    "clean": "rm -rf dist node_modules/.cache"
+    "lint": "eslint \"src/**/*.ts*\"",
+    "test": "jest"
   },
   "dependencies": {
-    "@aws-sdk/client-cognito-identity-provider": "^3.812.0",
-    "@aws-sdk/client-s3": "^3.812.0",
     "@bellyfed/types": "workspace:*",
     "@bellyfed/utils": "workspace:*",
-    "axios": "^1.6.7",
-    "zod": "^3.22.4"
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@types/node": "^20.11.5",
+    "@types/uuid": "^9.0.8",
+    "eslint": "^8.56.0",
     "eslint-config-custom": "workspace:*",
-    "@bellyfed/typescript-config": "workspace:*",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8.57.1",
-    "next": "^14.1.0",
-    "react": "^18.2.0",
-    "typescript": "~5.3.3"
-  },
-  "type": "module"
+    "jest": "^29.7.0",
+    "typescript": "^5.3.3"
+  }
 }

@@ -3,6 +3,31 @@
  */
 
 /**
+ * User interface
+ * Represents a standard user profile
+ */
+export interface User {
+  id: string;
+  username: string;
+  email: string;
+  name: string;
+  avatar?: string;
+  bio?: string;
+  location?: string;
+  interests?: string[];
+  createdAt: string;
+  updatedAt: string;
+  points?: number;
+  achievements?: any[];
+  stats?: {
+    reviews?: number;
+    followers?: number;
+    following?: number;
+    cities?: number;
+  };
+}
+
+/**
  * Cognito user data interface
  * Represents a user profile with data from Cognito and additional profile information
  */

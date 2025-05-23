@@ -1,3 +1,7 @@
+/**
+ * Service for uploading photos to S3
+ */
+
 import { compressImage, validateImageFile } from '@bellyfed/utils';
 
 /**

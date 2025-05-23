@@ -2,7 +2,8 @@
  * Test Feature Components Page
  * 
  * Test page for newly migrated feature components including
- * analytics, competitions, premium, and admin components.
+ * analytics, competitions, premium, admin, AI center, dish restaurants,
+ * foodie leaderboard, and restaurant management components.
  */
 
 import React, { useState } from 'react';
@@ -26,6 +27,22 @@ import {
   AdminDashboard,
   useAdminPermissions 
 } from '../components/admin/index.js';
+import {
+  AIRecommendations,
+  AIChat
+} from '../components/ai-center/index.js';
+import {
+  DishRestaurantList,
+  DishComparison
+} from '../components/dish-restaurants/index.js';
+import {
+  FoodieLeaderboard,
+  UserAchievements
+} from '../components/my-foodie-leaderboard/index.js';
+import {
+  RestaurantDashboard,
+  MenuManager
+} from '../components/restaurant-management/index.js';
 
 // Mock data for testing
 const mockCompetitions = [
@@ -68,7 +85,11 @@ const TestFeatureComponents = () => {
     { id: 'analytics', title: 'Analytics Components', icon: '📊' },
     { id: 'competitions', title: 'Competition Components', icon: '🏆' },
     { id: 'premium', title: 'Premium Components', icon: '⭐' },
-    { id: 'admin', title: 'Admin Components', icon: '👑' }
+    { id: 'admin', title: 'Admin Components', icon: '👑' },
+    { id: 'ai-center', title: 'AI Center Components', icon: '🤖' },
+    { id: 'dish-restaurants', title: 'Dish Restaurant Components', icon: '🍽️' },
+    { id: 'leaderboard', title: 'Foodie Leaderboard Components', icon: '🏅' },
+    { id: 'restaurant-mgmt', title: 'Restaurant Management Components', icon: '🏪' }
   ];
 
   const renderAnalyticsSection = () => (
@@ -83,9 +104,6 @@ const TestFeatureComponents = () => {
 
       <Card className="p-6">
         <h3 className="text-lg font-semibold mb-4">Page View Component</h3>
-        <p className="text-gray-600 mb-4">
-          The PageView component is automatically tracking this page view with custom metadata.
-        </p>
         <PageView
           pageName="test-feature-components"
           pageCategory="testing"
@@ -170,16 +188,6 @@ const TestFeatureComponents = () => {
         />
       </Card>
 
-      <div>
-        <h3 className="text-lg font-semibold mb-4">Premium Banner - Hero</h3>
-        <PremiumBanner
-          variant="hero"
-          showDismiss={false}
-          showPricing={true}
-          showFeatures={true}
-        />
-      </div>
-
       <Card className="p-6">
         <h3 className="text-lg font-semibold mb-4">Premium Features</h3>
         <PremiumFeatures
@@ -204,26 +212,6 @@ const TestFeatureComponents = () => {
       </Card>
 
       <Card className="p-6">
-        <h3 className="text-lg font-semibold mb-4">Admin Guard Test</h3>
-        <AdminGuard
-          requiredRole="admin"
-          fallbackComponent={
-            <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-              <p className="text-yellow-800">
-                ⚠️ Admin access required. This content is protected by AdminGuard.
-              </p>
-            </div>
-          }
-        >
-          <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-            <p className="text-green-800">
-              ✅ You have admin access! This content is protected by AdminGuard.
-            </p>
-          </div>
-        </AdminGuard>
-      </Card>
-
-      <Card className="p-6">
         <h3 className="text-lg font-semibold mb-4">Admin Dashboard</h3>
         <AdminGuard
           requiredRole="admin"
@@ -244,6 +232,109 @@ const TestFeatureComponents = () => {
     </div>
   );
 
+  const renderAICenterSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">AI Recommendations</h3>
+        <AIRecommendations
+          userId="test-user-1"
+          recommendationType="mixed"
+          limit={5}
+          showConfidenceScores={true}
+          showFeedback={true}
+          showExplanations={true}
+        />
+      </Card>
+
+      <Card className="p-6" style={{ height: '500px' }}>
+        <h3 className="text-lg font-semibold mb-4">AI Chat</h3>
+        <AIChat
+          userId="test-user-1"
+          showSuggestions={true}
+          className="h-full"
+        />
+      </Card>
+    </div>
+  );
+
+  const renderDishRestaurantsSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Dish Restaurant List</h3>
+        <DishRestaurantList
+          dishId="test-dish-1"
+          dishName="Margherita Pizza"
+          showFilters={true}
+          showComparison={true}
+          showRankings={true}
+        />
+      </Card>
+
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Dish Comparison</h3>
+        <DishComparison
+          dishId="test-dish-1"
+          dishName="Margherita Pizza"
+          restaurantIds={['rest-1', 'rest-2', 'rest-3']}
+          showReviews={true}
+          showPricing={true}
+          showMetrics={true}
+        />
+      </Card>
+    </div>
+  );
+
+  const renderLeaderboardSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Foodie Leaderboard</h3>
+        <FoodieLeaderboard
+          category="overall"
+          period="all_time"
+          limit={10}
+          showUserPosition={true}
+          showAchievements={true}
+          showFollowButtons={true}
+        />
+      </Card>
+
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">User Achievements</h3>
+        <UserAchievements
+          showProgress={true}
+          showSharing={true}
+          showCategories={true}
+          showRarity={true}
+        />
+      </Card>
+    </div>
+  );
+
+  const renderRestaurantMgmtSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Restaurant Dashboard</h3>
+        <RestaurantDashboard
+          restaurantId="test-restaurant-1"
+          showAnalytics={true}
+          showQuickActions={true}
+          showRecentReviews={true}
+          showPerformanceMetrics={true}
+        />
+      </Card>
+
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Menu Manager</h3>
+        <MenuManager
+          restaurantId="test-restaurant-1"
+          showCategories={true}
+          showBulkActions={true}
+          allowReordering={true}
+        />
+      </Card>
+    </div>
+  );
+
   return (
     <AnalyticsProvider
       enableAutoTracking={true}
@@ -257,7 +348,7 @@ const TestFeatureComponents = () => {
               Feature Components Test Page
             </h1>
             <p className="text-lg text-gray-600">
-              Testing newly migrated analytics, competitions, premium, and admin components
+              Testing all newly migrated feature components
             </p>
           </div>
 
@@ -289,6 +380,10 @@ const TestFeatureComponents = () => {
             {activeSection === 'competitions' && renderCompetitionsSection()}
             {activeSection === 'premium' && renderPremiumSection()}
             {activeSection === 'admin' && renderAdminSection()}
+            {activeSection === 'ai-center' && renderAICenterSection()}
+            {activeSection === 'dish-restaurants' && renderDishRestaurantsSection()}
+            {activeSection === 'leaderboard' && renderLeaderboardSection()}
+            {activeSection === 'restaurant-mgmt' && renderRestaurantMgmtSection()}
           </div>
         </div>
       </div>

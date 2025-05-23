@@ -8,6 +8,9 @@
 // Admin Components
 export * from './admin/index.js';
 
+// AI Center Components
+export * from './ai-center/index.js';
+
 // Analytics Components
 export * from './analytics/index.js';
 
@@ -26,6 +29,9 @@ export * from './competitions/index.js';
 
 // Dish Components
 export * from './dish/DishRanking.js';
+
+// Dish Restaurants Components
+export * from './dish-restaurants/index.js';
 
 // Dishes Components
 export * from './dishes/DishHeader.js';
@@ -52,6 +58,9 @@ export * from './layout/Footer.js';
 export * from './layout/Header.js';
 export * from './layout/Layout.js';
 
+// My Foodie Leaderboard Components
+export * from './my-foodie-leaderboard/index.js';
+
 // Premium Components
 export * from './premium/index.js';
 
@@ -71,6 +80,9 @@ export * from './rankings/RankingDialog.js';
 
 // Restaurant Components
 export * from './restaurant/ReviewCard.js';
+
+// Restaurant Management Components
+export * from './restaurant-management/index.js';
 
 // Restaurants Components
 export * from './restaurants/RestaurantCard.js';
