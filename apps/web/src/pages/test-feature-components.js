@@ -100,6 +100,17 @@ import {
 import {
   MapView
 } from '../components/maps/index.js';
+import {
+  SocialShare,
+  FollowButton
+} from '../components/social/index.js';
+import {
+  ReviewForm,
+  ReviewList
+} from '../components/reviews/index.js';
+import {
+  CommentThread
+} from '../components/comments/index.js';
 
 // Mock data for testing
 const mockCompetitions = [
@@ -162,7 +173,10 @@ const TestFeatureComponents = () => {
     { id: 'notifications', title: 'Notification Components', icon: '🔔' },
     { id: 'search', title: 'Search Components', icon: '🔍' },
     { id: 'filters', title: 'Filter Components', icon: '🔧' },
-    { id: 'maps', title: 'Map Components', icon: '🗺️' }
+    { id: 'maps', title: 'Map Components', icon: '🗺️' },
+    { id: 'social', title: 'Social Components', icon: '👥' },
+    { id: 'reviews', title: 'Review Components', icon: '⭐' },
+    { id: 'comments', title: 'Comment Components', icon: '💬' }
   ];
 
   const renderAnalyticsSection = () => (
@@ -978,6 +992,137 @@ const TestFeatureComponents = () => {
     );
   };
 
+  const renderSocialSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Social Share - Full Featured</h3>
+        <SocialShare
+          url="https://bellyfed.com/restaurants/nasi-lemak-wanjo"
+          title="Amazing Nasi Lemak at Wanjo!"
+          description="Just had the best nasi lemak in KL. You have to try this place!"
+          hashtags={['bellyfed', 'nasilemak', 'malaysianfood', 'kl']}
+          platforms={['facebook', 'twitter', 'whatsapp', 'telegram', 'copy']}
+          showLabels={true}
+          size="md"
+          variant="default"
+        />
+      </Card>
+
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Social Share - Floating Style</h3>
+        <SocialShare
+          title="Check out this restaurant!"
+          platforms={['facebook', 'twitter', 'whatsapp', 'copy']}
+          showLabels={true}
+          size="lg"
+          variant="floating"
+        />
+      </Card>
+
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Follow Button Examples</h3>
+        <div className="space-y-4">
+          <div>
+            <h4 className="font-medium mb-2">Following User</h4>
+            <FollowButton
+              targetUserId="user-123"
+              targetUserName="John Doe"
+              initialFollowing={true}
+              initialFollowerCount={1234}
+              showFollowerCount={true}
+              size="md"
+            />
+          </div>
+          <div>
+            <h4 className="font-medium mb-2">Not Following User</h4>
+            <FollowButton
+              targetUserId="user-456"
+              targetUserName="Jane Smith"
+              initialFollowing={false}
+              initialFollowerCount={567}
+              showFollowerCount={true}
+              size="md"
+            />
+          </div>
+          <div>
+            <h4 className="font-medium mb-2">Compact Style</h4>
+            <FollowButton
+              targetUserId="user-789"
+              targetUserName="Bob Wilson"
+              initialFollowing={false}
+              initialFollowerCount={89}
+              showFollowerCount={false}
+              size="sm"
+            />
+          </div>
+        </div>
+      </Card>
+    </div>
+  );
+
+  const renderReviewsSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Review List - Restaurant Reviews</h3>
+        <ReviewList
+          targetType="restaurant"
+          targetId="restaurant-123"
+          showFilters={true}
+          showSorting={true}
+          showPhotos={true}
+          showRatingBreakdown={true}
+          itemsPerPage={5}
+          enableInfiniteScroll={false}
+        />
+      </Card>
+
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Review Form - New Review</h3>
+        <ReviewForm
+          targetType="restaurant"
+          targetId="restaurant-123"
+          targetName="Nasi Lemak Wanjo"
+          existingReview={null}
+          showCategories={true}
+          allowPhotos={true}
+          maxPhotos={5}
+          onSubmit={(review) => console.log('Review submitted:', review)}
+          onCancel={() => console.log('Review cancelled')}
+        />
+      </Card>
+    </div>
+  );
+
+  const renderCommentsSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Comment Thread - Dish Comments</h3>
+        <CommentThread
+          targetType="dish"
+          targetId="dish-123"
+          showReplyForm={true}
+          showReactions={true}
+          maxDepth={3}
+          commentsPerPage={10}
+          enableRealTime={true}
+        />
+      </Card>
+
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Comment Thread - Restaurant Discussion</h3>
+        <CommentThread
+          targetType="restaurant"
+          targetId="restaurant-456"
+          showReplyForm={true}
+          showReactions={true}
+          maxDepth={2}
+          commentsPerPage={15}
+          enableRealTime={false}
+        />
+      </Card>
+    </div>
+  );
+
   return (
     <AnalyticsProvider
       enableAutoTracking={true}
@@ -1043,6 +1188,9 @@ const TestFeatureComponents = () => {
             {activeSection === 'search' && renderSearchSection()}
             {activeSection === 'filters' && renderFiltersSection()}
             {activeSection === 'maps' && renderMapsSection()}
+            {activeSection === 'social' && renderSocialSection()}
+            {activeSection === 'reviews' && renderReviewsSection()}
+            {activeSection === 'comments' && renderCommentsSection()}
           </div>
         </div>
       </div>

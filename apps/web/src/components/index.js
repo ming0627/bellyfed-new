@@ -60,6 +60,15 @@ export * from './filters/index.js';
 // Maps Components
 export * from './maps/index.js';
 
+// Social Components
+export * from './social/index.js';
+
+// Reviews Components
+export * from './reviews/index.js';
+
+// Comments Components
+export * from './comments/index.js';
+
 // Competitions Components
 export * from './competitions/index.js';
 
