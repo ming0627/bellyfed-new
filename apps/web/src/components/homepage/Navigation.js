@@ -1,193 +1,396 @@
-import React, { useState, useCallback, memo } from 'react';
-import Link from 'next/link';
-import { Search, Menu, X, MapPin, User, Bell } from 'lucide-react';
-import { useCountry } from '../../contexts/CountryContext.js';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
-
 /**
- * Navigation component for the main site header
- *
- * @param {Object} props - Component props
- * @param {Function} props.getCountryLink - Function to generate country-specific links
- * @returns {JSX.Element} - Rendered component
+ * Homepage Navigation Component
+ * 
+ * Main navigation component for the homepage with dynamic menu items.
+ * Provides quick access to key sections and user-specific features.
+ * 
+ * Features:
+ * - Responsive navigation menu
+ * - User authentication state
+ * - Dynamic menu items based on user role
+ * - Search integration
+ * - Country/location selector
+ * - Mobile-friendly design
  */
-export const Navigation = memo(function Navigation({ getCountryLink }) {
-  const { currentCountry } = useCountry();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
 
-  // Validate required props
-  if (typeof getCountryLink !== 'function') {
-    console.error('Navigation component missing required getCountryLink function');
-    return null;
+import React, { useState, useEffect } from 'react'
+import { Button, Badge } from '../ui/index.js'
+import { useAuth } from '../../hooks/useAuth.js'
+import { useAnalyticsContext } from '../analytics/AnalyticsProvider.js'
+
+const HomepageNavigation = ({
+  currentCountry = 'malaysia',
+  showSearch = true,
+  showCountrySelector = true,
+  showUserMenu = true,
+  className = ''
+}) => {
+  // State
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [notifications, setNotifications] = useState(0)
+
+  // Context
+  const { user, isAuthenticated, logout } = useAuth()
+  const { trackUserEngagement } = useAnalyticsContext()
+
+  // Mock notifications
+  useEffect(() => {
+    if (isAuthenticated) {
+      setNotifications(Math.floor(Math.random() * 5))
+    }
+  }, [isAuthenticated])
+
+  // Navigation items
+  const navigationItems = [
+    {
+      label: 'Explore',
+      href: `/${currentCountry}/explore`,
+      icon: '🗺️',
+      description: 'Discover restaurants near you'
+    },
+    {
+      label: 'Rankings',
+      href: `/${currentCountry}/rankings`,
+      icon: '🏆',
+      description: 'Top dishes and restaurants'
+    },
+    {
+      label: 'Social',
+      href: `/${currentCountry}/social`,
+      icon: '👥',
+      description: 'Connect with food lovers'
+    },
+    {
+      label: 'Competitions',
+      href: `/${currentCountry}/competitions`,
+      icon: '🎯',
+      description: 'Food challenges and contests'
+    }
+  ]
+
+  // User menu items
+  const userMenuItems = isAuthenticated ? [
+    {
+      label: 'My Profile',
+      href: `/${currentCountry}/profile`,
+      icon: '👤'
+    },
+    {
+      label: 'My Rankings',
+      href: `/${currentCountry}/rankings/my`,
+      icon: '📊'
+    },
+    {
+      label: 'Favorites',
+      href: `/${currentCountry}/favorites`,
+      icon: '❤️'
+    },
+    {
+      label: 'Settings',
+      href: `/${currentCountry}/settings`,
+      icon: '⚙️'
+    }
+  ] : [
+    {
+      label: 'Sign In',
+      href: '/signin',
+      icon: '🔑'
+    },
+    {
+      label: 'Sign Up',
+      href: '/signup',
+      icon: '📝'
+    }
+  ]
+
+  // Countries list
+  const countries = [
+    { code: 'malaysia', name: 'Malaysia', flag: '🇲🇾' },
+    { code: 'singapore', name: 'Singapore', flag: '🇸🇬' },
+    { code: 'thailand', name: 'Thailand', flag: '🇹🇭' },
+    { code: 'indonesia', name: 'Indonesia', flag: '🇮🇩' }
+  ]
+
+  // Handle search
+  const handleSearch = (e) => {
+    e.preventDefault()
+    if (searchQuery.trim()) {
+      trackUserEngagement('search', 'submit', 'homepage_nav', {
+        query: searchQuery,
+        country: currentCountry
+      })
+      window.location.href = `/${currentCountry}/search?q=${encodeURIComponent(searchQuery)}`
+    }
   }
 
-  // Memoize the search handler to prevent unnecessary re-renders
-  const handleSearch = useCallback((e) => {
-    e.preventDefault();
-    // Implement search functionality
-    console.log('Searching for:', searchQuery);
-    // In a real app, this would navigate to search results page
-  }, [searchQuery]);
+  // Handle navigation click
+  const handleNavClick = (item) => {
+    trackUserEngagement('navigation', 'click', item.label.toLowerCase(), {
+      source: 'homepage_nav',
+      country: currentCountry
+    })
+    window.location.href = item.href
+  }
 
-  // Memoize the menu toggle handler
-  const toggleMenu = useCallback(() => {
-    setIsMenuOpen((prev) => !prev);
-  }, []);
-
-  // Memoize the menu close handler
-  const closeMenu = useCallback(() => {
-    setIsMenuOpen(false);
-  }, []);
-
-  // Navigation links - could be moved to a configuration file in a real app
-  const navLinks = [
-    { href: '/restaurants', label: 'Restaurants' },
-    { href: '/explore', label: 'Explore' },
-    { href: '/social', label: 'Social' },
-    { href: '/competitions', label: 'Competitions' },
-  ];
+  // Handle logout
+  const handleLogout = async () => {
+    try {
+      await logout()
+      trackUserEngagement('auth', 'logout', 'homepage_nav')
+      window.location.href = '/'
+    } catch (error) {
+      console.error('Logout error:', error)
+    }
+  }
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
-      <div className="container mx-auto px-4">
+    <nav className={`bg-white shadow-sm border-b border-gray-200 ${className}`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo and Country Selector */}
+          {/* Logo */}
           <div className="flex items-center">
-            <Link href={getCountryLink('/')} className="flex items-center">
-              <span className="text-xl font-bold text-blue-600">Bellyfed</span>
-              {currentCountry?.flagUrl && (
-                <img
-                  src={currentCountry.flagUrl}
-                  alt={currentCountry.name || 'Country flag'}
-                  className="w-6 h-4 ml-2"
-                  loading="lazy"
-                />
-              )}
-            </Link>
+            <a
+              href={`/${currentCountry}`}
+              className="flex items-center gap-2 text-xl font-bold text-orange-600 hover:text-orange-700 transition-colors"
+            >
+              🍽️ Bellyfed
+            </a>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8" aria-label="Main navigation">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={getCountryLink(link.href)}
-                className="text-gray-600 hover:text-blue-600 transition-colors"
+          <div className="hidden md:flex items-center gap-8">
+            {navigationItems.map((item) => (
+              <button
+                key={item.label}
+                onClick={() => handleNavClick(item)}
+                className="flex items-center gap-2 text-gray-700 hover:text-orange-600 transition-colors group"
+                title={item.description}
               >
-                {link.label}
-              </Link>
+                <span className="text-lg group-hover:scale-110 transition-transform">
+                  {item.icon}
+                </span>
+                <span className="font-medium">{item.label}</span>
+              </button>
             ))}
-          </nav>
-
-          {/* Search, Location, and User */}
-          <div className="hidden md:flex items-center space-x-4">
-            <form onSubmit={handleSearch} className="relative">
-              <label htmlFor="desktop-search" className="sr-only">
-                Search restaurants and dishes
-              </label>
-              <input
-                id="desktop-search"
-                type="text"
-                placeholder="Search restaurants, dishes..."
-                className="pl-8 pr-4 py-1 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-48 lg:w-64"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <LucideClientIcon
-                icon={Search}
-                className="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4"
-                aria-hidden="true"
-              />
-            </form>
-            <button
-              className="text-gray-600 hover:text-blue-600 transition-colors"
-              aria-label="Find restaurants near me"
-            >
-              <LucideClientIcon icon={MapPin} className="w-5 h-5" />
-            </button>
-            <button
-              className="text-gray-600 hover:text-blue-600 transition-colors"
-              aria-label="Notifications"
-            >
-              <LucideClientIcon icon={Bell} className="w-5 h-5" />
-            </button>
-            <Link
-              href={getCountryLink('/my')}
-              className="text-gray-600 hover:text-blue-600 transition-colors"
-              aria-label="My profile"
-            >
-              <LucideClientIcon icon={User} className="w-5 h-5" />
-            </Link>
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          {/* Search Bar */}
+          {showSearch && (
+            <div className="hidden lg:flex flex-1 max-w-md mx-8">
+              <form onSubmit={handleSearch} className="w-full">
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="Search restaurants, dishes..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                  />
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <span className="text-gray-400">🔍</span>
+                  </div>
+                </div>
+              </form>
+            </div>
+          )}
+
+          {/* Right Side */}
+          <div className="flex items-center gap-4">
+            {/* Country Selector */}
+            {showCountrySelector && (
+              <div className="hidden sm:block">
+                <select
+                  value={currentCountry}
+                  onChange={(e) => {
+                    const newCountry = e.target.value
+                    trackUserEngagement('country', 'change', newCountry, {
+                      previousCountry: currentCountry
+                    })
+                    window.location.href = `/${newCountry}`
+                  }}
+                  className="px-3 py-1 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-orange-500"
+                >
+                  {countries.map((country) => (
+                    <option key={country.code} value={country.code}>
+                      {country.flag} {country.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+
+            {/* Notifications */}
+            {isAuthenticated && (
+              <button className="relative p-2 text-gray-600 hover:text-orange-600 transition-colors">
+                <span className="text-xl">🔔</span>
+                {notifications > 0 && (
+                  <Badge
+                    variant="error"
+                    size="sm"
+                    className="absolute -top-1 -right-1 min-w-[20px] h-5 flex items-center justify-center text-xs"
+                  >
+                    {notifications}
+                  </Badge>
+                )}
+              </button>
+            )}
+
+            {/* User Menu */}
+            {showUserMenu && (
+              <div className="relative">
+                <button
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  className="flex items-center gap-2 p-2 text-gray-700 hover:text-orange-600 transition-colors"
+                >
+                  {isAuthenticated ? (
+                    <>
+                      <img
+                        src={user?.avatar || '/images/placeholder-avatar.jpg'}
+                        alt={user?.name || 'User'}
+                        className="w-8 h-8 rounded-full object-cover"
+                      />
+                      <span className="hidden sm:block font-medium">
+                        {user?.name || 'User'}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="text-xl">👤</span>
+                      <span className="hidden sm:block font-medium">Account</span>
+                    </>
+                  )}
+                  <span className="text-sm">▼</span>
+                </button>
+
+                {/* Dropdown Menu */}
+                {isMenuOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
+                    {userMenuItems.map((item) => (
+                      <button
+                        key={item.label}
+                        onClick={() => {
+                          setIsMenuOpen(false)
+                          if (item.label === 'Sign Out') {
+                            handleLogout()
+                          } else {
+                            handleNavClick(item)
+                          }
+                        }}
+                        className="w-full px-4 py-2 text-left flex items-center gap-3 text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
+                      >
+                        <span>{item.icon}</span>
+                        <span>{item.label}</span>
+                      </button>
+                    ))}
+                    
+                    {isAuthenticated && (
+                      <>
+                        <hr className="my-2 border-gray-200" />
+                        <button
+                          onClick={() => {
+                            setIsMenuOpen(false)
+                            handleLogout()
+                          }}
+                          className="w-full px-4 py-2 text-left flex items-center gap-3 text-red-600 hover:bg-red-50 transition-colors"
+                        >
+                          <span>🚪</span>
+                          <span>Sign Out</span>
+                        </button>
+                      </>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Mobile Menu Button */}
             <button
-              onClick={toggleMenu}
-              className="text-gray-600 hover:text-blue-600 transition-colors"
-              aria-expanded={isMenuOpen}
-              aria-controls="mobile-menu"
-              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden p-2 text-gray-600 hover:text-orange-600 transition-colors"
             >
-              {isMenuOpen ? (
-                <LucideClientIcon icon={X} className="w-6 h-6" aria-hidden="true" />
-              ) : (
-                <LucideClientIcon icon={Menu} className="w-6 h-6" aria-hidden="true" />
-              )}
+              <span className="text-xl">☰</span>
             </button>
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden border-t border-gray-200 py-4">
+            {/* Mobile Search */}
+            {showSearch && (
+              <div className="mb-4">
+                <form onSubmit={handleSearch}>
+                  <input
+                    type="text"
+                    placeholder="Search restaurants, dishes..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                  />
+                </form>
+              </div>
+            )}
+
+            {/* Mobile Navigation Items */}
+            <div className="space-y-2">
+              {navigationItems.map((item) => (
+                <button
+                  key={item.label}
+                  onClick={() => {
+                    setIsMenuOpen(false)
+                    handleNavClick(item)
+                  }}
+                  className="w-full flex items-center gap-3 px-4 py-3 text-left text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors rounded-lg"
+                >
+                  <span className="text-lg">{item.icon}</span>
+                  <div>
+                    <div className="font-medium">{item.label}</div>
+                    <div className="text-sm text-gray-500">{item.description}</div>
+                  </div>
+                </button>
+              ))}
+            </div>
+
+            {/* Mobile Country Selector */}
+            {showCountrySelector && (
+              <div className="mt-4 pt-4 border-t border-gray-200">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Country/Region
+                </label>
+                <select
+                  value={currentCountry}
+                  onChange={(e) => {
+                    const newCountry = e.target.value
+                    setIsMenuOpen(false)
+                    trackUserEngagement('country', 'change', newCountry, {
+                      previousCountry: currentCountry
+                    })
+                    window.location.href = `/${newCountry}`
+                  }}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                >
+                  {countries.map((country) => (
+                    <option key={country.code} value={country.code}>
+                      {country.flag} {country.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
-      {/* Mobile Menu */}
+      {/* Click outside to close menu */}
       {isMenuOpen && (
         <div
-          id="mobile-menu"
-          className="md:hidden bg-white border-t border-gray-200 py-2 px-4"
-        >
-          <form onSubmit={handleSearch} className="relative mb-4">
-            <label htmlFor="mobile-search" className="sr-only">
-              Search restaurants and dishes
-            </label>
-            <input
-              id="mobile-search"
-              type="text"
-              placeholder="Search restaurants, dishes..."
-              className="pl-8 pr-4 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <LucideClientIcon
-              icon={Search}
-              className="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4"
-              aria-hidden="true"
-            />
-          </form>
-          <nav className="flex flex-col space-y-3" aria-label="Mobile navigation">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={getCountryLink(link.href)}
-                className="text-gray-600 hover:text-blue-600 transition-colors py-1"
-                onClick={closeMenu}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <Link
-              href={getCountryLink('/my')}
-              className="text-gray-600 hover:text-blue-600 transition-colors py-1"
-              onClick={closeMenu}
-            >
-              My Profile
-            </Link>
-          </nav>
-        </div>
+          className="fixed inset-0 z-40"
+          onClick={() => setIsMenuOpen(false)}
+        />
       )}
-    </header>
-  );
-});
+    </nav>
+  )
+}
 
-// Default export for easier imports
-export default Navigation;
+export default HomepageNavigation

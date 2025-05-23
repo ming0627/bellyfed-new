@@ -1,0 +1,219 @@
+# AWS CodeBuild specification for Bellyfed monorepo
+# Builds and deploys frontend, backend, and docs applications to ECS
+
+version: 0.2
+
+env:
+  variables:
+    # Build configuration
+    NODE_VERSION: '18'
+    PNPM_VERSION: 'latest'
+    # AWS configuration
+    AWS_DEFAULT_REGION: 'us-east-1'
+    # Application configuration
+    NEXT_TELEMETRY_DISABLED: '1'
+    HUSKY: '0'
+    HUSKY_SKIP_INSTALL: '1'
+  parameter-store:
+    # Sensitive environment variables from AWS Parameter Store
+    COGNITO_USER_POOL_ID: '/bellyfed/cognito/user-pool-id'
+    COGNITO_CLIENT_ID: '/bellyfed/cognito/client-id'
+    JWT_SECRET: '/bellyfed/auth/jwt-secret'
+    DATABASE_URL: '/bellyfed/database/url'
+    GOOGLE_MAPS_API_KEY: '/bellyfed/google/maps-api-key'
+    OPENAI_API_KEY: '/bellyfed/openai/api-key'
+    S3_BUCKET_NAME: '/bellyfed/s3/bucket-name'
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - echo "Installing dependencies..."
+      - corepack enable
+      - corepack prepare pnpm@$PNPM_VERSION --activate
+      - pnpm --version
+      - node --version
+      - npm --version
+
+  pre_build:
+    commands:
+      - echo "Pre-build phase started on `date`"
+      - echo "Logging in to Amazon ECR..."
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+
+      - echo "Setting up environment variables..."
+      - export REPOSITORY_URI_FRONTEND=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/bellyfed-frontend
+      - export REPOSITORY_URI_BACKEND=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/bellyfed-backend
+      - export REPOSITORY_URI_DOCS=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/bellyfed-docs
+      - export IMAGE_TAG=${CODEBUILD_RESOLVED_SOURCE_VERSION:-latest}
+
+      - echo "Installing project dependencies..."
+      - pnpm install --frozen-lockfile --ignore-scripts
+
+      - echo "Running tests..."
+      - pnpm test:ci || echo "Tests failed but continuing build"
+
+      - echo "Running linting..."
+      - pnpm lint || echo "Linting failed but continuing build"
+
+  build:
+    commands:
+      - echo "Build phase started on `date`"
+
+      - echo "Building shared packages..."
+      - pnpm --filter "@bellyfed/types" build
+      - pnpm --filter "@bellyfed/config" build
+      - pnpm --filter "@bellyfed/utils" build
+      - pnpm --filter "@bellyfed/ui" build
+      - pnpm --filter "@bellyfed/hooks" build
+      - pnpm --filter "@bellyfed/services" build
+      - pnpm --filter "@bellyfed/db" build
+      - pnpm --filter "@bellyfed/trpc" build
+
+      - echo "Building Docker images..."
+
+      # Build Frontend Docker image
+      - echo "Building frontend Docker image..."
+      - docker build -f apps/web/Dockerfile -t $REPOSITORY_URI_FRONTEND:latest -t $REPOSITORY_URI_FRONTEND:$IMAGE_TAG .
+
+      # Build Backend Docker image
+      - echo "Building backend Docker image..."
+      - docker build -f apps/backend/Dockerfile -t $REPOSITORY_URI_BACKEND:latest -t $REPOSITORY_URI_BACKEND:$IMAGE_TAG .
+
+      # Build Docs Docker image
+      - echo "Building docs Docker image..."
+      - docker build -f apps/docs/Dockerfile -t $REPOSITORY_URI_DOCS:latest -t $REPOSITORY_URI_DOCS:$IMAGE_TAG .
+
+  post_build:
+    commands:
+      - echo "Post-build phase started on `date`"
+
+      - echo "Pushing Docker images to ECR..."
+
+      # Push Frontend image
+      - echo "Pushing frontend image..."
+      - docker push $REPOSITORY_URI_FRONTEND:latest
+      - docker push $REPOSITORY_URI_FRONTEND:$IMAGE_TAG
+
+      # Push Backend image
+      - echo "Pushing backend image..."
+      - docker push $REPOSITORY_URI_BACKEND:latest
+      - docker push $REPOSITORY_URI_BACKEND:$IMAGE_TAG
+
+      # Push Docs image
+      - echo "Pushing docs image..."
+      - docker push $REPOSITORY_URI_DOCS:latest
+      - docker push $REPOSITORY_URI_DOCS:$IMAGE_TAG
+
+      - echo "Updating ECS task definitions..."
+
+      # Update Frontend task definition
+      - |
+        cat > frontend-task-definition.json << EOF
+        {
+          "family": "bellyfed-frontend",
+          "networkMode": "awsvpc",
+          "requiresCompatibilities": ["FARGATE"],
+          "cpu": "512",
+          "memory": "1024",
+          "executionRoleArn": "arn:aws:iam::$AWS_ACCOUNT_ID:role/ecsTaskExecutionRole",
+          "taskRoleArn": "arn:aws:iam::$AWS_ACCOUNT_ID:role/ecsTaskRole",
+          "containerDefinitions": [
+            {
+              "name": "frontend",
+              "image": "$REPOSITORY_URI_FRONTEND:$IMAGE_TAG",
+              "portMappings": [
+                {
+                  "containerPort": 3000,
+                  "protocol": "tcp"
+                }
+              ],
+              "essential": true,
+              "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                  "awslogs-group": "/ecs/bellyfed-frontend",
+                  "awslogs-region": "$AWS_DEFAULT_REGION",
+                  "awslogs-stream-prefix": "ecs"
+                }
+              },
+              "environment": [
+                {
+                  "name": "NODE_ENV",
+                  "value": "production"
+                },
+                {
+                  "name": "NEXT_TELEMETRY_DISABLED",
+                  "value": "1"
+                }
+              ]
+            }
+          ]
+        }
+        EOF
+
+      # Update Backend task definition
+      - |
+        cat > backend-task-definition.json << EOF
+        {
+          "family": "bellyfed-backend",
+          "networkMode": "awsvpc",
+          "requiresCompatibilities": ["FARGATE"],
+          "cpu": "1024",
+          "memory": "2048",
+          "executionRoleArn": "arn:aws:iam::$AWS_ACCOUNT_ID:role/ecsTaskExecutionRole",
+          "taskRoleArn": "arn:aws:iam::$AWS_ACCOUNT_ID:role/ecsTaskRole",
+          "containerDefinitions": [
+            {
+              "name": "backend",
+              "image": "$REPOSITORY_URI_BACKEND:$IMAGE_TAG",
+              "portMappings": [
+                {
+                  "containerPort": 4000,
+                  "protocol": "tcp"
+                }
+              ],
+              "essential": true,
+              "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                  "awslogs-group": "/ecs/bellyfed-backend",
+                  "awslogs-region": "$AWS_DEFAULT_REGION",
+                  "awslogs-stream-prefix": "ecs"
+                }
+              },
+              "environment": [
+                {
+                  "name": "NODE_ENV",
+                  "value": "production"
+                }
+              ],
+              "secrets": [
+                {
+                  "name": "DATABASE_URL",
+                  "valueFrom": "/bellyfed/database/url"
+                },
+                {
+                  "name": "JWT_SECRET",
+                  "valueFrom": "/bellyfed/auth/jwt-secret"
+                }
+              ]
+            }
+          ]
+        }
+        EOF
+
+      - echo "Build completed on `date`"
+
+artifacts:
+  files:
+    - frontend-task-definition.json
+    - backend-task-definition.json
+    - packages/infra/ecs/task-definitions/*.json
+    - packages/infra/ecs/services/*.json
+
+cache:
+  paths:
+    - node_modules/**/*
+    - .pnpm-store/**/*

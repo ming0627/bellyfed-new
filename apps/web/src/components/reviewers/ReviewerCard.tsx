@@ -1,10 +1,15 @@
 import React from 'react';
 import Link from 'next/link';
-import { Star, Award, MapPin, UserCheck, Utensils, ThumbsUp, Check } from 'lucide-react';
-import { Card } from '@/components/ui/Card';
-import { Avatar } from '@/components/ui/Avatar';
-import { Badge } from '@/components/ui/Badge';
-import { Button } from '@/components/ui/Button';
+import {
+  Star,
+  Award,
+  MapPin,
+  UserCheck,
+  Utensils,
+  ThumbsUp,
+  Check,
+} from 'lucide-react';
+import { Card, AvatarWithInitials, Badge, Button } from '@bellyfed/ui';
 
 interface ReviewerCardProps {
   id: string;
@@ -57,21 +62,33 @@ const ReviewerCard: React.FC<ReviewerCardProps> = ({
   const getRankBadge = () => {
     if (rank === 1) {
       return (
-        <Badge variant="premium" size="sm" className="absolute -top-2 -right-2 shadow-sm">
+        <Badge
+          variant="premium"
+          size="sm"
+          className="absolute -top-2 -right-2 shadow-sm"
+        >
           <Award size={12} className="mr-1" />
           #1 Reviewer
         </Badge>
       );
     } else if (rank <= 3) {
       return (
-        <Badge variant="premium" size="sm" className="absolute -top-2 -right-2 shadow-sm">
+        <Badge
+          variant="premium"
+          size="sm"
+          className="absolute -top-2 -right-2 shadow-sm"
+        >
           <Award size={12} className="mr-1" />
           Top {rank}
         </Badge>
       );
     } else if (rank <= 10) {
       return (
-        <Badge variant="soft-secondary" size="sm" className="absolute -top-2 -right-2 shadow-sm">
+        <Badge
+          variant="soft-secondary"
+          size="sm"
+          className="absolute -top-2 -right-2 shadow-sm"
+        >
           <Award size={12} className="mr-1" />
           Top {rank}
         </Badge>
@@ -92,15 +109,10 @@ const ReviewerCard: React.FC<ReviewerCardProps> = ({
       >
         <Link href={`/reviewers/${id}`} className="flex items-start">
           <div className="relative flex-shrink-0">
-            <Avatar
+            <AvatarWithInitials
               src={avatarUrl}
-              fallback={name}
-              size="lg"
-              shape="circle"
-              border={isVerified ? "accent" : "thick"}
-              background={isVerified ? "gradient" : "default"}
-              hover="grow"
-              className="mr-4"
+              name={name}
+              className="mr-4 w-12 h-12"
             />
             {isVerified && (
               <Badge
@@ -119,9 +131,12 @@ const ReviewerCard: React.FC<ReviewerCardProps> = ({
                 <h3 className="text-base font-heading font-semibold text-neutral-800 dark:text-neutral-100 group-hover:text-primary-600 transition-colors flex items-center">
                   {name}
                   {rank <= 10 && (
-                    <Badge variant={rank <= 3 ? "premium" : "soft-secondary"} size="xs" className="ml-2">
-                      <Award size={10} className="mr-1" />
-                      #{rank}
+                    <Badge
+                      variant={rank <= 3 ? 'premium' : 'soft-secondary'}
+                      size="xs"
+                      className="ml-2"
+                    >
+                      <Award size={10} className="mr-1" />#{rank}
                     </Badge>
                   )}
                 </h3>
@@ -153,7 +168,9 @@ const ReviewerCard: React.FC<ReviewerCardProps> = ({
                     <UserCheck size={12} className="mr-1" />
                     Following
                   </>
-                ) : 'Follow'}
+                ) : (
+                  'Follow'
+                )}
               </Button>
             </div>
 
@@ -201,21 +218,16 @@ const ReviewerCard: React.FC<ReviewerCardProps> = ({
         radius="md"
       >
         <Link href={`/reviewers/${id}`} className="flex items-center">
-          <Avatar
+          <AvatarWithInitials
             src={avatarUrl}
-            fallback={name}
-            size="sm"
-            shape="circle"
-            border={isVerified ? "accent" : "thin"}
-            className="mr-3"
+            name={name}
+            className="mr-3 w-8 h-8"
           />
 
           <div className="flex-grow min-w-0">
             <h3 className="text-sm font-medium text-neutral-800 dark:text-neutral-100 truncate group-hover:text-primary-600 transition-colors flex items-center">
               {name}
-              {isVerified && (
-                <span className="ml-1 text-verified">•</span>
-              )}
+              {isVerified && <span className="ml-1 text-verified">•</span>}
             </h3>
 
             <div className="flex items-center text-xs text-neutral-500">
@@ -237,9 +249,7 @@ const ReviewerCard: React.FC<ReviewerCardProps> = ({
             onClick={handleFollow}
             className="ml-2 flex-shrink-0"
           >
-            {isFollowing ? (
-              <UserCheck size={12} />
-            ) : 'Follow'}
+            {isFollowing ? <UserCheck size={12} /> : 'Follow'}
           </Button>
         </Link>
       </Card>
@@ -257,15 +267,10 @@ const ReviewerCard: React.FC<ReviewerCardProps> = ({
     >
       <div className="flex flex-col items-center p-2">
         <div className="relative mb-4">
-          <Avatar
+          <AvatarWithInitials
             src={avatarUrl}
-            fallback={name}
-            size="2xl"
-            shape="circle"
-            border={isVerified ? "accent" : "thick"}
-            background={isVerified ? "gradient" : "default"}
-            hover="grow"
-            className="mb-2"
+            name={name}
+            className="mb-2 w-20 h-20"
           />
 
           {getRankBadge()}
@@ -343,7 +348,9 @@ const ReviewerCard: React.FC<ReviewerCardProps> = ({
                 <UserCheck size={16} className="mr-2" />
                 Following
               </>
-            ) : 'Follow'}
+            ) : (
+              'Follow'
+            )}
           </Button>
         </div>
       </div>

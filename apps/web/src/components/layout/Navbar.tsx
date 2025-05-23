@@ -2,10 +2,19 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useTheme } from 'next-themes';
-import { Search, Menu, X, Sun, Moon, MapPin, Compass, Users, Home } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
-import { Avatar } from '@/components/ui/Avatar';
-import { Badge } from '@/components/ui/Badge';
+import {
+  Search,
+  Menu,
+  X,
+  Sun,
+  Moon,
+  MapPin,
+  Compass,
+  Users,
+  Home,
+} from 'lucide-react';
+import { Button, Badge } from '@bellyfed/ui';
+import { getCountryUrl } from '@bellyfed/utils';
 
 const Navbar: React.FC = () => {
   const router = useRouter();
@@ -14,6 +23,9 @@ const Navbar: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [scrolled, setScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
+
+  // Get the current country from the router or default to 'my'
+  const country = (router.query.country as string) || 'my';
 
   // After mounting, we can access the theme
   useEffect(() => {
@@ -49,7 +61,13 @@ const Navbar: React.FC = () => {
 
   // Check if the current route matches
   const isActive = (path: string) => {
-    return router.pathname === path;
+    if (path === '/') {
+      return router.pathname === '/' || router.pathname === '/[country]';
+    }
+
+    // For other paths, check if the current path matches the country-specific path
+    const countryPath = `/[country]${path}`;
+    return router.pathname === countryPath;
   };
 
   return (
@@ -64,7 +82,7 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between h-16">
           {/* Logo and Navigation Links */}
           <div className="flex items-center">
-            <Link href="/" className="flex-shrink-0 flex items-center">
+            <Link href={getCountryUrl(country, '')} className="flex-shrink-0 flex items-center">
               <span className="text-2xl font-heading font-bold bg-gradient-to-r from-primary-600 to-secondary-500 bg-clip-text text-transparent">
                 Bellyfed
               </span>
@@ -73,7 +91,7 @@ const Navbar: React.FC = () => {
             {/* Desktop Navigation */}
             <div className="hidden md:ml-10 md:flex md:space-x-8">
               <Link
-                href="/"
+                href={getCountryUrl(country, '')}
                 className={`inline-flex items-center px-1 py-2 text-sm font-medium border-b-2 transition-all duration-200 ${
                   isActive('/')
                     ? 'border-primary-500 text-primary-700 dark:text-primary-400'
@@ -85,7 +103,7 @@ const Navbar: React.FC = () => {
               </Link>
 
               <Link
-                href="/restaurants"
+                href={getCountryUrl(country, 'restaurants')}
                 className={`inline-flex items-center px-1 py-2 text-sm font-medium border-b-2 transition-all duration-200 ${
                   isActive('/restaurants')
                     ? 'border-primary-500 text-primary-700 dark:text-primary-400'
@@ -97,7 +115,7 @@ const Navbar: React.FC = () => {
               </Link>
 
               <Link
-                href="/explore"
+                href={getCountryUrl(country, 'explore')}
                 className={`inline-flex items-center px-1 py-2 text-sm font-medium border-b-2 transition-all duration-200 ${
                   isActive('/explore')
                     ? 'border-primary-500 text-primary-700 dark:text-primary-400'
@@ -106,11 +124,13 @@ const Navbar: React.FC = () => {
               >
                 <Compass className="w-4 h-4 mr-1.5" />
                 Explore
-                <Badge variant="new" size="xs" className="ml-2">New</Badge>
+                <Badge variant="new" size="xs" className="ml-2">
+                  New
+                </Badge>
               </Link>
 
               <Link
-                href="/social"
+                href={getCountryUrl(country, 'social')}
                 className={`inline-flex items-center px-1 py-2 text-sm font-medium border-b-2 transition-all duration-200 ${
                   isActive('/social')
                     ? 'border-primary-500 text-primary-700 dark:text-primary-400'
@@ -131,7 +151,7 @@ const Navbar: React.FC = () => {
                 placeholder="Search restaurants, dishes..."
                 className="pl-10 pr-4 py-2 w-64 bg-neutral-50 dark:bg-neutral-700/50 border border-neutral-200 dark:border-neutral-600 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-transparent transition-all"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={e => setSearchQuery(e.target.value)}
               />
               <Search className="absolute left-3.5 top-1/2 transform -translate-y-1/2 text-neutral-400 w-4 h-4" />
             </form>
@@ -141,19 +161,24 @@ const Navbar: React.FC = () => {
               size="icon.sm"
               shape="rounded"
               onClick={toggleTheme}
-              aria-label={resolvedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              aria-label={
+                resolvedTheme === 'dark'
+                  ? 'Switch to light mode'
+                  : 'Switch to dark mode'
+              }
               className="text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400"
             >
-              {mounted && (resolvedTheme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />)}
+              {mounted &&
+                (resolvedTheme === 'dark' ? (
+                  <Sun className="h-5 w-5" />
+                ) : (
+                  <Moon className="h-5 w-5" />
+                ))}
             </Button>
 
             <div className="flex items-center space-x-3">
               <Link href="/signin">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="font-medium"
-                >
+                <Button variant="outline" size="sm" className="font-medium">
                   Sign In
                 </Button>
               </Link>
@@ -177,10 +202,19 @@ const Navbar: React.FC = () => {
               size="icon.sm"
               shape="rounded"
               onClick={toggleTheme}
-              aria-label={resolvedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              aria-label={
+                resolvedTheme === 'dark'
+                  ? 'Switch to light mode'
+                  : 'Switch to dark mode'
+              }
               className="text-neutral-600 dark:text-neutral-400"
             >
-              {mounted && (resolvedTheme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />)}
+              {mounted &&
+                (resolvedTheme === 'dark' ? (
+                  <Sun className="h-5 w-5" />
+                ) : (
+                  <Moon className="h-5 w-5" />
+                ))}
             </Button>
 
             <Button
@@ -190,7 +224,7 @@ const Navbar: React.FC = () => {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
-              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
               className="text-neutral-600 dark:text-neutral-400"
             >
               {isMenuOpen ? (
@@ -217,14 +251,17 @@ const Navbar: React.FC = () => {
               placeholder="Search restaurants, dishes..."
               className="pl-10 pr-4 py-2.5 w-full bg-neutral-50 dark:bg-neutral-700/50 border border-neutral-200 dark:border-neutral-600 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-transparent transition-all"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={e => setSearchQuery(e.target.value)}
             />
             <Search className="absolute left-3.5 top-1/2 transform -translate-y-1/2 text-neutral-400 w-4 h-4" />
           </form>
 
-          <nav className="flex flex-col space-y-1" aria-label="Mobile navigation">
+          <nav
+            className="flex flex-col space-y-1"
+            aria-label="Mobile navigation"
+          >
             <Link
-              href="/"
+              href={getCountryUrl(country, '')}
               className={`flex items-center px-3 py-3 text-base font-medium rounded-md transition-colors ${
                 isActive('/')
                   ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-400'
@@ -237,7 +274,7 @@ const Navbar: React.FC = () => {
             </Link>
 
             <Link
-              href="/restaurants"
+              href={getCountryUrl(country, 'restaurants')}
               className={`flex items-center px-3 py-3 text-base font-medium rounded-md transition-colors ${
                 isActive('/restaurants')
                   ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-400'
@@ -250,7 +287,7 @@ const Navbar: React.FC = () => {
             </Link>
 
             <Link
-              href="/explore"
+              href={getCountryUrl(country, 'explore')}
               className={`flex items-center px-3 py-3 text-base font-medium rounded-md transition-colors ${
                 isActive('/explore')
                   ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-400'
@@ -260,11 +297,13 @@ const Navbar: React.FC = () => {
             >
               <Compass className="w-5 h-5 mr-3" />
               Explore
-              <Badge variant="new" size="xs" className="ml-2">New</Badge>
+              <Badge variant="new" size="xs" className="ml-2">
+                New
+              </Badge>
             </Link>
 
             <Link
-              href="/social"
+              href={getCountryUrl(country, 'social')}
               className={`flex items-center px-3 py-3 text-base font-medium rounded-md transition-colors ${
                 isActive('/social')
                   ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-400'
@@ -279,11 +318,7 @@ const Navbar: React.FC = () => {
 
           <div className="pt-5 border-t border-neutral-200 dark:border-neutral-700 flex flex-col space-y-3">
             <Link href="/signin" className="w-full">
-              <Button
-                variant="outline"
-                width="full"
-                className="py-2.5"
-              >
+              <Button variant="outline" width="full" className="py-2.5">
                 Sign In
               </Button>
             </Link>

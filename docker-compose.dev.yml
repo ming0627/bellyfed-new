@@ -1,0 +1,161 @@
+# Docker Compose configuration for Bellyfed development environment
+# Optimized for local development with hot reload and debugging
+
+version: '3.8'
+
+services:
+  # Frontend Next.js application (development mode)
+  frontend:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      target: development
+    container_name: bellyfed-frontend-dev
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development
+      - NEXT_TELEMETRY_DISABLED=1
+      - NEXT_PUBLIC_API_URL=http://localhost:4000
+      - NEXT_PUBLIC_TRPC_URL=http://localhost:4000/trpc
+      - WATCHPACK_POLLING=true
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - backend
+      - database
+    networks:
+      - bellyfed-dev-network
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+
+  # Backend tRPC API (development mode)
+  backend:
+    build:
+      context: .
+      dockerfile: apps/backend/Dockerfile
+      target: development
+    container_name: bellyfed-backend-dev
+    ports:
+      - '4000:4000'
+      - '9229:9229' # Node.js debugging port
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://bellyfed:bellyfed_password@database:5432/bellyfed
+      - JWT_SECRET=dev-jwt-secret-not-for-production
+      - AWS_REGION=us-east-1
+      - COGNITO_USER_POOL_ID=${COGNITO_USER_POOL_ID:-dev-pool}
+      - COGNITO_CLIENT_ID=${COGNITO_CLIENT_ID:-dev-client}
+      - DEBUG=bellyfed:*
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/apps/backend/dist
+    depends_on:
+      - database
+      - redis
+    networks:
+      - bellyfed-dev-network
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+
+  # Documentation site (development mode)
+  docs:
+    build:
+      context: .
+      dockerfile: apps/docs/Dockerfile
+      target: development
+    container_name: bellyfed-docs-dev
+    ports:
+      - '3001:3001'
+    environment:
+      - NODE_ENV=development
+      - NEXT_TELEMETRY_DISABLED=1
+      - WATCHPACK_POLLING=true
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    networks:
+      - bellyfed-dev-network
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+
+  # PostgreSQL database (development)
+  database:
+    image: postgres:15-alpine
+    container_name: bellyfed-database-dev
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_DB=bellyfed_dev
+      - POSTGRES_USER=bellyfed
+      - POSTGRES_PASSWORD=bellyfed_password
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+      - ./packages/db/init:/docker-entrypoint-initdb.d
+      - ./packages/db/migrations:/migrations
+    networks:
+      - bellyfed-dev-network
+    restart: unless-stopped
+    command: postgres -c log_statement=all -c log_destination=stderr
+
+  # Redis for caching and sessions (development)
+  redis:
+    image: redis:7-alpine
+    container_name: bellyfed-redis-dev
+    ports:
+      - '6379:6379'
+    command: redis-server --appendonly yes --loglevel verbose
+    volumes:
+      - redis_dev_data:/data
+    networks:
+      - bellyfed-dev-network
+    restart: unless-stopped
+
+  # Mailhog for email testing
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: bellyfed-mailhog-dev
+    ports:
+      - '1025:1025' # SMTP port
+      - '8025:8025' # Web UI port
+    networks:
+      - bellyfed-dev-network
+    restart: unless-stopped
+
+  # pgAdmin for database management
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: bellyfed-pgadmin-dev
+    ports:
+      - '5050:80'
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@bellyfed.dev
+      - PGADMIN_DEFAULT_PASSWORD=admin
+      - PGADMIN_CONFIG_SERVER_MODE=False
+    volumes:
+      - pgadmin_dev_data:/var/lib/pgadmin
+    depends_on:
+      - database
+    networks:
+      - bellyfed-dev-network
+    restart: unless-stopped
+
+volumes:
+  postgres_dev_data:
+    driver: local
+  redis_dev_data:
+    driver: local
+  pgadmin_dev_data:
+    driver: local
+
+networks:
+  bellyfed-dev-network:
+    driver: bridge

@@ -100,18 +100,18 @@ export const theme = {
     semantic: {
       success: '#4CAF50', // Vibrant green
       warning: '#FFB74D', // Warm amber
-      error: '#FF5252',   // Bright red
-      info: '#29B6F6',    // Bright blue
+      error: '#FF5252', // Bright red
+      info: '#29B6F6', // Bright blue
     },
 
     // Special purpose colors
     special: {
-      premium: '#FFD700',    // Bright gold
-      verified: '#4CAF50',   // Verified restaurants
-      new: '#29B6F6',        // New items
-      popular: '#FF8C69',    // Popular items
-      featured: '#B388FF',   // Featured content
-      ranking: '#FF6E33',    // Ranking board
+      premium: '#FFD700', // Bright gold
+      verified: '#4CAF50', // Verified restaurants
+      new: '#29B6F6', // New items
+      popular: '#FF8C69', // Popular items
+      featured: '#B388FF', // Featured content
+      ranking: '#FF6E33', // Ranking board
     },
 
     // Gradients
@@ -138,16 +138,16 @@ export const theme = {
       bold: 700,
     },
     fontSize: {
-      xs: '0.75rem',     // 12px
-      sm: '0.875rem',    // 14px
-      base: '1rem',      // 16px
-      lg: '1.125rem',    // 18px
-      xl: '1.25rem',     // 20px
-      '2xl': '1.5rem',   // 24px
+      xs: '0.75rem', // 12px
+      sm: '0.875rem', // 14px
+      base: '1rem', // 16px
+      lg: '1.125rem', // 18px
+      xl: '1.25rem', // 20px
+      '2xl': '1.5rem', // 24px
       '3xl': '1.875rem', // 30px
-      '4xl': '2.25rem',  // 36px
-      '5xl': '3rem',     // 48px
-      '6xl': '3.75rem',  // 60px
+      '4xl': '2.25rem', // 36px
+      '5xl': '3rem', // 48px
+      '6xl': '3.75rem', // 60px
     },
     lineHeight: {
       none: 1,
@@ -171,39 +171,39 @@ export const theme = {
   spacing: {
     0: '0',
     0.5: '0.125rem', // 2px
-    1: '0.25rem',    // 4px
+    1: '0.25rem', // 4px
     1.5: '0.375rem', // 6px
-    2: '0.5rem',     // 8px
+    2: '0.5rem', // 8px
     2.5: '0.625rem', // 10px
-    3: '0.75rem',    // 12px
+    3: '0.75rem', // 12px
     3.5: '0.875rem', // 14px
-    4: '1rem',       // 16px
-    5: '1.25rem',    // 20px
-    6: '1.5rem',     // 24px
-    7: '1.75rem',    // 28px
-    8: '2rem',       // 32px
-    9: '2.25rem',    // 36px
-    10: '2.5rem',    // 40px
-    12: '3rem',      // 48px
-    14: '3.5rem',    // 56px
-    16: '4rem',      // 64px
-    20: '5rem',      // 80px
-    24: '6rem',      // 96px
-    28: '7rem',      // 112px
-    32: '8rem',      // 128px
+    4: '1rem', // 16px
+    5: '1.25rem', // 20px
+    6: '1.5rem', // 24px
+    7: '1.75rem', // 28px
+    8: '2rem', // 32px
+    9: '2.25rem', // 36px
+    10: '2.5rem', // 40px
+    12: '3rem', // 48px
+    14: '3.5rem', // 56px
+    16: '4rem', // 64px
+    20: '5rem', // 80px
+    24: '6rem', // 96px
+    28: '7rem', // 112px
+    32: '8rem', // 128px
   },
 
   // Border radius - More refined with subtle rounding
   borderRadius: {
     none: '0',
-    xs: '0.125rem',    // 2px
-    sm: '0.25rem',     // 4px
-    md: '0.375rem',    // 6px
-    lg: '0.5rem',      // 8px
-    xl: '0.75rem',     // 12px
-    '2xl': '1rem',     // 16px
-    '3xl': '1.5rem',   // 24px
-    pill: '9999px',    // Pill shape
+    xs: '0.125rem', // 2px
+    sm: '0.25rem', // 4px
+    md: '0.375rem', // 6px
+    lg: '0.5rem', // 8px
+    xl: '0.75rem', // 12px
+    '2xl': '1rem', // 16px
+    '3xl': '1.5rem', // 24px
+    pill: '9999px', // Pill shape
   },
 
   // Shadows - More subtle and sophisticated

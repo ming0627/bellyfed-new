@@ -1,0 +1,39 @@
+{
+  "name": "@bellyfed/services",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js",
+    "./auth/cognitoAuthService.js": "./dist/auth/cognitoAuthService.js",
+    "./api.js": "./dist/api.js",
+    "./analyticsService.js": "./dist/analyticsService.js",
+    "./restaurantService.js": "./dist/restaurantService.js",
+    "./reviewService.js": "./dist/reviewService.js",
+    "./userService.js": "./dist/userService.js",
+    "./userProfileService.js": "./dist/userProfileService.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "dev": "tsc --watch",
+    "lint": "eslint \"src/**/*.ts*\"",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@bellyfed/types": "workspace:*",
+    "@bellyfed/utils": "workspace:*",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "@types/uuid": "^9.0.8",
+    "eslint": "^8.56.0",
+    "eslint-config-custom": "workspace:*",
+    "jest": "^29.7.0",
+    "typescript": "^5.3.3"
+  }
+}

@@ -1,17 +1,15 @@
+import { useCallback, useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
-import { useCallback, useEffect, useState, useMemo } from 'react';
-import Head from 'next/head';
 
-import { LucideClientIcon } from './ui/lucide-icon.js';
-import { useCountry } from '../contexts/CountryContext.js';
+import { useCountry } from '../contexts/index.js';
+import { getCountryLink } from '../utils/routing.js';
 
 // Import components
 import Collections from './homepage/Collections.js';
 import FeaturedRestaurants from './homepage/FeaturedRestaurants.js';
-import Navigation from './homepage/Navigation.js';
 import PremiumBanner from './homepage/PremiumBanner.js';
-import TopCritics from './homepage/TopCritics.js';
+import { TopCritics } from './homepage/TopCritics.js';
 import TopFoodies from './homepage/TopFoodies.js';
 import TopRatedDishes from './homepage/TopRatedDishes.js';
 
@@ -127,6 +125,10 @@ const mockTopReviewers = [
   },
 ];
 
+// This file defines the main Homepage component for the Bellyfed web application.
+// It fetches and displays various sections like featured restaurants, top critics,
+// top-rated dishes, and collections. It also handles dynamic updates for some of these sections.
+
 /**
  * Homepage component for the Bellyfed application
  *
@@ -147,12 +149,12 @@ export function Homepage() {
     if (!currentCountry || !currentCountry.reviewers) return;
 
     setReviewers(
-      currentCountry.reviewers.map((r) => ({ ...r, highlight: false })),
+      currentCountry.reviewers.map(r => ({ ...r, highlight: false })),
     );
 
     if (currentCountry.dishes) {
       setDishes(
-        currentCountry.dishes.map((d) => ({
+        currentCountry.dishes.map(d => ({
           ...d,
           highlight: false,
           dish: d.name,
@@ -162,7 +164,7 @@ export function Homepage() {
 
     if (currentCountry.locations) {
       setLocations(
-        currentCountry.locations.map((l) => ({
+        currentCountry.locations.map(l => ({
           ...l,
           highlight: false,
           area: l.name,
@@ -173,19 +175,21 @@ export function Homepage() {
   }, [currentCountry]);
 
   // Memoize the country link generator to prevent unnecessary re-renders
-  const getCountryLink = useCallback((path) => {
-    if (!currentCountry || !currentCountry.code) return path;
-    return `/${currentCountry.code}${path}`;
-  }, [currentCountry]);
+  const createCountryLink = useCallback(
+    path => {
+      return getCountryLink(path, currentCountry?.code);
+    },
+    [currentCountry],
+  );
 
   // Function to randomly update stats - memoized to prevent unnecessary re-renders
   const updateStats = useCallback(() => {
     // Update reviewers with error handling
-    setReviewers((prev) => {
+    setReviewers(prev => {
       if (!prev || !Array.isArray(prev)) return [];
 
       try {
-        const newReviews = prev.map((reviewer) => {
+        const newReviews = prev.map(reviewer => {
           const newReviews = reviewer.reviews + Math.floor(Math.random() * 8);
           return {
             ...reviewer,
@@ -201,11 +205,11 @@ export function Homepage() {
     });
 
     // Update dishes with error handling
-    setDishes((prev) => {
+    setDishes(prev => {
       if (!prev || !Array.isArray(prev)) return [];
 
       try {
-        const newDishes = prev.map((dish) => {
+        const newDishes = prev.map(dish => {
           const change = Math.floor(Math.random() * 15);
           const newVotes = dish.votes + change;
           const newTrend = `↑ ${Math.floor(Math.random() * 15 + 5)}%`;
@@ -224,11 +228,11 @@ export function Homepage() {
     });
 
     // Update locations with error handling
-    setLocations((prev) => {
+    setLocations(prev => {
       if (!prev || !Array.isArray(prev)) return [];
 
       try {
-        const newLocations = prev.map((location) => {
+        const newLocations = prev.map(location => {
           const newRestaurants = Math.floor(Math.random() * 5);
           const newTotal = location.restaurants + newRestaurants;
           const newAdded = `+${Math.floor(Math.random() * 8 + 1)} this month`;
@@ -256,10 +260,10 @@ export function Homepage() {
       updateStats();
 
       // Update top reviewers
-      setTopReviewers((prev) => {
+      setTopReviewers(prev => {
         if (!prev || !Array.isArray(prev)) return mockTopReviewers;
 
-        return prev.map((reviewer) => ({
+        return prev.map(reviewer => ({
           ...reviewer,
           reviews: reviewer.reviews + Math.floor(Math.random() * 3),
           highlight: true,
@@ -271,7 +275,11 @@ export function Homepage() {
   }, [updateStats, isInitialized]);
 
   // Fetch restaurant data
-  const { data: restaurants, isLoading, error } = useQuery({
+  const {
+    // data: restaurants, // Removed unused variable
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ['restaurants', currentCountry?.code],
     queryFn: () => {
       // In a real app, this would fetch data from an API with the country code
@@ -280,52 +288,18 @@ export function Homepage() {
     // Don't refetch on window focus for demo purposes
     refetchOnWindowFocus: false,
     // Add error handling
-    onError: (err) => {
+    onError: err => {
       console.error('Error fetching restaurants:', err);
     },
     // Only enable the query when country is initialized
     enabled: !!isInitialized,
   });
 
-  // Calculate cuisine statistics - memoized to prevent recalculation on every render
-  const cuisineStats = useMemo(() => {
-    if (!restaurants || !Array.isArray(restaurants)) return [];
-
-    try {
-      const stats = new Map();
-
-      restaurants.forEach((restaurant) => {
-        if (!restaurant.cuisineTypes) return;
-
-        restaurant.cuisineTypes.forEach((cuisine) => {
-          const current = stats.get(cuisine) || { count: 0, totalRating: 0 };
-          stats.set(cuisine, {
-            count: current.count + 1,
-            totalRating: current.totalRating + (restaurant.ranking?.totalScore || 0),
-          });
-        });
-      });
-
-      return Array.from(stats.entries()).map(([cuisine, { count, totalRating }]) => ({
-        type: cuisine,
-        restaurantCount: count,
-        averageRating: count > 0 ? totalRating / count : 0,
-      }));
-    } catch (err) {
-      console.error('Error calculating cuisine stats:', err);
-      return [];
-    }
-  }, [restaurants]);
-
   // Show loading state
   if (isLoading || !isInitialized) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <LucideClientIcon
-          icon={Loader2}
-          className="w-6 h-6 animate-spin"
-          aria-label="Loading"
-        />
+        <Loader2 className="w-6 h-6 animate-spin" />
       </div>
     );
   }
@@ -334,9 +308,12 @@ export function Homepage() {
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen p-4">
-        <h1 className="text-2xl font-bold text-red-600 mb-4">Error Loading Data</h1>
+        <h1 className="text-2xl font-bold text-red-600 mb-4">
+          Error Loading Data
+        </h1>
         <p className="text-gray-700 mb-6">
-          We encountered a problem while loading the page. Please try again later.
+          We encountered a problem while loading the page. Please try again
+          later.
         </p>
         <button
           onClick={() => window.location.reload()}
@@ -350,42 +327,37 @@ export function Homepage() {
 
   return (
     <>
-      <Head>
-        <title>Bellyfed - {currentCountry?.name || 'Food Discovery'}</title>
-        <meta name="description" content={`Discover the best restaurants and dishes in ${currentCountry?.name || 'your country'}`} />
-      </Head>
-
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         <PremiumBanner
           showPremiumBanner={showPremiumBanner}
           setShowPremiumBanner={setShowPremiumBanner}
         />
 
-        <Navigation getCountryLink={getCountryLink} />
-
         {/* Main Content */}
-        <main className="container mx-auto px-4 py-8">
-          <TopFoodies
-            reviewers={reviewers}
-            dishes={dishes}
-            locations={locations}
-            countryName={currentCountry?.name || 'Your Country'}
-            getCountryLink={getCountryLink}
-          />
+        <main className="w-full">
+          <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+            <TopFoodies
+              reviewers={reviewers}
+              dishes={dishes}
+              locations={locations}
+              countryName={currentCountry?.name || 'Your Country'}
+              getCountryLink={createCountryLink}
+            />
 
-          <TopCritics topReviewers={topReviewers} />
+            <TopCritics topReviewers={topReviewers} />
 
-          <TopRatedDishes />
+            <TopRatedDishes />
 
-          <Collections
-            countryName={currentCountry?.name || 'Your Country'}
-            getCountryLink={getCountryLink}
-          />
+            <Collections
+              countryName={currentCountry?.name || 'Your Country'}
+              getCountryLink={createCountryLink}
+            />
 
-          <FeaturedRestaurants
-            countryName={currentCountry?.name || 'Your Country'}
-            getCountryLink={getCountryLink}
-          />
+            <FeaturedRestaurants
+              countryName={currentCountry?.name || 'Your Country'}
+              getCountryLink={createCountryLink}
+            />
+          </div>
         </main>
       </div>
     </>

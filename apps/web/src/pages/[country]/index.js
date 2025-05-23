@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
-import { Suspense, useEffect } from 'react';
-import HomePage from '../home';
+import { useEffect } from 'react';
+import { Homepage } from '../../components/homepage.js';
 
 export default function CountryHomePage({ country }) {
   const router = useRouter();
@@ -8,28 +8,23 @@ export default function CountryHomePage({ country }) {
 
   // Validate country code
   useEffect(() => {
-    if (routerCountry && !['my', 'sg'].includes(routerCountry)) {
+    if (routerCountry && !['us', 'my', 'sg', 'jp'].includes(routerCountry)) {
       router.replace('/my');
     }
   }, [routerCountry, router]);
 
-  return (
-    <Suspense
-      fallback={
-        <div className="flex items-center justify-center min-h-screen">
-          <div className="text-primary-500 font-medium">Loading...</div>
-        </div>
-      }
-    >
-      <HomePage />
-    </Suspense>
-  );
+  return <Homepage />;
 }
 
 // Pre-render these paths
 export async function getStaticPaths() {
   return {
-    paths: [{ params: { country: 'my' } }, { params: { country: 'sg' } }],
+    paths: [
+      { params: { country: 'us' } },
+      { params: { country: 'my' } },
+      { params: { country: 'sg' } },
+      { params: { country: 'jp' } }
+    ],
     fallback: false,
   };
 }

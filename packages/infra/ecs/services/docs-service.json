@@ -1,0 +1,69 @@
+{
+  "serviceName": "bellyfed-docs-${ENVIRONMENT}",
+  "cluster": "bellyfed-cluster-${ENVIRONMENT}",
+  "taskDefinition": "bellyfed-docs:LATEST",
+  "desiredCount": 1,
+  "launchType": "FARGATE",
+  "platformVersion": "LATEST",
+  "networkConfiguration": {
+    "awsvpcConfiguration": {
+      "subnets": [
+        "${PRIVATE_SUBNET_1}",
+        "${PRIVATE_SUBNET_2}"
+      ],
+      "securityGroups": [
+        "${ECS_SECURITY_GROUP}"
+      ],
+      "assignPublicIp": "DISABLED"
+    }
+  },
+  "loadBalancers": [
+    {
+      "targetGroupArn": "${DOCS_TARGET_GROUP_ARN}",
+      "containerName": "docs",
+      "containerPort": 3001
+    }
+  ],
+  "serviceRegistries": [
+    {
+      "registryArn": "${SERVICE_DISCOVERY_ARN}",
+      "containerName": "docs",
+      "containerPort": 3001
+    }
+  ],
+  "deploymentConfiguration": {
+    "maximumPercent": 200,
+    "minimumHealthyPercent": 0,
+    "deploymentCircuitBreaker": {
+      "enable": true,
+      "rollback": true
+    }
+  },
+  "capacityProviderStrategy": [
+    {
+      "capacityProvider": "FARGATE_SPOT",
+      "weight": 1
+    }
+  ],
+  "enableExecuteCommand": true,
+  "enableLogging": true,
+  "propagateTags": "SERVICE",
+  "tags": [
+    {
+      "key": "Environment",
+      "value": "${ENVIRONMENT}"
+    },
+    {
+      "key": "Application",
+      "value": "bellyfed"
+    },
+    {
+      "key": "Component",
+      "value": "docs"
+    },
+    {
+      "key": "Service",
+      "value": "documentation"
+    }
+  ]
+}
