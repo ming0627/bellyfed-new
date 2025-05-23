@@ -9,6 +9,7 @@ import { userProfileRouter } from './services/user-profile/router.js';
 import { dbInitRouter } from './services/db-init/router.js';
 import { analyticsProcessorRouter } from './services/analytics-processor/router.js';
 import { analyticsServiceRouter } from './services/analytics-service/router.js';
+import { analyticsWriterRouter } from './services/analytics-writer/router.js';
 import { cognitoCustomMessageRouter } from './services/cognito-custom-message/router.js';
 import { cognitoPostConfirmationRouter } from './services/cognito-post-confirmation/router.js';
 import { dlqProcessorRouter } from './services/dlq-processor/router.js';
@@ -30,6 +31,7 @@ export const appRouter = router({
   dbInit: dbInitRouter,
   analyticsProcessor: analyticsProcessorRouter,
   analyticsService: analyticsServiceRouter,
+  analyticsWriter: analyticsWriterRouter,
   cognitoCustomMessage: cognitoCustomMessageRouter,
   cognitoPostConfirmation: cognitoPostConfirmationRouter,
   dlqProcessor: dlqProcessorRouter,
