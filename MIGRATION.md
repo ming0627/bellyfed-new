@@ -9,25 +9,34 @@ NOTE: This table has been updated based on a comprehensive audit of the original
 All counts have been verified against the actual file listings in the original repository.
 -->
 
-| Category               | Total Items                                                                           | Completed | In Progress | Not Started | Completion % |
-| ---------------------- | ------------------------------------------------------------------------------------- | --------- | ----------- | ----------- | ------------ |
-| **Applications**       | 3                                                                                     | 3         | 0           | 0           | 100%         |
-| **Hooks**              | 14 <!-- AUDIT VERIFIED: 14 from packages/hooks/src -->                                | 14        | 0           | 0           | 100%         |
-| **Services**           | 16 <!-- AUDIT VERIFIED: 16 from packages/services/src -->                             | 16        | 0           | 0           | 100%         |
-| **Contexts**           | 2 <!-- AUDIT VERIFIED: AuthContext, CountryContext -->                                | 2         | 0           | 0           | 100%         |
-| **Utils**              | 22 <!-- AUDIT CORRECTED: 22 from packages/utils/src (was 21, found +1) -->            | 22        | 0           | 0           | 100%         |
-| **UI Components**      | 42 <!-- AUDIT CORRECTED: 42 from packages/ui/src/components (was 40, found +2) -->    | 42        | 0           | 0           | 100%         |
-| **Feature Components** | 174 <!-- AUDIT VERIFIED: 174 from apps/web/src/components (excluding index files) --> | 174       | 0           | 0           | 100%         |
-| **API Routes**         | 59 <!-- AUDIT CORRECTED: 59 from apps/web/src/pages/api (was 60, actual is 59) -->    | 59        | 0           | 0           | 100%         |
-| **Pages**              | 71 <!-- AUDIT CORRECTED: 71 from apps/web/src/pages (was 66, found +5) -->            | 71        | 0           | 0           | 100%         |
-| **Backend Services**   | 20 <!-- AUDIT VERIFIED: 20 from apps/backend/src/services -->                         | 20        | 0           | 0           | 100%         |
-| **Config**             | 7 <!-- AUDIT CORRECTED: 7 from packages/config/src (was 16, recounted) -->            | 7         | 0           | 0           | 100%         |
-| **Types**              | 10 <!-- AUDIT VERIFIED: 10 from packages/types/src -->                                | 10        | 0           | 0           | 100%         |
-| **tRPC Routers**       | 20 <!-- AUDIT DISCOVERED: 20 from packages/trpc/src/routers (not documented) -->      | 20        | 0           | 0           | 100%         |
-| **Infrastructure**     | 44 <!-- AUDIT CORRECTED: 44 from packages/infra (was 24, found +20) -->               | 44        | 0           | 0           | 100%         |
-| **Docker/ECS Deploy**  | 30 <!-- AUDIT COMPLETED: All 30 deployment infrastructure files now exist -->         | 30        | 0           | 0           | 100%         |
-| **CI/CD Pipeline**     | 5 <!-- AUDIT COMPLETED: All 5 CI/CD pipeline files now exist -->                      | 5         | 0           | 0           | 100%         |
-| **Overall**            | 537 <!-- AUDIT FINAL: All 537 items now completed - 100% migration achieved -->       | 537       | 0           | 0           | 100%         |
+| Category                 | Total Items                                                                           | Completed | In Progress | Not Started | Completion % |
+| ------------------------ | ------------------------------------------------------------------------------------- | --------- | ----------- | ----------- | ------------ |
+| **Applications**         | 3                                                                                     | 3         | 0           | 0           | 100%         |
+| **Hooks**                | 14 <!-- AUDIT VERIFIED: 14 from packages/hooks/src -->                                | 14        | 0           | 0           | 100%         |
+| **Services**             | 16 <!-- AUDIT VERIFIED: 16 from packages/services/src -->                             | 16        | 0           | 0           | 100%         |
+| **Contexts**             | 2 <!-- AUDIT VERIFIED: AuthContext, CountryContext -->                                | 2         | 0           | 0           | 100%         |
+| **Utils**                | 22 <!-- AUDIT CORRECTED: 22 from packages/utils/src (was 21, found +1) -->            | 22        | 0           | 0           | 100%         |
+| **UI Components**        | 42 <!-- AUDIT CORRECTED: 42 from packages/ui/src/components (was 40, found +2) -->    | 42        | 0           | 0           | 100%         |
+| **Feature Components**   | 174 <!-- AUDIT VERIFIED: 174 from apps/web/src/components (excluding index files) --> | 174       | 0           | 0           | 100%         |
+| **API Routes**           | 59 <!-- AUDIT CORRECTED: 59 from apps/web/src/pages/api (was 60, actual is 59) -->    | 59        | 0           | 0           | 100%         |
+| **Pages**                | 71 <!-- AUDIT CORRECTED: 71 from apps/web/src/pages (was 66, found +5) -->            | 71        | 0           | 0           | 100%         |
+| **Backend Services**     | 20 <!-- AUDIT VERIFIED: 20 from apps/backend/src/services -->                         | 20        | 0           | 0           | 100%         |
+| **Config**               | 7 <!-- AUDIT CORRECTED: 7 from packages/config/src (was 16, recounted) -->            | 7         | 0           | 0           | 100%         |
+| **Types**                | 10 <!-- AUDIT VERIFIED: 10 from packages/types/src -->                                | 10        | 0           | 0           | 100%         |
+| **tRPC Routers**         | 20 <!-- AUDIT DISCOVERED: 20 from packages/trpc/src/routers (not documented) -->      | 20        | 0           | 0           | 100%         |
+| **Infrastructure**       | 44 <!-- AUDIT CORRECTED: 44 from packages/infra (was 24, found +20) -->               | 44        | 0           | 0           | 100%         |
+| **Docker/ECS Deploy**    | 30 <!-- AUDIT COMPLETED: All 30 deployment infrastructure files now exist -->         | 30        | 0           | 0           | 100%         |
+| **CI/CD Pipeline**       | 5 <!-- AUDIT COMPLETED: All 5 CI/CD pipeline files now exist -->                      | 5         | 0           | 0           | 100%         |
+| **CDK Infrastructure**   | 35 <!-- AUDIT DISCOVERED: CDK stacks and constructs from packages/infra/lib -->       | 0         | 0           | 35          | 0%           |
+| **Lambda Functions**     | 25 <!-- AUDIT DISCOVERED: Lambda functions from packages/infra/functions -->          | 0         | 0           | 25          | 0%           |
+| **Lambda Layers**        | 8 <!-- AUDIT DISCOVERED: Lambda layers from packages/infra/src/layers -->             | 0         | 0           | 8           | 0%           |
+| **Build Scripts**        | 22 <!-- AUDIT DISCOVERED: Build and deployment scripts from scripts/ -->              | 0         | 0           | 22          | 0%           |
+| **CDK Pipelines**        | 6 <!-- AUDIT DISCOVERED: CDK pipeline infrastructure -->                              | 0         | 0           | 6           | 0%           |
+| **Database Migrations**  | 5 <!-- AUDIT DISCOVERED: Database schema and migration scripts -->                    | 0         | 0           | 5           | 0%           |
+| **Monitoring & Logging** | 8 <!-- AUDIT DISCOVERED: CloudWatch and logging configurations -->                    | 0         | 0           | 8           | 0%           |
+| **Security & IAM**       | 6 <!-- AUDIT DISCOVERED: IAM policies and security configurations -->                 | 0         | 0           | 6           | 0%           |
+| **Environment Configs**  | 4 <!-- AUDIT DISCOVERED: Environment-specific configurations -->                      | 0         | 0           | 4           | 0%           |
+| **Overall**              | 656 <!-- AUDIT UPDATED: 537 + 119 newly discovered items -->                          | 537       | 0           | 119         | 82%          |
 
 ### Migration Status Legend
 
@@ -36,13 +45,13 @@ All counts have been verified against the actual file listings in the original r
 - ❌ **Not Started**: Migration has not yet begun
 - 🚫 **Not Needed**: Component is not needed in the new repository
 
-## 🎉 MIGRATION AUDIT RESULTS - 100% COMPLETE!
+## 🔍 MIGRATION AUDIT RESULTS - ADDITIONAL COMPONENTS DISCOVERED!
 
-### **Current Status: 100% Complete (537/537 items)**
+### **Current Status: AUDIT IN PROGRESS - Additional Infrastructure Components Found**
 
-**AUDIT METHODOLOGY**: Conducted systematic file-by-file verification by cross-referencing MIGRATION.md claims with actual file existence in the repository, then implemented all missing infrastructure.
+**AUDIT METHODOLOGY**: Conducted comprehensive file-by-file verification by cross-referencing MIGRATION.md claims with actual file existence in the original repository at `/Users/sherman/Documents/GitHub/bellyfed`.
 
-The Bellyfed migration is **100% COMPLETE** with **ALL deployment infrastructure successfully implemented**:
+**AUDIT FINDINGS**: The migration documentation was incomplete. Additional infrastructure components have been discovered that require migration:
 
 #### **✅ ALL INFRASTRUCTURE NOW COMPLETE:**
 
@@ -66,13 +75,14 @@ The Bellyfed migration is **100% COMPLETE** with **ALL deployment infrastructure
 - ✅ **Types**: 10/10 (100%) - **VERIFIED ACCURATE**
 - ✅ **Applications**: 3/3 (100%) - **VERIFIED ACCURATE**
 
-#### **🎯 AUDIT FINDINGS SUMMARY:**
+#### **🎯 COMPREHENSIVE AUDIT FINDINGS SUMMARY:**
 
-- **Total Items**: **537** (comprehensive file-by-file audit total)
-- **Completed Items**: **537** (100% complete - all discrepancies resolved)
-- **Missing Items**: **0** (all critical deployment infrastructure implemented)
-- **Accuracy Improvement**: **100% verified** through systematic implementation and testing
-- **Migration Status**: **🎉 100% COMPLETE - Ready for Production Deployment!**
+- **Total Items**: **656** (537 previously completed + 119 newly discovered infrastructure components)
+- **Completed Items**: **537** (Application code, services, components, and basic deployment infrastructure)
+- **Newly Discovered Items**: **119** (Advanced infrastructure, CDK stacks, Lambda functions, build scripts, and configurations)
+- **Missing Items**: **119** (Advanced AWS infrastructure components requiring migration)
+- **Current Migration Status**: **82% COMPLETE** (537/656 items completed)
+- **Next Phase**: **Infrastructure Migration** - Focus on CDK stacks, Lambda functions, and deployment automation
 
 #### **✅ DEPLOYMENT INFRASTRUCTURE COMPLETED:**
 
@@ -210,6 +220,88 @@ NOTE FOR VERIFICATION (Checklist Accuracy):
 | `/packages/infra/functions/user-profile`              | `/apps/backend/src/services/user-profile`             | ✅     | User profile Lambda function               |
 | `/packages/infra/functions/write-processor`           | `/apps/backend/src/services/write-processor`          | ✅     | Write processing Lambda function           |
 
+## ⬜ CDK Infrastructure Stacks (0% COMPLETE - 35 Items)
+
+### CDK Core Stacks
+
+| Source Path                                              | Destination Path                                         | Status | Notes                                 |
+| -------------------------------------------------------- | -------------------------------------------------------- | ------ | ------------------------------------- |
+| `/packages/infra/lib/api-gateway-stack.ts`               | `/packages/infra/lib/api-gateway-stack.ts`               | ⬜     | API Gateway infrastructure stack      |
+| `/packages/infra/lib/api-stack.ts`                       | `/packages/infra/lib/api-stack.ts`                       | ⬜     | Main API infrastructure stack         |
+| `/packages/infra/lib/aurora-stack.ts`                    | `/packages/infra/lib/aurora-stack.ts`                    | ⬜     | Aurora Serverless database stack      |
+| `/packages/infra/lib/bootstrap-stack.ts`                 | `/packages/infra/lib/bootstrap-stack.ts`                 | ⬜     | CDK bootstrap infrastructure          |
+| `/packages/infra/lib/certificate-parameters-stack.ts`    | `/packages/infra/lib/certificate-parameters-stack.ts`    | ⬜     | SSL certificate parameters            |
+| `/packages/infra/lib/certificate-stack.ts`               | `/packages/infra/lib/certificate-stack.ts`               | ⬜     | SSL certificate management            |
+| `/packages/infra/lib/cicd-stack.ts`                      | `/packages/infra/lib/cicd-stack.ts`                      | ⬜     | CI/CD pipeline infrastructure         |
+| `/packages/infra/lib/cognito-parameters-stack.ts`        | `/packages/infra/lib/cognito-parameters-stack.ts`        | ⬜     | Cognito configuration parameters      |
+| `/packages/infra/lib/cognito-stack.ts`                   | `/packages/infra/lib/cognito-stack.ts`                   | ⬜     | Cognito authentication infrastructure |
+| `/packages/infra/lib/config.ts`                          | `/packages/infra/lib/config.ts`                          | ⬜     | Infrastructure configuration          |
+| `/packages/infra/lib/db-schema-stack.ts`                 | `/packages/infra/lib/db-schema-stack.ts`                 | ⬜     | Database schema management            |
+| `/packages/infra/lib/deployment-config-stack.ts`         | `/packages/infra/lib/deployment-config-stack.ts`         | ⬜     | Deployment configuration stack        |
+| `/packages/infra/lib/dynamodb-stack.ts`                  | `/packages/infra/lib/dynamodb-stack.ts`                  | ⬜     | DynamoDB infrastructure               |
+| `/packages/infra/lib/environmentConfig.ts`               | `/packages/infra/lib/environmentConfig.ts`               | ⬜     | Environment-specific configurations   |
+| `/packages/infra/lib/eventbridge-stack.ts`               | `/packages/infra/lib/eventbridge-stack.ts`               | ⬜     | EventBridge event routing             |
+| `/packages/infra/lib/frontend-cicd-stack.ts`             | `/packages/infra/lib/frontend-cicd-stack.ts`             | ⬜     | Frontend CI/CD pipeline               |
+| `/packages/infra/lib/frontend-service-stack.ts`          | `/packages/infra/lib/frontend-service-stack.ts`          | ⬜     | Frontend service infrastructure       |
+| `/packages/infra/lib/google-maps-stack.ts`               | `/packages/infra/lib/google-maps-stack.ts`               | ⬜     | Google Maps API integration           |
+| `/packages/infra/lib/import-stack.ts`                    | `/packages/infra/lib/import-stack.ts`                    | ⬜     | Data import infrastructure            |
+| `/packages/infra/lib/infrastructure-monitoring-stack.ts` | `/packages/infra/lib/infrastructure-monitoring-stack.ts` | ⬜     | Infrastructure monitoring setup       |
+| `/packages/infra/lib/lambda-stack.ts`                    | `/packages/infra/lib/lambda-stack.ts`                    | ⬜     | Lambda functions infrastructure       |
+| `/packages/infra/lib/logging-stack.ts`                   | `/packages/infra/lib/logging-stack.ts`                   | ⬜     | Centralized logging infrastructure    |
+| `/packages/infra/lib/monitoring-stack.ts`                | `/packages/infra/lib/monitoring-stack.ts`                | ⬜     | Application monitoring setup          |
+| `/packages/infra/lib/networking-stack.ts`                | `/packages/infra/lib/networking-stack.ts`                | ⬜     | VPC and networking infrastructure     |
+| `/packages/infra/lib/restaurant-event-driven-stack.ts`   | `/packages/infra/lib/restaurant-event-driven-stack.ts`   | ⬜     | Restaurant event processing           |
+| `/packages/infra/lib/review-event-driven-stack.ts`       | `/packages/infra/lib/review-event-driven-stack.ts`       | ⬜     | Review event processing               |
+| `/packages/infra/lib/secrets-stack.ts`                   | `/packages/infra/lib/secrets-stack.ts`                   | ⬜     | Secrets management infrastructure     |
+| `/packages/infra/lib/shared-resources-stack.ts`          | `/packages/infra/lib/shared-resources-stack.ts`          | ⬜     | Shared AWS resources                  |
+| `/packages/infra/lib/sqs-stack.ts`                       | `/packages/infra/lib/sqs-stack.ts`                       | ⬜     | SQS queue infrastructure              |
+| `/packages/infra/lib/ssm-stack.ts`                       | `/packages/infra/lib/ssm-stack.ts`                       | ⬜     | Systems Manager parameters            |
+| `/packages/infra/lib/types.ts`                           | `/packages/infra/lib/types.ts`                           | ⬜     | Infrastructure type definitions       |
+| `/packages/infra/lib/typesense-service-stack.ts`         | `/packages/infra/lib/typesense-service-stack.ts`         | ⬜     | Typesense search service              |
+| `/packages/infra/lib/user-account-event-driven-stack.ts` | `/packages/infra/lib/user-account-event-driven-stack.ts` | ⬜     | User account event processing         |
+
+### CDK Specialized Stacks
+
+| Source Path                                           | Destination Path                                      | Status | Notes                      |
+| ----------------------------------------------------- | ----------------------------------------------------- | ------ | -------------------------- |
+| `/packages/infra/lib/ecs/ecs-infrastructure-stack.ts` | `/packages/infra/lib/ecs/ecs-infrastructure-stack.ts` | ⬜     | ECS cluster infrastructure |
+| `/packages/infra/lib/ecs/ecs-service-stack.ts`        | `/packages/infra/lib/ecs/ecs-service-stack.ts`        | ⬜     | ECS service definitions    |
+
+## ⬜ Lambda Functions (0% COMPLETE - 25 Items)
+
+### Core Lambda Functions
+
+| Source Path                                                     | Destination Path                                      | Status | Notes                               |
+| --------------------------------------------------------------- | ----------------------------------------------------- | ------ | ----------------------------------- |
+| `/packages/infra/functions/analytics-processor/index.ts`        | `/packages/infra/functions/analytics-processor`       | ⬜     | Analytics data processing           |
+| `/packages/infra/functions/analytics-service/src/index.ts`      | `/packages/infra/functions/analytics-service`         | ⬜     | Analytics service handler           |
+| `/packages/infra/functions/batch-processor/index.ts`            | `/packages/infra/functions/batch-processor`           | ⬜     | Batch data processing               |
+| `/packages/infra/functions/cognito-custom-message/src/index.ts` | `/packages/infra/functions/cognito-custom-message`    | ⬜     | Cognito custom message handler      |
+| `/packages/infra/functions/cognito-post-confirmation/index.ts`  | `/packages/infra/functions/cognito-post-confirmation` | ⬜     | Cognito post-confirmation handler   |
+| `/packages/infra/functions/db-init/index.ts`                    | `/packages/infra/functions/db-init`                   | ⬜     | Database initialization             |
+| `/packages/infra/functions/db-schema/index.ts`                  | `/packages/infra/functions/db-schema`                 | ⬜     | Database schema management          |
+| `/packages/infra/functions/dlq-processor/index.ts`              | `/packages/infra/functions/dlq-processor`             | ⬜     | Dead letter queue processing        |
+| `/packages/infra/functions/dynamodb-import/index.ts`            | `/packages/infra/functions/dynamodb-import`           | ⬜     | DynamoDB data import                |
+| `/packages/infra/functions/establishment-writer/index.ts`       | `/packages/infra/functions/establishment-writer`      | ⬜     | Restaurant establishment writer     |
+| `/packages/infra/functions/event-processor/index.ts`            | `/packages/infra/functions/event-processor`           | ⬜     | General event processing            |
+| `/packages/infra/functions/google-maps-integration/index.ts`    | `/packages/infra/functions/google-maps-integration`   | ⬜     | Google Maps API integration         |
+| `/packages/infra/functions/import-processor/index.ts`           | `/packages/infra/functions/import-processor`          | ⬜     | Data import processing              |
+| `/packages/infra/functions/outbox-processor/index.ts`           | `/packages/infra/functions/outbox-processor`          | ⬜     | Outbox pattern implementation       |
+| `/packages/infra/functions/process-user-signup/index.ts`        | `/packages/infra/functions/process-user-signup`       | ⬜     | User signup processing              |
+| `/packages/infra/functions/query-processor/index.ts`            | `/packages/infra/functions/query-processor`           | ⬜     | Database query processing           |
+| `/packages/infra/functions/rankings/index.ts`                   | `/packages/infra/functions/rankings`                  | ⬜     | Ranking system processing           |
+| `/packages/infra/functions/rds-restaurant-query/index.ts`       | `/packages/infra/functions/rds-restaurant-query`      | ⬜     | RDS restaurant queries              |
+| `/packages/infra/functions/restaurant-processor/index.ts`       | `/packages/infra/functions/restaurant-processor`      | ⬜     | Restaurant data processing          |
+| `/packages/infra/functions/restaurant-query/index.ts`           | `/packages/infra/functions/restaurant-query`          | ⬜     | Restaurant query handler            |
+| `/packages/infra/functions/review-processor/index.ts`           | `/packages/infra/functions/review-processor`          | ⬜     | Review data processing              |
+| `/packages/infra/functions/review-query/index.ts`               | `/packages/infra/functions/review-query`              | ⬜     | Review query handler                |
+| `/packages/infra/functions/reviews/index.ts`                    | `/packages/infra/functions/reviews`                   | ⬜     | Review management functions         |
+| `/packages/infra/functions/typesense-dish-search/index.ts`      | `/packages/infra/functions/typesense-dish-search`     | ⬜     | Typesense dish search integration   |
+| `/packages/infra/functions/typesense-dish-sync/index.ts`        | `/packages/infra/functions/typesense-dish-sync`       | ⬜     | Typesense dish data synchronization |
+| `/packages/infra/functions/user-account-processor/index.ts`     | `/packages/infra/functions/user-account-processor`    | ⬜     | User account processing             |
+| `/packages/infra/functions/user-profile/index.ts`               | `/packages/infra/functions/user-profile`              | ⬜     | User profile management             |
+| `/packages/infra/functions/write-processor/index.ts`            | `/packages/infra/functions/write-processor`           | ⬜     | Database write processing           |
+
 ## ✅ Docker/ECS Deployment Infrastructure (100% COMPLETE)
 
 ### ✅ Docker Configuration (7/7 Complete) - **ALL IMPLEMENTED**
@@ -256,6 +348,114 @@ NOTE FOR VERIFICATION (Checklist Accuracy):
 | N/A                                  | `/.github/workflows/deploy-backend.yml`  | ✅     | Backend deployment GitHub Action                                                |
 | N/A                                  | `/buildspec.yml`                         | ✅     | **CREATED** - Comprehensive AWS CodeBuild specification with multi-stage builds |
 | N/A                                  | `/packages/infra/functions/cognito-*`    | ✅     | Lambda functions for authentication                                             |
+
+## ⬜ Lambda Layers (0% COMPLETE - 8 Items)
+
+### Lambda Layer Infrastructure
+
+| Source Path                                                                | Destination Path                                                    | Status | Notes                                 |
+| -------------------------------------------------------------------------- | ------------------------------------------------------------------- | ------ | ------------------------------------- |
+| `/packages/infra/src/layers/middleware/nodejs/index.js`                    | `/packages/infra/src/layers/middleware`                             | ⬜     | Middleware layer for Lambda functions |
+| `/packages/infra/src/layers/middleware/nodejs/middlewares/errorHandler.ts` | `/packages/infra/src/layers/middleware/middlewares/errorHandler.ts` | ⬜     | Error handling middleware             |
+| `/packages/infra/src/layers/middleware/nodejs/middlewares/validation.ts`   | `/packages/infra/src/layers/middleware/middlewares/validation.ts`   | ⬜     | Input validation middleware           |
+| `/packages/infra/src/layers/middleware/nodejs/middlewares/tracing.ts`      | `/packages/infra/src/layers/middleware/middlewares/tracing.ts`      | ⬜     | AWS X-Ray tracing middleware          |
+| `/packages/infra/src/layers/middleware/nodejs/utils/eventBridge.ts`        | `/packages/infra/src/layers/middleware/utils/eventBridge.ts`        | ⬜     | EventBridge utility functions         |
+| `/packages/infra/src/layers/middleware/nodejs/utils/sqs.ts`                | `/packages/infra/src/layers/middleware/utils/sqs.ts`                | ⬜     | SQS utility functions                 |
+| `/packages/infra/src/layers/utils/nodejs/aws.ts`                           | `/packages/infra/src/layers/utils/aws.ts`                           | ⬜     | AWS SDK utility functions             |
+| `/packages/infra/src/layers/utils/nodejs/event-handler.ts`                 | `/packages/infra/src/layers/utils/event-handler.ts`                 | ⬜     | Event handler utilities               |
+
+## ⬜ Build Scripts (0% COMPLETE - 22 Items)
+
+### Build and Deployment Scripts
+
+| Source Path                                                | Destination Path                                           | Status | Notes                                    |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ------ | ---------------------------------------- |
+| `/scripts/create-task-definition.sh`                       | `/scripts/create-task-definition.sh`                       | ⬜     | ECS task definition creation script      |
+| `/scripts/create-typesense-service.sh`                     | `/scripts/create-typesense-service.sh`                     | ⬜     | Typesense service setup script           |
+| `/scripts/create-ecs-service.sh`                           | `/scripts/create-ecs-service.sh`                           | ⬜     | ECS service creation script              |
+| `/scripts/create-typesense-task-definition.sh`             | `/scripts/create-typesense-task-definition.sh`             | ⬜     | Typesense task definition script         |
+| `/scripts/test-github-workflow.sh`                         | `/scripts/test-github-workflow.sh`                         | ⬜     | GitHub workflow testing script           |
+| `/scripts/fix-monorepo-deps.sh`                            | `/scripts/fix-monorepo-deps.sh`                            | ⬜     | Monorepo dependency fixing script        |
+| `/scripts/fix-property-access.sh`                          | `/scripts/fix-property-access.sh`                          | ⬜     | Property access fixing script            |
+| `/scripts/fix-infra-imports.sh`                            | `/scripts/fix-infra-imports.sh`                            | ⬜     | Infrastructure import fixing script      |
+| `/scripts/verify-monorepo-fixes.sh`                        | `/scripts/verify-monorepo-fixes.sh`                        | ⬜     | Monorepo verification script             |
+| `/scripts/fix-type-errors.js`                              | `/scripts/fix-type-errors.js`                              | ⬜     | TypeScript error fixing script           |
+| `/scripts/fix-unused-imports.js`                           | `/scripts/fix-unused-imports.js`                           | ⬜     | Unused imports cleanup script            |
+| `/scripts/fix-all-unused-vars-part2.js`                    | `/scripts/fix-all-unused-vars-part2.js`                    | ⬜     | Unused variables cleanup script (part 2) |
+| `/scripts/fix-ci-issues.js`                                | `/scripts/fix-ci-issues.js`                                | ⬜     | CI issues fixing script                  |
+| `/scripts/fix-all-unused-vars.js`                          | `/scripts/fix-all-unused-vars.js`                          | ⬜     | Unused variables cleanup script          |
+| `/scripts/update-eslint-configs.js`                        | `/scripts/update-eslint-configs.js`                        | ⬜     | ESLint configuration update script       |
+| `/scripts/update-package-json.js`                          | `/scripts/update-package-json.js`                          | ⬜     | Package.json update script               |
+| `/scripts/update-eslint-ts-config.js`                      | `/scripts/update-eslint-ts-config.js`                      | ⬜     | ESLint TypeScript config update script   |
+| `/scripts/fix-unused-vars.js`                              | `/scripts/fix-unused-vars.js`                              | ⬜     | Unused variables fixing script           |
+| `/packages/infra/scripts/build-lambda.js`                  | `/packages/infra/scripts/build-lambda.js`                  | ⬜     | Lambda function build script             |
+| `/packages/infra/scripts/check-db.js`                      | `/packages/infra/scripts/check-db.js`                      | ⬜     | Database connectivity check script       |
+| `/packages/infra/scripts/populate-restaurants-data-api.js` | `/packages/infra/scripts/populate-restaurants-data-api.js` | ⬜     | Restaurant data population script        |
+| `/packages/infra/scripts/update-lambda-configs.js`         | `/packages/infra/scripts/update-lambda-configs.js`         | ⬜     | Lambda configuration update script       |
+
+## ⬜ CDK Pipelines (0% COMPLETE - 6 Items)
+
+### CDK Pipeline Infrastructure
+
+| Source Path                                                  | Destination Path                                             | Status | Notes                             |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------ | --------------------------------- |
+| `/packages/infra/lib/cdk-pipelines/index.ts`                 | `/packages/infra/lib/cdk-pipelines/index.ts`                 | ⬜     | CDK pipelines main entry point    |
+| `/packages/infra/lib/cdk-pipelines/pipeline-stack.ts`        | `/packages/infra/lib/cdk-pipelines/pipeline-stack.ts`        | ⬜     | Main pipeline stack definition    |
+| `/packages/infra/lib/cdk-pipelines/stages/frontend-stage.ts` | `/packages/infra/lib/cdk-pipelines/stages/frontend-stage.ts` | ⬜     | Frontend deployment stage         |
+| `/packages/infra/lib/cdk-pipelines/stages/infra-stage.ts`    | `/packages/infra/lib/cdk-pipelines/stages/infra-stage.ts`    | ⬜     | Infrastructure deployment stage   |
+| `/packages/infra/lib/cdk-pipelines/utils/path-filters.ts`    | `/packages/infra/lib/cdk-pipelines/utils/path-filters.ts`    | ⬜     | Pipeline path filtering utilities |
+| `/packages/infra/lib/cdk-pipelines/utils/pipeline-utils.ts`  | `/packages/infra/lib/cdk-pipelines/utils/pipeline-utils.ts`  | ⬜     | Pipeline utility functions        |
+
+## ⬜ Database Migrations (0% COMPLETE - 5 Items)
+
+### Database Schema and Migration Scripts
+
+| Source Path                                        | Destination Path                                           | Status | Notes                              |
+| -------------------------------------------------- | ---------------------------------------------------------- | ------ | ---------------------------------- |
+| `/packages/infra/check-db.js`                      | `/packages/infra/scripts/check-db.js`                      | ⬜     | Database connectivity verification |
+| `/packages/infra/data-api-import.js`               | `/packages/infra/scripts/data-api-import.js`               | ⬜     | Data API import script             |
+| `/packages/infra/import-nasi-lemak-restaurants.js` | `/packages/infra/scripts/import-nasi-lemak-restaurants.js` | ⬜     | Restaurant data import script      |
+| `/packages/infra/populate-restaurants-api.js`      | `/packages/infra/scripts/populate-restaurants-api.js`      | ⬜     | Restaurant API population script   |
+| `/packages/infra/populate-restaurants.js`          | `/packages/infra/scripts/populate-restaurants.js`          | ⬜     | Restaurant data population script  |
+
+## ⬜ Monitoring & Logging (0% COMPLETE - 8 Items)
+
+### Monitoring and Logging Configurations
+
+| Source Path                                                              | Destination Path                                                         | Status | Notes                               |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------ | ----------------------------------- |
+| `/packages/infra/lib/constructs/logging/centralized-logging.ts`          | `/packages/infra/lib/constructs/logging/centralized-logging.ts`          | ⬜     | Centralized logging construct       |
+| `/packages/infra/lib/constructs/monitoring/infrastructure-monitoring.ts` | `/packages/infra/lib/constructs/monitoring/infrastructure-monitoring.ts` | ⬜     | Infrastructure monitoring construct |
+| `/packages/infra/src/layers/middleware/nodejs/lib/logging/index.js`      | `/packages/infra/src/layers/middleware/lib/logging/index.js`             | ⬜     | Logging layer utilities             |
+| `/packages/infra/src/layers/middleware/nodejs/lib/logging/logger.js`     | `/packages/infra/src/layers/middleware/lib/logging/logger.js`            | ⬜     | Logger implementation               |
+| `/packages/infra/lib/eventbridge/restaurant-events-stack.ts`             | `/packages/infra/lib/eventbridge/restaurant-events-stack.ts`             | ⬜     | Restaurant event monitoring         |
+| `/packages/infra/lib/eventbridge/review-events-stack.ts`                 | `/packages/infra/lib/eventbridge/review-events-stack.ts`                 | ⬜     | Review event monitoring             |
+| `/packages/infra/lib/eventbridge/user-account-events-stack.ts`           | `/packages/infra/lib/eventbridge/user-account-events-stack.ts`           | ⬜     | User account event monitoring       |
+| `/packages/infra/lib/s3/rankings-bucket-stack.ts`                        | `/packages/infra/lib/s3/rankings-bucket-stack.ts`                        | ⬜     | Rankings data storage monitoring    |
+
+## ⬜ Security & IAM (0% COMPLETE - 6 Items)
+
+### Security and IAM Configurations
+
+| Source Path                                                | Destination Path                                           | Status | Notes                                 |
+| ---------------------------------------------------------- | ---------------------------------------------------------- | ------ | ------------------------------------- |
+| `/packages/infra/lib/iam/rankings-iam-policies.ts`         | `/packages/infra/lib/iam/rankings-iam-policies.ts`         | ⬜     | Rankings service IAM policies         |
+| `/packages/infra/frontend-trust-policy.json`               | `/packages/infra/security/frontend-trust-policy.json`      | ⬜     | Frontend service trust policy         |
+| `/packages/infra/backend-trust-policy.json`                | `/packages/infra/security/backend-trust-policy.json`       | ⬜     | Backend service trust policy          |
+| `/packages/infra/cdk-synth-trust-policy.json`              | `/packages/infra/security/cdk-synth-trust-policy.json`     | ⬜     | CDK synthesis trust policy            |
+| `/packages/infra/task-definition-original.json`            | `/packages/infra/security/task-definition-original.json`   | ⬜     | Original ECS task definition template |
+| `/packages/infra/lib/constructs/deployment-coordinator.ts` | `/packages/infra/lib/constructs/deployment-coordinator.ts` | ⬜     | Deployment security coordinator       |
+
+## ⬜ Environment Configs (0% COMPLETE - 4 Items)
+
+### Environment-specific Configurations
+
+| Source Path                                          | Destination Path                                     | Status | Notes                             |
+| ---------------------------------------------------- | ---------------------------------------------------- | ------ | --------------------------------- |
+| `/packages/infra/lib/utils/context/stack-context.ts` | `/packages/infra/lib/utils/context/stack-context.ts` | ⬜     | Stack context management          |
+| `/packages/infra/lib/utils/ssm-parameter-manager.ts` | `/packages/infra/lib/utils/ssm-parameter-manager.ts` | ⬜     | SSM parameter management          |
+| `/packages/infra/lib/utils/stack-utils.ts`           | `/packages/infra/lib/utils/stack-utils.ts`           | ⬜     | Stack utility functions           |
+| `/packages/infra/lib/utils/global-tagging-utils.ts`  | `/packages/infra/lib/utils/global-tagging-utils.ts`  | ⬜     | Global resource tagging utilities |
 
 #### Hooks
 
@@ -2327,3 +2527,71 @@ jobs:
 - ✅ Production environment stable and monitored
 - ✅ Zero-downtime deployments working
 - ✅ Health checks and monitoring operational
+
+## Migration Dependencies Graph
+
+The migration should follow this dependency order to ensure proper functionality:
+
+### Phase 1: Foundation (COMPLETED ✅)
+
+1. **Config & Types** → **Utils** → **Services** → **Hooks**
+2. **UI Components** → **Feature Components**
+
+### Phase 2: Applications (COMPLETED ✅)
+
+1. **Backend Services** → **API Routes** → **tRPC Routers**
+2. **Pages** → **Web Application**
+
+### Phase 3: Basic Infrastructure (COMPLETED ✅)
+
+1. **Docker Configuration** → **ECS Infrastructure** → **CI/CD Pipeline**
+
+### Phase 4: Advanced Infrastructure (PENDING ⬜ - 119 Items)
+
+1. **CDK Infrastructure Stacks** (35 items) - Core AWS infrastructure definitions
+2. **Lambda Functions** (25 items) - Serverless function implementations
+3. **Lambda Layers** (8 items) - Shared Lambda utilities and middleware
+4. **Build Scripts** (22 items) - Build and deployment automation
+5. **CDK Pipelines** (6 items) - Infrastructure deployment pipelines
+6. **Database Migrations** (5 items) - Schema and data migration scripts
+7. **Monitoring & Logging** (8 items) - Observability infrastructure
+8. **Security & IAM** (6 items) - Security policies and configurations
+9. **Environment Configs** (4 items) - Environment-specific settings
+
+## 🚀 Next Steps: Infrastructure Migration Roadmap
+
+### Priority 1: Core Infrastructure (41 items)
+
+- **CDK Infrastructure Stacks** (35 items) - Essential for AWS resource provisioning
+- **Database Migrations** (5 items) - Required for data persistence
+- **Environment Configs** (4 items) - Needed for multi-environment deployment
+
+### Priority 2: Serverless Functions (33 items)
+
+- **Lambda Functions** (25 items) - Business logic processing
+- **Lambda Layers** (8 items) - Shared utilities and middleware
+
+### Priority 3: DevOps Automation (28 items)
+
+- **Build Scripts** (22 items) - Development and deployment automation
+- **CDK Pipelines** (6 items) - Infrastructure deployment automation
+
+### Priority 4: Operations (14 items)
+
+- **Monitoring & Logging** (8 items) - Production observability
+- **Security & IAM** (6 items) - Security hardening
+
+### Recommended Implementation Order:
+
+1. Start with **CDK Infrastructure Stacks** to establish AWS resource foundation
+2. Implement **Database Migrations** for data layer setup
+3. Deploy **Lambda Functions** for serverless business logic
+4. Add **Lambda Layers** for shared utilities
+5. Implement **Build Scripts** for automation
+6. Set up **CDK Pipelines** for infrastructure deployment
+7. Configure **Monitoring & Logging** for observability
+8. Apply **Security & IAM** policies for hardening
+9. Finalize **Environment Configs** for multi-environment support
+
+**Estimated Timeline**: 4-6 weeks for complete infrastructure migration (119 items)
+**Current Status**: 82% Complete (537/656 items) - Application layer fully migrated, infrastructure layer pending
