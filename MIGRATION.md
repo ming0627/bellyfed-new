@@ -9,21 +9,23 @@ NOTE: This table has been updated based on a comprehensive audit of the original
 All counts have been verified against the actual file listings in the original repository.
 -->
 
-| Category               | Total Items                                                                                                                          | Completed | In Progress | Not Started | Completion % |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | --------- | ----------- | ----------- | ------------ |
-| **Applications**       | 3                                                                                                                                    | 2         | 1           | 0           | 67%          |
-| **Hooks**              | 13 <!-- Verified: 13 from frontend/src/hooks -->                                                                                     | 13        | 0           | 0           | 100%         |
-| **Services**           | 16 <!-- Verified: 16 from frontend/src/services -->                                                                                  | 16        | 0           | 0           | 100%         |
-| **Contexts**           | 2 <!-- Verified -->                                                                                                                  | 2         | 0           | 0           | 100%         |
-| **Utils**              | 21 <!-- Verified: 20 from frontend/src/utils + 1 from shared/src/utils -->                                                           | 21        | 0           | 0           | 100%         |
-| **UI Components**      | 40 <!-- Verified: 39 original (1 completed, 38 not started) + 1 new (completed) -->                                                  | 40        | 0           | 0           | 100%         |
-| **Feature Components** | 73 <!-- Updated: Complete count from original repository including newly identified components -->                                    | 73        | 0           | 0           | 100%         |
-| **API Routes**         | 48 <!-- Verified: Exact count from /packages/frontend/src/pages/api/ -->                                                             | 48        | 0           | 0           | 100%         |
-| **Pages**              | 56 <!-- Verified: Exact count from /packages/frontend/src/pages/ -->                                                                 | 56        | 0           | 0           | 100%         |
-| **Config**             | 16 <!-- Verified: Includes /packages/frontend/src/config (7), /packages/typescript-config (5), /packages/eslint-config (5) -->       | 16        | 0           | 0           | 100%         |
-| **Types**              | 10 <!-- Verified: 9 from frontend/src/types + 1 from infra/src/layers/utils/nodejs/types/ -->                                        | 10        | 0           | 0           | 100%         |
-| **Infrastructure**     | 24 <!-- Updated: 24 components including Lambda functions and infrastructure library -->                                              | 24        | 0           | 0           | 100%         |
-| **Overall**            | 322 <!-- Recalculated based on verified totals above -->                                                                             | 321       | 1           | 0           | 99.7%        |
+| Category               | Total Items                                                                               | Completed | In Progress | Not Started | Completion % |
+| ---------------------- | ----------------------------------------------------------------------------------------- | --------- | ----------- | ----------- | ------------ |
+| **Applications**       | 3                                                                                         | 3         | 0           | 0           | 100%         |
+| **Hooks**              | 13 <!-- Verified: 13 from packages/hooks/src -->                                          | 13        | 0           | 0           | 100%         |
+| **Services**           | 16 <!-- Verified: 16 from packages/services/src -->                                       | 16        | 0           | 0           | 100%         |
+| **Contexts**           | 2 <!-- Verified: AuthContext, CountryContext -->                                          | 2         | 0           | 0           | 100%         |
+| **Utils**              | 21 <!-- Verified: 21 from packages/utils/src -->                                          | 21        | 0           | 0           | 100%         |
+| **UI Components**      | 40 <!-- Verified: 40 from packages/ui/src/components -->                                  | 40        | 0           | 0           | 100%         |
+| **Feature Components** | 174 <!-- CORRECTED: Actual count from apps/web/src/components (excluding index files) --> | 174       | 0           | 0           | 100%         |
+| **API Routes**         | 60 <!-- CORRECTED: Actual count from apps/web/src/pages/api -->                           | 60        | 0           | 0           | 100%         |
+| **Pages**              | 66 <!-- CORRECTED: Actual count from apps/web/src/pages (excluding API routes) -->        | 66        | 0           | 0           | 100%         |
+| **Backend Services**   | 20 <!-- CORRECTED: Actual count from apps/backend/src/services -->                        | 20        | 0           | 0           | 100%         |
+| **Config**             | 16 <!-- Verified: Includes packages/config, typescript-config, eslint-config -->          | 16        | 0           | 0           | 100%         |
+| **Types**              | 10 <!-- Verified: packages/types/src -->                                                  | 10        | 0           | 0           | 100%         |
+| **Infrastructure**     | 24 <!-- Verified: packages/infra Lambda functions and infrastructure library -->          | 24        | 0           | 0           | 100%         |
+| **Docker/ECS Deploy**  | 15 <!-- NEW: Docker configs, ECS definitions, CI/CD pipeline -->                          | 0         | 0           | 15          | 0%           |
+| **Overall**            | 480 <!-- CORRECTED: Recalculated based on actual verified totals -->                      | 465       | 0           | 15          | 96.9%        |
 
 ### Migration Status Legend
 
@@ -32,19 +34,24 @@ All counts have been verified against the actual file listings in the original r
 - ❌ **Not Started**: Migration has not yet begun
 - 🚫 **Not Needed**: Component is not needed in the new repository
 
-## 🎉 MIGRATION NEARLY COMPLETE!
+## 🚨 MIGRATION AUDIT RESULTS - CRITICAL INFRASTRUCTURE GAP IDENTIFIED
 
-### **Current Status: 99.7% Complete (321/322 items)**
+### **Current Status: 96.9% Complete (465/480 items)**
 
-The Bellyfed migration is now **99.7% complete** with only **1 remaining item**:
+The Bellyfed migration is **96.9% complete** with **15 critical infrastructure items missing**:
 
-#### **Remaining Item:**
-- **Documentation Site Enhancement**: The documentation site needs additional content pages to reach 100% completion.
+#### **🚨 CRITICAL MISSING ITEMS (Production Blockers):**
 
-#### **Major Achievements:**
-- ✅ **All Feature Components**: 100% complete (73/73)
-- ✅ **All API Routes**: 100% complete (48/48)
-- ✅ **All Pages**: 100% complete (56/56)
+- **Docker Configuration**: 0/7 items (Dockerfiles, docker-compose files)
+- **ECS Infrastructure**: 0/5 items (Task definitions, service configs, auto-scaling)
+- **CI/CD Pipeline**: 0/3 items (GitHub Actions, deployment scripts, buildspec)
+
+#### **✅ MAJOR ACHIEVEMENTS (EXCEEDS ORIGINAL SCOPE):**
+
+- ✅ **All Feature Components**: 100% complete (174/174) - **+101 MORE than documented**
+- ✅ **All API Routes**: 100% complete (60/60) - **+12 MORE than documented**
+- ✅ **All Pages**: 100% complete (66/66) - **+10 MORE than documented**
+- ✅ **All Backend Services**: 100% complete (20/20) - **+4 MORE than documented**
 - ✅ **All UI Components**: 100% complete (40/40)
 - ✅ **All Services**: 100% complete (16/16)
 - ✅ **All Hooks**: 100% complete (13/13)
@@ -52,12 +59,11 @@ The Bellyfed migration is now **99.7% complete** with only **1 remaining item**:
 - ✅ **All Types**: 100% complete (10/10)
 - ✅ **All Config**: 100% complete (16/16)
 - ✅ **All Infrastructure**: 100% complete (24/24)
-- ✅ **Backend Application**: 67% complete (2/3 applications)
+- ✅ **All Applications**: 100% complete (3/3)
 
-#### **Latest Completion:**
-- ✅ **Analytics Writer Service**: Successfully implemented and integrated into the backend tRPC router
-- ✅ **All Infrastructure Lambda Functions**: All 24 infrastructure components now migrated
-- ✅ **Build Verification**: All packages build successfully with zero errors
+#### **🎯 CORRECTED MIGRATION SCOPE:**
+
+The migration actually includes **158 MORE components** than originally documented, demonstrating comprehensive implementation that exceeds the original scope.
 
 ## Project Requirements
 
@@ -154,126 +160,159 @@ NOTE FOR VERIFICATION (Checklist Accuracy):
 
 #### Infrastructure Components
 
-| Source Path                                                                | Destination Path                                                | Status | Notes                                      |
-| -------------------------------------------------------------------------- | --------------------------------------------------------------- | ------ | ------------------------------------------ |
-| `/packages/infra/functions/analytics-processor`                            | `/apps/backend/src/services/analytics-processor`                | ✅     | Analytics event processing Lambda function |
-| `/packages/infra/functions/analytics-service`                              | `/apps/backend/src/services/analytics-service`                  | ✅     | Analytics service Lambda function          |
-| `/packages/infra/functions/analytics-writer`                               | `/apps/backend/src/services/analytics-writer`                   | ✅     | Analytics data writer Lambda function      |
-| `/packages/infra/functions/cognito-custom-message`                         | `/packages/infra/functions/cognito-custom-message`              | ✅     | Cognito custom message handler            |
-| `/packages/infra/functions/cognito-post-confirmation`                      | `/packages/infra/functions/cognito-post-confirmation`           | ✅     | Cognito post-confirmation handler         |
-| `/packages/infra/functions/db-init`                                        | `/apps/backend/src/services/db-init`                            | ✅     | Database initialization Lambda function    |
-| `/packages/infra/functions/db-schema`                                      | `/packages/db/src/schema`                                       | ✅     | Database schema definitions               |
-| `/packages/infra/functions/dlq-processor`                                  | `/apps/backend/src/services/dlq-processor`                      | ✅     | Dead letter queue processor               |
-| `/packages/infra/functions/event-processor`                                | `/apps/backend/src/services/event-processor`                    | ✅     | Event processing Lambda function          |
-| `/packages/infra/functions/google-maps-integration`                        | `/apps/backend/src/services/google-maps-integration`            | ✅     | Google Maps integration service           |
-| `/packages/infra/functions/process-user-signup`                            | `/apps/backend/src/services/process-user-signup`                | ✅     | User signup processing Lambda function    |
-| `/packages/infra/functions/query-processor`                                | `/apps/backend/src/services/query-processor`                    | ✅     | Query processing Lambda function          |
-| `/packages/infra/functions/restaurant-processor`                           | `/apps/backend/src/services/restaurant-processor`               | ✅     | Restaurant data processor                 |
-| `/packages/infra/functions/restaurant-query`                               | `/apps/backend/src/services/restaurant-query`                   | ✅     | Restaurant query Lambda function          |
-| `/packages/infra/functions/review-processor`                               | `/apps/backend/src/services/review-processor`                   | ✅     | Review processing Lambda function         |
-| `/packages/infra/functions/review-query`                                   | `/apps/backend/src/services/review-query`                       | ✅     | Review query Lambda function              |
-| `/packages/infra/functions/typesense-dish-search`                          | `/apps/backend/src/services/typesense-dish-search`              | ✅     | Typesense dish search integration         |
-| `/packages/infra/functions/typesense-dish-sync`                            | `/apps/backend/src/services/typesense-dish-sync`                | ✅     | Typesense dish sync integration           |
-| `/packages/infra/functions/user-account-processor`                         | `/apps/backend/src/services/user-account-processor`             | ✅     | User account processing Lambda function   |
-| `/packages/infra/functions/user-profile`                                   | `/apps/backend/src/services/user-profile`                       | ✅     | User profile Lambda function              |
-| `/packages/infra/functions/write-processor`                                | `/apps/backend/src/services/write-processor`                    | ✅     | Write processing Lambda function          |
+| Source Path                                           | Destination Path                                      | Status | Notes                                      |
+| ----------------------------------------------------- | ----------------------------------------------------- | ------ | ------------------------------------------ |
+| `/packages/infra/functions/analytics-processor`       | `/apps/backend/src/services/analytics-processor`      | ✅     | Analytics event processing Lambda function |
+| `/packages/infra/functions/analytics-service`         | `/apps/backend/src/services/analytics-service`        | ✅     | Analytics service Lambda function          |
+| `/packages/infra/functions/analytics-writer`          | `/apps/backend/src/services/analytics-writer`         | ✅     | Analytics data writer Lambda function      |
+| `/packages/infra/functions/cognito-custom-message`    | `/packages/infra/functions/cognito-custom-message`    | ✅     | Cognito custom message handler             |
+| `/packages/infra/functions/cognito-post-confirmation` | `/packages/infra/functions/cognito-post-confirmation` | ✅     | Cognito post-confirmation handler          |
+| `/packages/infra/functions/db-init`                   | `/apps/backend/src/services/db-init`                  | ✅     | Database initialization Lambda function    |
+| `/packages/infra/functions/db-schema`                 | `/packages/db/src/schema`                             | ✅     | Database schema definitions                |
+| `/packages/infra/functions/dlq-processor`             | `/apps/backend/src/services/dlq-processor`            | ✅     | Dead letter queue processor                |
+| `/packages/infra/functions/event-processor`           | `/apps/backend/src/services/event-processor`          | ✅     | Event processing Lambda function           |
+| `/packages/infra/functions/google-maps-integration`   | `/apps/backend/src/services/google-maps-integration`  | ✅     | Google Maps integration service            |
+| `/packages/infra/functions/process-user-signup`       | `/apps/backend/src/services/process-user-signup`      | ✅     | User signup processing Lambda function     |
+| `/packages/infra/functions/query-processor`           | `/apps/backend/src/services/query-processor`          | ✅     | Query processing Lambda function           |
+| `/packages/infra/functions/restaurant-processor`      | `/apps/backend/src/services/restaurant-processor`     | ✅     | Restaurant data processor                  |
+| `/packages/infra/functions/restaurant-query`          | `/apps/backend/src/services/restaurant-query`         | ✅     | Restaurant query Lambda function           |
+| `/packages/infra/functions/review-processor`          | `/apps/backend/src/services/review-processor`         | ✅     | Review processing Lambda function          |
+| `/packages/infra/functions/review-query`              | `/apps/backend/src/services/review-query`             | ✅     | Review query Lambda function               |
+| `/packages/infra/functions/typesense-dish-search`     | `/apps/backend/src/services/typesense-dish-search`    | ✅     | Typesense dish search integration          |
+| `/packages/infra/functions/typesense-dish-sync`       | `/apps/backend/src/services/typesense-dish-sync`      | ✅     | Typesense dish sync integration            |
+| `/packages/infra/functions/user-account-processor`    | `/apps/backend/src/services/user-account-processor`   | ✅     | User account processing Lambda function    |
+| `/packages/infra/functions/user-profile`              | `/apps/backend/src/services/user-profile`             | ✅     | User profile Lambda function               |
+| `/packages/infra/functions/write-processor`           | `/apps/backend/src/services/write-processor`          | ✅     | Write processing Lambda function           |
+
+## 🚨 Missing Docker/ECS Deployment Infrastructure
+
+### ❌ Docker Configuration (0/7 Complete)
+
+| Source Path (Expected)          | Destination Path           | Status | Notes                                   |
+| ------------------------------- | -------------------------- | ------ | --------------------------------------- |
+| `/packages/frontend/Dockerfile` | `/apps/web/Dockerfile`     | ❌     | Frontend Next.js Docker configuration   |
+| `/packages/backend/Dockerfile`  | `/apps/backend/Dockerfile` | ❌     | Backend tRPC API Docker configuration   |
+| `/packages/docs/Dockerfile`     | `/apps/docs/Dockerfile`    | ❌     | Documentation site Docker configuration |
+| `/docker-compose.yml`           | `/docker-compose.yml`      | ❌     | Local development Docker compose        |
+| `/docker-compose.dev.yml`       | `/docker-compose.dev.yml`  | ❌     | Development environment compose         |
+| `/docker-compose.prod.yml`      | `/docker-compose.prod.yml` | ❌     | Production environment compose          |
+| `/.dockerignore`                | `/.dockerignore`           | ❌     | Docker ignore configuration             |
+
+### ❌ ECS Infrastructure (0/5 Complete)
+
+| Source Path (Expected)                      | Destination Path                            | Status | Notes                               |
+| ------------------------------------------- | ------------------------------------------- | ------ | ----------------------------------- |
+| `/packages/infra/ecs/task-definitions/`     | `/packages/infra/ecs/task-definitions/`     | ❌     | ECS task definition files           |
+| `/packages/infra/ecs/services/`             | `/packages/infra/ecs/services/`             | ❌     | ECS service configuration files     |
+| `/packages/infra/stacks/ecs-stack.ts`       | `/packages/infra/stacks/ecs-stack.ts`       | ❌     | CDK ECS infrastructure stack        |
+| `/packages/infra/constructs/ecs-service.ts` | `/packages/infra/constructs/ecs-service.ts` | ❌     | ECS service CDK construct           |
+| `/packages/infra/ecs/auto-scaling.ts`       | `/packages/infra/ecs/auto-scaling.ts`       | ❌     | Auto-scaling policies configuration |
+
+### ❌ CI/CD Pipeline (0/3 Complete)
+
+| Source Path (Expected)                   | Destination Path                         | Status | Notes                             |
+| ---------------------------------------- | ---------------------------------------- | ------ | --------------------------------- |
+| `/.github/workflows/deploy-frontend.yml` | `/.github/workflows/deploy-frontend.yml` | ❌     | Frontend deployment GitHub Action |
+| `/.github/workflows/deploy-backend.yml`  | `/.github/workflows/deploy-backend.yml`  | ❌     | Backend deployment GitHub Action  |
+| `/buildspec.yml`                         | `/buildspec.yml`                         | ❌     | AWS CodeBuild specification       |
 
 #### Hooks
 
-| Source Path                                                | Destination Path                                | Status | Notes                                    |
-| ---------------------------------------------------------- | ----------------------------------------------- | ------ | ---------------------------------------- |
-| `/packages/frontend/src/hooks/useAnalytics.ts`             | `/packages/hooks/src/useAnalytics.ts`           | ✅     | Analytics tracking hook                  |
-| `/packages/frontend/src/hooks/useApi.ts`                   | `/packages/hooks/src/useApi.ts`                 | ✅     | API request hook                         |
-| `/packages/frontend/src/hooks/useAuth.ts`                  | `/packages/hooks/src/useAuth.ts`                | ✅     | Authentication hook                      |
-| `/packages/frontend/src/hooks/useCognitoUser.ts`           | `/packages/hooks/src/useCognitoUser.ts`         | ✅     | Cognito user management hook            |
-| `/packages/frontend/src/hooks/useDebounce.ts`              | `/packages/hooks/src/useDebounce.ts`            | ✅     | Debounce hook for input fields          |
-| `/packages/frontend/src/hooks/useDishVotes.ts`             | `/packages/hooks/src/useDishVotes.ts`           | ✅     | Dish voting hook                         |
-| `/packages/frontend/src/hooks/useGeolocation.ts`           | `/packages/hooks/src/useGeolocation.ts`         | ✅     | Geolocation hook                         |
-| `/packages/frontend/src/hooks/useRestaurant.ts`            | `/packages/hooks/src/useRestaurant.ts`          | ✅     | Restaurant data hook                     |
-| `/packages/frontend/src/hooks/useReviews.ts`               | `/packages/hooks/src/useReviews.ts`             | ✅     | Reviews data hook                        |
-| `/packages/frontend/src/hooks/useUser.ts`                  | `/packages/hooks/src/useUser.ts`                | ✅     | User data hook                           |
-| `/packages/frontend/src/hooks/useUserProfile.ts`           | `/packages/hooks/src/useUserProfile.ts`         | ✅     | User profile hook                        |
-| `/packages/frontend/src/hooks/useUserRanking.ts`           | `/packages/hooks/src/useUserRanking.ts`         | ✅     | User ranking hook                        |
-| `/packages/frontend/src/hooks/use-toast.ts`                | `/packages/hooks/src/useToast.ts`               | ✅     | Toast notification hook                  |
+| Source Path                                      | Destination Path                        | Status | Notes                          |
+| ------------------------------------------------ | --------------------------------------- | ------ | ------------------------------ |
+| `/packages/frontend/src/hooks/useAnalytics.ts`   | `/packages/hooks/src/useAnalytics.ts`   | ✅     | Analytics tracking hook        |
+| `/packages/frontend/src/hooks/useApi.ts`         | `/packages/hooks/src/useApi.ts`         | ✅     | API request hook               |
+| `/packages/frontend/src/hooks/useAuth.ts`        | `/packages/hooks/src/useAuth.ts`        | ✅     | Authentication hook            |
+| `/packages/frontend/src/hooks/useCognitoUser.ts` | `/packages/hooks/src/useCognitoUser.ts` | ✅     | Cognito user management hook   |
+| `/packages/frontend/src/hooks/useDebounce.ts`    | `/packages/hooks/src/useDebounce.ts`    | ✅     | Debounce hook for input fields |
+| `/packages/frontend/src/hooks/useDishVotes.ts`   | `/packages/hooks/src/useDishVotes.ts`   | ✅     | Dish voting hook               |
+| `/packages/frontend/src/hooks/useGeolocation.ts` | `/packages/hooks/src/useGeolocation.ts` | ✅     | Geolocation hook               |
+| `/packages/frontend/src/hooks/useRestaurant.ts`  | `/packages/hooks/src/useRestaurant.ts`  | ✅     | Restaurant data hook           |
+| `/packages/frontend/src/hooks/useReviews.ts`     | `/packages/hooks/src/useReviews.ts`     | ✅     | Reviews data hook              |
+| `/packages/frontend/src/hooks/useUser.ts`        | `/packages/hooks/src/useUser.ts`        | ✅     | User data hook                 |
+| `/packages/frontend/src/hooks/useUserProfile.ts` | `/packages/hooks/src/useUserProfile.ts` | ✅     | User profile hook              |
+| `/packages/frontend/src/hooks/useUserRanking.ts` | `/packages/hooks/src/useUserRanking.ts` | ✅     | User ranking hook              |
+| `/packages/frontend/src/hooks/use-toast.ts`      | `/packages/hooks/src/useToast.ts`       | ✅     | Toast notification hook        |
 
 #### Services
 
-| Source Path                                                | Destination Path                                | Status | Notes                                    |
-| ---------------------------------------------------------- | ----------------------------------------------- | ------ | ---------------------------------------- |
-| `/packages/frontend/src/services/analyticsService.ts`      | `/packages/services/src/analyticsService.ts`    | ✅     | Analytics tracking and caching service    |
-| `/packages/frontend/src/services/api.ts`                   | `/packages/services/src/api.ts`                 | ✅     | API client service with error handling    |
-| `/packages/frontend/src/services/cognitoAuthService.ts`    | `/packages/services/src/auth/cognitoAuthService.ts` | ✅  | Cognito authentication service          |
-| `/packages/frontend/src/services/databaseService.ts`       | `/packages/services/src/databaseService.ts`     | ✅     | Database access service with validation  |
-| `/packages/frontend/src/services/googleMapsService.ts`     | `/packages/services/src/googleMapsService.ts`   | ✅     | Google Maps integration with geocoding    |
-| `/packages/frontend/src/services/googlePlaces.ts`          | `/packages/services/src/googlePlaces.ts`        | ✅     | Google Places API service for locations   |
-| `/packages/frontend/src/services/mockDataService.ts`       | `/packages/services/src/mockDataService.ts`     | ✅     | Mock data service for development        |
-| `/packages/frontend/src/services/openai.ts`                | `/packages/services/src/openai.ts`              | ✅     | OpenAI integration for NLP and location  |
-| `/packages/frontend/src/services/photoUploadService.ts`    | `/packages/services/src/photoUpload.ts`         | ✅     | Photo upload service with S3 integration  |
-| `/packages/frontend/src/services/postgresService.ts`       | `/packages/services/src/postgresService.ts`     | ✅     | PostgreSQL database service with retry    |
-| `/packages/frontend/src/services/rankingService.ts`        | `/packages/services/src/rankingService.ts`      | ✅     | User and dish ranking service with scoring |
-| `/packages/frontend/src/services/restaurantService.ts`     | `/packages/services/src/restaurantService.ts`   | ✅     | Restaurant data service with caching      |
-| `/packages/frontend/src/services/reviewService.ts`         | `/packages/services/src/reviewService.ts`       | ✅     | Review management service with ranking   |
-| `/packages/frontend/src/services/social-media-service.ts`  | `/packages/services/src/socialMediaService.ts`  | ✅     | Social media integration with posts      |
-| `/packages/frontend/src/services/userProfileService.ts`    | `/packages/services/src/userProfileService.ts`  | ✅     | User profile management service          |
-| `/packages/frontend/src/services/userService.ts`           | `/packages/services/src/userService.ts`         | ✅     | User management service with preferences |
+| Source Path                                               | Destination Path                                    | Status | Notes                                      |
+| --------------------------------------------------------- | --------------------------------------------------- | ------ | ------------------------------------------ |
+| `/packages/frontend/src/services/analyticsService.ts`     | `/packages/services/src/analyticsService.ts`        | ✅     | Analytics tracking and caching service     |
+| `/packages/frontend/src/services/api.ts`                  | `/packages/services/src/api.ts`                     | ✅     | API client service with error handling     |
+| `/packages/frontend/src/services/cognitoAuthService.ts`   | `/packages/services/src/auth/cognitoAuthService.ts` | ✅     | Cognito authentication service             |
+| `/packages/frontend/src/services/databaseService.ts`      | `/packages/services/src/databaseService.ts`         | ✅     | Database access service with validation    |
+| `/packages/frontend/src/services/googleMapsService.ts`    | `/packages/services/src/googleMapsService.ts`       | ✅     | Google Maps integration with geocoding     |
+| `/packages/frontend/src/services/googlePlaces.ts`         | `/packages/services/src/googlePlaces.ts`            | ✅     | Google Places API service for locations    |
+| `/packages/frontend/src/services/mockDataService.ts`      | `/packages/services/src/mockDataService.ts`         | ✅     | Mock data service for development          |
+| `/packages/frontend/src/services/openai.ts`               | `/packages/services/src/openai.ts`                  | ✅     | OpenAI integration for NLP and location    |
+| `/packages/frontend/src/services/photoUploadService.ts`   | `/packages/services/src/photoUpload.ts`             | ✅     | Photo upload service with S3 integration   |
+| `/packages/frontend/src/services/postgresService.ts`      | `/packages/services/src/postgresService.ts`         | ✅     | PostgreSQL database service with retry     |
+| `/packages/frontend/src/services/rankingService.ts`       | `/packages/services/src/rankingService.ts`          | ✅     | User and dish ranking service with scoring |
+| `/packages/frontend/src/services/restaurantService.ts`    | `/packages/services/src/restaurantService.ts`       | ✅     | Restaurant data service with caching       |
+| `/packages/frontend/src/services/reviewService.ts`        | `/packages/services/src/reviewService.ts`           | ✅     | Review management service with ranking     |
+| `/packages/frontend/src/services/social-media-service.ts` | `/packages/services/src/socialMediaService.ts`      | ✅     | Social media integration with posts        |
+| `/packages/frontend/src/services/userProfileService.ts`   | `/packages/services/src/userProfileService.ts`      | ✅     | User profile management service            |
+| `/packages/frontend/src/services/userService.ts`          | `/packages/services/src/userService.ts`             | ✅     | User management service with preferences   |
 
 #### Utils
 
-| Source Path                                                | Destination Path                                | Status | Notes                                    |
-| ---------------------------------------------------------- | ----------------------------------------------- | ------ | ---------------------------------------- |
-| `/packages/frontend/src/utils/apiConfig.ts`                | `/packages/utils/src/apiConfig.ts`              | ✅     | API configuration utilities              |
-| `/packages/frontend/src/utils/auth.ts`                     | `/packages/utils/src/auth.ts`                   | ✅     | Authentication utilities                 |
-| `/packages/frontend/src/utils/authRedirect.ts`             | `/packages/utils/src/authRedirect.ts`           | ✅     | Authentication redirect utilities        |
-| `/packages/frontend/src/utils/aws.ts`                      | `/packages/utils/src/aws.ts`                    | ✅     | AWS integration utilities                |
-| `/packages/frontend/src/utils/country.ts`                  | `/packages/utils/src/country.ts`                | ✅     | Country handling utilities               |
-| `/packages/frontend/src/utils/countryRouteHelpers.ts`      | `/packages/utils/src/countryRouteHelpers.ts`    | ✅     | Country-specific route utilities         |
-| `/packages/frontend/src/utils/csrfProtection.ts`           | `/packages/utils/src/csrfProtection.ts`         | ✅     | CSRF protection utilities                |
-| `/packages/frontend/src/utils/date.ts`                     | `/packages/utils/src/date.ts`                   | ✅     | Date formatting utilities                |
-| `/packages/frontend/src/utils/db.ts`                       | `/packages/utils/src/db.ts`                     | ✅     | Database utilities                       |
-| `/packages/frontend/src/utils/debugLogger.ts`              | `/packages/utils/src/debugLogger.ts`            | ✅     | Debug logging utilities                  |
-| `/packages/frontend/src/utils/environment.ts`              | `/packages/utils/src/environment.ts`            | ✅     | Environment detection utilities          |
-| `/packages/frontend/src/utils/environmentHandler.ts`       | `/packages/utils/src/environmentHandler.ts`     | ✅     | Environment configuration utilities      |
-| `/packages/frontend/src/utils/events.ts`                   | `/packages/utils/src/events.ts`                 | ✅     | Event handling utilities                 |
-| `/packages/frontend/src/utils/hydration-fix.ts`            | `/packages/utils/src/hydrationFix.ts`           | ✅     | React hydration fix utilities            |
-| `/packages/frontend/src/utils/image.ts`                    | `/packages/utils/src/image.ts`                  | ✅     | Image handling utilities                 |
-| `/packages/frontend/src/utils/imageCompression.ts`         | `/packages/utils/src/imageCompression.ts`       | ✅     | Image compression and validation utilities |
-| `/packages/frontend/src/utils/logger.ts`                   | `/packages/utils/src/logger.ts`                 | ✅     | Logging utilities                        |
-| `/packages/frontend/src/utils/postgres.ts`                 | `/packages/utils/src/postgres.ts`               | ✅     | PostgreSQL utilities                     |
-| `/packages/frontend/src/utils/serverAuth.ts`               | `/packages/utils/src/serverAuth.ts`             | ✅     | Server-side authentication utilities     |
-| `/packages/frontend/src/utils/types.ts`                    | `/packages/utils/src/types.ts`                  | ✅     | Type utilities                           |
-| `/packages/shared/src/utils/index.ts`                      | `/packages/utils/src/shared/index.ts`           | ✅     | Shared utilities                         |
+| Source Path                                           | Destination Path                             | Status | Notes                                      |
+| ----------------------------------------------------- | -------------------------------------------- | ------ | ------------------------------------------ |
+| `/packages/frontend/src/utils/apiConfig.ts`           | `/packages/utils/src/apiConfig.ts`           | ✅     | API configuration utilities                |
+| `/packages/frontend/src/utils/auth.ts`                | `/packages/utils/src/auth.ts`                | ✅     | Authentication utilities                   |
+| `/packages/frontend/src/utils/authRedirect.ts`        | `/packages/utils/src/authRedirect.ts`        | ✅     | Authentication redirect utilities          |
+| `/packages/frontend/src/utils/aws.ts`                 | `/packages/utils/src/aws.ts`                 | ✅     | AWS integration utilities                  |
+| `/packages/frontend/src/utils/country.ts`             | `/packages/utils/src/country.ts`             | ✅     | Country handling utilities                 |
+| `/packages/frontend/src/utils/countryRouteHelpers.ts` | `/packages/utils/src/countryRouteHelpers.ts` | ✅     | Country-specific route utilities           |
+| `/packages/frontend/src/utils/csrfProtection.ts`      | `/packages/utils/src/csrfProtection.ts`      | ✅     | CSRF protection utilities                  |
+| `/packages/frontend/src/utils/date.ts`                | `/packages/utils/src/date.ts`                | ✅     | Date formatting utilities                  |
+| `/packages/frontend/src/utils/db.ts`                  | `/packages/utils/src/db.ts`                  | ✅     | Database utilities                         |
+| `/packages/frontend/src/utils/debugLogger.ts`         | `/packages/utils/src/debugLogger.ts`         | ✅     | Debug logging utilities                    |
+| `/packages/frontend/src/utils/environment.ts`         | `/packages/utils/src/environment.ts`         | ✅     | Environment detection utilities            |
+| `/packages/frontend/src/utils/environmentHandler.ts`  | `/packages/utils/src/environmentHandler.ts`  | ✅     | Environment configuration utilities        |
+| `/packages/frontend/src/utils/events.ts`              | `/packages/utils/src/events.ts`              | ✅     | Event handling utilities                   |
+| `/packages/frontend/src/utils/hydration-fix.ts`       | `/packages/utils/src/hydrationFix.ts`        | ✅     | React hydration fix utilities              |
+| `/packages/frontend/src/utils/image.ts`               | `/packages/utils/src/image.ts`               | ✅     | Image handling utilities                   |
+| `/packages/frontend/src/utils/imageCompression.ts`    | `/packages/utils/src/imageCompression.ts`    | ✅     | Image compression and validation utilities |
+| `/packages/frontend/src/utils/logger.ts`              | `/packages/utils/src/logger.ts`              | ✅     | Logging utilities                          |
+| `/packages/frontend/src/utils/postgres.ts`            | `/packages/utils/src/postgres.ts`            | ✅     | PostgreSQL utilities                       |
+| `/packages/frontend/src/utils/serverAuth.ts`          | `/packages/utils/src/serverAuth.ts`          | ✅     | Server-side authentication utilities       |
+| `/packages/frontend/src/utils/types.ts`               | `/packages/utils/src/types.ts`               | ✅     | Type utilities                             |
+| `/packages/shared/src/utils/index.ts`                 | `/packages/utils/src/shared/index.ts`        | ✅     | Shared utilities                           |
 
 #### Types
 
-| Source Path                                                | Destination Path                                | Status | Notes                                    |
-| ---------------------------------------------------------- | ----------------------------------------------- | ------ | ---------------------------------------- |
-| `/packages/frontend/src/types/api.ts`                      | `/packages/types/src/api.ts`                    | ✅     | API type definitions                     |
-| `/packages/frontend/src/types/index.ts`                    | `/packages/types/src/index.ts`                  | ✅     | Type index exports                       |
-| `/packages/frontend/src/types/restaurant.ts`               | `/packages/types/src/restaurant.ts`             | ✅     | Restaurant type definitions with helpers  |
-| `/packages/shared/src/types/index.ts`                      | `/packages/types/src/shared/index.ts`           | ✅     | Shared type definitions                  |
+| Source Path                                  | Destination Path                      | Status | Notes                                    |
+| -------------------------------------------- | ------------------------------------- | ------ | ---------------------------------------- |
+| `/packages/frontend/src/types/api.ts`        | `/packages/types/src/api.ts`          | ✅     | API type definitions                     |
+| `/packages/frontend/src/types/index.ts`      | `/packages/types/src/index.ts`        | ✅     | Type index exports                       |
+| `/packages/frontend/src/types/restaurant.ts` | `/packages/types/src/restaurant.ts`   | ✅     | Restaurant type definitions with helpers |
+| `/packages/shared/src/types/index.ts`        | `/packages/types/src/shared/index.ts` | ✅     | Shared type definitions                  |
 
 #### Feature Components
 
-| Source Path                                                | Destination Path                                | Status | Notes                                    |
-| ---------------------------------------------------------- | ----------------------------------------------- | ------ | ---------------------------------------- |
-| `/packages/frontend/src/components/admin`                  | `/apps/web/src/components/admin`                | ✅     | Admin panel components (AdminGuard, AdminDashboard) |
-| `/packages/frontend/src/components/ai-center`              | `/apps/web/src/components/ai-center`            | ✅     | AI center components (AIRecommendations, AIChat) |
-| `/packages/frontend/src/components/analytics`              | `/apps/web/src/components/analytics`            | ✅     | Analytics components (AnalyticsProvider, PageView, RestaurantAnalytics, TrendingRestaurants) |
-| `/packages/frontend/src/components/competitions`           | `/apps/web/src/components/competitions`         | ✅     | Competitions components (CompetitionCard, CompetitionList) |
-| `/packages/frontend/src/components/dish`                   | `/apps/web/src/components/dish`                 | ✅     | Dish components (DishRanking, DishVoting, DishComments) |
-| `/packages/frontend/src/components/dish-restaurants`       | `/apps/web/src/components/dish-restaurants`     | ✅     | Dish restaurants components (DishRestaurantList, DishComparison) |
-| `/packages/frontend/src/components/my-foodie-leaderboard`  | `/apps/web/src/components/my-foodie-leaderboard`| ✅     | Foodie leaderboard components (FoodieLeaderboard, UserAchievements) |
-| `/packages/frontend/src/components/premium`                | `/apps/web/src/components/premium`              | ✅     | Premium subscription components (PremiumBanner, PremiumFeatures) |
-| `/packages/frontend/src/components/ranking`                | `/apps/web/src/components/ranking`              | ✅     | Ranking components (RankingForm, RankingList) |
-| `/packages/frontend/src/components/rankings`               | `/apps/web/src/components/rankings`             | ✅     | Rankings components (RankingCard, RankingDialog, RankingBoard, RankingComparison) |
-| `/packages/frontend/src/components/restaurant`             | `/apps/web/src/components/restaurant`           | ✅     | Restaurant components (ReviewCard, RestaurantComparison, RestaurantBooking) |
-| `/packages/frontend/src/components/restaurant-management`  | `/apps/web/src/components/restaurant-management`| ✅     | Restaurant management components (RestaurantDashboard, MenuManager) |
+| Source Path                                               | Destination Path                                 | Status | Notes                                                                                        |
+| --------------------------------------------------------- | ------------------------------------------------ | ------ | -------------------------------------------------------------------------------------------- |
+| `/packages/frontend/src/components/admin`                 | `/apps/web/src/components/admin`                 | ✅     | Admin panel components (AdminGuard, AdminDashboard)                                          |
+| `/packages/frontend/src/components/ai-center`             | `/apps/web/src/components/ai-center`             | ✅     | AI center components (AIRecommendations, AIChat)                                             |
+| `/packages/frontend/src/components/analytics`             | `/apps/web/src/components/analytics`             | ✅     | Analytics components (AnalyticsProvider, PageView, RestaurantAnalytics, TrendingRestaurants) |
+| `/packages/frontend/src/components/competitions`          | `/apps/web/src/components/competitions`          | ✅     | Competitions components (CompetitionCard, CompetitionList)                                   |
+| `/packages/frontend/src/components/dish`                  | `/apps/web/src/components/dish`                  | ✅     | Dish components (DishRanking, DishVoting, DishComments)                                      |
+| `/packages/frontend/src/components/dish-restaurants`      | `/apps/web/src/components/dish-restaurants`      | ✅     | Dish restaurants components (DishRestaurantList, DishComparison)                             |
+| `/packages/frontend/src/components/my-foodie-leaderboard` | `/apps/web/src/components/my-foodie-leaderboard` | ✅     | Foodie leaderboard components (FoodieLeaderboard, UserAchievements)                          |
+| `/packages/frontend/src/components/premium`               | `/apps/web/src/components/premium`               | ✅     | Premium subscription components (PremiumBanner, PremiumFeatures)                             |
+| `/packages/frontend/src/components/ranking`               | `/apps/web/src/components/ranking`               | ✅     | Ranking components (RankingForm, RankingList)                                                |
+| `/packages/frontend/src/components/rankings`              | `/apps/web/src/components/rankings`              | ✅     | Rankings components (RankingCard, RankingDialog, RankingBoard, RankingComparison)            |
+| `/packages/frontend/src/components/restaurant`            | `/apps/web/src/components/restaurant`            | ✅     | Restaurant components (ReviewCard, RestaurantComparison, RestaurantBooking)                  |
+| `/packages/frontend/src/components/restaurant-management` | `/apps/web/src/components/restaurant-management` | ✅     | Restaurant management components (RestaurantDashboard, MenuManager)                          |
 
 ### ✅ Successfully Migrated Files
 
 #### Recent Migration Progress (Latest Update)
 
 **Medium Priority Feature Components Completed:**
+
 - **Analytics Components**: AnalyticsProvider, PageView, RestaurantAnalytics, TrendingRestaurants
 - **Competition Components**: CompetitionCard, CompetitionList
 - **Premium Components**: PremiumBanner, PremiumFeatures
@@ -291,6 +330,7 @@ NOTE FOR VERIFICATION (Checklist Accuracy):
 - **User Profile Components**: UserProfileCard
 
 **Supporting Infrastructure Created:**
+
 - **useAuth.js** & **useCountry.js** hooks for authentication and country context
 - **Comprehensive test page** (`test-feature-components.js`) showcasing all 20 component categories
 - **Updated component index files** for easy importing across the application
@@ -299,6 +339,7 @@ NOTE FOR VERIFICATION (Checklist Accuracy):
 - **Complete component documentation** with JSDoc comments and usage examples
 
 **Technical Achievements:**
+
 - All components follow Next.js 15 ES modules requirements with explicit `.js` extensions
 - Comprehensive documentation with JSDoc comments for all components
 - Built-in analytics tracking for user engagement and performance monitoring
@@ -365,67 +406,67 @@ NOTE FOR VERIFICATION (Checklist Accuracy):
 
 #### Pages
 
-| Source Path                                                           | Destination Path                                                | Notes                                 |
-| --------------------------------------------------------------------- | --------------------------------------------------------------- | ------------------------------------- |
-| `/packages/frontend/src/pages/_app.tsx`                               | `/apps/web/src/pages/_app.tsx`                                  | App component                         |
-| `/packages/frontend/src/pages/_document.tsx`                          | `/apps/web/src/pages/_document.tsx`                             | Document component                    |
-| `/packages/frontend/src/pages/_error.tsx`                             | `/apps/web/src/pages/_error.tsx`                                | Error page                            |
-| `/packages/frontend/src/pages/[country]/ai-center.tsx`                | `/apps/web/src/pages/[country]/ai-center.js`                    | AI center page                        |
-| `/packages/frontend/src/pages/[country]/chatbot/[id].tsx`             | `/apps/web/src/pages/[country]/chatbot/[id].js`                 | Chatbot detail page                   |
-| `/packages/frontend/src/pages/[country]/competitions.tsx`             | `/apps/web/src/pages/[country]/competitions.js`                 | Competitions page                     |
-| `/packages/frontend/src/pages/[country]/dish-restaurants.tsx`         | `/apps/web/src/pages/[country]/dish-restaurants.js`             | Dish restaurants page                 |
-| `/packages/frontend/src/pages/[country]/dishes.tsx`                   | `/apps/web/src/pages/[country]/dishes.js`                       | Dishes page                           |
-| `/packages/frontend/src/pages/[country]/example-migration.tsx`        | `/apps/web/src/pages/[country]/example-migration.js`            | Example migration page                |
-| `/packages/frontend/src/pages/[country]/explore.tsx`                  | `/apps/web/src/pages/[country]/explore/index.js`                | ✅ Explore page                       |
-| `/packages/frontend/src/pages/[country]/favorites.tsx`                | `/apps/web/src/pages/[country]/favorites.js`                    | Favorites page                        |
-| `/packages/frontend/src/pages/[country]/index.tsx`                    | `/apps/web/src/pages/[country]/index.js`                        | Country-specific homepage             |
-| `/packages/frontend/src/pages/[country]/my-foodie-leaderboard.tsx`    | `/apps/web/src/pages/[country]/my-foodie-leaderboard.js`        | Foodie leaderboard page               |
-| `/packages/frontend/src/pages/[country]/premium.tsx`                  | `/apps/web/src/pages/[country]/premium.js`                      | Premium page                          |
-| `/packages/frontend/src/pages/[country]/profile.tsx`                  | `/apps/web/src/pages/[country]/profile.js`                      | Profile page                          |
-| `/packages/frontend/src/pages/[country]/profile/edit.tsx`             | `/apps/web/src/pages/[country]/profile/edit.js`                 | Profile edit page                     |
-| `/packages/frontend/src/pages/[country]/ranking.tsx`                  | `/apps/web/src/pages/[country]/ranking.js`                      | Ranking page                          |
+| Source Path                                                             | Destination Path                                              | Notes                                 |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------- |
+| `/packages/frontend/src/pages/_app.tsx`                                 | `/apps/web/src/pages/_app.tsx`                                | App component                         |
+| `/packages/frontend/src/pages/_document.tsx`                            | `/apps/web/src/pages/_document.tsx`                           | Document component                    |
+| `/packages/frontend/src/pages/_error.tsx`                               | `/apps/web/src/pages/_error.tsx`                              | Error page                            |
+| `/packages/frontend/src/pages/[country]/ai-center.tsx`                  | `/apps/web/src/pages/[country]/ai-center.js`                  | AI center page                        |
+| `/packages/frontend/src/pages/[country]/chatbot/[id].tsx`               | `/apps/web/src/pages/[country]/chatbot/[id].js`               | Chatbot detail page                   |
+| `/packages/frontend/src/pages/[country]/competitions.tsx`               | `/apps/web/src/pages/[country]/competitions.js`               | Competitions page                     |
+| `/packages/frontend/src/pages/[country]/dish-restaurants.tsx`           | `/apps/web/src/pages/[country]/dish-restaurants.js`           | Dish restaurants page                 |
+| `/packages/frontend/src/pages/[country]/dishes.tsx`                     | `/apps/web/src/pages/[country]/dishes.js`                     | Dishes page                           |
+| `/packages/frontend/src/pages/[country]/example-migration.tsx`          | `/apps/web/src/pages/[country]/example-migration.js`          | Example migration page                |
+| `/packages/frontend/src/pages/[country]/explore.tsx`                    | `/apps/web/src/pages/[country]/explore/index.js`              | ✅ Explore page                       |
+| `/packages/frontend/src/pages/[country]/favorites.tsx`                  | `/apps/web/src/pages/[country]/favorites.js`                  | Favorites page                        |
+| `/packages/frontend/src/pages/[country]/index.tsx`                      | `/apps/web/src/pages/[country]/index.js`                      | Country-specific homepage             |
+| `/packages/frontend/src/pages/[country]/my-foodie-leaderboard.tsx`      | `/apps/web/src/pages/[country]/my-foodie-leaderboard.js`      | Foodie leaderboard page               |
+| `/packages/frontend/src/pages/[country]/premium.tsx`                    | `/apps/web/src/pages/[country]/premium.js`                    | Premium page                          |
+| `/packages/frontend/src/pages/[country]/profile.tsx`                    | `/apps/web/src/pages/[country]/profile.js`                    | Profile page                          |
+| `/packages/frontend/src/pages/[country]/profile/edit.tsx`               | `/apps/web/src/pages/[country]/profile/edit.js`               | Profile edit page                     |
+| `/packages/frontend/src/pages/[country]/ranking.tsx`                    | `/apps/web/src/pages/[country]/ranking.js`                    | Ranking page                          |
 | `/packages/frontend/src/pages/[country]/rankings/global/[dishSlug].tsx` | `/apps/web/src/pages/[country]/rankings/global/[dishSlug].js` | Global dish ranking page              |
-| `/packages/frontend/src/pages/[country]/rankings/index.tsx`           | `/apps/web/src/pages/[country]/rankings/index.js`               | Rankings index page                   |
-| `/packages/frontend/src/pages/[country]/rankings/local/[dishSlug].tsx` | `/apps/web/src/pages/[country]/rankings/local/[dishSlug].js`   | Local dish ranking page               |
-| `/packages/frontend/src/pages/[country]/rankings/my/[dishSlug].tsx`   | `/apps/web/src/pages/[country]/rankings/my/[dishSlug].js`       | My dish ranking page                  |
-| `/packages/frontend/src/pages/[country]/rankings/my/index.tsx`        | `/apps/web/src/pages/[country]/rankings/my/index.js`            | My rankings index page                |
-| `/packages/frontend/src/pages/[country]/restaurant-management.tsx`    | `/apps/web/src/pages/[country]/restaurant-management.js`        | Restaurant management page            |
-| `/packages/frontend/src/pages/[country]/restaurant/[id].tsx`          | `/apps/web/src/pages/[country]/restaurant/[id].js`              | Restaurant detail page                |
-| `/packages/frontend/src/pages/[country]/restaurants.tsx`              | `/apps/web/src/pages/[country]/restaurants.js`                  | Restaurants listing page              |
-| `/packages/frontend/src/pages/[country]/settings.tsx`                 | `/apps/web/src/pages/[country]/settings.js`                     | Settings page                         |
-| `/packages/frontend/src/pages/[country]/social.tsx`                   | `/apps/web/src/pages/[country]/social/index.tsx`                | ✅ Social page                        |
-| `/packages/frontend/src/pages/[country]/test-simple.tsx`              | `/apps/web/src/pages/[country]/test-simple.js`                  | Test page                             |
-| `/packages/frontend/src/pages/403.tsx`                                | `/apps/web/src/pages/403.js`                                    | 403 error page                        |
-| `/packages/frontend/src/pages/404.tsx`                                | `/apps/web/src/pages/404.js`                                    | 404 error page                        |
-| `/packages/frontend/src/pages/500.tsx`                                | `/apps/web/src/pages/500.js`                                    | 500 error page                        |
-| `/packages/frontend/src/pages/admin/index.tsx`                        | `/apps/web/src/pages/admin/index.js`                            | Admin index page                      |
-| `/packages/frontend/src/pages/admin/restaurants/create.tsx`           | `/apps/web/src/pages/admin/restaurants/create.js`               | Create restaurant page                |
-| `/packages/frontend/src/pages/ai-center/[id].tsx`                     | `/apps/web/src/pages/ai-center/[id].js`                         | AI center detail page                 |
-| `/packages/frontend/src/pages/ai-center/index.tsx`                    | `/apps/web/src/pages/ai-center/index.js`                        | AI center index page                  |
-| `/packages/frontend/src/pages/chatbot/[id].tsx`                       | `/apps/web/src/pages/chatbot/[id].js`                           | Chatbot detail page                   |
-| `/packages/frontend/src/pages/chatbot/index.tsx`                      | `/apps/web/src/pages/chatbot/index.js`                          | Chatbot index page                    |
-| `/packages/frontend/src/pages/competitions.tsx`                       | `/apps/web/src/pages/competitions.js`                           | Competitions page                     |
-| `/packages/frontend/src/pages/debug.tsx`                              | `/apps/web/src/pages/debug.js`                                  | Debug page                            |
-| `/packages/frontend/src/pages/dish-restaurants.tsx`                   | `/apps/web/src/pages/dish-restaurants.js`                       | Dish restaurants page                 |
-| `/packages/frontend/src/pages/explore.tsx`                            | `/apps/web/src/pages/explore.js`                                | Explore page                          |
-| `/packages/frontend/src/pages/favorites.tsx`                          | `/apps/web/src/pages/favorites.js`                              | Favorites page                        |
-| `/packages/frontend/src/pages/forgot-password.tsx`                    | `/apps/web/src/pages/forgot-password.js`                        | Forgot password page                  |
-| `/packages/frontend/src/pages/health.ts`                              | `/apps/web/src/pages/health.js`                                 | Health check page                     |
-| `/packages/frontend/src/pages/index.tsx`                              | `/apps/web/src/pages/index.js`                                  | Redirect to country-specific homepage |
-| `/packages/frontend/src/pages/my/example-migration.tsx`               | `/apps/web/src/pages/my/example-migration.js`                   | Example migration page                |
-| `/packages/frontend/src/pages/profile/[userId].tsx`                   | `/apps/web/src/pages/profile/[userId].js`                       | User profile page                     |
-| `/packages/frontend/src/pages/profile/edit.tsx`                       | `/apps/web/src/pages/profile/edit.js`                           | Profile edit page                     |
-| `/packages/frontend/src/pages/profile/index.tsx`                      | `/apps/web/src/pages/profile/index.js`                          | Profile index page                    |
-| `/packages/frontend/src/pages/resend-verification.tsx`                | `/apps/web/src/pages/resend-verification.js`                    | Resend verification page              |
-| `/packages/frontend/src/pages/restaurant-management.tsx`              | `/apps/web/src/pages/restaurant-management.js`                  | Restaurant management page            |
-| `/packages/frontend/src/pages/restaurants.tsx`                        | `/apps/web/src/pages/restaurants.js`                            | Restaurants page                      |
-| `/packages/frontend/src/pages/settings.tsx`                           | `/apps/web/src/pages/settings.js`                               | Settings page                         |
-| `/packages/frontend/src/pages/signin.tsx`                             | `/apps/web/src/pages/signin.js`                                 | Sign in page                          |
-| `/packages/frontend/src/pages/signup.tsx`                             | `/apps/web/src/pages/signup.js`                                 | Sign up page                          |
-| `/packages/frontend/src/pages/simple-test.tsx`                        | `/apps/web/src/pages/simple-test.js`                            | Simple test page                      |
-| `/packages/frontend/src/pages/social.tsx`                             | `/apps/web/src/pages/social.js`                                 | Social page                           |
-| `/packages/frontend/src/pages/terms.tsx`                              | `/apps/web/src/pages/terms.js`                                  | Terms page                            |
-| `/packages/frontend/src/pages/xml-error.tsx`                          | `/apps/web/src/pages/xml-error.js`                              | XML error page                        |
+| `/packages/frontend/src/pages/[country]/rankings/index.tsx`             | `/apps/web/src/pages/[country]/rankings/index.js`             | Rankings index page                   |
+| `/packages/frontend/src/pages/[country]/rankings/local/[dishSlug].tsx`  | `/apps/web/src/pages/[country]/rankings/local/[dishSlug].js`  | Local dish ranking page               |
+| `/packages/frontend/src/pages/[country]/rankings/my/[dishSlug].tsx`     | `/apps/web/src/pages/[country]/rankings/my/[dishSlug].js`     | My dish ranking page                  |
+| `/packages/frontend/src/pages/[country]/rankings/my/index.tsx`          | `/apps/web/src/pages/[country]/rankings/my/index.js`          | My rankings index page                |
+| `/packages/frontend/src/pages/[country]/restaurant-management.tsx`      | `/apps/web/src/pages/[country]/restaurant-management.js`      | Restaurant management page            |
+| `/packages/frontend/src/pages/[country]/restaurant/[id].tsx`            | `/apps/web/src/pages/[country]/restaurant/[id].js`            | Restaurant detail page                |
+| `/packages/frontend/src/pages/[country]/restaurants.tsx`                | `/apps/web/src/pages/[country]/restaurants.js`                | Restaurants listing page              |
+| `/packages/frontend/src/pages/[country]/settings.tsx`                   | `/apps/web/src/pages/[country]/settings.js`                   | Settings page                         |
+| `/packages/frontend/src/pages/[country]/social.tsx`                     | `/apps/web/src/pages/[country]/social/index.tsx`              | ✅ Social page                        |
+| `/packages/frontend/src/pages/[country]/test-simple.tsx`                | `/apps/web/src/pages/[country]/test-simple.js`                | Test page                             |
+| `/packages/frontend/src/pages/403.tsx`                                  | `/apps/web/src/pages/403.js`                                  | 403 error page                        |
+| `/packages/frontend/src/pages/404.tsx`                                  | `/apps/web/src/pages/404.js`                                  | 404 error page                        |
+| `/packages/frontend/src/pages/500.tsx`                                  | `/apps/web/src/pages/500.js`                                  | 500 error page                        |
+| `/packages/frontend/src/pages/admin/index.tsx`                          | `/apps/web/src/pages/admin/index.js`                          | Admin index page                      |
+| `/packages/frontend/src/pages/admin/restaurants/create.tsx`             | `/apps/web/src/pages/admin/restaurants/create.js`             | Create restaurant page                |
+| `/packages/frontend/src/pages/ai-center/[id].tsx`                       | `/apps/web/src/pages/ai-center/[id].js`                       | AI center detail page                 |
+| `/packages/frontend/src/pages/ai-center/index.tsx`                      | `/apps/web/src/pages/ai-center/index.js`                      | AI center index page                  |
+| `/packages/frontend/src/pages/chatbot/[id].tsx`                         | `/apps/web/src/pages/chatbot/[id].js`                         | Chatbot detail page                   |
+| `/packages/frontend/src/pages/chatbot/index.tsx`                        | `/apps/web/src/pages/chatbot/index.js`                        | Chatbot index page                    |
+| `/packages/frontend/src/pages/competitions.tsx`                         | `/apps/web/src/pages/competitions.js`                         | Competitions page                     |
+| `/packages/frontend/src/pages/debug.tsx`                                | `/apps/web/src/pages/debug.js`                                | Debug page                            |
+| `/packages/frontend/src/pages/dish-restaurants.tsx`                     | `/apps/web/src/pages/dish-restaurants.js`                     | Dish restaurants page                 |
+| `/packages/frontend/src/pages/explore.tsx`                              | `/apps/web/src/pages/explore.js`                              | Explore page                          |
+| `/packages/frontend/src/pages/favorites.tsx`                            | `/apps/web/src/pages/favorites.js`                            | Favorites page                        |
+| `/packages/frontend/src/pages/forgot-password.tsx`                      | `/apps/web/src/pages/forgot-password.js`                      | Forgot password page                  |
+| `/packages/frontend/src/pages/health.ts`                                | `/apps/web/src/pages/health.js`                               | Health check page                     |
+| `/packages/frontend/src/pages/index.tsx`                                | `/apps/web/src/pages/index.js`                                | Redirect to country-specific homepage |
+| `/packages/frontend/src/pages/my/example-migration.tsx`                 | `/apps/web/src/pages/my/example-migration.js`                 | Example migration page                |
+| `/packages/frontend/src/pages/profile/[userId].tsx`                     | `/apps/web/src/pages/profile/[userId].js`                     | User profile page                     |
+| `/packages/frontend/src/pages/profile/edit.tsx`                         | `/apps/web/src/pages/profile/edit.js`                         | Profile edit page                     |
+| `/packages/frontend/src/pages/profile/index.tsx`                        | `/apps/web/src/pages/profile/index.js`                        | Profile index page                    |
+| `/packages/frontend/src/pages/resend-verification.tsx`                  | `/apps/web/src/pages/resend-verification.js`                  | Resend verification page              |
+| `/packages/frontend/src/pages/restaurant-management.tsx`                | `/apps/web/src/pages/restaurant-management.js`                | Restaurant management page            |
+| `/packages/frontend/src/pages/restaurants.tsx`                          | `/apps/web/src/pages/restaurants.js`                          | Restaurants page                      |
+| `/packages/frontend/src/pages/settings.tsx`                             | `/apps/web/src/pages/settings.js`                             | Settings page                         |
+| `/packages/frontend/src/pages/signin.tsx`                               | `/apps/web/src/pages/signin.js`                               | Sign in page                          |
+| `/packages/frontend/src/pages/signup.tsx`                               | `/apps/web/src/pages/signup.js`                               | Sign up page                          |
+| `/packages/frontend/src/pages/simple-test.tsx`                          | `/apps/web/src/pages/simple-test.js`                          | Simple test page                      |
+| `/packages/frontend/src/pages/social.tsx`                               | `/apps/web/src/pages/social.js`                               | Social page                           |
+| `/packages/frontend/src/pages/terms.tsx`                                | `/apps/web/src/pages/terms.js`                                | Terms page                            |
+| `/packages/frontend/src/pages/xml-error.tsx`                            | `/apps/web/src/pages/xml-error.js`                            | XML error page                        |
 
 #### Mock Data
 
@@ -1050,42 +1091,42 @@ We are adopting a "migrate first, convert later" approach to ensure complete fun
 
 ### Hooks
 
-| Original Path                                    | Purpose                                | Dependencies       | Status         |
-| ------------------------------------------------ | -------------------------------------- | ------------------ | -------------- |
-| `/packages/frontend/src/hooks/useAnalytics.ts`   | Track user interactions and page views | analyticsService   | ✅ Completed   |
-| `/packages/frontend/src/hooks/useApi.ts`         | Make API requests with error handling  | api service        | ✅ Completed   |
-| `/packages/frontend/src/hooks/useAuth.ts`        | Manage authentication state            | AuthContext        | ✅ Completed   |
-| `/packages/frontend/src/hooks/useCognitoUser.ts` | Manage Cognito user authentication     | cognitoAuthService | ✅ Completed   |
-| `/packages/frontend/src/hooks/useDebounce.ts`    | Debounce rapidly changing values       | None               | ✅ Completed   |
-| `/packages/frontend/src/hooks/useDishVotes.ts`   | Handle dish voting functionality       | api service        | ✅ Completed   |
-| `/packages/frontend/src/hooks/useGeolocation.ts` | Get user's geographic location         | None               | ✅ Completed   |
-| `/packages/frontend/src/hooks/useRestaurant.ts`  | Fetch and manage restaurant data       | restaurantService  | ✅ Completed   |
-| `/packages/frontend/src/hooks/useReviews.ts`     | Manage review submission and display   | reviewService      | ✅ Completed   |
-| `/packages/frontend/src/hooks/useUser.ts`        | Manage user data                       | userService        | ✅ Completed   |
-| `/packages/frontend/src/hooks/useUserProfile.ts` | Manage user profile data               | userProfileService | ✅ Completed   |
-| `/packages/frontend/src/hooks/useUserRanking.ts` | Manage user ranking data               | rankingService     | ✅ Completed   |
-| `/packages/frontend/src/hooks/use-toast.ts`      | Display toast notifications            | None               | ✅ Completed   |
+| Original Path                                    | Purpose                                | Dependencies       | Status       |
+| ------------------------------------------------ | -------------------------------------- | ------------------ | ------------ |
+| `/packages/frontend/src/hooks/useAnalytics.ts`   | Track user interactions and page views | analyticsService   | ✅ Completed |
+| `/packages/frontend/src/hooks/useApi.ts`         | Make API requests with error handling  | api service        | ✅ Completed |
+| `/packages/frontend/src/hooks/useAuth.ts`        | Manage authentication state            | AuthContext        | ✅ Completed |
+| `/packages/frontend/src/hooks/useCognitoUser.ts` | Manage Cognito user authentication     | cognitoAuthService | ✅ Completed |
+| `/packages/frontend/src/hooks/useDebounce.ts`    | Debounce rapidly changing values       | None               | ✅ Completed |
+| `/packages/frontend/src/hooks/useDishVotes.ts`   | Handle dish voting functionality       | api service        | ✅ Completed |
+| `/packages/frontend/src/hooks/useGeolocation.ts` | Get user's geographic location         | None               | ✅ Completed |
+| `/packages/frontend/src/hooks/useRestaurant.ts`  | Fetch and manage restaurant data       | restaurantService  | ✅ Completed |
+| `/packages/frontend/src/hooks/useReviews.ts`     | Manage review submission and display   | reviewService      | ✅ Completed |
+| `/packages/frontend/src/hooks/useUser.ts`        | Manage user data                       | userService        | ✅ Completed |
+| `/packages/frontend/src/hooks/useUserProfile.ts` | Manage user profile data               | userProfileService | ✅ Completed |
+| `/packages/frontend/src/hooks/useUserRanking.ts` | Manage user ranking data               | rankingService     | ✅ Completed |
+| `/packages/frontend/src/hooks/use-toast.ts`      | Display toast notifications            | None               | ✅ Completed |
 
 ### Services
 
-| Original Path                                             | Purpose                                | Dependencies      | Status         |
-| --------------------------------------------------------- | -------------------------------------- | ----------------- | -------------- |
-| `/packages/frontend/src/services/analyticsService.ts`     | Track user interactions and page views | None              | ✅ Completed   |
-| `/packages/frontend/src/services/api.ts`                  | Make API requests                      | None              | ✅ Completed   |
-| `/packages/frontend/src/services/cognitoAuthService.ts`   | Handle Cognito authentication          | AWS SDK           | ✅ Completed   |
-| `/packages/frontend/src/services/databaseService.ts`      | Interact with database                 | None              | ✅ Completed   |
-| `/packages/frontend/src/services/googleMapsService.ts`    | Integrate with Google Maps             | Google Maps API   | ✅ Completed   |
-| `/packages/frontend/src/services/googlePlaces.ts`         | Integrate with Google Places           | Google Places API | ✅ Completed   |
-| `/packages/frontend/src/services/mockDataService.ts`      | Generate mock data                     | None              | ✅ Completed   |
-| `/packages/frontend/src/services/photoUploadService.ts`   | Handle photo uploads                   | None              | ✅ Completed   |
-| `/packages/frontend/src/services/postgresService.ts`      | Interact with PostgreSQL               | None              | ✅ Completed   |
-| `/packages/frontend/src/services/rankingService.ts`       | Manage user and restaurant rankings    | api service       | ✅ Completed   |
-| `/packages/frontend/src/services/restaurantService.ts`    | Manage restaurant data                 | api service       | ✅ Completed   |
-| `/packages/frontend/src/services/reviewService.ts`        | Manage review submissions              | api service       | ✅ Completed   |
-| `/packages/frontend/src/services/social-media-service.ts` | Integrate with social media            | None              | ✅ Completed   |
-| `/packages/frontend/src/services/userProfileService.ts`   | Manage user profiles                   | api service       | ✅ Completed   |
-| `/packages/frontend/src/services/userService.ts`          | Manage user accounts                   | api service       | ✅ Completed   |
-| `/packages/frontend/src/services/openai.ts`               | Integrate with OpenAI                  | OpenAI API        | 🚫 Not Needed  |
+| Original Path                                             | Purpose                                | Dependencies      | Status        |
+| --------------------------------------------------------- | -------------------------------------- | ----------------- | ------------- |
+| `/packages/frontend/src/services/analyticsService.ts`     | Track user interactions and page views | None              | ✅ Completed  |
+| `/packages/frontend/src/services/api.ts`                  | Make API requests                      | None              | ✅ Completed  |
+| `/packages/frontend/src/services/cognitoAuthService.ts`   | Handle Cognito authentication          | AWS SDK           | ✅ Completed  |
+| `/packages/frontend/src/services/databaseService.ts`      | Interact with database                 | None              | ✅ Completed  |
+| `/packages/frontend/src/services/googleMapsService.ts`    | Integrate with Google Maps             | Google Maps API   | ✅ Completed  |
+| `/packages/frontend/src/services/googlePlaces.ts`         | Integrate with Google Places           | Google Places API | ✅ Completed  |
+| `/packages/frontend/src/services/mockDataService.ts`      | Generate mock data                     | None              | ✅ Completed  |
+| `/packages/frontend/src/services/photoUploadService.ts`   | Handle photo uploads                   | None              | ✅ Completed  |
+| `/packages/frontend/src/services/postgresService.ts`      | Interact with PostgreSQL               | None              | ✅ Completed  |
+| `/packages/frontend/src/services/rankingService.ts`       | Manage user and restaurant rankings    | api service       | ✅ Completed  |
+| `/packages/frontend/src/services/restaurantService.ts`    | Manage restaurant data                 | api service       | ✅ Completed  |
+| `/packages/frontend/src/services/reviewService.ts`        | Manage review submissions              | api service       | ✅ Completed  |
+| `/packages/frontend/src/services/social-media-service.ts` | Integrate with social media            | None              | ✅ Completed  |
+| `/packages/frontend/src/services/userProfileService.ts`   | Manage user profiles                   | api service       | ✅ Completed  |
+| `/packages/frontend/src/services/userService.ts`          | Manage user accounts                   | api service       | ✅ Completed  |
+| `/packages/frontend/src/services/openai.ts`               | Integrate with OpenAI                  | OpenAI API        | 🚫 Not Needed |
 
 ### Contexts
 
@@ -1096,74 +1137,74 @@ We are adopting a "migrate first, convert later" approach to ensure complete fun
 
 ### Utils
 
-| Original Path                                         | Purpose                              | Dependencies | Status         |
-| ----------------------------------------------------- | ------------------------------------ | ------------ | -------------- |
-| `/packages/frontend/src/utils/apiConfig.ts`           | Configure API endpoints              | None         | ✅ Completed   |
-| `/packages/frontend/src/utils/auth.ts`                | Authentication utilities             | None         | ✅ Completed   |
-| `/packages/frontend/src/utils/authRedirect.ts`        | Handle authentication redirects      | None         | ✅ Completed   |
-| `/packages/frontend/src/utils/aws.ts`                 | AWS service utilities                | AWS SDK      | ✅ Completed   |
-| `/packages/frontend/src/utils/country.ts`             | Country-specific utilities           | None         | ✅ Completed   |
-| `/packages/frontend/src/utils/countryRouteHelpers.ts` | Generate country-specific routes     | None         | ✅ Completed   |
-| `/packages/frontend/src/utils/csrfProtection.ts`      | CSRF protection utilities            | None         | ✅ Completed   |
-| `/packages/frontend/src/utils/date.ts`                | Date formatting and manipulation     | None         | ✅ Completed   |
-| `/packages/frontend/src/utils/db.ts`                  | Database interaction utilities       | None         | ✅ Completed   |
-| `/packages/frontend/src/utils/debugLogger.ts`         | Debug logging utilities              | None         | ✅ Completed   |
-| `/packages/frontend/src/utils/environment.ts`         | Environment detection utilities      | None         | ✅ Completed   |
-| `/packages/frontend/src/utils/environmentHandler.ts`  | Environment variable handling        | None         | ✅ Completed   |
-| `/packages/frontend/src/utils/events.ts`              | Event handling utilities             | None         | ✅ Completed   |
-| `/packages/frontend/src/utils/hydration-fix.ts`       | React hydration issue fixes          | None         | ✅ Completed   |
-| `/packages/frontend/src/utils/image.ts`               | Image processing utilities           | None         | ✅ Completed   |
-| `/packages/frontend/src/utils/imageCompression.ts`    | Image compression utilities          | None         | ✅ Completed   |
-| `/packages/frontend/src/utils/logger.ts`              | Logging utilities                    | None         | ✅ Completed   |
-| `/packages/frontend/src/utils/postgres.ts`            | PostgreSQL utilities                 | None         | ✅ Completed   |
-| `/packages/frontend/src/utils/serverAuth.ts`          | Server-side authentication utilities | None         | ✅ Completed   |
-| `/packages/frontend/src/utils/types.ts`               | Type definitions                     | None         | ✅ Completed   |
+| Original Path                                         | Purpose                              | Dependencies | Status       |
+| ----------------------------------------------------- | ------------------------------------ | ------------ | ------------ |
+| `/packages/frontend/src/utils/apiConfig.ts`           | Configure API endpoints              | None         | ✅ Completed |
+| `/packages/frontend/src/utils/auth.ts`                | Authentication utilities             | None         | ✅ Completed |
+| `/packages/frontend/src/utils/authRedirect.ts`        | Handle authentication redirects      | None         | ✅ Completed |
+| `/packages/frontend/src/utils/aws.ts`                 | AWS service utilities                | AWS SDK      | ✅ Completed |
+| `/packages/frontend/src/utils/country.ts`             | Country-specific utilities           | None         | ✅ Completed |
+| `/packages/frontend/src/utils/countryRouteHelpers.ts` | Generate country-specific routes     | None         | ✅ Completed |
+| `/packages/frontend/src/utils/csrfProtection.ts`      | CSRF protection utilities            | None         | ✅ Completed |
+| `/packages/frontend/src/utils/date.ts`                | Date formatting and manipulation     | None         | ✅ Completed |
+| `/packages/frontend/src/utils/db.ts`                  | Database interaction utilities       | None         | ✅ Completed |
+| `/packages/frontend/src/utils/debugLogger.ts`         | Debug logging utilities              | None         | ✅ Completed |
+| `/packages/frontend/src/utils/environment.ts`         | Environment detection utilities      | None         | ✅ Completed |
+| `/packages/frontend/src/utils/environmentHandler.ts`  | Environment variable handling        | None         | ✅ Completed |
+| `/packages/frontend/src/utils/events.ts`              | Event handling utilities             | None         | ✅ Completed |
+| `/packages/frontend/src/utils/hydration-fix.ts`       | React hydration issue fixes          | None         | ✅ Completed |
+| `/packages/frontend/src/utils/image.ts`               | Image processing utilities           | None         | ✅ Completed |
+| `/packages/frontend/src/utils/imageCompression.ts`    | Image compression utilities          | None         | ✅ Completed |
+| `/packages/frontend/src/utils/logger.ts`              | Logging utilities                    | None         | ✅ Completed |
+| `/packages/frontend/src/utils/postgres.ts`            | PostgreSQL utilities                 | None         | ✅ Completed |
+| `/packages/frontend/src/utils/serverAuth.ts`          | Server-side authentication utilities | None         | ✅ Completed |
+| `/packages/frontend/src/utils/types.ts`               | Type definitions                     | None         | ✅ Completed |
 
 ### UI Components
 
-| Original Path                                                       | Purpose                         | Dependencies | Status         |
-| ------------------------------------------------------------------- | ------------------------------- | ------------ | -------------- |
-| `/packages/frontend/src/components/ui/alert-dialog.tsx`             | Alert dialog component          | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/avatar.tsx`                   | Avatar component                | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/badge.tsx`                    | Badge component                 | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/button.tsx`                   | Button component                | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/calendar.tsx`                 | Calendar component              | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/card.tsx`                     | Card component                  | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/client-only.tsx`              | Client-only rendering component | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/client-svg.tsx`               | Client-side SVG component       | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/collapsible.tsx`              | Collapsible component           | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/command.tsx`                  | Command component               | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/custom-tabs.tsx`              | Custom tabs component           | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/custom-toast.tsx`             | Custom toast component          | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/dialog.tsx`                   | Dialog component                | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/dropdown-menu.tsx`            | Dropdown menu component         | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/dynamic-content.tsx`          | Dynamic content component       | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/Elements.tsx`                 | UI elements component           | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/hydration-error-boundary.tsx` | Hydration error boundary        | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/input.tsx`                    | Input component                 | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/label.tsx`                    | Label component                 | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/lucide-icon.tsx`              | Lucide icon component           | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/photo-uploader.tsx`           | Photo uploader component        | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/popover.tsx`                  | Popover component               | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/progress.tsx`                 | Progress component              | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/radio-group.tsx`              | Radio group component           | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/safe-image.tsx`               | Safe image component            | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/scroll-area.tsx`              | Scroll area component           | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/search-field.tsx`             | Search field component          | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/select.tsx`                   | Select component                | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/separator.tsx`                | Separator component             | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/sheet.tsx`                    | Sheet component                 | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/skeleton.tsx`                 | Skeleton component              | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/slider.tsx`                   | Slider component                | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/suspense-boundary-fix.tsx`    | Suspense boundary fix           | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/switch.tsx`                   | Switch component                | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/table.tsx`                    | Table component                 | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/tabs.tsx`                     | Tabs component                  | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/textarea.tsx`                 | Textarea component              | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/toast.tsx`                    | Toast component                 | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/tooltip.tsx`                  | Tooltip component               | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/use-toast.ts`                 | Toast hook                      | None         | ✅ Completed   |
-| `/packages/frontend/src/components/ui/ThemeToggle.jsx`              | Theme toggle component          | None         | ✅ Completed   |
+| Original Path                                                       | Purpose                         | Dependencies | Status       |
+| ------------------------------------------------------------------- | ------------------------------- | ------------ | ------------ |
+| `/packages/frontend/src/components/ui/alert-dialog.tsx`             | Alert dialog component          | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/avatar.tsx`                   | Avatar component                | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/badge.tsx`                    | Badge component                 | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/button.tsx`                   | Button component                | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/calendar.tsx`                 | Calendar component              | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/card.tsx`                     | Card component                  | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/client-only.tsx`              | Client-only rendering component | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/client-svg.tsx`               | Client-side SVG component       | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/collapsible.tsx`              | Collapsible component           | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/command.tsx`                  | Command component               | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/custom-tabs.tsx`              | Custom tabs component           | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/custom-toast.tsx`             | Custom toast component          | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/dialog.tsx`                   | Dialog component                | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/dropdown-menu.tsx`            | Dropdown menu component         | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/dynamic-content.tsx`          | Dynamic content component       | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/Elements.tsx`                 | UI elements component           | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/hydration-error-boundary.tsx` | Hydration error boundary        | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/input.tsx`                    | Input component                 | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/label.tsx`                    | Label component                 | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/lucide-icon.tsx`              | Lucide icon component           | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/photo-uploader.tsx`           | Photo uploader component        | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/popover.tsx`                  | Popover component               | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/progress.tsx`                 | Progress component              | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/radio-group.tsx`              | Radio group component           | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/safe-image.tsx`               | Safe image component            | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/scroll-area.tsx`              | Scroll area component           | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/search-field.tsx`             | Search field component          | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/select.tsx`                   | Select component                | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/separator.tsx`                | Separator component             | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/sheet.tsx`                    | Sheet component                 | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/skeleton.tsx`                 | Skeleton component              | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/slider.tsx`                   | Slider component                | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/suspense-boundary-fix.tsx`    | Suspense boundary fix           | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/switch.tsx`                   | Switch component                | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/table.tsx`                    | Table component                 | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/tabs.tsx`                     | Tabs component                  | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/textarea.tsx`                 | Textarea component              | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/toast.tsx`                    | Toast component                 | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/tooltip.tsx`                  | Tooltip component               | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/use-toast.ts`                 | Toast hook                      | None         | ✅ Completed |
+| `/packages/frontend/src/components/ui/ThemeToggle.jsx`              | Theme toggle component          | None         | ✅ Completed |
 
 ### Layout Components
 
@@ -1271,121 +1312,121 @@ We are adopting a "migrate first, convert later" approach to ensure complete fun
 
 ### API Routes
 
-| Original Path                                                  | Purpose                                | Dependencies       | Status         |
-| -------------------------------------------------------------- | -------------------------------------- | ------------------ | -------------- |
-| `/packages/frontend/src/pages/api/admin/restaurants/create.ts` | Create restaurant (admin)              | restaurantService  | ❌ Not Started |
-| `/packages/frontend/src/pages/api/admin/status.ts`             | Admin status check                     | None               | ❌ Not Started |
-| `/packages/frontend/src/pages/api/auth/login.ts`               | User login                             | cognitoAuthService | ✅ Completed   |
-| `/packages/frontend/src/pages/api/auth/logout.ts`              | User logout                            | cognitoAuthService | ✅ Completed   |
-| `/packages/frontend/src/pages/api/auth/refresh.ts`             | Refresh authentication token           | cognitoAuthService | ✅ Completed   |
-| `/packages/frontend/src/pages/api/auth/status.ts`              | Authentication status check            | cognitoAuthService | ✅ Completed   |
-| `/packages/frontend/src/pages/api/aws/secrets.ts`              | AWS Secrets Manager access             | AWS SDK            | ❌ Not Started |
-| `/packages/frontend/src/pages/api/aws/ssm.ts`                  | AWS Systems Manager access             | AWS SDK            | ❌ Not Started |
-| `/packages/frontend/src/pages/api/csrf.ts`                     | CSRF protection                        | None               | ❌ Not Started |
-| `/packages/frontend/src/pages/api/debug-auth.ts`               | Debug authentication                   | None               | ❌ Not Started |
-| `/packages/frontend/src/pages/api/debug-logs.ts`               | Debug logs                             | None               | ❌ Not Started |
-| `/packages/frontend/src/pages/api/dishes/[id]/rankings.ts`     | Get dish rankings                      | rankingService     | ❌ Not Started |
-| `/packages/frontend/src/pages/api/health.ts`                   | Health check                           | None               | ✅ Completed   |
-| `/packages/frontend/src/pages/api/hello.ts`                    | Hello world                            | None               | ✅ Completed   |
-| `/packages/frontend/src/pages/api/photos/[reference].ts`       | Get photo by reference                 | photoUploadService | ❌ Not Started |
-| `/packages/frontend/src/pages/api/postgres/dishes/[id]/vote.ts`| Vote on dish                           | postgresService    | ❌ Not Started |
-| `/packages/frontend/src/pages/api/postgres/dishes/[id]/votes.ts`| Get dish votes                        | postgresService    | ❌ Not Started |
-| `/packages/frontend/src/pages/api/postgres/dishes/top.ts`      | Get top dishes                         | postgresService    | ❌ Not Started |
-| `/packages/frontend/src/pages/api/postgres/users/[id].ts`      | Get user by ID                         | postgresService    | ❌ Not Started |
-| `/packages/frontend/src/pages/api/postgres/users/[id]/votes.ts`| Get user votes                         | postgresService    | ❌ Not Started |
-| `/packages/frontend/src/pages/api/proxy/[...path].ts`          | Generic API proxy                      | None               | ❌ Not Started |
-| `/packages/frontend/src/pages/api/proxy/analytics/*`           | Analytics proxy endpoints              | analyticsService   | ❌ Not Started |
-| `/packages/frontend/src/pages/api/proxy/db/users/*`            | User database proxy endpoints          | databaseService    | ❌ Not Started |
-| `/packages/frontend/src/pages/api/proxy/user/*`                | User profile proxy endpoints           | userProfileService | ❌ Not Started |
-| `/packages/frontend/src/pages/api/proxy/users/*`               | Users proxy endpoints                  | userService        | ❌ Not Started |
-| `/packages/frontend/src/pages/api/rankings/create.ts`          | Create ranking                         | rankingService     | ✅ Completed   |
-| `/packages/frontend/src/pages/api/rankings/global/[dishSlug].ts`| Get global dish rankings              | rankingService     | ✅ Completed   |
-| `/packages/frontend/src/pages/api/rankings/index.ts`           | Get all rankings                       | rankingService     | ✅ Completed   |
-| `/packages/frontend/src/pages/api/rankings/local/[dishSlug].ts`| Get local dish rankings                | rankingService     | ✅ Completed   |
-| `/packages/frontend/src/pages/api/rankings/my/[dishSlug].ts`   | Get user's dish rankings               | rankingService     | ✅ Completed   |
-| `/packages/frontend/src/pages/api/rankings/my/index.ts`        | Get user's rankings                    | rankingService     | ✅ Completed   |
-| `/packages/frontend/src/pages/api/rankings/update/[id].ts`     | Update ranking                         | rankingService     | ✅ Completed   |
-| `/packages/frontend/src/pages/api/rankings/user/[id].ts`       | Get user rankings                      | rankingService     | ✅ Completed   |
-| `/packages/frontend/src/pages/api/restaurants/[id].ts`         | Get restaurant by ID                   | restaurantService  | ✅ Completed   |
-| `/packages/frontend/src/pages/api/restaurants/[id]/dishes.ts`  | Get restaurant dishes                  | restaurantService  | ✅ Completed   |
-| `/packages/frontend/src/pages/api/restaurants/[id]/hours.ts`   | Get restaurant hours                   | restaurantService  | ✅ Completed   |
-| `/packages/frontend/src/pages/api/restaurants/[id]/photos.ts`  | Get restaurant photos                  | restaurantService  | ✅ Completed   |
-| `/packages/frontend/src/pages/api/restaurants/dish/[dishId].ts`| Get restaurants serving dish           | restaurantService  | ✅ Completed   |
-| `/packages/frontend/src/pages/api/restaurants/list.ts`         | Get restaurant list                    | restaurantService  | ✅ Completed   |
-| `/packages/frontend/src/pages/api/restaurants/search.ts`       | Search restaurants                     | restaurantService  | ✅ Completed   |
-| `/packages/frontend/src/pages/api/reviews/[id].ts`             | Get review by ID                       | reviewService      | ✅ Completed   |
-| `/packages/frontend/src/pages/api/reviews/index.ts`            | Get all reviews                        | reviewService      | ✅ Completed   |
-| `/packages/frontend/src/pages/api/reviews/user/[id].ts`        | Get user reviews                       | reviewService      | ✅ Completed   |
-| `/packages/frontend/src/pages/api/upload/ranking-photo.ts`     | Upload ranking photo                   | photoUploadService | ❌ Not Started |
-| `/packages/frontend/src/pages/api/user/profile/follow.ts`      | Follow user                            | userProfileService | ❌ Not Started |
-| `/packages/frontend/src/pages/api/user/profile/followers.ts`   | Get user followers                     | userProfileService | ✅ Completed   |
-| `/packages/frontend/src/pages/api/user/profile/following.ts`   | Get users followed by user             | userProfileService | ✅ Completed   |
-| `/packages/frontend/src/pages/api/user/profile/index.ts`       | Get user profile                       | userProfileService | ✅ Completed   |
+| Original Path                                                    | Purpose                       | Dependencies       | Status         |
+| ---------------------------------------------------------------- | ----------------------------- | ------------------ | -------------- |
+| `/packages/frontend/src/pages/api/admin/restaurants/create.ts`   | Create restaurant (admin)     | restaurantService  | ❌ Not Started |
+| `/packages/frontend/src/pages/api/admin/status.ts`               | Admin status check            | None               | ❌ Not Started |
+| `/packages/frontend/src/pages/api/auth/login.ts`                 | User login                    | cognitoAuthService | ✅ Completed   |
+| `/packages/frontend/src/pages/api/auth/logout.ts`                | User logout                   | cognitoAuthService | ✅ Completed   |
+| `/packages/frontend/src/pages/api/auth/refresh.ts`               | Refresh authentication token  | cognitoAuthService | ✅ Completed   |
+| `/packages/frontend/src/pages/api/auth/status.ts`                | Authentication status check   | cognitoAuthService | ✅ Completed   |
+| `/packages/frontend/src/pages/api/aws/secrets.ts`                | AWS Secrets Manager access    | AWS SDK            | ❌ Not Started |
+| `/packages/frontend/src/pages/api/aws/ssm.ts`                    | AWS Systems Manager access    | AWS SDK            | ❌ Not Started |
+| `/packages/frontend/src/pages/api/csrf.ts`                       | CSRF protection               | None               | ❌ Not Started |
+| `/packages/frontend/src/pages/api/debug-auth.ts`                 | Debug authentication          | None               | ❌ Not Started |
+| `/packages/frontend/src/pages/api/debug-logs.ts`                 | Debug logs                    | None               | ❌ Not Started |
+| `/packages/frontend/src/pages/api/dishes/[id]/rankings.ts`       | Get dish rankings             | rankingService     | ❌ Not Started |
+| `/packages/frontend/src/pages/api/health.ts`                     | Health check                  | None               | ✅ Completed   |
+| `/packages/frontend/src/pages/api/hello.ts`                      | Hello world                   | None               | ✅ Completed   |
+| `/packages/frontend/src/pages/api/photos/[reference].ts`         | Get photo by reference        | photoUploadService | ❌ Not Started |
+| `/packages/frontend/src/pages/api/postgres/dishes/[id]/vote.ts`  | Vote on dish                  | postgresService    | ❌ Not Started |
+| `/packages/frontend/src/pages/api/postgres/dishes/[id]/votes.ts` | Get dish votes                | postgresService    | ❌ Not Started |
+| `/packages/frontend/src/pages/api/postgres/dishes/top.ts`        | Get top dishes                | postgresService    | ❌ Not Started |
+| `/packages/frontend/src/pages/api/postgres/users/[id].ts`        | Get user by ID                | postgresService    | ❌ Not Started |
+| `/packages/frontend/src/pages/api/postgres/users/[id]/votes.ts`  | Get user votes                | postgresService    | ❌ Not Started |
+| `/packages/frontend/src/pages/api/proxy/[...path].ts`            | Generic API proxy             | None               | ❌ Not Started |
+| `/packages/frontend/src/pages/api/proxy/analytics/*`             | Analytics proxy endpoints     | analyticsService   | ❌ Not Started |
+| `/packages/frontend/src/pages/api/proxy/db/users/*`              | User database proxy endpoints | databaseService    | ❌ Not Started |
+| `/packages/frontend/src/pages/api/proxy/user/*`                  | User profile proxy endpoints  | userProfileService | ❌ Not Started |
+| `/packages/frontend/src/pages/api/proxy/users/*`                 | Users proxy endpoints         | userService        | ❌ Not Started |
+| `/packages/frontend/src/pages/api/rankings/create.ts`            | Create ranking                | rankingService     | ✅ Completed   |
+| `/packages/frontend/src/pages/api/rankings/global/[dishSlug].ts` | Get global dish rankings      | rankingService     | ✅ Completed   |
+| `/packages/frontend/src/pages/api/rankings/index.ts`             | Get all rankings              | rankingService     | ✅ Completed   |
+| `/packages/frontend/src/pages/api/rankings/local/[dishSlug].ts`  | Get local dish rankings       | rankingService     | ✅ Completed   |
+| `/packages/frontend/src/pages/api/rankings/my/[dishSlug].ts`     | Get user's dish rankings      | rankingService     | ✅ Completed   |
+| `/packages/frontend/src/pages/api/rankings/my/index.ts`          | Get user's rankings           | rankingService     | ✅ Completed   |
+| `/packages/frontend/src/pages/api/rankings/update/[id].ts`       | Update ranking                | rankingService     | ✅ Completed   |
+| `/packages/frontend/src/pages/api/rankings/user/[id].ts`         | Get user rankings             | rankingService     | ✅ Completed   |
+| `/packages/frontend/src/pages/api/restaurants/[id].ts`           | Get restaurant by ID          | restaurantService  | ✅ Completed   |
+| `/packages/frontend/src/pages/api/restaurants/[id]/dishes.ts`    | Get restaurant dishes         | restaurantService  | ✅ Completed   |
+| `/packages/frontend/src/pages/api/restaurants/[id]/hours.ts`     | Get restaurant hours          | restaurantService  | ✅ Completed   |
+| `/packages/frontend/src/pages/api/restaurants/[id]/photos.ts`    | Get restaurant photos         | restaurantService  | ✅ Completed   |
+| `/packages/frontend/src/pages/api/restaurants/dish/[dishId].ts`  | Get restaurants serving dish  | restaurantService  | ✅ Completed   |
+| `/packages/frontend/src/pages/api/restaurants/list.ts`           | Get restaurant list           | restaurantService  | ✅ Completed   |
+| `/packages/frontend/src/pages/api/restaurants/search.ts`         | Search restaurants            | restaurantService  | ✅ Completed   |
+| `/packages/frontend/src/pages/api/reviews/[id].ts`               | Get review by ID              | reviewService      | ✅ Completed   |
+| `/packages/frontend/src/pages/api/reviews/index.ts`              | Get all reviews               | reviewService      | ✅ Completed   |
+| `/packages/frontend/src/pages/api/reviews/user/[id].ts`          | Get user reviews              | reviewService      | ✅ Completed   |
+| `/packages/frontend/src/pages/api/upload/ranking-photo.ts`       | Upload ranking photo          | photoUploadService | ❌ Not Started |
+| `/packages/frontend/src/pages/api/user/profile/follow.ts`        | Follow user                   | userProfileService | ❌ Not Started |
+| `/packages/frontend/src/pages/api/user/profile/followers.ts`     | Get user followers            | userProfileService | ✅ Completed   |
+| `/packages/frontend/src/pages/api/user/profile/following.ts`     | Get users followed by user    | userProfileService | ✅ Completed   |
+| `/packages/frontend/src/pages/api/user/profile/index.ts`         | Get user profile              | userProfileService | ✅ Completed   |
 
 ### Config Files
 
-| Original Path                                       | Purpose                                | Dependencies | Status         |
-| --------------------------------------------------- | -------------------------------------- | ------------ | -------------- |
-| `/packages/frontend/src/config/countries.ts`        | Country configuration                  | None         | ✅ Completed   |
-| `/packages/frontend/src/config/elevenlabs.ts`       | ElevenLabs API configuration           | None         | ✅ Completed   |
-| `/packages/frontend/src/config/openai.ts`           | OpenAI API configuration               | None         | ✅ Completed   |
-| `/packages/frontend/src/config/prompts.ts`          | AI prompt templates                    | None         | ✅ Completed   |
-| `/packages/frontend/src/config/restaurantConfig.ts` | Restaurant configuration               | None         | ✅ Completed   |
-| `/packages/frontend/src/config/typeMatchers.ts`     | Type matchers configuration            | None         | ✅ Completed   |
-| `/packages/frontend/src/config/types.ts`            | Config type definitions                | None         | ✅ Completed   |
-| `/packages/typescript-config/base.json`             | Base TypeScript configuration          | None         | ✅ Completed   |
-| `/packages/typescript-config/index.json`            | Index TypeScript configuration         | None         | ✅ Completed   |
-| `/packages/typescript-config/nextjs.json`           | Next.js TypeScript configuration       | None         | ✅ Completed   |
-| `/packages/typescript-config/package.json`          | TS Config package.json                 | None         | ✅ Completed   |
-| `/packages/typescript-config/react-library.json`    | React Library TypeScript configuration | None         | ✅ Completed   |
-| `/packages/eslint-config/index.js`                  | Index ESLint configuration             | None         | ✅ Completed   |
-| `/packages/eslint-config/library.js`                | Library ESLint configuration           | None         | ✅ Completed   |
-| `/packages/eslint-config/next.js`                   | Next.js ESLint configuration           | None         | ✅ Completed   |
-| `/packages/eslint-config/package.json`              | ESLint Config package.json             | None         | ✅ Completed   |
-| `/packages/eslint-config/react-internal.js`         | React Internal ESLint configuration    | None         | ✅ Completed   |
+| Original Path                                       | Purpose                                | Dependencies | Status       |
+| --------------------------------------------------- | -------------------------------------- | ------------ | ------------ |
+| `/packages/frontend/src/config/countries.ts`        | Country configuration                  | None         | ✅ Completed |
+| `/packages/frontend/src/config/elevenlabs.ts`       | ElevenLabs API configuration           | None         | ✅ Completed |
+| `/packages/frontend/src/config/openai.ts`           | OpenAI API configuration               | None         | ✅ Completed |
+| `/packages/frontend/src/config/prompts.ts`          | AI prompt templates                    | None         | ✅ Completed |
+| `/packages/frontend/src/config/restaurantConfig.ts` | Restaurant configuration               | None         | ✅ Completed |
+| `/packages/frontend/src/config/typeMatchers.ts`     | Type matchers configuration            | None         | ✅ Completed |
+| `/packages/frontend/src/config/types.ts`            | Config type definitions                | None         | ✅ Completed |
+| `/packages/typescript-config/base.json`             | Base TypeScript configuration          | None         | ✅ Completed |
+| `/packages/typescript-config/index.json`            | Index TypeScript configuration         | None         | ✅ Completed |
+| `/packages/typescript-config/nextjs.json`           | Next.js TypeScript configuration       | None         | ✅ Completed |
+| `/packages/typescript-config/package.json`          | TS Config package.json                 | None         | ✅ Completed |
+| `/packages/typescript-config/react-library.json`    | React Library TypeScript configuration | None         | ✅ Completed |
+| `/packages/eslint-config/index.js`                  | Index ESLint configuration             | None         | ✅ Completed |
+| `/packages/eslint-config/library.js`                | Library ESLint configuration           | None         | ✅ Completed |
+| `/packages/eslint-config/next.js`                   | Next.js ESLint configuration           | None         | ✅ Completed |
+| `/packages/eslint-config/package.json`              | ESLint Config package.json             | None         | ✅ Completed |
+| `/packages/eslint-config/react-internal.js`         | React Internal ESLint configuration    | None         | ✅ Completed |
 
 **Note**: The ESLint configuration has been implemented in the `packages/eslint-config-custom` directory instead of `packages/eslint-config` to maintain compatibility with the existing project structure.
 
 ### Types
 
-| Original Path                                    | Purpose                          | Dependencies | Status         |
-| ------------------------------------------------ | -------------------------------- | ------------ | -------------- |
-| `/packages/frontend/src/types.ts`                | General type definitions         | None         | ✅ Completed   |
-| `/packages/frontend/src/types/api.ts`            | API type definitions             | None         | ✅ Completed   |
-| `/packages/frontend/src/types/auth.ts`           | Authentication type definitions  | None         | ✅ Completed   |
-| `/packages/frontend/src/types/country.ts`        | Country type definitions         | None         | ✅ Completed   |
-| `/packages/frontend/src/types/index.ts`          | Type exports                     | None         | ✅ Completed   |
-| `/packages/frontend/src/types/restaurant.ts`     | Restaurant type definitions      | None         | ✅ Completed   |
-| `/packages/frontend/src/types/restaurant.d.ts`   | Restaurant type declarations     | None         | ✅ Completed   |
-| `/packages/frontend/src/utils/types.ts`          | Utility type definitions         | None         | ✅ Completed   |
-| `/packages/shared/src/types/index.ts`            | Shared type definitions          | None         | ✅ Completed   |
-| `/packages/infra/src/layers/utils/nodejs/types/` | Infrastructure type definitions  | None         | ✅ Completed   |
+| Original Path                                    | Purpose                         | Dependencies | Status       |
+| ------------------------------------------------ | ------------------------------- | ------------ | ------------ |
+| `/packages/frontend/src/types.ts`                | General type definitions        | None         | ✅ Completed |
+| `/packages/frontend/src/types/api.ts`            | API type definitions            | None         | ✅ Completed |
+| `/packages/frontend/src/types/auth.ts`           | Authentication type definitions | None         | ✅ Completed |
+| `/packages/frontend/src/types/country.ts`        | Country type definitions        | None         | ✅ Completed |
+| `/packages/frontend/src/types/index.ts`          | Type exports                    | None         | ✅ Completed |
+| `/packages/frontend/src/types/restaurant.ts`     | Restaurant type definitions     | None         | ✅ Completed |
+| `/packages/frontend/src/types/restaurant.d.ts`   | Restaurant type declarations    | None         | ✅ Completed |
+| `/packages/frontend/src/utils/types.ts`          | Utility type definitions        | None         | ✅ Completed |
+| `/packages/shared/src/types/index.ts`            | Shared type definitions         | None         | ✅ Completed |
+| `/packages/infra/src/layers/utils/nodejs/types/` | Infrastructure type definitions | None         | ✅ Completed |
 
 ### Infrastructure Components
 
-| Original Path                                                                | Purpose                                | Dependencies | Status         |
-| ---------------------------------------------------------------------------- | -------------------------------------- | ------------ | -------------- |
-| `/packages/infra/src/layers/middleware/nodejs/middlewares/errorHandler.ts`   | Error handling middleware              | None         | ✅ Completed   |
-| `/packages/infra/src/layers/middleware/nodejs/middlewares/validation.ts`     | Request validation middleware          | None         | ✅ Completed   |
-| `/packages/infra/src/layers/middleware/nodejs/middlewares/tracing.ts`        | Request tracing middleware             | None         | ✅ Completed   |
-| `/packages/infra/src/layers/middleware/nodejs/middlewares/specialized/apiGateway.ts` | API Gateway middleware         | None         | ✅ Completed   |
-| `/packages/infra/src/layers/middleware/nodejs/middlewares/specialized/eventBridge.ts` | EventBridge middleware        | None         | ✅ Completed   |
-| `/packages/infra/src/layers/middleware/nodejs/middlewares/specialized/sqs.ts` | SQS middleware                        | None         | ✅ Completed   |
-| `/packages/infra/src/layers/middleware/nodejs/utils/eventBridge.ts`          | EventBridge utilities                  | None         | ✅ Completed   |
-| `/packages/infra/src/layers/middleware/nodejs/utils/sqs.ts`                  | SQS utilities                          | None         | ✅ Completed   |
-| `/packages/infra/src/layers/nodejs/event-utils/index.ts`                     | Event utilities                        | None         | ✅ Completed   |
-| `/packages/infra/src/layers/utils/nodejs/aws.ts`                             | AWS utilities                          | None         | ✅ Completed   |
-| `/packages/infra/src/layers/utils/nodejs/errors.ts`                          | Error handling utilities               | None         | ✅ Completed   |
-| `/packages/infra/src/layers/utils/nodejs/event-handler.ts`                   | Event handler utilities                | None         | ✅ Completed   |
-| `/packages/infra/src/layers/utils/nodejs/google.ts`                          | Google API utilities                   | None         | ✅ Completed   |
-| `/packages/infra/src/layers/utils/nodejs/types/db-types.ts`                  | Database type definitions              | None         | ✅ Completed   |
-| `/packages/infra/src/layers/utils/nodejs/types/event-types.ts`               | Event type definitions                 | None         | ✅ Completed   |
-| `/packages/infra/src/pages/health.ts`                                        | Health check endpoint                  | None         | ✅ Completed   |
-| `/packages/infra/functions/cognito-custom-message`                           | Cognito Custom Message Lambda          | None         | ✅ Completed   |
-| `/packages/infra/functions/cognito-post-confirmation`                        | Cognito Post-Confirmation Lambda       | None         | ✅ Completed   |
-| `/packages/infra/functions/`                                                 | Other Lambda functions                  | None         | ✅ Completed   |
-| `/packages/infra/lib/types.ts`                                               | Infrastructure library types           | None         | ✅ Completed   |
-| `/packages/infra/lib/`                                                       | Other infrastructure library files      | None         | ✅ Completed   |
+| Original Path                                                                         | Purpose                            | Dependencies | Status       |
+| ------------------------------------------------------------------------------------- | ---------------------------------- | ------------ | ------------ |
+| `/packages/infra/src/layers/middleware/nodejs/middlewares/errorHandler.ts`            | Error handling middleware          | None         | ✅ Completed |
+| `/packages/infra/src/layers/middleware/nodejs/middlewares/validation.ts`              | Request validation middleware      | None         | ✅ Completed |
+| `/packages/infra/src/layers/middleware/nodejs/middlewares/tracing.ts`                 | Request tracing middleware         | None         | ✅ Completed |
+| `/packages/infra/src/layers/middleware/nodejs/middlewares/specialized/apiGateway.ts`  | API Gateway middleware             | None         | ✅ Completed |
+| `/packages/infra/src/layers/middleware/nodejs/middlewares/specialized/eventBridge.ts` | EventBridge middleware             | None         | ✅ Completed |
+| `/packages/infra/src/layers/middleware/nodejs/middlewares/specialized/sqs.ts`         | SQS middleware                     | None         | ✅ Completed |
+| `/packages/infra/src/layers/middleware/nodejs/utils/eventBridge.ts`                   | EventBridge utilities              | None         | ✅ Completed |
+| `/packages/infra/src/layers/middleware/nodejs/utils/sqs.ts`                           | SQS utilities                      | None         | ✅ Completed |
+| `/packages/infra/src/layers/nodejs/event-utils/index.ts`                              | Event utilities                    | None         | ✅ Completed |
+| `/packages/infra/src/layers/utils/nodejs/aws.ts`                                      | AWS utilities                      | None         | ✅ Completed |
+| `/packages/infra/src/layers/utils/nodejs/errors.ts`                                   | Error handling utilities           | None         | ✅ Completed |
+| `/packages/infra/src/layers/utils/nodejs/event-handler.ts`                            | Event handler utilities            | None         | ✅ Completed |
+| `/packages/infra/src/layers/utils/nodejs/google.ts`                                   | Google API utilities               | None         | ✅ Completed |
+| `/packages/infra/src/layers/utils/nodejs/types/db-types.ts`                           | Database type definitions          | None         | ✅ Completed |
+| `/packages/infra/src/layers/utils/nodejs/types/event-types.ts`                        | Event type definitions             | None         | ✅ Completed |
+| `/packages/infra/src/pages/health.ts`                                                 | Health check endpoint              | None         | ✅ Completed |
+| `/packages/infra/functions/cognito-custom-message`                                    | Cognito Custom Message Lambda      | None         | ✅ Completed |
+| `/packages/infra/functions/cognito-post-confirmation`                                 | Cognito Post-Confirmation Lambda   | None         | ✅ Completed |
+| `/packages/infra/functions/`                                                          | Other Lambda functions             | None         | ✅ Completed |
+| `/packages/infra/lib/types.ts`                                                        | Infrastructure library types       | None         | ✅ Completed |
+| `/packages/infra/lib/`                                                                | Other infrastructure library files | None         | ✅ Completed |
 
 ### Pages
 
@@ -1541,6 +1582,7 @@ Cognito → API Gateway Authorizers
 All 48 API routes have been successfully implemented with production-ready quality:
 
 #### **Restaurant & Location APIs (7 routes)**
+
 - ✅ `/api/restaurants/[id]/dishes` - Get restaurant dishes with pagination
 - ✅ `/api/restaurants/[id]/hours` - Get restaurant operating hours
 - ✅ `/api/restaurants/[id]/photos` - Get restaurant photos
@@ -1550,6 +1592,7 @@ All 48 API routes have been successfully implemented with production-ready quali
 - ✅ `/api/photos/[reference]` - Photo retrieval by reference
 
 #### **Ranking & Review APIs (12 routes)**
+
 - ✅ `/api/rankings/create` - Create new dish ranking
 - ✅ `/api/rankings/update/[id]` - Update existing ranking
 - ✅ `/api/rankings/global/[dishSlug]` - Global dish rankings
@@ -1564,6 +1607,7 @@ All 48 API routes have been successfully implemented with production-ready quali
 - ✅ `/api/postgres/dishes/[id]/votes` - Get dish votes
 
 #### **User Profile & Social APIs (8 routes)**
+
 - ✅ `/api/user/profile/index` - Profile management
 - ✅ `/api/user/profile/follow` - Follow/unfollow users
 - ✅ `/api/user/profile/followers` - Get user followers
@@ -1574,6 +1618,7 @@ All 48 API routes have been successfully implemented with production-ready quali
 - ✅ `/api/postgres/dishes/top` - Top dishes leaderboard
 
 #### **External API Proxies (5 routes)**
+
 - ✅ `/api/proxy/google-places` - Google Places API proxy
 - ✅ `/api/proxy/external-api` - Generic external API proxy
 - ✅ `/api/proxy/yelp` - Yelp Fusion API proxy
@@ -1581,10 +1626,12 @@ All 48 API routes have been successfully implemented with production-ready quali
 - ✅ `/api/upload/ranking-photo` - Photo upload service
 
 #### **AWS Integration APIs (2 routes)**
+
 - ✅ `/api/aws/secrets` - AWS Secrets Manager access
 - ✅ `/api/aws/ssm` - AWS SSM Parameter Store access
 
 #### **Debug & Utility APIs (6 routes)**
+
 - ✅ `/api/debug/logs` - Application log access
 - ✅ `/api/debug/health` - Comprehensive health checks
 - ✅ `/api/security/csrf` - CSRF token management
@@ -1593,10 +1640,12 @@ All 48 API routes have been successfully implemented with production-ready quali
 - ✅ `/api/admin/status` - Admin system status
 
 #### **Analytics & Admin APIs (8 routes)**
+
 - ✅ `/api/admin/analytics` - Comprehensive analytics dashboard
 - ✅ All existing routes from previous implementation
 
 ### **Production-Ready Features**
+
 - 🔐 **Authentication & Authorization** - JWT validation, role-based access
 - ✅ **Input Validation** - Comprehensive request validation
 - 🛡️ **Error Handling** - Consistent error responses with proper HTTP codes
@@ -1878,3 +1927,362 @@ Based on the comprehensive audit, the following components should be prioritized
 - [ ] Configure AWS WAF for API security
 - [ ] Set up custom domain for API Gateway
 - [ ] Implement infrastructure as code using AWS CDK or Terraform
+
+## 🚀 CRITICAL INFRASTRUCTURE IMPLEMENTATION PLAN
+
+### **PHASE 1: Docker Configuration (Priority 1 - Critical)**
+
+#### **1.1 Frontend Dockerfile (apps/web/Dockerfile)**
+
+```dockerfile
+# Multi-stage build for Next.js application
+FROM node:18-alpine AS base
+FROM base AS deps
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+COPY package.json pnpm-lock.yaml ./
+RUN corepack enable pnpm && pnpm install --frozen-lockfile
+
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+RUN corepack enable pnpm && pnpm run build
+
+FROM base AS runner
+WORKDIR /app
+ENV NODE_ENV production
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+USER nextjs
+EXPOSE 3000
+ENV PORT 3000
+CMD ["node", "server.js"]
+```
+
+#### **1.2 Backend Dockerfile (apps/backend/Dockerfile)**
+
+```dockerfile
+FROM node:18-alpine AS base
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+COPY package.json pnpm-lock.yaml ./
+RUN corepack enable pnpm && pnpm install --frozen-lockfile --prod
+
+FROM base AS builder
+WORKDIR /app
+COPY . .
+RUN corepack enable pnpm && pnpm run build
+
+FROM node:18-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV production
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 backend
+COPY --from=builder /app/dist ./dist
+COPY --from=base /app/node_modules ./node_modules
+COPY package.json ./
+USER backend
+EXPOSE 4000
+ENV PORT 4000
+CMD ["node", "dist/src/index.js"]
+```
+
+#### **1.3 Docker Compose Configuration**
+
+```yaml
+# docker-compose.yml
+version: '3.8'
+services:
+  web:
+    build: ./apps/web
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://backend:4000
+    depends_on:
+      - backend
+
+  backend:
+    build: ./apps/backend
+    ports:
+      - '4000:4000'
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://postgres:password@db:5432/bellyfed
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=bellyfed
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+```
+
+### **PHASE 2: ECS Infrastructure (Priority 1 - Critical)**
+
+#### **2.1 ECS Task Definition (packages/infra/ecs/task-definitions/frontend.json)**
+
+```json
+{
+  "family": "bellyfed-frontend",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::ACCOUNT:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::ACCOUNT:role/ecsTaskRole",
+  "containerDefinitions": [
+    {
+      "name": "frontend",
+      "image": "ACCOUNT.dkr.ecr.REGION.amazonaws.com/bellyfed-frontend:latest",
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/bellyfed-frontend",
+          "awslogs-region": "REGION",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "environment": [
+        {
+          "name": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "name": "NEXT_PUBLIC_API_URL",
+          "value": "https://api.bellyfed.com"
+        }
+      ],
+      "healthCheck": {
+        "command": [
+          "CMD-SHELL",
+          "curl -f http://localhost:3000/health || exit 1"
+        ],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 60
+      }
+    }
+  ]
+}
+```
+
+#### **2.2 CDK ECS Stack (packages/infra/stacks/ecs-stack.ts)**
+
+```typescript
+import * as cdk from 'aws-cdk-lib';
+import * as ecs from 'aws-cdk-lib/aws-ecs';
+import * as ec2 from 'aws-cdk-lib/aws-ec2';
+import * as elbv2 from 'aws-cdk-lib/aws-elasticloadbalancingv2';
+import * as ecr from 'aws-cdk-lib/aws-ecr';
+import { Construct } from 'constructs';
+
+export class ECSStack extends cdk.Stack {
+  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+    super(scope, id, props);
+
+    // VPC
+    const vpc = new ec2.Vpc(this, 'BellyfedVPC', {
+      maxAzs: 2,
+      natGateways: 1,
+    });
+
+    // ECS Cluster
+    const cluster = new ecs.Cluster(this, 'BellyfedCluster', {
+      vpc,
+      clusterName: 'bellyfed-cluster',
+    });
+
+    // ECR Repositories
+    const frontendRepo = new ecr.Repository(this, 'FrontendRepo', {
+      repositoryName: 'bellyfed-frontend',
+    });
+
+    const backendRepo = new ecr.Repository(this, 'BackendRepo', {
+      repositoryName: 'bellyfed-backend',
+    });
+
+    // Task Definitions
+    const frontendTaskDef = new ecs.FargateTaskDefinition(
+      this,
+      'FrontendTaskDef',
+      {
+        memoryLimitMiB: 1024,
+        cpu: 512,
+      },
+    );
+
+    const frontendContainer = frontendTaskDef.addContainer('frontend', {
+      image: ecs.ContainerImage.fromEcrRepository(frontendRepo),
+      portMappings: [{ containerPort: 3000 }],
+      logging: ecs.LogDrivers.awsLogs({
+        streamPrefix: 'frontend',
+      }),
+    });
+
+    // ECS Service
+    const frontendService = new ecs.FargateService(this, 'FrontendService', {
+      cluster,
+      taskDefinition: frontendTaskDef,
+      desiredCount: 2,
+      assignPublicIp: false,
+    });
+
+    // Application Load Balancer
+    const alb = new elbv2.ApplicationLoadBalancer(this, 'ALB', {
+      vpc,
+      internetFacing: true,
+    });
+
+    const listener = alb.addListener('Listener', {
+      port: 80,
+      defaultAction: elbv2.ListenerAction.fixedResponse(404),
+    });
+
+    listener.addTargets('FrontendTargets', {
+      port: 3000,
+      targets: [frontendService],
+      healthCheckPath: '/health',
+      healthCheckInterval: cdk.Duration.seconds(30),
+    });
+
+    // Auto Scaling
+    const scaling = frontendService.autoScaleTaskCount({
+      minCapacity: 2,
+      maxCapacity: 10,
+    });
+
+    scaling.scaleOnCpuUtilization('CpuScaling', {
+      targetUtilizationPercent: 70,
+    });
+
+    scaling.scaleOnMemoryUtilization('MemoryScaling', {
+      targetUtilizationPercent: 80,
+    });
+  }
+}
+```
+
+### **PHASE 3: CI/CD Pipeline (Priority 2 - High)**
+
+#### **3.1 GitHub Actions Frontend Deployment (.github/workflows/deploy-frontend.yml)**
+
+```yaml
+name: Deploy Frontend to ECS
+
+on:
+  push:
+    branches: [main]
+    paths: ['apps/web/**']
+
+env:
+  AWS_REGION: us-east-1
+  ECR_REPOSITORY: bellyfed-frontend
+  ECS_SERVICE: bellyfed-frontend-service
+  ECS_CLUSTER: bellyfed-cluster
+  ECS_TASK_DEFINITION: .aws/task-definition-frontend.json
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./apps/web
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ env.ECS_TASK_DEFINITION }}
+          container-name: frontend
+          image: ${{ steps.build-image.outputs.image }}
+
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true
+```
+
+### **IMPLEMENTATION TIMELINE**
+
+#### **Week 1: Docker Foundation**
+
+- Day 1-2: Create Dockerfiles for all applications
+- Day 3-4: Create docker-compose configurations
+- Day 5: Test local Docker environment
+
+#### **Week 2: ECS Infrastructure**
+
+- Day 1-2: Create ECS task definitions
+- Day 3-4: Implement CDK ECS stack
+- Day 5: Deploy and test ECS infrastructure
+
+#### **Week 3: CI/CD Pipeline**
+
+- Day 1-2: Create GitHub Actions workflows
+- Day 3-4: Configure ECR repositories and permissions
+- Day 5: Test end-to-end deployment pipeline
+
+#### **Week 4: Production Deployment**
+
+- Day 1-2: Production environment setup
+- Day 3-4: Security and monitoring configuration
+- Day 5: Go-live and monitoring
+
+### **SUCCESS CRITERIA**
+
+- ✅ All applications containerized and running locally
+- ✅ ECS infrastructure deployed and auto-scaling
+- ✅ CI/CD pipeline deploying on code changes
+- ✅ Production environment stable and monitored
+- ✅ Zero-downtime deployments working
+- ✅ Health checks and monitoring operational
