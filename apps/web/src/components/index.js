@@ -24,6 +24,21 @@ export * from './collections/CollectionCard.js';
 export * from './collections/CollectionForm.js';
 export * from './collections/CollectionList.js';
 
+// Charts Components
+export * from './charts/index.js';
+
+// Dialogs Components
+export * from './dialogs/index.js';
+
+// Feed Components
+export * from './feed/index.js';
+
+// Location Components
+export * from './location/index.js';
+
+// Statistics Components
+export * from './statistics/index.js';
+
 // Competitions Components
 export * from './competitions/index.js';
 

@@ -19,11 +19,11 @@ All counts have been verified against the actual file listings in the original r
 | **UI Components**      | 40 <!-- Verified: 39 original (1 completed, 38 not started) + 1 new (completed) -->                                                  | 40        | 0           | 0           | 100%         |
 | **Feature Components** | 73 <!-- Updated: Complete count from original repository including newly identified components -->                                    | 24        | 0           | 49          | 33%          |
 | **API Routes**         | 48 <!-- Verified: Exact count from /packages/frontend/src/pages/api/ -->                                                             | 8         | 4           | 36          | 17%          |
-| **Pages**              | 56 <!-- Verified: Exact count from /packages/frontend/src/pages/ -->                                                                 | 44        | 0           | 12          | 79%          |
+| **Pages**              | 56 <!-- Verified: Exact count from /packages/frontend/src/pages/ -->                                                                 | 46        | 0           | 10          | 82%          |
 | **Config**             | 16 <!-- Verified: Includes /packages/frontend/src/config (7), /packages/typescript-config (5), /packages/eslint-config (5) -->       | 16        | 0           | 0           | 100%         |
 | **Types**              | 10 <!-- Verified: 9 from frontend/src/types + 1 from infra/src/layers/utils/nodejs/types/ -->                                        | 10        | 0           | 0           | 100%         |
 | **Infrastructure**     | 24 <!-- Updated: 24 components including Lambda functions and infrastructure library -->                                              | 21        | 0           | 3           | 88%          |
-| **Overall**            | 322 <!-- Recalculated based on verified totals above -->                                                                             | 199       | 6           | 117         | 62%          |
+| **Overall**            | 322 <!-- Recalculated based on verified totals above -->                                                                             | 201       | 6           | 115         | 62%          |
 
 ### Migration Status Legend
 
@@ -1359,7 +1359,7 @@ We are adopting a "migrate first, convert later" approach to ensure complete fun
 | ----------------------------------------------------------------------- | -------------------------- | ------------ | -------------- |
 | `/packages/frontend/src/pages/_app.tsx`                                 | App component              | None         | ✅ Completed   |
 | `/packages/frontend/src/pages/_document.tsx`                            | Document component         | None         | ✅ Completed   |
-| `/packages/frontend/src/pages/_error.tsx`                               | Error page                 | None         | ❌ Not Started |
+| `/packages/frontend/src/pages/_error.tsx`                               | Error page                 | None         | ✅ Completed   |
 | `/packages/frontend/src/pages/[country]/ai-center.tsx`                  | AI center page             | None         | ❌ Not Started |
 | `/packages/frontend/src/pages/[country]/chatbot/[id].tsx`               | Chatbot detail page        | None         | ❌ Not Started |
 | `/packages/frontend/src/pages/[country]/competitions.tsx`               | Competitions page          | None         | ✅ Completed   |
@@ -1378,7 +1378,7 @@ We are adopting a "migrate first, convert later" approach to ensure complete fun
 | `/packages/frontend/src/pages/[country]/rankings/index.tsx`             | Rankings index page        | None         | ✅ Completed   |
 | `/packages/frontend/src/pages/[country]/rankings/local/[dishSlug].tsx`  | Local dish ranking page    | None         | ✅ Completed   |
 | `/packages/frontend/src/pages/[country]/rankings/my/[dishSlug].tsx`     | My dish ranking page       | None         | ✅ Completed   |
-| `/packages/frontend/src/pages/[country]/rankings/my/index.tsx`          | My rankings index page     | None         | ❌ Not Started |
+| `/packages/frontend/src/pages/[country]/rankings/my/index.tsx`          | My rankings index page     | None         | ✅ Completed   |
 | `/packages/frontend/src/pages/[country]/restaurant-management.tsx`      | Restaurant management page | None         | ✅ Completed   |
 | `/packages/frontend/src/pages/[country]/restaurant/[id].tsx`            | Restaurant detail page     | None         | ✅ Completed   |
 | `/packages/frontend/src/pages/[country]/restaurants.tsx`                | Restaurants page           | None         | ✅ Completed   |

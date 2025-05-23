@@ -63,6 +63,22 @@ import {
   RestaurantComparison,
   RestaurantBooking
 } from '../components/restaurant/index.js';
+import {
+  BarChart
+} from '../components/charts/index.js';
+import {
+  AddDishDialog,
+  AddRestaurantButton
+} from '../components/dialogs/index.js';
+import {
+  FeedContent
+} from '../components/feed/index.js';
+import {
+  LocationSearch
+} from '../components/location/index.js';
+import {
+  Statistics
+} from '../components/statistics/index.js';
 
 // Mock data for testing
 const mockCompetitions = [
@@ -113,7 +129,12 @@ const TestFeatureComponents = () => {
     { id: 'dish', title: 'Dish Components', icon: '🍽️' },
     { id: 'ranking', title: 'Ranking Components', icon: '📊' },
     { id: 'rankings', title: 'Rankings Components', icon: '🏆' },
-    { id: 'restaurant', title: 'Restaurant Components', icon: '🏪' }
+    { id: 'restaurant', title: 'Restaurant Components', icon: '🏪' },
+    { id: 'charts', title: 'Charts Components', icon: '📈' },
+    { id: 'dialogs', title: 'Dialog Components', icon: '💬' },
+    { id: 'feed', title: 'Feed Components', icon: '📱' },
+    { id: 'location', title: 'Location Components', icon: '📍' },
+    { id: 'statistics', title: 'Statistics Components', icon: '📊' }
   ];
 
   const renderAnalyticsSection = () => (
@@ -499,6 +520,163 @@ const TestFeatureComponents = () => {
     </div>
   );
 
+  const renderChartsSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Bar Chart - Vertical</h3>
+        <BarChart
+          data={[
+            { label: 'Pizza', value: 85 },
+            { label: 'Burger', value: 72 },
+            { label: 'Pasta', value: 68 },
+            { label: 'Sushi', value: 91 },
+            { label: 'Tacos', value: 76 }
+          ]}
+          title="Popular Dishes Rating"
+          orientation="vertical"
+          colorScheme="orange"
+          height={300}
+        />
+      </Card>
+
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Bar Chart - Horizontal</h3>
+        <BarChart
+          data={[
+            { label: 'Italian', value: 45 },
+            { label: 'Chinese', value: 38 },
+            { label: 'Japanese', value: 52 },
+            { label: 'Mexican', value: 29 }
+          ]}
+          title="Cuisine Popularity"
+          orientation="horizontal"
+          colorScheme="blue"
+          height={250}
+        />
+      </Card>
+    </div>
+  );
+
+  const renderDialogsSection = () => {
+    const [showAddDish, setShowAddDish] = useState(false);
+
+    return (
+      <div className="space-y-8">
+        <Card className="p-6">
+          <h3 className="text-lg font-semibold mb-4">Add Restaurant Button</h3>
+          <div className="space-y-4">
+            <AddRestaurantButton
+              variant="default"
+              size="md"
+              showIcon={true}
+              requiresAdmin={false}
+            />
+            <AddRestaurantButton
+              variant="outline"
+              size="sm"
+              showIcon={true}
+              requiresAdmin={true}
+            />
+          </div>
+        </Card>
+
+        <Card className="p-6">
+          <h3 className="text-lg font-semibold mb-4">Add Dish Dialog</h3>
+          <Button onClick={() => setShowAddDish(true)}>
+            Open Add Dish Dialog
+          </Button>
+          <AddDishDialog
+            isOpen={showAddDish}
+            onClose={() => setShowAddDish(false)}
+            onDishAdded={(dish) => {
+              console.log('Dish added:', dish);
+              setShowAddDish(false);
+            }}
+            restaurantId="test-restaurant-1"
+            restaurantName="Test Restaurant"
+          />
+        </Card>
+      </div>
+    );
+  };
+
+  const renderFeedSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Feed Content - Following</h3>
+        <FeedContent
+          feedType="following"
+          showFilters={true}
+          showComposer={true}
+          itemsPerPage={5}
+          enableInfiniteScroll={false}
+        />
+      </Card>
+
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Feed Content - Discover</h3>
+        <FeedContent
+          feedType="discover"
+          showFilters={true}
+          showComposer={false}
+          itemsPerPage={3}
+          enableInfiniteScroll={false}
+        />
+      </Card>
+    </div>
+  );
+
+  const renderLocationSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Location Search</h3>
+        <LocationSearch
+          onLocationSelect={(location) => console.log('Selected location:', location)}
+          placeholder="Search for restaurants, areas, or landmarks..."
+          showCurrentLocation={true}
+          showMap={true}
+        />
+      </Card>
+
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Location Search - Compact</h3>
+        <LocationSearch
+          onLocationSelect={(location) => console.log('Selected location:', location)}
+          placeholder="Quick location search..."
+          showCurrentLocation={false}
+          showMap={false}
+        />
+      </Card>
+    </div>
+  );
+
+  const renderStatisticsSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">General Statistics</h3>
+        <Statistics
+          entityType="general"
+          timeframe="month"
+          showCharts={true}
+          showExport={true}
+          autoRefresh={false}
+        />
+      </Card>
+
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Restaurant Statistics</h3>
+        <Statistics
+          entityType="restaurant"
+          entityId="test-restaurant-1"
+          timeframe="week"
+          showCharts={true}
+          showExport={true}
+          autoRefresh={false}
+        />
+      </Card>
+    </div>
+  );
+
   return (
     <AnalyticsProvider
       enableAutoTracking={true}
@@ -552,6 +730,11 @@ const TestFeatureComponents = () => {
             {activeSection === 'ranking' && renderRankingSection()}
             {activeSection === 'rankings' && renderRankingsSection()}
             {activeSection === 'restaurant' && renderRestaurantSection()}
+            {activeSection === 'charts' && renderChartsSection()}
+            {activeSection === 'dialogs' && renderDialogsSection()}
+            {activeSection === 'feed' && renderFeedSection()}
+            {activeSection === 'location' && renderLocationSection()}
+            {activeSection === 'statistics' && renderStatisticsSection()}
           </div>
         </div>
       </div>
