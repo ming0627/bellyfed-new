@@ -39,6 +39,15 @@ export * from './location/index.js';
 // Statistics Components
 export * from './statistics/index.js';
 
+// Chat Components
+export * from './chat/index.js';
+
+// Date Picker Components
+export * from './date-picker/index.js';
+
+// User Profile Components
+export * from './user-profile/index.js';
+
 // Competitions Components
 export * from './competitions/index.js';
 

@@ -79,6 +79,15 @@ import {
 import {
   Statistics
 } from '../components/statistics/index.js';
+import {
+  ChatInterface
+} from '../components/chat/index.js';
+import {
+  CustomDatePicker
+} from '../components/date-picker/index.js';
+import {
+  UserProfileCard
+} from '../components/user-profile/index.js';
 
 // Mock data for testing
 const mockCompetitions = [
@@ -134,7 +143,10 @@ const TestFeatureComponents = () => {
     { id: 'dialogs', title: 'Dialog Components', icon: '💬' },
     { id: 'feed', title: 'Feed Components', icon: '📱' },
     { id: 'location', title: 'Location Components', icon: '📍' },
-    { id: 'statistics', title: 'Statistics Components', icon: '📊' }
+    { id: 'statistics', title: 'Statistics Components', icon: '📊' },
+    { id: 'chat', title: 'Chat Components', icon: '💬' },
+    { id: 'date-picker', title: 'Date Picker Components', icon: '📅' },
+    { id: 'user-profile', title: 'User Profile Components', icon: '👤' }
   ];
 
   const renderAnalyticsSection = () => (
@@ -677,6 +689,110 @@ const TestFeatureComponents = () => {
     </div>
   );
 
+  const renderChatSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Chat Interface - Direct Chat</h3>
+        <ChatInterface
+          chatId="chat-1"
+          chatType="direct"
+          participants={[
+            { id: 'user-1', name: 'John Doe', avatar: null },
+            { id: 'user-2', name: 'Jane Smith', avatar: null }
+          ]}
+          showParticipants={true}
+          showTypingIndicator={true}
+          allowFileUpload={true}
+        />
+      </Card>
+
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Chat Interface - Group Chat</h3>
+        <ChatInterface
+          chatId="chat-2"
+          chatType="group"
+          participants={[
+            { id: 'user-1', name: 'John Doe', avatar: null },
+            { id: 'user-2', name: 'Jane Smith', avatar: null },
+            { id: 'user-3', name: 'Bob Wilson', avatar: null }
+          ]}
+          showParticipants={true}
+          showTypingIndicator={true}
+          allowFileUpload={true}
+        />
+      </Card>
+    </div>
+  );
+
+  const renderDatePickerSection = () => {
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedRange, setSelectedRange] = useState([null, null]);
+
+    return (
+      <div className="space-y-8">
+        <Card className="p-6">
+          <h3 className="text-lg font-semibold mb-4">Custom Date Picker - Single Date</h3>
+          <CustomDatePicker
+            value={selectedDate}
+            onChange={setSelectedDate}
+            placeholder="Select a date"
+            minDate={new Date()}
+            maxDate={new Date(Date.now() + 90 * 24 * 60 * 60 * 1000)}
+          />
+          {selectedDate && (
+            <p className="mt-2 text-sm text-gray-600">
+              Selected: {selectedDate.toLocaleDateString()}
+            </p>
+          )}
+        </Card>
+
+        <Card className="p-6">
+          <h3 className="text-lg font-semibold mb-4">Custom Date Picker - Date Range</h3>
+          <CustomDatePicker
+            value={selectedRange}
+            onChange={setSelectedRange}
+            placeholder="Select date range"
+            isRange={true}
+            minDate={new Date()}
+          />
+          {selectedRange[0] && selectedRange[1] && (
+            <p className="mt-2 text-sm text-gray-600">
+              Range: {selectedRange[0].toLocaleDateString()} - {selectedRange[1].toLocaleDateString()}
+            </p>
+          )}
+        </Card>
+      </div>
+    );
+  };
+
+  const renderUserProfileSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">User Profile Card - Full</h3>
+        <UserProfileCard
+          userId="user-1"
+          showStats={true}
+          showAchievements={true}
+          showFollowButton={true}
+          showSocialLinks={true}
+          compact={false}
+        />
+      </Card>
+
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">User Profile Card - Compact</h3>
+        <UserProfileCard
+          userId="user-2"
+          showStats={true}
+          showAchievements={false}
+          showFollowButton={true}
+          showSocialLinks={false}
+          compact={true}
+        />
+      </Card>
+    </div>
+  );
+
   return (
     <AnalyticsProvider
       enableAutoTracking={true}
@@ -735,6 +851,9 @@ const TestFeatureComponents = () => {
             {activeSection === 'feed' && renderFeedSection()}
             {activeSection === 'location' && renderLocationSection()}
             {activeSection === 'statistics' && renderStatisticsSection()}
+            {activeSection === 'chat' && renderChatSection()}
+            {activeSection === 'date-picker' && renderDatePickerSection()}
+            {activeSection === 'user-profile' && renderUserProfileSection()}
           </div>
         </div>
       </div>
