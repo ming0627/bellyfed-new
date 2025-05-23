@@ -1,6 +1,6 @@
 /**
  * Components Index
- * 
+ *
  * Main export file for all application components.
  * Organized by category for easy importing and discovery.
  */
@@ -28,7 +28,7 @@ export * from './collections/CollectionList.js';
 export * from './competitions/index.js';
 
 // Dish Components
-export * from './dish/DishRanking.js';
+export * from './dish/index.js';
 
 // Dish Restaurants Components
 export * from './dish-restaurants/index.js';
@@ -64,6 +64,9 @@ export * from './my-foodie-leaderboard/index.js';
 // Premium Components
 export * from './premium/index.js';
 
+// Ranking Components
+export * from './ranking/index.js';
+
 // Profile Components
 export * from './profile/ProfileHeader.js';
 export * from './profile/ProfileTabs.js';
@@ -75,11 +78,10 @@ export * from './profile/UserFavorites.js';
 export * from './profile/UserReviews.js';
 
 // Rankings Components
-export * from './rankings/RankingCard.js';
-export * from './rankings/RankingDialog.js';
+export * from './rankings/index.js';
 
 // Restaurant Components
-export * from './restaurant/ReviewCard.js';
+export * from './restaurant/index.js';
 
 // Restaurant Management Components
 export * from './restaurant-management/index.js';

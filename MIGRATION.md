@@ -19,11 +19,11 @@ All counts have been verified against the actual file listings in the original r
 | **UI Components**      | 40 <!-- Verified: 39 original (1 completed, 38 not started) + 1 new (completed) -->                                                  | 40        | 0           | 0           | 100%         |
 | **Feature Components** | 73 <!-- Updated: Complete count from original repository including newly identified components -->                                    | 20        | 0           | 53          | 27%          |
 | **API Routes**         | 48 <!-- Verified: Exact count from /packages/frontend/src/pages/api/ -->                                                             | 8         | 4           | 36          | 17%          |
-| **Pages**              | 56 <!-- Verified: Exact count from /packages/frontend/src/pages/ -->                                                                 | 35        | 0           | 21          | 63%          |
+| **Pages**              | 56 <!-- Verified: Exact count from /packages/frontend/src/pages/ -->                                                                 | 42        | 0           | 14          | 75%          |
 | **Config**             | 16 <!-- Verified: Includes /packages/frontend/src/config (7), /packages/typescript-config (5), /packages/eslint-config (5) -->       | 16        | 0           | 0           | 100%         |
 | **Types**              | 10 <!-- Verified: 9 from frontend/src/types + 1 from infra/src/layers/utils/nodejs/types/ -->                                        | 10        | 0           | 0           | 100%         |
 | **Infrastructure**     | 24 <!-- Updated: 24 components including Lambda functions and infrastructure library -->                                              | 21        | 0           | 3           | 88%          |
-| **Overall**            | 322 <!-- Recalculated based on verified totals above -->                                                                             | 190       | 6           | 126         | 59%          |
+| **Overall**            | 322 <!-- Recalculated based on verified totals above -->                                                                             | 197       | 6           | 119         | 61%          |
 
 ### Migration Status Legend
 
@@ -1362,9 +1362,9 @@ We are adopting a "migrate first, convert later" approach to ensure complete fun
 | `/packages/frontend/src/pages/[country]/profile.tsx`                    | Profile page               | None         | ✅ Completed   |
 | `/packages/frontend/src/pages/[country]/profile/edit.tsx`               | Profile edit page          | None         | ✅ Completed   |
 | `/packages/frontend/src/pages/[country]/ranking.tsx`                    | Ranking page               | None         | ❌ Not Started |
-| `/packages/frontend/src/pages/[country]/rankings/global/[dishSlug].tsx` | Global dish ranking page   | None         | ❌ Not Started |
+| `/packages/frontend/src/pages/[country]/rankings/global/[dishSlug].tsx` | Global dish ranking page   | None         | ✅ Completed   |
 | `/packages/frontend/src/pages/[country]/rankings/index.tsx`             | Rankings index page        | None         | ✅ Completed   |
-| `/packages/frontend/src/pages/[country]/rankings/local/[dishSlug].tsx`  | Local dish ranking page    | None         | ❌ Not Started |
+| `/packages/frontend/src/pages/[country]/rankings/local/[dishSlug].tsx`  | Local dish ranking page    | None         | ✅ Completed   |
 | `/packages/frontend/src/pages/[country]/rankings/my/[dishSlug].tsx`     | My dish ranking page       | None         | ❌ Not Started |
 | `/packages/frontend/src/pages/[country]/rankings/my/index.tsx`          | My rankings index page     | None         | ❌ Not Started |
 | `/packages/frontend/src/pages/[country]/restaurant-management.tsx`      | Restaurant management page | None         | ✅ Completed   |
@@ -1376,8 +1376,8 @@ We are adopting a "migrate first, convert later" approach to ensure complete fun
 | `/packages/frontend/src/pages/403.tsx`                                  | 403 error page             | None         | ✅ Completed   |
 | `/packages/frontend/src/pages/404.tsx`                                  | 404 error page             | None         | ✅ Completed   |
 | `/packages/frontend/src/pages/500.tsx`                                  | 500 error page             | None         | ✅ Completed   |
-| `/packages/frontend/src/pages/admin/index.tsx`                          | Admin index page           | None         | ❌ Not Started |
-| `/packages/frontend/src/pages/admin/restaurants/create.tsx`             | Create restaurant page     | None         | ❌ Not Started |
+| `/packages/frontend/src/pages/admin/index.tsx`                          | Admin index page           | None         | ✅ Completed   |
+| `/packages/frontend/src/pages/admin/restaurants/create.tsx`             | Create restaurant page     | None         | ✅ Completed   |
 | `/packages/frontend/src/pages/ai-center/[id].tsx`                       | AI center detail page      | None         | ❌ Not Started |
 | `/packages/frontend/src/pages/ai-center/index.tsx`                      | AI center index page       | None         | ❌ Not Started |
 | `/packages/frontend/src/pages/chatbot/[id].tsx`                         | Chatbot detail page        | None         | ❌ Not Started |
@@ -1391,9 +1391,9 @@ We are adopting a "migrate first, convert later" approach to ensure complete fun
 | `/packages/frontend/src/pages/health.ts`                                | Health check page          | None         | ✅ Completed   |
 | `/packages/frontend/src/pages/index.tsx`                                | Root index page            | None         | ✅ Completed   |
 | `/packages/frontend/src/pages/my/example-migration.tsx`                 | Example migration page     | None         | ❌ Not Started |
-| `/packages/frontend/src/pages/profile/[userId].tsx`                     | User profile page          | None         | ❌ Not Started |
-| `/packages/frontend/src/pages/profile/edit.tsx`                         | Profile edit page          | None         | ❌ Not Started |
-| `/packages/frontend/src/pages/profile/index.tsx`                        | Profile index page         | None         | ❌ Not Started |
+| `/packages/frontend/src/pages/profile/[userId].tsx`                     | User profile page          | None         | ✅ Completed   |
+| `/packages/frontend/src/pages/profile/edit.tsx`                         | Profile edit page          | None         | ✅ Completed   |
+| `/packages/frontend/src/pages/profile/index.tsx`                        | Profile index page         | None         | ✅ Completed   |
 | `/packages/frontend/src/pages/resend-verification.tsx`                  | Resend verification page   | None         | ❌ Not Started |
 | `/packages/frontend/src/pages/restaurant-management.tsx`                | Restaurant management page | None         | ❌ Not Started |
 | `/packages/frontend/src/pages/restaurants.tsx`                          | Restaurants page           | None         | ✅ Completed   |

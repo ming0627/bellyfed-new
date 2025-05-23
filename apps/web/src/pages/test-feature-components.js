@@ -1,6 +1,6 @@
 /**
  * Test Feature Components Page
- * 
+ *
  * Test page for newly migrated feature components including
  * analytics, competitions, premium, admin, AI center, dish restaurants,
  * foodie leaderboard, and restaurant management components.
@@ -8,24 +8,24 @@
 
 import React, { useState } from 'react';
 import { Card, Button, Badge } from '../components/ui/index.js';
-import { 
-  AnalyticsProvider, 
-  PageView, 
-  RestaurantAnalytics, 
-  TrendingRestaurants 
+import {
+  AnalyticsProvider,
+  PageView,
+  RestaurantAnalytics,
+  TrendingRestaurants
 } from '../components/analytics/index.js';
-import { 
-  CompetitionCard, 
-  CompetitionList 
+import {
+  CompetitionCard,
+  CompetitionList
 } from '../components/competitions/index.js';
-import { 
-  PremiumBanner, 
-  PremiumFeatures 
+import {
+  PremiumBanner,
+  PremiumFeatures
 } from '../components/premium/index.js';
-import { 
-  AdminGuard, 
+import {
+  AdminGuard,
   AdminDashboard,
-  useAdminPermissions 
+  useAdminPermissions
 } from '../components/admin/index.js';
 import {
   AIRecommendations,
@@ -43,6 +43,26 @@ import {
   RestaurantDashboard,
   MenuManager
 } from '../components/restaurant-management/index.js';
+import {
+  DishRanking,
+  DishVoting,
+  DishComments
+} from '../components/dish/index.js';
+import {
+  RankingForm,
+  RankingList
+} from '../components/ranking/index.js';
+import {
+  RankingCard,
+  RankingDialog,
+  RankingBoard,
+  RankingComparison
+} from '../components/rankings/index.js';
+import {
+  ReviewCard,
+  RestaurantComparison,
+  RestaurantBooking
+} from '../components/restaurant/index.js';
 
 // Mock data for testing
 const mockCompetitions = [
@@ -89,7 +109,11 @@ const TestFeatureComponents = () => {
     { id: 'ai-center', title: 'AI Center Components', icon: '🤖' },
     { id: 'dish-restaurants', title: 'Dish Restaurant Components', icon: '🍽️' },
     { id: 'leaderboard', title: 'Foodie Leaderboard Components', icon: '🏅' },
-    { id: 'restaurant-mgmt', title: 'Restaurant Management Components', icon: '🏪' }
+    { id: 'restaurant-mgmt', title: 'Restaurant Management Components', icon: '🏪' },
+    { id: 'dish', title: 'Dish Components', icon: '🍽️' },
+    { id: 'ranking', title: 'Ranking Components', icon: '📊' },
+    { id: 'rankings', title: 'Rankings Components', icon: '🏆' },
+    { id: 'restaurant', title: 'Restaurant Components', icon: '🏪' }
   ];
 
   const renderAnalyticsSection = () => (
@@ -335,6 +359,146 @@ const TestFeatureComponents = () => {
     </div>
   );
 
+  const renderDishSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Dish Ranking</h3>
+        <DishRanking
+          dishId="test-dish-1"
+          dishName="Margherita Pizza"
+          restaurantId="test-restaurant-1"
+          showGlobalRanking={true}
+          showUserRanking={true}
+          showRecentRankings={true}
+        />
+      </Card>
+
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Dish Voting</h3>
+        <DishVoting
+          dishId="test-dish-1"
+          dishName="Margherita Pizza"
+          restaurantId="test-restaurant-1"
+          votingType="updown"
+          showResults={true}
+          showVoteCount={true}
+        />
+      </Card>
+
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Dish Comments</h3>
+        <DishComments
+          dishId="test-dish-1"
+          dishName="Margherita Pizza"
+          restaurantId="test-restaurant-1"
+          showAddComment={true}
+          showReplies={true}
+          commentsPerPage={5}
+        />
+      </Card>
+    </div>
+  );
+
+  const renderRankingSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Ranking Form</h3>
+        <RankingForm
+          entityType="dish"
+          entityId="test-dish-1"
+          entityData={{ name: "Margherita Pizza" }}
+          showPreview={true}
+          autoSave={false}
+        />
+      </Card>
+
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Ranking List</h3>
+        <RankingList
+          entityType="dish"
+          entityId="test-dish-1"
+          showFilters={true}
+          showSorting={true}
+          showViewToggle={true}
+          defaultView="grid"
+          itemsPerPage={6}
+        />
+      </Card>
+    </div>
+  );
+
+  const renderRankingsSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Ranking Board</h3>
+        <RankingBoard
+          categories={['dishes', 'restaurants', 'users']}
+          showTimeFilter={true}
+          showTrends={true}
+          showViewAll={true}
+          itemsPerCategory={5}
+        />
+      </Card>
+
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Ranking Comparison</h3>
+        <RankingComparison
+          entityType="dish"
+          entityIds={['dish-1', 'dish-2', 'dish-3']}
+          comparisonMetrics={['overall', 'popularity', 'recent']}
+          showCharts={true}
+          showExport={true}
+          showShare={true}
+        />
+      </Card>
+    </div>
+  );
+
+  const renderRestaurantSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Restaurant Comparison</h3>
+        <RestaurantComparison
+          restaurantIds={['rest-1', 'rest-2', 'rest-3']}
+          comparisonCriteria={['rating', 'price', 'service', 'ambiance']}
+          showPhotos={true}
+          showReviews={true}
+          showMenuHighlights={true}
+        />
+      </Card>
+
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Restaurant Booking</h3>
+        <RestaurantBooking
+          restaurantId="test-restaurant-1"
+          restaurantName="Test Restaurant"
+          showAvailability={true}
+          showSpecialRequests={true}
+          maxPartySize={8}
+          advanceBookingDays={30}
+        />
+      </Card>
+
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Review Card</h3>
+        <ReviewCard
+          review={{
+            id: '1',
+            userName: 'John Doe',
+            userAvatar: null,
+            rating: 4.5,
+            date: '2024-01-15',
+            content: 'Amazing food and great service! The pasta was perfectly cooked and the atmosphere was wonderful.',
+            helpful: 12,
+            images: []
+          }}
+          showActions={true}
+          showImages={true}
+        />
+      </Card>
+    </div>
+  );
+
   return (
     <AnalyticsProvider
       enableAutoTracking={true}
@@ -384,6 +548,10 @@ const TestFeatureComponents = () => {
             {activeSection === 'dish-restaurants' && renderDishRestaurantsSection()}
             {activeSection === 'leaderboard' && renderLeaderboardSection()}
             {activeSection === 'restaurant-mgmt' && renderRestaurantMgmtSection()}
+            {activeSection === 'dish' && renderDishSection()}
+            {activeSection === 'ranking' && renderRankingSection()}
+            {activeSection === 'rankings' && renderRankingsSection()}
+            {activeSection === 'restaurant' && renderRestaurantSection()}
           </div>
         </div>
       </div>
