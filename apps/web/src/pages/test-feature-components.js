@@ -111,6 +111,18 @@ import {
 import {
   CommentThread
 } from '../components/comments/index.js';
+import {
+  ContactForm
+} from '../components/forms/index.js';
+import {
+  PhotoGallery
+} from '../components/gallery/index.js';
+import {
+  ConfirmationModal
+} from '../components/modals/index.js';
+import {
+  DataTable
+} from '../components/tables/index.js';
 
 // Mock data for testing
 const mockCompetitions = [
@@ -176,7 +188,11 @@ const TestFeatureComponents = () => {
     { id: 'maps', title: 'Map Components', icon: '🗺️' },
     { id: 'social', title: 'Social Components', icon: '👥' },
     { id: 'reviews', title: 'Review Components', icon: '⭐' },
-    { id: 'comments', title: 'Comment Components', icon: '💬' }
+    { id: 'comments', title: 'Comment Components', icon: '💬' },
+    { id: 'forms', title: 'Form Components', icon: '📝' },
+    { id: 'gallery', title: 'Gallery Components', icon: '🖼️' },
+    { id: 'modals', title: 'Modal Components', icon: '🪟' },
+    { id: 'tables', title: 'Table Components', icon: '📊' }
   ];
 
   const renderAnalyticsSection = () => (
@@ -1123,6 +1139,327 @@ const TestFeatureComponents = () => {
     </div>
   );
 
+  const renderFormsSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Contact Form - Full Featured</h3>
+        <ContactForm
+          inquiryType="general"
+          showSubjectField={true}
+          showAttachments={true}
+          showPriorityField={true}
+          maxAttachments={3}
+          autoSave={true}
+          onSubmit={(result) => console.log('Form submitted:', result)}
+        />
+      </Card>
+
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Contact Form - Simple</h3>
+        <ContactForm
+          inquiryType="support"
+          showSubjectField={false}
+          showAttachments={false}
+          showPriorityField={false}
+          autoSave={false}
+        />
+      </Card>
+    </div>
+  );
+
+  const renderGallerySection = () => {
+    const mockPhotos = [
+      {
+        id: 'photo-1',
+        url: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=200',
+        title: 'Delicious Pizza',
+        caption: 'Authentic Italian pizza with fresh ingredients',
+        uploadedBy: 'user-1',
+        uploadedAt: '2024-01-15T10:30:00Z',
+        metadata: { size: 245760, type: 'image/jpeg', name: 'pizza.jpg' }
+      },
+      {
+        id: 'photo-2',
+        url: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=200',
+        title: 'Gourmet Burger',
+        caption: 'Juicy beef burger with artisanal toppings',
+        uploadedBy: 'user-2',
+        uploadedAt: '2024-01-14T15:45:00Z',
+        metadata: { size: 189432, type: 'image/jpeg', name: 'burger.jpg' }
+      },
+      {
+        id: 'photo-3',
+        url: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400',
+        thumbnailUrl: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=200',
+        title: 'Fresh Salad',
+        caption: 'Healthy mixed greens with seasonal vegetables',
+        uploadedBy: 'user-3',
+        uploadedAt: '2024-01-13T12:20:00Z',
+        metadata: { size: 156789, type: 'image/jpeg', name: 'salad.jpg' }
+      }
+    ];
+
+    return (
+      <div className="space-y-8">
+        <Card className="p-6">
+          <h3 className="text-lg font-semibold mb-4">Photo Gallery - Restaurant Photos</h3>
+          <PhotoGallery
+            photos={mockPhotos}
+            targetType="restaurant"
+            targetId="restaurant-123"
+            showUpload={true}
+            showCaptions={true}
+            showMetadata={true}
+            allowZoom={true}
+            gridColumns="auto"
+            aspectRatio="square"
+            maxPhotos={20}
+          />
+        </Card>
+
+        <Card className="p-6">
+          <h3 className="text-lg font-semibold mb-4">Photo Gallery - Compact Grid</h3>
+          <PhotoGallery
+            photos={mockPhotos.slice(0, 2)}
+            targetType="dish"
+            targetId="dish-456"
+            showUpload={false}
+            showCaptions={false}
+            showMetadata={false}
+            allowZoom={true}
+            gridColumns={3}
+            aspectRatio="landscape"
+            maxPhotos={10}
+          />
+        </Card>
+      </div>
+    );
+  };
+
+  const renderModalsSection = () => {
+    const [showInfoModal, setShowInfoModal] = useState(false);
+    const [showWarningModal, setShowWarningModal] = useState(false);
+    const [showDangerModal, setShowDangerModal] = useState(false);
+    const [modalLoading, setModalLoading] = useState(false);
+
+    const handleConfirm = async () => {
+      setModalLoading(true);
+      // Simulate async operation
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      setModalLoading(false);
+      setShowInfoModal(false);
+      setShowWarningModal(false);
+      setShowDangerModal(false);
+    };
+
+    return (
+      <div className="space-y-8">
+        <Card className="p-6">
+          <h3 className="text-lg font-semibold mb-4">Confirmation Modals</h3>
+          <div className="space-y-4">
+            <div>
+              <h4 className="font-medium mb-2">Info Modal</h4>
+              <Button onClick={() => setShowInfoModal(true)}>
+                Show Info Modal
+              </Button>
+            </div>
+
+            <div>
+              <h4 className="font-medium mb-2">Warning Modal</h4>
+              <Button onClick={() => setShowWarningModal(true)} variant="outline">
+                Show Warning Modal
+              </Button>
+            </div>
+
+            <div>
+              <h4 className="font-medium mb-2">Danger Modal</h4>
+              <Button onClick={() => setShowDangerModal(true)} className="bg-red-600 hover:bg-red-700">
+                Show Danger Modal
+              </Button>
+            </div>
+          </div>
+        </Card>
+
+        {/* Modals */}
+        <ConfirmationModal
+          isOpen={showInfoModal}
+          onClose={() => setShowInfoModal(false)}
+          onConfirm={handleConfirm}
+          title="Information"
+          message="This is an informational message. Would you like to proceed?"
+          confirmText="Proceed"
+          cancelText="Cancel"
+          severity="info"
+          loading={modalLoading}
+        />
+
+        <ConfirmationModal
+          isOpen={showWarningModal}
+          onClose={() => setShowWarningModal(false)}
+          onConfirm={handleConfirm}
+          title="Warning"
+          message="This action may have consequences. Are you sure you want to continue?"
+          confirmText="Continue"
+          cancelText="Cancel"
+          severity="warning"
+          loading={modalLoading}
+        />
+
+        <ConfirmationModal
+          isOpen={showDangerModal}
+          onClose={() => setShowDangerModal(false)}
+          onConfirm={handleConfirm}
+          title="Delete Item"
+          message="This action cannot be undone. Are you sure you want to delete this item permanently?"
+          confirmText="Delete"
+          cancelText="Cancel"
+          severity="danger"
+          loading={modalLoading}
+          preventBackdropClose={true}
+        />
+      </div>
+    );
+  };
+
+  const renderTablesSection = () => {
+    const mockTableData = [
+      {
+        id: 1,
+        name: 'Nasi Lemak Wanjo',
+        cuisine: 'Malaysian',
+        rating: 4.8,
+        reviews: 234,
+        price: 15.50,
+        status: 'active',
+        createdAt: '2024-01-15T10:30:00Z'
+      },
+      {
+        id: 2,
+        name: 'Din Tai Fung',
+        cuisine: 'Chinese',
+        rating: 4.6,
+        reviews: 567,
+        price: 45.00,
+        status: 'active',
+        createdAt: '2024-01-14T15:45:00Z'
+      },
+      {
+        id: 3,
+        name: 'Banana Leaf Apolo',
+        cuisine: 'Indian',
+        rating: 4.3,
+        reviews: 189,
+        price: 25.75,
+        status: 'inactive',
+        createdAt: '2024-01-13T12:20:00Z'
+      },
+      {
+        id: 4,
+        name: 'Jalan Alor Food Street',
+        cuisine: 'Street Food',
+        rating: 4.5,
+        reviews: 892,
+        price: 8.25,
+        status: 'active',
+        createdAt: '2024-01-12T18:10:00Z'
+      },
+      {
+        id: 5,
+        name: 'Atmosphere 360',
+        cuisine: 'International',
+        rating: 4.2,
+        reviews: 156,
+        price: 85.00,
+        status: 'active',
+        createdAt: '2024-01-11T20:30:00Z'
+      }
+    ];
+
+    const tableColumns = [
+      {
+        key: 'name',
+        header: 'Restaurant Name',
+        sortable: true
+      },
+      {
+        key: 'cuisine',
+        header: 'Cuisine',
+        sortable: true
+      },
+      {
+        key: 'rating',
+        header: 'Rating',
+        sortable: true,
+        render: (value) => (
+          <div className="flex items-center gap-1">
+            <span>⭐</span>
+            <span>{value}</span>
+          </div>
+        )
+      },
+      {
+        key: 'reviews',
+        header: 'Reviews',
+        sortable: true
+      },
+      {
+        key: 'price',
+        header: 'Avg Price',
+        type: 'currency',
+        sortable: true
+      },
+      {
+        key: 'status',
+        header: 'Status',
+        type: 'badge',
+        sortable: true
+      },
+      {
+        key: 'createdAt',
+        header: 'Created',
+        type: 'date',
+        sortable: true
+      }
+    ];
+
+    return (
+      <div className="space-y-8">
+        <Card className="p-6">
+          <h3 className="text-lg font-semibold mb-4">Data Table - Full Featured</h3>
+          <DataTable
+            data={mockTableData}
+            columns={tableColumns}
+            loading={false}
+            searchable={true}
+            sortable={true}
+            selectable={true}
+            pagination={true}
+            pageSize={3}
+            pageSizeOptions={[3, 5, 10]}
+            showExport={true}
+            emptyMessage="No restaurants found"
+          />
+        </Card>
+
+        <Card className="p-6">
+          <h3 className="text-lg font-semibold mb-4">Data Table - Simple</h3>
+          <DataTable
+            data={mockTableData.slice(0, 3)}
+            columns={tableColumns.slice(0, 4)}
+            loading={false}
+            searchable={false}
+            sortable={true}
+            selectable={false}
+            pagination={false}
+            showExport={false}
+          />
+        </Card>
+      </div>
+    );
+  };
+
   return (
     <AnalyticsProvider
       enableAutoTracking={true}
@@ -1191,6 +1528,10 @@ const TestFeatureComponents = () => {
             {activeSection === 'social' && renderSocialSection()}
             {activeSection === 'reviews' && renderReviewsSection()}
             {activeSection === 'comments' && renderCommentsSection()}
+            {activeSection === 'forms' && renderFormsSection()}
+            {activeSection === 'gallery' && renderGallerySection()}
+            {activeSection === 'modals' && renderModalsSection()}
+            {activeSection === 'tables' && renderTablesSection()}
           </div>
         </div>
       </div>

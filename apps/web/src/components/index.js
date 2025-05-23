@@ -69,6 +69,18 @@ export * from './reviews/index.js';
 // Comments Components
 export * from './comments/index.js';
 
+// Forms Components
+export * from './forms/index.js';
+
+// Gallery Components
+export * from './gallery/index.js';
+
+// Modals Components
+export * from './modals/index.js';
+
+// Tables Components
+export * from './tables/index.js';
+
 // Competitions Components
 export * from './competitions/index.js';
 
