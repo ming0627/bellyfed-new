@@ -12,7 +12,7 @@
  */
 
 import React, { useState } from 'react';
-import { Button } from '../ui/index.js';
+import { Button } from '@bellyfed/ui';
 import { useAnalyticsContext } from '../analytics/AnalyticsProvider.js';
 
 const AlertBanner = ({

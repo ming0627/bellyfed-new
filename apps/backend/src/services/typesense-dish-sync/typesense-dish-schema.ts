@@ -1,6 +1,6 @@
 /**
  * Typesense Dish Schema
- * 
+ *
  * This file defines the schema for the dishes collection in Typesense
  * and provides utility functions for formatting dish data.
  */
@@ -11,21 +11,21 @@
 export const TYPESENSE_DISH_SCHEMA = {
   name: 'dishes',
   fields: [
-    { name: 'id', type: 'string' },
-    { name: 'name', type: 'string' },
-    { name: 'description', type: 'string', optional: true },
-    { name: 'dish_type', type: 'string' },
-    { name: 'restaurant_id', type: 'string' },
-    { name: 'restaurant_name', type: 'string' },
-    { name: 'price', type: 'float' },
-    { name: 'tags', type: 'string[]', optional: true },
-    { name: 'image_url', type: 'string', optional: true },
-    { name: 'average_rank', type: 'float' },
-    { name: 'ranking_count', type: 'int32' },
-    { name: 'is_available', type: 'bool' },
-    { name: 'is_seasonal', type: 'bool', optional: true },
-    { name: 'created_at', type: 'string' },
-    { name: 'updated_at', type: 'string', optional: true },
+    { name: 'id', type: 'string' as const },
+    { name: 'name', type: 'string' as const },
+    { name: 'description', type: 'string' as const, optional: true },
+    { name: 'dish_type', type: 'string' as const },
+    { name: 'restaurant_id', type: 'string' as const },
+    { name: 'restaurant_name', type: 'string' as const },
+    { name: 'price', type: 'float' as const },
+    { name: 'tags', type: 'string[]' as const, optional: true },
+    { name: 'image_url', type: 'string' as const, optional: true },
+    { name: 'average_rank', type: 'float' as const },
+    { name: 'ranking_count', type: 'int32' as const },
+    { name: 'is_available', type: 'bool' as const },
+    { name: 'is_seasonal', type: 'bool' as const, optional: true },
+    { name: 'created_at', type: 'string' as const },
+    { name: 'updated_at', type: 'string' as const, optional: true },
   ],
   default_sorting_field: 'average_rank',
 };

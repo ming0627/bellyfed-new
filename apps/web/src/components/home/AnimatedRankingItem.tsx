@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Star } from 'lucide-react';
-import { Avatar } from '@/components/ui/Avatar';
+import { AvatarWithInitials } from '@bellyfed/ui';
 
 // Types for the ranking data
 interface BaseItem {
@@ -146,11 +146,10 @@ const AnimatedRankingItem: React.FC<RankingItemProps> = ({
         </div>
 
         {type === 'reviewer' ? (
-          <Avatar
+          <AvatarWithInitials
             src={item.avatarUrl}
-            fallback={item.name.charAt(0)}
-            size="sm"
-            className="ml-3 mr-3 flex-shrink-0 shadow-sm group-hover:shadow-md transition-all"
+            name={item.name}
+            className="ml-3 mr-3 flex-shrink-0 shadow-sm group-hover:shadow-md transition-all w-8 h-8"
           />
         ) : (
           <div className="w-10 h-10 rounded-md overflow-hidden ml-3 mr-3 flex-shrink-0 shadow-sm group-hover:shadow-md transition-all">

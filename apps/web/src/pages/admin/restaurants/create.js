@@ -1,13 +1,13 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { 
-  ArrowLeft, 
-  Save, 
-  Building, 
-  MapPin, 
-  Phone, 
-  Globe, 
+import {
+  ArrowLeft,
+  Save,
+  Building,
+  MapPin,
+  Phone,
+  Globe,
   Clock,
   Camera,
   Plus,
@@ -50,7 +50,7 @@ export default function CreateRestaurantPage() {
   const [newTag, setNewTag] = useState('')
 
   // Check admin permissions
-  useState(() => {
+  useEffect(() => {
     if (!isAuthenticated || !user?.role?.includes('admin')) {
       router.push('/admin')
     }
@@ -61,7 +61,7 @@ export default function CreateRestaurantPage() {
       ...prev,
       [field]: value
     }))
-    
+
     // Clear error when user starts typing
     if (errors[field]) {
       setErrors(prev => ({
@@ -147,7 +147,7 @@ export default function CreateRestaurantPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    
+
     if (!validateForm()) {
       return
     }
@@ -248,7 +248,7 @@ export default function CreateRestaurantPage() {
             <h3 className="text-lg font-semibold text-orange-900 dark:text-orange-100 mb-6">
               Basic Information
             </h3>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-orange-900 dark:text-orange-100 mb-2">
@@ -333,7 +333,7 @@ export default function CreateRestaurantPage() {
             <h3 className="text-lg font-semibold text-orange-900 dark:text-orange-100 mb-6">
               Location Information
             </h3>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-orange-900 dark:text-orange-100 mb-2">
@@ -417,7 +417,7 @@ export default function CreateRestaurantPage() {
             <h3 className="text-lg font-semibold text-orange-900 dark:text-orange-100 mb-6">
               Contact Information
             </h3>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-orange-900 dark:text-orange-100 mb-2">
@@ -486,7 +486,7 @@ export default function CreateRestaurantPage() {
             <h3 className="text-lg font-semibold text-orange-900 dark:text-orange-100 mb-6">
               Features & Amenities
             </h3>
-            
+
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
               {availableFeatures.map((feature) => (
                 <label key={feature} className="flex items-center">
@@ -509,7 +509,7 @@ export default function CreateRestaurantPage() {
             <h3 className="text-lg font-semibold text-orange-900 dark:text-orange-100 mb-6">
               Tags
             </h3>
-            
+
             <div className="flex flex-wrap gap-2 mb-4">
               {restaurantData.tags.map((tag) => (
                 <span
@@ -527,7 +527,7 @@ export default function CreateRestaurantPage() {
                 </span>
               ))}
             </div>
-            
+
             <div className="flex gap-2">
               <input
                 type="text"

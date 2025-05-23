@@ -2,7 +2,7 @@
 
 /**
  * Command Component
- * 
+ *
  * A command palette for keyboard-first interfaces.
  * Based on cmdk and Radix UI's Dialog primitive.
  */
@@ -41,7 +41,7 @@ export interface CommandDialogProps extends DialogProps {
    * Whether to hide the close button
    */
   hideCloseButton?: boolean;
-  
+
   /**
    * Additional class name for the command component
    */
@@ -51,19 +51,19 @@ export interface CommandDialogProps extends DialogProps {
 /**
  * CommandDialog component
  */
-export const CommandDialog = ({ 
-  children, 
+export const CommandDialog = ({
+  children,
   hideCloseButton,
   commandClassName,
-  ...props 
+  ...props
 }: CommandDialogProps): JSX.Element => {
   return (
     <Dialog {...props}>
-      <DialogContent 
+      <DialogContent
         className="overflow-hidden p-0"
         hideCloseButton={hideCloseButton}
       >
-        <Command 
+        <Command
           className={cn(
             '[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5',
             commandClassName
@@ -84,12 +84,12 @@ export interface CommandInputProps extends React.ComponentPropsWithoutRef<typeof
    * Whether to hide the search icon
    */
   hideIcon?: boolean;
-  
+
   /**
    * Custom search icon
    */
   icon?: React.ReactNode;
-  
+
   /**
    * Additional class name for the wrapper
    */
@@ -102,19 +102,19 @@ export interface CommandInputProps extends React.ComponentPropsWithoutRef<typeof
 export const CommandInput = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Input>,
   CommandInputProps
->(({ 
-  className, 
+>(({
+  className,
   hideIcon = false,
   icon,
   wrapperClassName,
-  ...props 
+  ...props
 }, ref) => (
-  <div 
+  <div
     className={cn(
-      "flex items-center border-b px-3", 
+      "flex items-center border-b px-3",
       wrapperClassName
-    )} 
-    cmdk-input-wrapper=""
+    )}
+    data-cmdk-input-wrapper=""
   >
     {!hideIcon && (
       icon || <MagnifyingGlassIcon className="mr-2 h-4 w-4 shrink-0 opacity-50" />
@@ -206,12 +206,12 @@ export interface CommandItemProps extends React.ComponentPropsWithoutRef<typeof 
    * Whether the item is active
    */
   active?: boolean;
-  
+
   /**
    * Icon to display before the item text
    */
   icon?: React.ReactNode;
-  
+
   /**
    * Shortcut to display after the item text
    */
@@ -224,13 +224,13 @@ export interface CommandItemProps extends React.ComponentPropsWithoutRef<typeof 
 export const CommandItem = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Item>,
   CommandItemProps
->(({ 
-  className, 
+>(({
+  className,
   active,
   icon,
   shortcut,
   children,
-  ...props 
+  ...props
 }, ref) => (
   <CommandPrimitive.Item
     ref={ref}
@@ -276,22 +276,22 @@ export interface CommandPaletteProps {
    * Whether the command palette is open
    */
   open: boolean;
-  
+
   /**
    * Callback when the open state changes
    */
   onOpenChange: (open: boolean) => void;
-  
+
   /**
    * Placeholder text for the search input
    */
   placeholder?: string;
-  
+
   /**
    * Text to display when no results are found
    */
   emptyMessage?: string;
-  
+
   /**
    * Groups of command items
    */
@@ -300,7 +300,7 @@ export interface CommandPaletteProps {
      * Group heading
      */
     heading: string;
-    
+
     /**
      * Group items
      */
@@ -309,27 +309,27 @@ export interface CommandPaletteProps {
        * Item ID
        */
       id: string;
-      
+
       /**
        * Item label
        */
       label: string;
-      
+
       /**
        * Item icon
        */
       icon?: React.ReactNode;
-      
+
       /**
        * Item shortcut
        */
       shortcut?: string;
-      
+
       /**
        * Callback when the item is selected
        */
       onSelect: () => void;
-      
+
       /**
        * Whether the item is disabled
        */
@@ -340,7 +340,7 @@ export interface CommandPaletteProps {
 
 /**
  * CommandPalette component
- * 
+ *
  * A convenience component that combines all the command components
  */
 export function CommandPalette({

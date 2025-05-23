@@ -14,7 +14,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { Card, Badge, Button } from '../ui/index.js';
+import { Card, Badge, Button } from '@bellyfed/ui';
 import { useAnalyticsContext } from '../analytics/AnalyticsProvider.js';
 
 const FilterPanel = ({

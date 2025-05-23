@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { 
-  Trophy, 
-  Star, 
-  TrendingUp, 
-  Users, 
+import {
+  Trophy,
+  Star,
+  TrendingUp,
+  Users,
   Medal,
   Crown,
   Target,
@@ -16,7 +16,7 @@ import {
   Filter,
   RefreshCw
 } from 'lucide-react'
-import { useAuth } from '../../../contexts/AuthContext.js'
+import { useAuth } from '../../contexts/AuthContext.js'
 
 export default function MyFoodieLeaderboardPage() {
   const router = useRouter()
@@ -231,7 +231,7 @@ export default function MyFoodieLeaderboardPage() {
                 </div>
               </div>
             </div>
-            
+
             <div className="text-right">
               <div className="text-3xl font-bold">{userStats.points.toLocaleString()}</div>
               <div className="text-orange-100">Total Points</div>
@@ -244,7 +244,7 @@ export default function MyFoodieLeaderboardPage() {
           {/* Progress Bar */}
           <div className="mt-4">
             <div className="bg-white/20 rounded-full h-2">
-              <div 
+              <div
                 className="bg-white rounded-full h-2 transition-all duration-300"
                 style={{ width: `${((userStats.points % 1000) / 1000) * 100}%` }}
               ></div>
@@ -300,7 +300,7 @@ export default function MyFoodieLeaderboardPage() {
                   {currentCategory.description}
                 </p>
               </div>
-              
+
               <div className="divide-y divide-orange-200 dark:divide-orange-800">
                 {currentCategory.leaderboard.map((entry) => (
                   <div
@@ -324,13 +324,13 @@ export default function MyFoodieLeaderboardPage() {
                           entry.rank
                         )}
                       </div>
-                      
+
                       <div className="flex items-center">
                         <span className="text-2xl mr-3">{entry.avatar}</span>
                         <div>
                           <div className={`font-medium ${
-                            entry.isCurrentUser 
-                              ? 'text-orange-900 dark:text-orange-100' 
+                            entry.isCurrentUser
+                              ? 'text-orange-900 dark:text-orange-100'
                               : 'text-orange-800 dark:text-orange-200'
                           }`}>
                             {entry.user}
@@ -348,7 +348,7 @@ export default function MyFoodieLeaderboardPage() {
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center">
                       <div className="text-right mr-3">
                         <div className="font-semibold text-orange-900 dark:text-orange-100">
@@ -358,7 +358,7 @@ export default function MyFoodieLeaderboardPage() {
                           {entry.metric || 'points'}
                         </div>
                       </div>
-                      
+
                       {entry.change !== 0 && (
                         <div className={`flex items-center text-sm ${
                           entry.change > 0 ? 'text-green-600' : 'text-red-600'

@@ -18,7 +18,7 @@ export interface User {
   createdAt: string;
   updatedAt: string;
   points?: number;
-  achievements?: any[];
+  achievements?: Record<string, unknown>[];
   stats?: {
     reviews?: number;
     followers?: number;
@@ -79,5 +79,5 @@ export interface EventPayload {
   eventType: string;
   source: string;
   timestamp: string;
-  detail: any;
+  detail: Record<string, unknown>;
 }

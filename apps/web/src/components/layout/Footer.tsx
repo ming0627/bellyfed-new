@@ -10,8 +10,7 @@ import {
   ArrowRight,
   Heart,
 } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
-import { Badge } from '@/components/ui/Badge';
+import { Button, Badge } from '@bellyfed/ui';
 
 const Footer: React.FC = () => {
   return (

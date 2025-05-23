@@ -1,6 +1,6 @@
 import React from 'react';
 import { getCountryStaticPaths, getCountryStaticProps } from '@bellyfed/utils';
-import { Container, PageHeader, Card } from '@/components/ui';
+import { Container, PageHeader, Card } from '@bellyfed/ui';
 import { Compass } from 'lucide-react';
 
 export default function ExplorePage({ country }) {

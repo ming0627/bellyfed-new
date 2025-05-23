@@ -2,7 +2,7 @@
 
 /**
  * Dynamic Content Component
- * 
+ *
  * A component that handles hydration errors by only rendering content on the client side.
  * This is a more aggressive approach than ClientOnly for components that consistently cause hydration errors.
  */
@@ -19,42 +19,42 @@ export interface DynamicContentProps {
    * The content to render on the client side
    */
   children: React.ReactNode;
-  
+
   /**
    * Optional fallback content to render during SSR
    */
   fallback?: React.ReactNode;
-  
+
   /**
    * Whether to suppress hydration warnings
    */
   suppressHydrationWarning?: boolean;
-  
+
   /**
    * Optional delay in milliseconds before rendering the children
    */
   delayMs?: number;
-  
+
   /**
    * Additional class name for the wrapper
    */
   className?: string;
-  
+
   /**
    * Whether to preserve the space during SSR
    */
   preserveSpace?: boolean;
-  
+
   /**
    * Minimum height of the wrapper during SSR
    */
   minHeight?: string | number;
-  
+
   /**
    * Minimum width of the wrapper during SSR
    */
   minWidth?: string | number;
-  
+
   /**
    * Whether to use a div wrapper (true) or render children directly (false)
    */
@@ -63,7 +63,7 @@ export interface DynamicContentProps {
 
 /**
  * DynamicContent component
- * 
+ *
  * @param props - Component props
  * @returns JSX.Element
  */
@@ -83,12 +83,12 @@ export function DynamicContent({
 
   React.useEffect(() => {
     setIsClient(true);
-    
+
     if (delayMs > 0) {
       const timer = setTimeout(() => {
         setIsDelayComplete(true);
       }, delayMs);
-      
+
       return () => clearTimeout(timer);
     }
   }, [delayMs]);
@@ -110,8 +110,8 @@ export function DynamicContent({
   // On client, wrap the children in a div with suppressHydrationWarning if useWrapper is true
   if (useWrapper) {
     return (
-      <div 
-        suppressHydrationWarning={suppressHydrationWarning} 
+      <div
+        suppressHydrationWarning={suppressHydrationWarning}
         className={className}
         data-dynamic-content=""
       >
@@ -119,16 +119,16 @@ export function DynamicContent({
       </div>
     );
   }
-  
+
   // Otherwise, render children directly
   return <>{children}</>;
 }
 
 /**
  * withDynamicContent higher-order component
- * 
+ *
  * Wraps a component to make it dynamic
- * 
+ *
  * @param Component - The component to wrap
  * @param options - Options for the dynamic content
  * @returns A new component that only renders on the client
@@ -142,9 +142,9 @@ export function withDynamicContent<P extends object>(
       <Component {...props} />
     </DynamicContent>
   );
-  
+
   WithDynamicContent.displayName = `withDynamicContent(${Component.displayName || Component.name || 'Component'})`;
-  
+
   return WithDynamicContent;
 }
 
@@ -156,38 +156,38 @@ export interface DynamicScriptProps {
    * The script content
    */
   content: string;
-  
+
   /**
    * Whether to suppress hydration warnings
    */
   suppressHydrationWarning?: boolean;
-  
+
   /**
    * The type of the script
    */
   type?: string;
-  
+
   /**
    * Whether to run the script asynchronously
    */
   async?: boolean;
-  
+
   /**
    * Whether to defer the script execution
    */
   defer?: boolean;
-  
+
   /**
    * Additional attributes for the script tag
    */
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 /**
  * DynamicScript component
- * 
+ *
  * A component that safely injects a script on the client side
- * 
+ *
  * @param props - Component props
  * @returns JSX.Element
  */
@@ -231,33 +231,33 @@ export interface DynamicHTMLProps {
    * The HTML content
    */
   html: string;
-  
+
   /**
    * Whether to suppress hydration warnings
    */
   suppressHydrationWarning?: boolean;
-  
+
   /**
    * Additional class name for the wrapper
    */
   className?: string;
-  
+
   /**
    * The tag to use for the wrapper
    */
   as?: keyof JSX.IntrinsicElements;
-  
+
   /**
    * Additional props for the wrapper
    */
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 /**
  * DynamicHTML component
- * 
+ *
  * A component that safely renders HTML content on the client side
- * 
+ *
  * @param props - Component props
  * @returns JSX.Element
  */

@@ -6,8 +6,8 @@
  * foodie leaderboard, and restaurant management components.
  */
 
-import React, { useState } from 'react';
-import { Card, Button, Badge } from '../components/ui/index.js';
+import React, { useState, useEffect } from 'react';
+import { Card, Button, Badge } from '@bellyfed/ui';
 import {
   AnalyticsProvider,
   PageView,
@@ -217,7 +217,8 @@ const mockCompetitions = [
   }
 ];
 
-const TestFeatureComponents = () => {
+// Client-only wrapper to avoid SSR issues
+const ClientOnlyTestFeatureComponents = () => {
   const [activeSection, setActiveSection] = useState('analytics');
   const adminPermissions = useAdminPermissions();
 
@@ -2240,4 +2241,33 @@ const TestFeatureComponents = () => {
   );
 };
 
+// Main component with client-side only rendering
+const TestFeatureComponents = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading Feature Components Test...</p>
+        </div>
+      </div>
+    );
+  }
+
+  return <ClientOnlyTestFeatureComponents />;
+};
+
 export default TestFeatureComponents;
+
+// Force client-side rendering to avoid SSR issues with auth context
+export async function getServerSideProps() {
+  return {
+    props: {},
+  };
+}

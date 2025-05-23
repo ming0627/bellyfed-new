@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '@bellyfed/hooks';
 import { shouldProtectPath } from '@bellyfed/utils';
-import { LoadingSpinner } from './ui/index.ts';
+import { LoadingSpinner } from '@bellyfed/ui';
 
 /**
  * ProtectedRoute component

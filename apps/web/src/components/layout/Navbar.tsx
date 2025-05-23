@@ -13,8 +13,7 @@ import {
   Users,
   Home,
 } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
-import { Badge } from '@/components/ui/Badge';
+import { Button, Badge } from '@bellyfed/ui';
 import { getCountryUrl } from '@bellyfed/utils';
 
 const Navbar: React.FC = () => {

@@ -13,7 +13,7 @@
  */
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { Card, Badge, Button, LoadingSpinner } from '../ui/index.js';
+import { Card, Badge, Button, LoadingSpinner } from '@bellyfed/ui';
 import { useAnalyticsContext } from './AnalyticsProvider.js';
 import { analyticsService } from '../../services/analyticsService.js';
 

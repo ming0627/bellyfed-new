@@ -1,12 +1,12 @@
 /**
  * Analytics Service Database Schema
- * 
+ *
  * This file exports database schema definitions and utilities
  * for working with analytics service data.
  */
 
 import { prisma } from '../index.js';
-import { type Prisma } from '@prisma/client';
+import { type Prisma, type AnalyticsViewer } from '@prisma/client';
 
 // Analytics view schema types
 export type AnalyticsViewCreateInput = Prisma.AnalyticsViewCreateInput;
@@ -16,6 +16,7 @@ export type AnalyticsViewWhereInput = Prisma.AnalyticsViewWhereInput;
 
 // Analytics viewer schema types
 export type AnalyticsViewerCreateInput = Prisma.AnalyticsViewerCreateInput;
+export type AnalyticsViewerUpdateInput = Prisma.AnalyticsViewerUpdateInput;
 export type AnalyticsViewerWhereUniqueInput = Prisma.AnalyticsViewerWhereUniqueInput;
 export type AnalyticsViewerWhereInput = Prisma.AnalyticsViewerWhereInput;
 
@@ -38,65 +39,65 @@ export type AnalyticsCacheWhereUniqueInput = Prisma.AnalyticsCacheWhereUniqueInp
 export const analyticsServiceDb = {
   // Analytics view operations
   view: {
-    create: (data: AnalyticsViewCreateInput) => 
+    create: (data: AnalyticsViewCreateInput) =>
       prisma.analyticsView.create({ data }),
-    update: (where: AnalyticsViewWhereUniqueInput, data: AnalyticsViewUpdateInput) => 
+    update: (where: AnalyticsViewWhereUniqueInput, data: AnalyticsViewUpdateInput) =>
       prisma.analyticsView.update({ where, data }),
-    upsert: (where: AnalyticsViewWhereUniqueInput, create: AnalyticsViewCreateInput, update: AnalyticsViewUpdateInput) => 
+    upsert: (where: AnalyticsViewWhereUniqueInput, create: AnalyticsViewCreateInput, update: AnalyticsViewUpdateInput) =>
       prisma.analyticsView.upsert({ where, create, update }),
-    findUnique: (where: AnalyticsViewWhereUniqueInput) => 
+    findUnique: (where: AnalyticsViewWhereUniqueInput) =>
       prisma.analyticsView.findUnique({ where }),
-    findMany: (where: AnalyticsViewWhereInput) => 
+    findMany: (where: AnalyticsViewWhereInput) =>
       prisma.analyticsView.findMany({ where }),
   },
-  
+
   // Analytics viewer operations
   viewer: {
-    create: (data: AnalyticsViewerCreateInput) => 
+    create: (data: AnalyticsViewerCreateInput) =>
       prisma.analyticsViewer.create({ data }),
-    upsert: (where: AnalyticsViewerWhereUniqueInput, create: AnalyticsViewerCreateInput, update: {}) => 
+    upsert: (where: AnalyticsViewerWhereUniqueInput, create: AnalyticsViewerCreateInput, update: AnalyticsViewerUpdateInput) =>
       prisma.analyticsViewer.upsert({ where, create, update }),
-    findMany: (where: AnalyticsViewerWhereInput) => 
+    findMany: (where: AnalyticsViewerWhereInput) =>
       prisma.analyticsViewer.findMany({ where }),
-    countDistinct: (where: AnalyticsViewerWhereInput, distinctField: string) => 
+    countDistinct: (where: AnalyticsViewerWhereInput, distinctField: string) =>
       prisma.analyticsViewer.findMany({
         where,
         select: { [distinctField]: true },
-        distinct: [distinctField as any],
+        distinct: [distinctField as keyof AnalyticsViewer],
       }),
   },
-  
+
   // Analytics engagement operations
   engagement: {
-    create: (data: AnalyticsEngagementCreateInput) => 
+    create: (data: AnalyticsEngagementCreateInput) =>
       prisma.analyticsEngagement.create({ data }),
-    findMany: (where: AnalyticsEngagementWhereInput) => 
+    findMany: (where: AnalyticsEngagementWhereInput) =>
       prisma.analyticsEngagement.findMany({ where }),
   },
-  
+
   // Analytics engagement count operations
   engagementCount: {
-    create: (data: AnalyticsEngagementCountCreateInput) => 
+    create: (data: AnalyticsEngagementCountCreateInput) =>
       prisma.analyticsEngagementCount.create({ data }),
-    update: (where: AnalyticsEngagementCountWhereUniqueInput, data: AnalyticsEngagementCountUpdateInput) => 
+    update: (where: AnalyticsEngagementCountWhereUniqueInput, data: AnalyticsEngagementCountUpdateInput) =>
       prisma.analyticsEngagementCount.update({ where, data }),
-    upsert: (where: AnalyticsEngagementCountWhereUniqueInput, create: AnalyticsEngagementCountCreateInput, update: AnalyticsEngagementCountUpdateInput) => 
+    upsert: (where: AnalyticsEngagementCountWhereUniqueInput, create: AnalyticsEngagementCountCreateInput, update: AnalyticsEngagementCountUpdateInput) =>
       prisma.analyticsEngagementCount.upsert({ where, create, update }),
-    findMany: (where: AnalyticsEngagementCountWhereInput) => 
+    findMany: (where: AnalyticsEngagementCountWhereInput) =>
       prisma.analyticsEngagementCount.findMany({ where }),
   },
-  
+
   // Analytics cache operations
   cache: {
-    create: (data: AnalyticsCacheCreateInput) => 
+    create: (data: AnalyticsCacheCreateInput) =>
       prisma.analyticsCache.create({ data }),
-    update: (where: AnalyticsCacheWhereUniqueInput, data: AnalyticsCacheUpdateInput) => 
+    update: (where: AnalyticsCacheWhereUniqueInput, data: AnalyticsCacheUpdateInput) =>
       prisma.analyticsCache.update({ where, data }),
-    upsert: (where: AnalyticsCacheWhereUniqueInput, create: AnalyticsCacheCreateInput, update: AnalyticsCacheUpdateInput) => 
+    upsert: (where: AnalyticsCacheWhereUniqueInput, create: AnalyticsCacheCreateInput, update: AnalyticsCacheUpdateInput) =>
       prisma.analyticsCache.upsert({ where, create, update }),
-    findUnique: (where: AnalyticsCacheWhereUniqueInput) => 
+    findUnique: (where: AnalyticsCacheWhereUniqueInput) =>
       prisma.analyticsCache.findUnique({ where }),
-    delete: (where: AnalyticsCacheWhereUniqueInput) => 
+    delete: (where: AnalyticsCacheWhereUniqueInput) =>
       prisma.analyticsCache.delete({ where }),
   },
 };

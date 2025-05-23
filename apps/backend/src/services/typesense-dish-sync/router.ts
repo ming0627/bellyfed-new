@@ -1,6 +1,6 @@
 /**
  * Typesense Dish Sync Router
- * 
+ *
  * This file defines the tRPC router for Typesense dish sync operations.
  * It exposes endpoints for syncing dish data to Typesense.
  */
@@ -69,7 +69,7 @@ export const typesenseDishSyncRouter = router({
 
       // Sync each dish
       const results = await Promise.all(
-        dishes.map(async (dish) => {
+        dishes.map(async (dish: any) => {
           try {
             const result = await syncDish(dish.id);
             return {
@@ -90,8 +90,8 @@ export const typesenseDishSyncRouter = router({
       return {
         restaurantId: input.restaurantId,
         totalDishes: dishes.length,
-        syncedDishes: results.filter((r) => r.success).length,
-        failedDishes: results.filter((r) => !r.success).length,
+        syncedDishes: results.filter((r: any) => r.success).length,
+        failedDishes: results.filter((r: any) => !r.success).length,
         results,
       };
     }),

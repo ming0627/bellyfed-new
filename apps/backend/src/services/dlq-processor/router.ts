@@ -1,6 +1,6 @@
 /**
  * Dead Letter Queue (DLQ) Processor Router
- * 
+ *
  * This file defines the tRPC router for DLQ processor operations.
  * It exposes endpoints for processing DLQ messages and retrieving
  * processing results.
@@ -116,7 +116,7 @@ export const dlqProcessorRouter = router({
       });
 
       return {
-        results: events.map((event) => ({
+        results: events.map((event: any) => ({
           messageId: (event.properties as any).messageId || event.id,
           source: event.source,
           type: event.action,

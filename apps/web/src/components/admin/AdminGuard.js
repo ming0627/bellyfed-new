@@ -14,7 +14,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router.js';
-import { Card, LoadingSpinner } from '../ui/index.js';
+import { Card, LoadingSpinner } from '@bellyfed/ui';
 import { useAuth } from '../../hooks/useAuth.js';
 import { useAnalyticsContext } from '../analytics/AnalyticsProvider.js';
 

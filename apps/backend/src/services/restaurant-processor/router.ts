@@ -1,6 +1,6 @@
 /**
  * Restaurant Processor Router
- * 
+ *
  * This file defines the tRPC router for restaurant processor operations.
  * It exposes endpoints for creating and updating restaurants.
  */
@@ -96,7 +96,7 @@ export const restaurantProcessorRouter = router({
     )
     .query(async ({ input, ctx }) => {
       const { restaurantId } = input;
-      
+
       // Get the latest event for this restaurant
       const latestEvent = await ctx.prisma.analyticsEvent.findFirst({
         where: {
@@ -110,7 +110,7 @@ export const restaurantProcessorRouter = router({
           timestamp: 'desc',
         },
       });
-      
+
       if (!latestEvent) {
         return {
           restaurantId,
@@ -118,7 +118,7 @@ export const restaurantProcessorRouter = router({
           lastUpdated: null,
         };
       }
-      
+
       return {
         restaurantId,
         status: latestEvent.status,
@@ -139,7 +139,7 @@ export const restaurantProcessorRouter = router({
     )
     .query(async ({ input, ctx }) => {
       const { restaurantId, limit = 10, offset = 0 } = input;
-      
+
       // Get all events for this restaurant
       const events = await ctx.prisma.analyticsEvent.findMany({
         where: {
@@ -155,7 +155,7 @@ export const restaurantProcessorRouter = router({
         take: limit,
         skip: offset,
       });
-      
+
       // Get total count
       const total = await ctx.prisma.analyticsEvent.count({
         where: {
@@ -166,9 +166,9 @@ export const restaurantProcessorRouter = router({
           },
         },
       });
-      
+
       return {
-        events: events.map(event => ({
+        events: events.map((event: any) => ({
           id: event.id,
           action: event.action,
           status: event.status,

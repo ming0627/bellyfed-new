@@ -11,12 +11,12 @@ export interface DatabaseRecord {
    * Unique identifier
    */
   id: string;
-  
+
   /**
    * Creation timestamp (ISO 8601 format)
    */
   createdAt: string;
-  
+
   /**
    * Last update timestamp (ISO 8601 format)
    */
@@ -31,17 +31,17 @@ export interface RestaurantRecord extends DatabaseRecord {
    * Restaurant name
    */
   name: string;
-  
+
   /**
    * Optional restaurant description
    */
   description?: string;
-  
+
   /**
    * Array of cuisine types
    */
   cuisine: string[];
-  
+
   /**
    * Restaurant address
    */
@@ -51,17 +51,17 @@ export interface RestaurantRecord extends DatabaseRecord {
     state: string;
     zip: string;
   };
-  
+
   /**
    * Optional average rating (0-5)
    */
   rating?: number;
-  
+
   /**
    * Optional price range (e.g., "$", "$$", "$$$")
    */
   priceRange?: string;
-  
+
   /**
    * Restaurant status
    */
@@ -76,27 +76,27 @@ export interface MenuItemRecord extends DatabaseRecord {
    * Menu item name
    */
   name: string;
-  
+
   /**
    * Optional menu item description
    */
   description?: string;
-  
+
   /**
    * Menu item price
    */
   price: number;
-  
+
   /**
    * Menu item category
    */
   category: string;
-  
+
   /**
    * Restaurant ID that this menu item belongs to
    */
   restaurantId: string;
-  
+
   /**
    * Optional dietary information
    */
@@ -106,7 +106,7 @@ export interface MenuItemRecord extends DatabaseRecord {
     glutenFree?: boolean;
     nutFree?: boolean;
   };
-  
+
   /**
    * Menu item status
    */
@@ -121,32 +121,32 @@ export interface RDSQueryParams {
    * RDS cluster ARN
    */
   resourceArn: string;
-  
+
   /**
    * Secrets Manager ARN for database credentials
    */
   secretArn: string;
-  
+
   /**
    * SQL query string
    */
   sql: string;
-  
+
   /**
    * Optional query parameters
    */
-  parameters?: any[];
-  
+  parameters?: unknown[];
+
   /**
    * Optional database name
    */
   database?: string;
-  
+
   /**
    * Optional schema name
    */
   schema?: string;
-  
+
   /**
    * Optional transaction ID for transactional queries
    */
@@ -161,17 +161,17 @@ export interface RDSTransactionParams {
    * RDS cluster ARN
    */
   resourceArn: string;
-  
+
   /**
    * Secrets Manager ARN for database credentials
    */
   secretArn: string;
-  
+
   /**
    * Optional database name
    */
   database?: string;
-  
+
   /**
    * Optional schema name
    */
@@ -186,12 +186,12 @@ export interface DatabaseEntity {
    * Unique identifier
    */
   id: string;
-  
+
   /**
    * Optional creation timestamp (ISO 8601 format)
    */
   createdAt?: string;
-  
+
   /**
    * Optional last update timestamp (ISO 8601 format)
    */
@@ -206,12 +206,12 @@ export interface UserEntity extends DatabaseEntity {
    * User email
    */
   email: string;
-  
+
   /**
    * Optional user name
    */
   name?: string;
-  
+
   /**
    * Optional user preferences
    */
@@ -226,17 +226,17 @@ export interface EstablishmentEntity extends DatabaseEntity {
    * Establishment name
    */
   name: string;
-  
+
   /**
    * Optional Google Place ID
    */
   googlePlaceId?: string;
-  
+
   /**
    * Optional establishment address
    */
   address?: string;
-  
+
   /**
    * Optional establishment location coordinates
    */
@@ -244,17 +244,17 @@ export interface EstablishmentEntity extends DatabaseEntity {
     latitude: number;
     longitude: number;
   };
-  
+
   /**
    * Optional array of menu item IDs
    */
   menuItems?: string[];
-  
+
   /**
    * Optional average rating (0-5)
    */
   averageRating?: number;
-  
+
   /**
    * Optional review count
    */
@@ -269,37 +269,37 @@ export interface MenuItemEntity extends DatabaseEntity {
    * Establishment ID that this menu item belongs to
    */
   establishmentId: string;
-  
+
   /**
    * Menu item name
    */
   name: string;
-  
+
   /**
    * Optional menu item description
    */
   description?: string;
-  
+
   /**
    * Optional menu item price
    */
   price?: number;
-  
+
   /**
    * Optional menu item category
    */
   category?: string;
-  
+
   /**
    * Optional array of tags
    */
   tags?: string[];
-  
+
   /**
    * Optional average rating (0-5)
    */
   averageRating?: number;
-  
+
   /**
    * Optional review count
    */
@@ -314,37 +314,37 @@ export interface ReviewEntity extends DatabaseEntity {
    * Establishment ID that this review belongs to
    */
   establishmentId: string;
-  
+
   /**
    * User ID that created this review
    */
   userId: string;
-  
+
   /**
    * Review rating (0-5)
    */
   rating: number;
-  
+
   /**
    * Optional review text
    */
   text?: string;
-  
+
   /**
    * Optional array of photo URLs
    */
   photos?: string[];
-  
+
   /**
    * Optional array of menu item IDs
    */
   menuItems?: string[];
-  
+
   /**
    * Optional array of tags
    */
   tags?: string[];
-  
+
   /**
    * Optional date of visit (ISO 8601 format)
    */

@@ -9,10 +9,7 @@ import {
   ThumbsUp,
   Check,
 } from 'lucide-react';
-import { Card } from '@/components/ui/Card';
-import { Avatar } from '@/components/ui/Avatar';
-import { Badge } from '@/components/ui/Badge';
-import { Button } from '@/components/ui/Button';
+import { Card, AvatarWithInitials, Badge, Button } from '@bellyfed/ui';
 
 interface ReviewerCardProps {
   id: string;
@@ -112,15 +109,10 @@ const ReviewerCard: React.FC<ReviewerCardProps> = ({
       >
         <Link href={`/reviewers/${id}`} className="flex items-start">
           <div className="relative flex-shrink-0">
-            <Avatar
+            <AvatarWithInitials
               src={avatarUrl}
-              fallback={name}
-              size="lg"
-              shape="circle"
-              border={isVerified ? 'accent' : 'thick'}
-              background={isVerified ? 'gradient' : 'default'}
-              hover="grow"
-              className="mr-4"
+              name={name}
+              className="mr-4 w-12 h-12"
             />
             {isVerified && (
               <Badge
@@ -226,13 +218,10 @@ const ReviewerCard: React.FC<ReviewerCardProps> = ({
         radius="md"
       >
         <Link href={`/reviewers/${id}`} className="flex items-center">
-          <Avatar
+          <AvatarWithInitials
             src={avatarUrl}
-            fallback={name}
-            size="sm"
-            shape="circle"
-            border={isVerified ? 'accent' : 'thin'}
-            className="mr-3"
+            name={name}
+            className="mr-3 w-8 h-8"
           />
 
           <div className="flex-grow min-w-0">
@@ -278,15 +267,10 @@ const ReviewerCard: React.FC<ReviewerCardProps> = ({
     >
       <div className="flex flex-col items-center p-2">
         <div className="relative mb-4">
-          <Avatar
+          <AvatarWithInitials
             src={avatarUrl}
-            fallback={name}
-            size="2xl"
-            shape="circle"
-            border={isVerified ? 'accent' : 'thick'}
-            background={isVerified ? 'gradient' : 'default'}
-            hover="grow"
-            className="mb-2"
+            name={name}
+            className="mb-2 w-20 h-20"
           />
 
           {getRankBadge()}

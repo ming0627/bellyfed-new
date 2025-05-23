@@ -14,7 +14,7 @@
 
 import React from 'react';
 import Link from 'next/link.js';
-import { Card, Badge, Button } from '../ui/index.js';
+import { Card, Badge, Button } from '@bellyfed/ui';
 import { useAnalyticsContext } from '../analytics/AnalyticsProvider.js';
 import { useCountry } from '../../hooks/useCountry.js';
 

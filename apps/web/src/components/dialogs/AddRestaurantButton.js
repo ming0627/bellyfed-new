@@ -13,7 +13,7 @@
  */
 
 import React, { useState } from 'react';
-import { Button } from '../ui/index.js';
+import { Button } from '@bellyfed/ui';
 import { useAnalyticsContext } from '../analytics/AnalyticsProvider.js';
 import { useAuth } from '../../hooks/useAuth.js';
 import { useCountry } from '../../hooks/useCountry.js';

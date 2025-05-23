@@ -14,7 +14,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { Button } from '../ui/index.js';
+import { Button } from '@bellyfed/ui';
 import { useAnalyticsContext } from '../analytics/AnalyticsProvider.js';
 import { useAuth } from '../../hooks/useAuth.js';
 import { analyticsService } from '../../services/analyticsService.js';

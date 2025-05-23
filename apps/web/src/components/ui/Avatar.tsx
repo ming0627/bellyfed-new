@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '@/utils/cn';
+import { cn } from '../../utils/cn';
 
 /**
  * Avatar component variants using class-variance-authority
@@ -145,12 +145,21 @@ const Avatar = ({
   const getInitials = () => {
     if (!fallback) return '';
 
-    const words = fallback.trim().split(' ');
+    const words = fallback.trim().split(' ').filter(word => word.length > 0);
+    if (words.length === 0) return '';
+
     if (words.length === 1) {
       return fallback.substring(0, 2).toUpperCase();
     }
 
-    return (words[0][0] + words[words.length - 1][0]).toUpperCase();
+    const firstWord = words[0];
+    const lastWord = words[words.length - 1];
+
+    if (!firstWord || !lastWord || !firstWord[0] || !lastWord[0]) {
+      return fallback.substring(0, 2).toUpperCase();
+    }
+
+    return (firstWord[0] + lastWord[0]).toUpperCase();
   };
 
   // Badge position classes

@@ -96,5 +96,5 @@
     "tailwindcss": "^3.4.15",
     "typescript": "~5.3.3"
   },
-  "type": "commonjs"
+  "type": "module"
 }

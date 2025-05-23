@@ -14,8 +14,8 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link.js';
-import { Card, Badge, Button, LoadingSpinner } from '../ui/index.js';
-import { RestaurantCard } from '../restaurants/RestaurantCard.js';
+import { Card, Badge, Button, LoadingSpinner } from '@bellyfed/ui';
+import RestaurantCard from '../restaurants/RestaurantCard.js';
 import { useAnalyticsContext } from '../analytics/AnalyticsProvider.js';
 import { useCountry } from '../../hooks/useCountry.js';
 import { analyticsService } from '../../services/analyticsService.js';

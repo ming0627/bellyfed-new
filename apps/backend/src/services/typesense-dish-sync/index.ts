@@ -1,24 +1,24 @@
 /**
  * Typesense Dish Sync Service
- * 
+ *
  * This service syncs dish data from the database to Typesense.
  * It provides functionality to:
  * - Ensure the dishes collection exists in Typesense
  * - Sync all dishes from the database to Typesense
  * - Sync a specific dish to Typesense
  * - Delete a dish from Typesense
- * 
+ *
  * The service uses Prisma ORM for database operations and Typesense for search.
  */
 
 import { PrismaClient } from '@prisma/client';
 import { TRPCError } from '@trpc/server';
-import { 
+import {
   getTypesenseClient,
   type DishDocument
 } from '../../utils/typesense-client.js';
-import { 
-  TYPESENSE_DISH_SCHEMA, 
+import {
+  TYPESENSE_DISH_SCHEMA,
   formatDishForTypesense,
   type DishData,
   type TypesenseDishDocument
@@ -194,7 +194,14 @@ export const syncDish = async (dishId: string): Promise<TypesenseDishDocument> =
     }
 
     // Format dish for Typesense
-    const typesenseDish = formatDishForTypesense(dishData[0]);
+    const dishToFormat = dishData[0];
+    if (!dishToFormat) {
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: `Dish with ID ${dishId} not found`,
+      });
+    }
+    const typesenseDish = formatDishForTypesense(dishToFormat);
 
     // Upsert dish in Typesense
     await client.collections('dishes').documents().upsert(typesenseDish);
@@ -204,11 +211,11 @@ export const syncDish = async (dishId: string): Promise<TypesenseDishDocument> =
     return typesenseDish;
   } catch (error) {
     console.error(`[syncDish] Error syncing dish ${dishId} to Typesense:`, error);
-    
+
     if (error instanceof TRPCError) {
       throw error;
     }
-    
+
     throw new TRPCError({
       code: 'INTERNAL_SERVER_ERROR',
       message: error instanceof Error ? error.message : `Error syncing dish ${dishId} to Typesense`,
@@ -236,7 +243,7 @@ export const deleteDish = async (dishId: string): Promise<{ success: boolean }> 
     };
   } catch (error) {
     console.error(`[deleteDish] Error deleting dish ${dishId} from Typesense:`, error);
-    
+
     // If the error is that the document was not found, consider it a success
     if (error instanceof Error && error.message.includes('Could not find')) {
       console.log(`[deleteDish] Dish ${dishId} not found in Typesense, considering deletion successful`);
@@ -244,7 +251,7 @@ export const deleteDish = async (dishId: string): Promise<{ success: boolean }> 
         success: true,
       };
     }
-    
+
     throw new TRPCError({
       code: 'INTERNAL_SERVER_ERROR',
       message: error instanceof Error ? error.message : `Error deleting dish ${dishId} from Typesense`,

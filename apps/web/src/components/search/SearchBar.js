@@ -15,7 +15,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link.js';
-import { Card, Badge, Button, LoadingSpinner, Avatar } from '../ui/index.js';
+import { Card, Badge, Button, LoadingSpinner, Avatar } from '@bellyfed/ui';
 import { useAnalyticsContext } from '../analytics/AnalyticsProvider.js';
 import { useCountry } from '../../hooks/useCountry.js';
 import { useAuth } from '../../hooks/useAuth.js';

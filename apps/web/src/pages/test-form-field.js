@@ -14,3 +14,10 @@ import FormFieldExample from '../examples/FormFieldExample.js';
 export default function TestFormFieldPage() {
   return <FormFieldExample />;
 }
+
+// Force client-side rendering to avoid SSR issues with context providers
+export async function getServerSideProps() {
+  return {
+    props: {},
+  };
+}

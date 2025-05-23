@@ -53,3 +53,10 @@ export default function TestProtectedPage() {
     </TestWrapper>
   );
 }
+
+// Force client-side rendering to avoid SSR issues with auth context
+export async function getServerSideProps() {
+  return {
+    props: {},
+  };
+}

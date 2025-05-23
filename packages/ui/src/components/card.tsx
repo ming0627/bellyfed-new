@@ -79,7 +79,16 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
 
     if (href) {
       // Extract anchor-specific props and filter out div-specific props
-      const { onCopy, onCut, onPaste, onCompositionStart, onCompositionEnd, onCompositionUpdate, ...anchorProps } = props;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const {
+        onCopy,
+        onCut,
+        onPaste,
+        onCompositionStart,
+        onCompositionEnd,
+        onCompositionUpdate,
+        ...anchorProps
+      } = props;
 
       return (
         <a
@@ -290,7 +299,7 @@ export interface LinkCardProps {
   /**
    * Additional props
    */
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 /**

@@ -225,7 +225,7 @@ export * from './settings/AccountSettings.js';
 export * from './settings/NotificationSettings.js';
 
 // UI Components
-export * from './ui/index.js';
+export * from '@bellyfed/ui';
 
 // Utility Components
 export { default as AuthStateManager } from './AuthStateManager.js';

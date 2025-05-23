@@ -16,7 +16,7 @@ export class ApiError extends Error {
   constructor(
     message: string,
     public status: number,
-    public data?: any,
+    public data?: unknown,
   ) {
     super(message);
     this.name = 'ApiError';
@@ -130,7 +130,7 @@ export interface ApiErrorResponse {
   /**
    * Additional error details
    */
-  details?: Record<string, any>;
+  details?: Record<string, unknown>;
 }
 
 /**

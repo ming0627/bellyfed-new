@@ -6,9 +6,7 @@ import {
   ChevronRight,
   ChevronLeft,
 } from 'lucide-react';
-import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
-import { Avatar } from '@/components/ui/Avatar';
+import { Card, Button, AvatarWithInitials } from '@bellyfed/ui';
 import dynamic from 'next/dynamic';
 
 // Create a client-only version of the component to prevent hydration errors
@@ -248,11 +246,10 @@ const RankingBoardContent: React.FC<RankingBoardProps> = ({
                     <div className="w-8 font-heading font-bold text-lg text-primary-600 dark:text-primary-500">
                       #{currentPage * itemsPerPage + index + 1}
                     </div>
-                    <Avatar
+                    <AvatarWithInitials
                       src={reviewer.avatarUrl}
-                      fallback={reviewer.name}
-                      size="md"
-                      className="mr-3 shadow-sm"
+                      name={reviewer.name}
+                      className="mr-3 shadow-sm w-10 h-10"
                     />
                     <div className="flex-grow min-w-0">
                       <h4 className="font-medium text-neutral-800 dark:text-neutral-100 truncate">

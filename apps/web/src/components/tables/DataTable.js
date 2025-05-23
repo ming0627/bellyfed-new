@@ -16,7 +16,7 @@
  */
 
 import React, { useState, useEffect, useMemo } from 'react';
-import { Card, Button, LoadingSpinner, Badge } from '../ui/index.js';
+import { Card, Button, LoadingSpinner, Badge } from '@bellyfed/ui';
 import { useAnalyticsContext } from '../analytics/AnalyticsProvider.js';
 
 const DataTable = ({

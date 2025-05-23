@@ -1,5 +1,5 @@
 import { getCountryStaticPaths, getCountryStaticProps } from '@bellyfed/utils';
-import { Container } from '@/components/ui';
+import { Container } from '@bellyfed/ui';
 import { Users } from 'lucide-react';
 
 export default function SocialPage({ country }: { country: string }) {
@@ -13,7 +13,7 @@ export default function SocialPage({ country }: { country: string }) {
         <p className="text-lg text-neutral-600 dark:text-neutral-400 mb-8">
           Connect with food lovers and share your culinary experiences
         </p>
-        
+
         <div className="bg-white dark:bg-neutral-800 rounded-lg shadow-md p-6">
           <p className="text-center text-lg">
             Social feed content will be displayed here.

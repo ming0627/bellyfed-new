@@ -1,9 +1,9 @@
 /**
  * Cognito Post-Confirmation Service
- * 
+ *
  * This service is triggered after a user successfully confirms their registration
  * in Cognito. It standardizes the user data and stores it in the database.
- * 
+ *
  * It also publishes an event for further processing.
  */
 
@@ -75,9 +75,7 @@ export const processPostConfirmation = async (
       user_id: userAttributes.sub || userName,
       status: 'confirmed',
       payload: {
-        email: userAttributes.email,
         username: userName,
-        sub: userAttributes.sub,
         ...userAttributes,
       },
     };

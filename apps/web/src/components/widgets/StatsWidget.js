@@ -14,7 +14,7 @@
  */
 
 import React from 'react';
-import { Card } from '../ui/index.js';
+import { Card } from '@bellyfed/ui';
 import { useAnalyticsContext } from '../analytics/AnalyticsProvider.js';
 
 const StatsWidget = ({

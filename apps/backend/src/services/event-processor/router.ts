@@ -1,6 +1,6 @@
 /**
  * Event Processor Router
- * 
+ *
  * This file defines the tRPC router for event processor operations.
  * It exposes endpoints for processing events and retrieving
  * processing results.
@@ -125,7 +125,7 @@ export const eventProcessorRouter = router({
       });
 
       return {
-        results: events.map((event) => ({
+        results: events.map((event: any) => ({
           eventId: event.id,
           eventType: event.action,
           source: event.source,

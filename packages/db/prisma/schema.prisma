@@ -70,6 +70,7 @@ model DishRanking {
 
   // Relations
   user User @relation(fields: [userId], references: [id])
+  dish Dish @relation(fields: [dishId], references: [id], onDelete: Cascade)
 
   // Indexes
   @@unique([userId, dishId])
@@ -173,6 +174,31 @@ model AnalyticsCache {
   @@index([expiresAt])
 }
 
+// Dish model
+model Dish {
+  id           String        @id @default(uuid())
+  restaurantId String
+  name         String
+  description  String?
+  price        Float?
+  dishType     String?
+  tags         String[]      @default([])
+  imageUrl     String?
+  isSeasonal   Boolean       @default(false)
+  isAvailable  Boolean       @default(true)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  // Relations
+  restaurant   Restaurant    @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  rankings     DishRanking[]
+
+  // Indexes
+  @@index([restaurantId])
+  @@index([dishType])
+  @@index([isAvailable])
+}
+
 // Restaurant model
 model Restaurant {
   id            String           @id @default(uuid())
@@ -191,6 +217,7 @@ model Restaurant {
   photos        RestaurantPhoto[]
   hours         RestaurantHour[]
   reviews       Review[]
+  dishes        Dish[]
 
   // Indexes
   @@index([googlePlaceId])

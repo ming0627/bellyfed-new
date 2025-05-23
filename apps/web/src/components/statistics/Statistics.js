@@ -1,9 +1,9 @@
 /**
  * Statistics Component
- * 
+ *
  * Displays various statistics and metrics in an organized dashboard format.
  * Supports different visualization types and real-time data updates.
- * 
+ *
  * Features:
  * - Multiple statistic cards
  * - Trend indicators
@@ -14,7 +14,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { Card, Badge, Button, LoadingSpinner } from '../ui/index.js';
+import { Card, Badge, Button, LoadingSpinner } from '@bellyfed/ui';
 import { BarChart } from '../charts/index.js';
 import { useAnalyticsContext } from '../analytics/AnalyticsProvider.js';
 import { analyticsService } from '../../services/analyticsService.js';
@@ -86,7 +86,7 @@ const Statistics = ({
       });
 
       setStatistics(data);
-      
+
       // Track statistics view
       trackUserEngagement('statistics', entityType, 'view', {
         entityId,
@@ -144,11 +144,11 @@ const Statistics = ({
   // Get trend indicator
   const getTrendIndicator = (change) => {
     if (!change) return null;
-    
+
     const isPositive = change > 0;
     const color = isPositive ? 'text-green-600' : 'text-red-600';
     const icon = isPositive ? '↗' : '↘';
-    
+
     return (
       <span className={`text-sm ${color} flex items-center gap-1`}>
         <span>{icon}</span>
@@ -172,14 +172,14 @@ const Statistics = ({
           </div>
           <div className="text-2xl">{stat.icon}</div>
         </div>
-        
+
         <div className="flex items-center justify-between">
           {stat.change && getTrendIndicator(stat.change)}
           {stat.subtitle && (
             <span className="text-sm text-gray-500">{stat.subtitle}</span>
           )}
         </div>
-        
+
         {stat.description && (
           <p className="text-xs text-gray-500 mt-2">{stat.description}</p>
         )}
@@ -216,8 +216,8 @@ const Statistics = ({
         <div className="text-red-600">
           <p className="text-lg font-semibold mb-2">Error Loading Statistics</p>
           <p className="text-sm">{error}</p>
-          <Button 
-            onClick={fetchStatistics} 
+          <Button
+            onClick={fetchStatistics}
             className="mt-4"
             variant="outline"
           >
@@ -346,7 +346,7 @@ const Statistics = ({
           <h3 className="text-lg font-semibold text-gray-900 mb-4">
             📋 Detailed Metrics
           </h3>
-          
+
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>

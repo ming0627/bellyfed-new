@@ -77,7 +77,7 @@ export class MockDataService {
       createdAt: '2023-01-15T08:30:00Z',
       updatedAt: '2024-03-20T14:45:00Z',
       points: 1250,
-      achievements: this.getMockAchievements(),
+      achievements: this.getMockAchievements() as unknown as Record<string, unknown>[],
       stats: {
         reviews: 42,
         followers: 128,
@@ -106,7 +106,7 @@ export class MockDataService {
       createdAt: '2023-02-10T10:15:00Z',
       updatedAt: '2024-03-18T09:30:00Z',
       points: 980,
-      achievements: this.getMockAchievements().slice(0, 3),
+      achievements: this.getMockAchievements().slice(0, 3) as unknown as Record<string, unknown>[],
       stats: {
         reviews: 36,
         followers: 95,

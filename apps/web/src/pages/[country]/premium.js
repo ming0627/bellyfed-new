@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { 
-  Crown, 
-  Star, 
-  Check, 
-  X, 
-  Zap, 
-  Shield, 
-  Users, 
+import {
+  Crown,
+  Star,
+  Check,
+  X,
+  Zap,
+  Shield,
+  Users,
   TrendingUp,
   Eye,
   MessageSquare,
@@ -19,7 +19,7 @@ import {
   Sparkles,
   ChefHat
 } from 'lucide-react'
-import { useAuth } from '../../../contexts/AuthContext.js'
+import { useAuth } from '../../contexts/AuthContext.js'
 
 export default function PremiumPage() {
   const router = useRouter()
@@ -183,10 +183,10 @@ export default function PremiumPage() {
               Upgrade to Premium
             </h1>
             <p className="text-xl text-orange-100 mb-8 max-w-3xl mx-auto">
-              Unlock the full potential of your food journey with AI-powered recommendations, 
+              Unlock the full potential of your food journey with AI-powered recommendations,
               exclusive events, and premium features designed for true food enthusiasts.
             </p>
-            
+
             {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
               <div className="text-center">
@@ -226,8 +226,8 @@ export default function PremiumPage() {
             <div
               key={key}
               className={`relative bg-white dark:bg-orange-900 rounded-lg shadow-sm border-2 transition-all ${
-                plan.popular 
-                  ? 'border-orange-500 shadow-lg scale-105' 
+                plan.popular
+                  ? 'border-orange-500 shadow-lg scale-105'
                   : 'border-orange-200 dark:border-orange-800 hover:border-orange-300 dark:hover:border-orange-700'
               }`}
             >
@@ -238,7 +238,7 @@ export default function PremiumPage() {
                   </span>
                 </div>
               )}
-              
+
               {plan.savings && (
                 <div className="absolute -top-3 right-4">
                   <span className="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
@@ -255,7 +255,7 @@ export default function PremiumPage() {
                   <p className="text-orange-600 dark:text-orange-400 text-sm mb-4">
                     {plan.description}
                   </p>
-                  
+
                   <div className="mb-4">
                     {plan.originalPrice && (
                       <div className="text-orange-500 line-through text-lg">
@@ -282,8 +282,8 @@ export default function PremiumPage() {
                         <X className="w-5 h-5 text-gray-400 mr-3 flex-shrink-0" />
                       )}
                       <span className={`text-sm ${
-                        feature.included 
-                          ? 'text-orange-900 dark:text-orange-100' 
+                        feature.included
+                          ? 'text-orange-900 dark:text-orange-100'
                           : 'text-orange-500 dark:text-orange-400'
                       }`}>
                         {feature.name}
@@ -378,13 +378,13 @@ export default function PremiumPage() {
                   </div>
                 </div>
               </div>
-              
+
               <div className="flex mb-3">
                 {[...Array(testimonial.rating)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 text-orange-500 fill-current" />
                 ))}
               </div>
-              
+
               <p className="text-orange-700 dark:text-orange-300 italic">
                 "{testimonial.content}"
               </p>

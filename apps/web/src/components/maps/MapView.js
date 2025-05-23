@@ -15,7 +15,7 @@
  */
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Card, Badge, Button, LoadingSpinner } from '../ui/index.js';
+import { Card, Badge, Button, LoadingSpinner } from '@bellyfed/ui';
 import { useAnalyticsContext } from '../analytics/AnalyticsProvider.js';
 import { useAuth } from '../../hooks/useAuth.js';
 import { analyticsService } from '../../services/analyticsService.js';

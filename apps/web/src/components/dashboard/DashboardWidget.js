@@ -14,7 +14,7 @@
  */
 
 import React from 'react';
-import { Card, Button, LoadingSpinner } from '../ui/index.js';
+import { Card, Button, LoadingSpinner } from '@bellyfed/ui';
 import { useAnalyticsContext } from '../analytics/AnalyticsProvider.js';
 
 const DashboardWidget = ({

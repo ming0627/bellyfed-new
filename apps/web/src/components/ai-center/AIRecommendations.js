@@ -1,9 +1,9 @@
 /**
  * AI Recommendations Component
- * 
+ *
  * Displays AI-powered restaurant and dish recommendations based on user preferences,
  * location, and past behavior. Features personalized suggestions with confidence scores.
- * 
+ *
  * Features:
  * - Personalized AI recommendations
  * - Confidence scoring
@@ -14,8 +14,8 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link.js';
-import { Card, Badge, Button, LoadingSpinner } from '../ui/index.js';
-import { RestaurantCard } from '../restaurants/RestaurantCard.js';
+import { Card, Badge, Button, LoadingSpinner } from '@bellyfed/ui';
+import RestaurantCard from '../restaurants/RestaurantCard.js';
 import { useAnalyticsContext } from '../analytics/AnalyticsProvider.js';
 import { useCountry } from '../../hooks/useCountry.js';
 import { analyticsService } from '../../services/analyticsService.js';
@@ -58,7 +58,7 @@ const AIRecommendations = ({
     } else {
       setLoading(true);
     }
-    
+
     setError(null);
 
     try {
@@ -74,7 +74,7 @@ const AIRecommendations = ({
       });
 
       setRecommendations(data);
-      
+
       // Track recommendations view
       trackUserEngagement('ai', 'recommendations', 'view', {
         type,
@@ -101,7 +101,7 @@ const AIRecommendations = ({
       });
 
       setFeedbackSubmitted(prev => new Set([...prev, recommendationId]));
-      
+
       trackUserEngagement('ai', 'recommendations', 'feedback', {
         recommendationId,
         feedback,
@@ -170,8 +170,8 @@ const AIRecommendations = ({
         <div className="text-red-600">
           <p className="text-lg font-semibold mb-2">Error Loading Recommendations</p>
           <p className="text-sm">{error}</p>
-          <Button 
-            onClick={() => fetchRecommendations()} 
+          <Button
+            onClick={() => fetchRecommendations()}
             className="mt-4"
             variant="outline"
           >
@@ -245,15 +245,15 @@ const AIRecommendations = ({
                       {recommendation.type}
                     </Badge>
                     {showConfidenceScores && (
-                      <Badge 
-                        variant="outline" 
+                      <Badge
+                        variant="outline"
                         className={`text-xs ${getConfidenceColor(recommendation.confidenceScore)}`}
                       >
                         {getConfidenceLabel(recommendation.confidenceScore)} Confidence
                       </Badge>
                     )}
                   </div>
-                  
+
                   {showExplanations && recommendation.explanation && (
                     <p className="text-sm text-gray-600 mb-3">
                       {recommendation.explanation}
@@ -271,7 +271,7 @@ const AIRecommendations = ({
                     className="hover:shadow-md transition-shadow cursor-pointer"
                   />
                 )}
-                
+
                 {recommendation.type === 'dish' && recommendation.dish && (
                   <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
                     {recommendation.dish.imageUrl && (

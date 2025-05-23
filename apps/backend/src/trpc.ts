@@ -1,49 +1,65 @@
 /**
  * tRPC Server Setup
- * 
+ *
  * This file sets up the tRPC server with authentication middleware
  * and defines the base router and procedure builders.
  */
 
 import { initTRPC, TRPCError } from '@trpc/server';
 import { type CreateExpressContextOptions } from '@trpc/server/adapters/express';
+import { prisma } from '@bellyfed/db';
 import superjson from 'superjson';
 
 // Define the context type
 export interface Context {
+  prisma: typeof prisma;
   user?: {
     id: string;
     email: string;
   };
+  requestId?: string;
+  userAgent?: string;
 }
 
 // Create context for each request
 export const createContext = ({ req, res }: CreateExpressContextOptions): Context => {
+  // Generate request ID for tracing
+  const requestId = req.headers['x-request-id'] as string || `req-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  const userAgent = req.headers['user-agent'] as string;
+
+  // Base context with Prisma
+  const baseContext: Context = {
+    prisma,
+    requestId,
+    userAgent,
+  };
+
   // For now, we'll use a simple auth header check
   // In production, this would validate JWT tokens from Cognito
   const authHeader = req.headers.authorization;
-  
+
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return {};
+    return baseContext;
   }
-  
+
   // In a real implementation, we would validate the token
   // and extract user information from it
   // This is a simplified example
   const token = authHeader.split(' ')[1];
-  
+
   // Mock user for development
   // In production, this would come from token validation
   if (token === 'test-token') {
     return {
+      ...baseContext,
       user: {
         id: 'user-1',
         email: 'test@example.com',
       },
     };
   }
-  
-  return {};
+
+  return baseContext;
 };
 
 // Initialize tRPC
@@ -65,6 +81,7 @@ const isAuthed = t.middleware(({ ctx, next }) => {
   }
   return next({
     ctx: {
+      ...ctx,
       user: ctx.user,
     },
   });

@@ -122,10 +122,15 @@ const getTimeSeriesData = async (entityType: string, entityId: string, period: s
   const viewersByDate: Record<string, string[]> = {};
   viewers.forEach((viewer) => {
     const dateStr = viewer.date.toISOString().split('T')[0];
-    if (!viewersByDate[dateStr]) {
+    if (dateStr && !viewersByDate[dateStr]) {
       viewersByDate[dateStr] = [];
     }
-    viewersByDate[dateStr].push(viewer.userId);
+    if (dateStr) {
+      if (!viewersByDate[dateStr]) {
+        viewersByDate[dateStr] = [];
+      }
+      viewersByDate[dateStr]!.push(viewer.userId);
+    }
   });
 
   // Create time series data
@@ -135,18 +140,20 @@ const getTimeSeriesData = async (entityType: string, entityId: string, period: s
   const currentDate = new Date(startDate);
   while (currentDate <= endDate) {
     const dateStr = currentDate.toISOString().split('T')[0];
-    timeSeriesData[dateStr] = {
-      views: 0,
-      uniqueViewers: 0,
-    };
+    if (dateStr) {
+      timeSeriesData[dateStr] = {
+        views: 0,
+        uniqueViewers: 0,
+      };
+    }
     currentDate.setDate(currentDate.getDate() + 1);
   }
 
   // Fill in actual data
   Object.keys(viewersByDate).forEach((dateStr) => {
-    if (timeSeriesData[dateStr]) {
-      timeSeriesData[dateStr].views = viewersByDate[dateStr].length;
-      timeSeriesData[dateStr].uniqueViewers = new Set(viewersByDate[dateStr]).size;
+    if (timeSeriesData[dateStr] && viewersByDate[dateStr]) {
+      timeSeriesData[dateStr].views = viewersByDate[dateStr]!.length;
+      timeSeriesData[dateStr].uniqueViewers = new Set(viewersByDate[dateStr]!).size;
     }
   });
 
@@ -293,7 +300,7 @@ export const trackEngagement = async (params: TrackEngagementParams): Promise<{ 
         entityId,
         userId: userId || 'anonymous',
         engagementType,
-        metadata: metadata || {},
+        metadata: metadata ? JSON.parse(JSON.stringify(metadata)) : {},
         timestamp: new Date(),
       },
     });

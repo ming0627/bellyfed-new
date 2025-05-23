@@ -4,8 +4,9 @@ import * as React from "react"
 import { cn } from "../utils.js"
 
 // Dynamic import for Next.js Image component to make it optional
-let NextImage: any = null
+let NextImage: React.ComponentType<any> | null = null
 try {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   NextImage = require("next/image").default
 } catch {
   // Next.js not available, will use regular img tag
@@ -39,7 +40,7 @@ const SafeImage = React.forwardRef<HTMLImageElement, SafeImageProps>(
     sizes,
     onError,
     ...props
-  }, ref) => {
+  }, _ref) => {
     const [imageSrc, setImageSrc] = React.useState(src)
     const [hasError, setHasError] = React.useState(false)
 

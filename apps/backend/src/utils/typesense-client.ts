@@ -1,6 +1,6 @@
 /**
  * Typesense Client Utility
- * 
+ *
  * This utility provides a consistent way to access Typesense from the backend services.
  * It handles configuration and client initialization.
  */
@@ -167,7 +167,8 @@ export async function searchDishes(params: SearchParams): Promise<any> {
  */
 export async function getDishById(id: string): Promise<DishDocument> {
   const client = await getTypesenseClient();
-  return client.collections('dishes').documents(id).retrieve();
+  const result = await client.collections('dishes').documents(id).retrieve();
+  return result as DishDocument;
 }
 
 /**
@@ -233,7 +234,7 @@ export async function getDishesByTags(
   }
 
   const tagFilter = tags.map((tag) => `tags:=${tag}`).join(' || ');
-  
+
   const searchParams: SearchParams = {
     q: '*',
     filter_by: `(${tagFilter}) && is_available:=true`,

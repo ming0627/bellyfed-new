@@ -14,3 +14,10 @@ import RankingCardExample from '../examples/RankingCardExample.js';
 export default function TestRankingCardPage() {
   return <RankingCardExample />;
 }
+
+// Force client-side rendering to avoid SSR issues with context providers
+export async function getServerSideProps() {
+  return {
+    props: {},
+  };
+}

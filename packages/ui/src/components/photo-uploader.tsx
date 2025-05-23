@@ -54,8 +54,26 @@ const PhotoUploader = React.forwardRef<HTMLDivElement, PhotoUploaderProps>(
       if (disabled) return
 
       const droppedFiles = Array.from(e.dataTransfer.files)
-      handleFiles(droppedFiles)
-    }, [disabled])
+      const validFiles = droppedFiles.filter(file => {
+        if (!acceptedTypes.includes(file.type)) return false
+        if (file.size > maxSize) return false
+        return true
+      })
+
+      const filesToAdd = multiple
+        ? validFiles.slice(0, maxFiles - files.length)
+        : validFiles.slice(0, 1)
+
+      if (multiple) {
+        setFiles(prev => [...prev, ...filesToAdd])
+      } else {
+        setFiles(filesToAdd)
+      }
+
+      if (onUpload) {
+        onUpload(filesToAdd)
+      }
+    }, [disabled, files, acceptedTypes, maxSize, maxFiles, multiple, onUpload])
 
     const handleFiles = React.useCallback((newFiles: File[]) => {
       const validFiles = newFiles.filter(file => {
@@ -64,8 +82,7 @@ const PhotoUploader = React.forwardRef<HTMLDivElement, PhotoUploaderProps>(
         return true
       })
 
-      const totalFiles = multiple ? files.length + validFiles.length : validFiles.length
-      const filesToAdd = multiple 
+      const filesToAdd = multiple
         ? validFiles.slice(0, maxFiles - files.length)
         : validFiles.slice(0, 1)
 
@@ -104,8 +121,8 @@ const PhotoUploader = React.forwardRef<HTMLDivElement, PhotoUploaderProps>(
         <div
           className={cn(
             "relative border-2 border-dashed rounded-lg p-6 transition-colors",
-            dragActive 
-              ? "border-orange-500 bg-orange-50 dark:bg-orange-950/50" 
+            dragActive
+              ? "border-orange-500 bg-orange-50 dark:bg-orange-950/50"
               : "border-orange-200 dark:border-orange-800",
             disabled && "opacity-50 cursor-not-allowed",
             !disabled && "cursor-pointer hover:border-orange-300 dark:hover:border-orange-700"
@@ -125,7 +142,7 @@ const PhotoUploader = React.forwardRef<HTMLDivElement, PhotoUploaderProps>(
             className="hidden"
             disabled={disabled}
           />
-          
+
           <div className="flex flex-col items-center justify-center text-center">
             <Upload className="h-10 w-10 text-orange-400 mb-4" />
             <p className="text-sm text-orange-600 dark:text-orange-400 mb-2">

@@ -1,6 +1,6 @@
 /**
  * Review Processor Router
- * 
+ *
  * This file defines the tRPC router for review processor operations.
  * It exposes endpoints for creating and updating reviews.
  */
@@ -86,7 +86,7 @@ export const reviewProcessorRouter = router({
     )
     .query(async ({ input, ctx }) => {
       const { reviewId } = input;
-      
+
       // Get the latest event for this review
       const latestEvent = await ctx.prisma.analyticsEvent.findFirst({
         where: {
@@ -100,7 +100,7 @@ export const reviewProcessorRouter = router({
           timestamp: 'desc',
         },
       });
-      
+
       if (!latestEvent) {
         return {
           reviewId,
@@ -108,7 +108,7 @@ export const reviewProcessorRouter = router({
           lastUpdated: null,
         };
       }
-      
+
       return {
         reviewId,
         status: latestEvent.status,
@@ -129,7 +129,7 @@ export const reviewProcessorRouter = router({
     )
     .query(async ({ input, ctx }) => {
       const { reviewId, limit = 10, offset = 0 } = input;
-      
+
       // Get all events for this review
       const events = await ctx.prisma.analyticsEvent.findMany({
         where: {
@@ -145,7 +145,7 @@ export const reviewProcessorRouter = router({
         take: limit,
         skip: offset,
       });
-      
+
       // Get total count
       const total = await ctx.prisma.analyticsEvent.count({
         where: {
@@ -156,9 +156,9 @@ export const reviewProcessorRouter = router({
           },
         },
       });
-      
+
       return {
-        events: events.map(event => ({
+        events: events.map((event: any) => ({
           id: event.id,
           action: event.action,
           status: event.status,
@@ -180,7 +180,7 @@ export const reviewProcessorRouter = router({
     )
     .query(async ({ input, ctx }) => {
       const { restaurantId, limit = 10, offset = 0 } = input;
-      
+
       // Get reviews for this restaurant
       const reviews = await ctx.prisma.review.findMany({
         where: {
@@ -201,14 +201,14 @@ export const reviewProcessorRouter = router({
         take: limit,
         skip: offset,
       });
-      
+
       // Get total count
       const total = await ctx.prisma.review.count({
         where: {
           restaurantId,
         },
       });
-      
+
       return {
         reviews,
         total,
@@ -226,7 +226,7 @@ export const reviewProcessorRouter = router({
     )
     .query(async ({ input, ctx }) => {
       const { userId, limit = 10, offset = 0 } = input;
-      
+
       // Get reviews by this user
       const reviews = await ctx.prisma.review.findMany({
         where: {
@@ -250,14 +250,14 @@ export const reviewProcessorRouter = router({
         take: limit,
         skip: offset,
       });
-      
+
       // Get total count
       const total = await ctx.prisma.review.count({
         where: {
           userId,
         },
       });
-      
+
       return {
         reviews,
         total,

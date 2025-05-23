@@ -14,7 +14,7 @@
  */
 
 import React, { useState } from 'react';
-import { Card, Button } from '../ui/index.js';
+import { Card, Button } from '@bellyfed/ui';
 import { useAnalyticsContext } from '../analytics/AnalyticsProvider.js';
 import { useCountry } from '../../hooks/useCountry.js';
 

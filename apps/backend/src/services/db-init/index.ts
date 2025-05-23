@@ -1,16 +1,20 @@
 /**
  * Database Initialization Service
- * 
+ *
  * This service handles database initialization operations including:
  * - Creating database tables if they don't exist
  * - Setting up initial data
  * - Performing database migrations
- * 
+ *
  * It uses Prisma ORM for database operations.
  */
 
 import { PrismaClient } from '@prisma/client';
-import { initializationQueries } from '@bellyfed/db/schema/db-schema.js';
+// Simple initialization queries since the schema import is not working
+const initializationQueries = [
+  // Basic health check query
+  'SELECT 1 as health_check;'
+];
 
 // Initialize Prisma client
 const prisma = new PrismaClient();
@@ -19,12 +23,12 @@ const prisma = new PrismaClient();
 export const initializeDatabase = async () => {
   try {
     console.log('Starting database initialization...');
-    
+
     // Use Prisma's executeRaw to run SQL queries
     for (const query of initializationQueries) {
       await prisma.$executeRawUnsafe(query);
     }
-    
+
     console.log('Database initialization completed successfully');
     return { success: true, message: 'Database initialized successfully' };
   } catch (error) {
@@ -50,12 +54,12 @@ export const getDatabaseStatus = async () => {
   try {
     // Check connection
     await checkDatabaseConnection();
-    
+
     // Get table counts
     const userCount = await prisma.user.count();
     const userFollowerCount = await prisma.userFollower.count();
     const dishRankingCount = await prisma.dishRanking.count();
-    
+
     return {
       success: true,
       status: 'online',

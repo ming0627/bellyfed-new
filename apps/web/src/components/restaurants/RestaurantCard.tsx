@@ -2,8 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Star, MapPin, Clock, Heart, Award, Utensils } from 'lucide-react';
-import { Card } from '@/components/ui/Card';
-import { Badge } from '@/components/ui/Badge';
+import { Card, Badge } from '@bellyfed/ui';
 
 interface RestaurantCardProps {
   id: string;

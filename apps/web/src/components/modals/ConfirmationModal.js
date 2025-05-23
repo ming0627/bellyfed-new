@@ -15,7 +15,7 @@
  */
 
 import React, { useEffect, useRef } from 'react';
-import { Button, LoadingSpinner } from '../ui/index.js';
+import { Button, LoadingSpinner } from '@bellyfed/ui';
 import { useAnalyticsContext } from '../analytics/AnalyticsProvider.js';
 
 const ConfirmationModal = ({
