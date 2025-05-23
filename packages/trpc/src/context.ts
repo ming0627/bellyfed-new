@@ -11,3 +11,12 @@ export const createContext = ({ req, res }: CreateExpressContextOptions) => ({
 });
 
 export type Context = ReturnType<typeof createContext>;
+
+// Authenticated context with user information
+export type AuthenticatedContext = Context & {
+  user: {
+    id: string;
+    email: string;
+    name: string;
+  };
+};

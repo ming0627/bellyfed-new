@@ -1,6 +1,6 @@
 /**
  * User Profile Router
- * 
+ *
  * This file defines the tRPC router for user profile operations.
  * It's a wrapper around the backend user profile service.
  */
@@ -8,15 +8,17 @@
 import { z } from 'zod';
 import { router } from '../trpc.js';
 import { privateProcedure } from '../procedures/private.js';
+import type { AuthenticatedContext } from '../context.js';
 
 export const userProfileRouter = router({
   // Get current user profile
   getCurrentProfile: privateProcedure.query(async ({ ctx }) => {
+    const authCtx = ctx as AuthenticatedContext;
     // This will be implemented in the backend service
-    return { 
-      id: ctx.user.id,
+    return {
+      id: authCtx.user.id,
       name: 'User Name',
-      email: ctx.user.email,
+      email: authCtx.user.email,
       bio: 'User bio',
       location: 'User location',
       countryCode: 'US',
@@ -43,11 +45,12 @@ export const userProfileRouter = router({
       })
     )
     .mutation(async ({ ctx, input }) => {
+      const authCtx = ctx as AuthenticatedContext;
       // This will be implemented in the backend service
-      return { 
-        id: ctx.user.id,
+      return {
+        id: authCtx.user.id,
         name: input.name || 'User Name',
-        email: ctx.user.email,
+        email: authCtx.user.email,
         bio: input.bio || 'User bio',
         location: input.location || 'User location',
         countryCode: input.countryCode || 'US',

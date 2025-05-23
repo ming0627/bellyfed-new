@@ -1,6 +1,6 @@
 /**
  * Analytics Database Schema
- * 
+ *
  * This file exports database schema definitions and utilities
  * for working with analytics data.
  */
@@ -30,13 +30,13 @@ export enum AnalyticsEventStatus {
 // Database operations
 export const analyticsDb = {
   // Create a new analytics event
-  create: (data: AnalyticsEventCreateInput) => 
+  create: (data: AnalyticsEventCreateInput) =>
     prisma.analyticsEvent.create({ data }),
-  
+
   // Create multiple analytics events
-  createMany: (data: Prisma.AnalyticsEventCreateManyInput[]) => 
+  createMany: (data: Prisma.AnalyticsEventCreateManyInput[]) =>
     prisma.analyticsEvent.createMany({ data }),
-  
+
   // Find analytics events
   findMany: (params: {
     where?: AnalyticsEventWhereInput;
@@ -44,47 +44,47 @@ export const analyticsDb = {
     skip?: number;
     take?: number;
   }) => prisma.analyticsEvent.findMany(params),
-  
+
   // Count analytics events
-  count: (where: AnalyticsEventWhereInput) => 
+  count: (where: AnalyticsEventWhereInput) =>
     prisma.analyticsEvent.count({ where }),
-  
+
   // Group analytics events
   groupBy: (params: {
     by: Prisma.AnalyticsEventScalarFieldEnum[];
     where?: AnalyticsEventWhereInput;
-    _count?: boolean;
+    _count?: true | Prisma.AnalyticsEventCountAggregateInputType;
   }) => prisma.analyticsEvent.groupBy(params),
-  
+
   // Get analytics events by user
-  getByUser: (userId: string, limit: number = 50, offset: number = 0) => 
+  getByUser: (userId: string, limit: number = 50, offset: number = 0) =>
     prisma.analyticsEvent.findMany({
       where: { userId },
       orderBy: { timestamp: 'desc' },
       take: limit,
       skip: offset,
     }),
-  
+
   // Get analytics events by type
-  getByType: (type: string, limit: number = 50, offset: number = 0) => 
+  getByType: (type: string, limit: number = 50, offset: number = 0) =>
     prisma.analyticsEvent.findMany({
       where: { type },
       orderBy: { timestamp: 'desc' },
       take: limit,
       skip: offset,
     }),
-  
+
   // Get analytics events by category
-  getByCategory: (category: AnalyticsEventCategory, limit: number = 50, offset: number = 0) => 
+  getByCategory: (category: AnalyticsEventCategory, limit: number = 50, offset: number = 0) =>
     prisma.analyticsEvent.findMany({
       where: { eventCategory: category },
       orderBy: { timestamp: 'desc' },
       take: limit,
       skip: offset,
     }),
-  
+
   // Get analytics events by date range
-  getByDateRange: (startDate: Date, endDate: Date, limit: number = 50, offset: number = 0) => 
+  getByDateRange: (startDate: Date, endDate: Date, limit: number = 50, offset: number = 0) =>
     prisma.analyticsEvent.findMany({
       where: {
         timestamp: {

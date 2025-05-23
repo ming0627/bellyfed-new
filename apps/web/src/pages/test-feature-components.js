@@ -88,6 +88,18 @@ import {
 import {
   UserProfileCard
 } from '../components/user-profile/index.js';
+import {
+  NotificationCenter
+} from '../components/notifications/index.js';
+import {
+  SearchBar
+} from '../components/search/index.js';
+import {
+  FilterPanel
+} from '../components/filters/index.js';
+import {
+  MapView
+} from '../components/maps/index.js';
 
 // Mock data for testing
 const mockCompetitions = [
@@ -146,7 +158,11 @@ const TestFeatureComponents = () => {
     { id: 'statistics', title: 'Statistics Components', icon: '📊' },
     { id: 'chat', title: 'Chat Components', icon: '💬' },
     { id: 'date-picker', title: 'Date Picker Components', icon: '📅' },
-    { id: 'user-profile', title: 'User Profile Components', icon: '👤' }
+    { id: 'user-profile', title: 'User Profile Components', icon: '👤' },
+    { id: 'notifications', title: 'Notification Components', icon: '🔔' },
+    { id: 'search', title: 'Search Components', icon: '🔍' },
+    { id: 'filters', title: 'Filter Components', icon: '🔧' },
+    { id: 'maps', title: 'Map Components', icon: '🗺️' }
   ];
 
   const renderAnalyticsSection = () => (
@@ -793,6 +809,175 @@ const TestFeatureComponents = () => {
     </div>
   );
 
+  const renderNotificationsSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Notification Center</h3>
+        <NotificationCenter
+          showUnreadOnly={false}
+          maxNotifications={20}
+          enableRealTime={true}
+          showMarkAllRead={true}
+          showFilters={true}
+        />
+      </Card>
+    </div>
+  );
+
+  const renderSearchSection = () => (
+    <div className="space-y-8">
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Search Bar - Full Featured</h3>
+        <SearchBar
+          placeholder="Search restaurants, dishes, or users..."
+          showFilters={true}
+          showSuggestions={true}
+          showHistory={true}
+          maxSuggestions={8}
+          categories={['restaurants', 'dishes', 'users']}
+          onSearch={(query, category, suggestion) => {
+            console.log('Search:', { query, category, suggestion });
+          }}
+        />
+      </Card>
+
+      <Card className="p-6">
+        <h3 className="text-lg font-semibold mb-4">Search Bar - Simple</h3>
+        <SearchBar
+          placeholder="Quick search..."
+          showFilters={false}
+          showSuggestions={true}
+          showHistory={false}
+          maxSuggestions={5}
+          categories={['restaurants']}
+        />
+      </Card>
+    </div>
+  );
+
+  const renderFiltersSection = () => {
+    const [filterValues, setFilterValues] = useState({});
+
+    const mockFilters = [
+      {
+        id: 'cuisine',
+        label: 'Cuisine Type',
+        type: 'checkbox',
+        options: [
+          { value: 'malaysian', label: 'Malaysian', count: 45 },
+          { value: 'chinese', label: 'Chinese', count: 32 },
+          { value: 'indian', label: 'Indian', count: 28 },
+          { value: 'western', label: 'Western', count: 21 }
+        ]
+      },
+      {
+        id: 'price',
+        label: 'Price Range',
+        type: 'range',
+        min: 0,
+        max: 100,
+        showSlider: true
+      },
+      {
+        id: 'rating',
+        label: 'Minimum Rating',
+        type: 'radio',
+        options: [
+          { value: '4.5', label: '4.5+ Stars', count: 12 },
+          { value: '4.0', label: '4.0+ Stars', count: 28 },
+          { value: '3.5', label: '3.5+ Stars', count: 45 },
+          { value: '3.0', label: '3.0+ Stars', count: 67 }
+        ]
+      },
+      {
+        id: 'location',
+        label: 'Area',
+        type: 'select',
+        options: [
+          { value: 'klcc', label: 'KLCC', count: 15 },
+          { value: 'bukit-bintang', label: 'Bukit Bintang', count: 23 },
+          { value: 'bangsar', label: 'Bangsar', count: 18 }
+        ]
+      }
+    ];
+
+    return (
+      <div className="space-y-8">
+        <Card className="p-6">
+          <h3 className="text-lg font-semibold mb-4">Filter Panel</h3>
+          <FilterPanel
+            filters={mockFilters}
+            values={filterValues}
+            onChange={setFilterValues}
+            showClearAll={true}
+            collapsible={true}
+          />
+          {Object.keys(filterValues).length > 0 && (
+            <div className="mt-4 p-3 bg-gray-50 rounded">
+              <h4 className="font-medium mb-2">Current Filters:</h4>
+              <pre className="text-xs text-gray-600">
+                {JSON.stringify(filterValues, null, 2)}
+              </pre>
+            </div>
+          )}
+        </Card>
+      </div>
+    );
+  };
+
+  const renderMapsSection = () => {
+    const mockMarkers = [
+      {
+        id: 'restaurant-1',
+        name: 'Nasi Lemak Wanjo',
+        type: 'restaurant',
+        rating: 4.8,
+        reviewCount: 234,
+        cuisine: 'Malaysian',
+        address: 'Kampung Baru, KL',
+        image: null
+      },
+      {
+        id: 'restaurant-2',
+        name: 'Din Tai Fung',
+        type: 'restaurant',
+        rating: 4.6,
+        reviewCount: 567,
+        cuisine: 'Chinese',
+        address: 'Pavilion KL',
+        image: null
+      },
+      {
+        id: 'restaurant-3',
+        name: 'Banana Leaf Apolo',
+        type: 'restaurant',
+        rating: 4.3,
+        reviewCount: 189,
+        cuisine: 'Indian',
+        address: 'Brickfields, KL',
+        image: null
+      }
+    ];
+
+    return (
+      <div className="space-y-8">
+        <Card className="p-6">
+          <h3 className="text-lg font-semibold mb-4">Interactive Map View</h3>
+          <MapView
+            center={{ lat: 3.1390, lng: 101.6869 }}
+            zoom={12}
+            markers={mockMarkers}
+            showUserLocation={true}
+            showSearch={true}
+            showDirections={true}
+            enableClustering={true}
+            onMarkerClick={(marker) => console.log('Marker clicked:', marker)}
+          />
+        </Card>
+      </div>
+    );
+  };
+
   return (
     <AnalyticsProvider
       enableAutoTracking={true}
@@ -854,6 +1039,10 @@ const TestFeatureComponents = () => {
             {activeSection === 'chat' && renderChatSection()}
             {activeSection === 'date-picker' && renderDatePickerSection()}
             {activeSection === 'user-profile' && renderUserProfileSection()}
+            {activeSection === 'notifications' && renderNotificationsSection()}
+            {activeSection === 'search' && renderSearchSection()}
+            {activeSection === 'filters' && renderFiltersSection()}
+            {activeSection === 'maps' && renderMapsSection()}
           </div>
         </div>
       </div>

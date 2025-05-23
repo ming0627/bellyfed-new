@@ -48,6 +48,18 @@ export * from './date-picker/index.js';
 // User Profile Components
 export * from './user-profile/index.js';
 
+// Notifications Components
+export * from './notifications/index.js';
+
+// Search Components
+export * from './search/index.js';
+
+// Filters Components
+export * from './filters/index.js';
+
+// Maps Components
+export * from './maps/index.js';
+
 // Competitions Components
 export * from './competitions/index.js';
 
