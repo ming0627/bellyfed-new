@@ -46,7 +46,7 @@ const defaultConfig = {
   includeSessionId: false,
   includeUserId: false,
   maxStoredLogs: 1000,
-  serverEndpoint: '/api/logs',
+  serverEndpoint: '/api/debug-logs',
   retryFailedLogs: true,
   retryDelay: 5000,
   maxRetries: 3
@@ -211,7 +211,7 @@ export function log(level, category, message, data) {
  */
 function logToConsole(entry) {
   const { level, levelName, category, message, data, timestamp } = entry
-  
+
   // Choose console method based on log level
   let consoleMethod = 'log'
   let emoji = '📝'
@@ -269,7 +269,7 @@ function logToConsole(entry) {
  */
 function storeLog(entry) {
   logStorage.push(entry)
-  
+
   // Remove old logs if we exceed the maximum
   if (logStorage.length > config.maxStoredLogs) {
     logStorage.shift()
@@ -300,7 +300,7 @@ async function sendLogToServer(entry) {
     if (config.retryFailedLogs) {
       failedLogs.push(entry)
     }
-    
+
     // Log the error (but don't send to server to avoid infinite loop)
     console.error('Failed to send log to server:', error)
   }
@@ -331,13 +331,13 @@ export function exportLogs() {
   const logs = getLogs()
   const dataStr = JSON.stringify(logs, null, 2)
   const dataBlob = new Blob([dataStr], { type: 'application/json' })
-  
+
   const url = URL.createObjectURL(dataBlob)
   const link = document.createElement('a')
   link.href = url
   link.download = `bellyfed-logs-${new Date().toISOString().split('T')[0]}.json`
   link.click()
-  
+
   URL.revokeObjectURL(url)
 }
 
@@ -380,7 +380,7 @@ const logger = {
   warn: (message, data) => warn('App', message, data),
   error: (message, data) => error('App', message, data),
   fatal: (message, data) => fatal('App', message, data),
-  
+
   // Configuration methods
   setLogLevel,
   getLogLevel,
@@ -396,7 +396,7 @@ const logger = {
   exportLogs,
   retryFailedLogs,
   configure,
-  
+
   // Constants
   LogLevel,
   LogLevelNames

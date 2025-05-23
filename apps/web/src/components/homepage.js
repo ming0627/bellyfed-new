@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { Loader2 } from 'lucide-react';
 
 import { useCountry } from '../contexts/CountryContext.js';
 
@@ -112,11 +114,53 @@ export default function Homepage() {
     return () => clearInterval(interval);
   }, [updateStats, isInitialized]);
 
+  // Fetch restaurant data
+  const {
+    // data: restaurants, // Removed unused variable
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ['restaurants', currentCountry?.code],
+    queryFn: () => {
+      // In a real app, this would fetch data from an API with the country code
+      return Promise.resolve(mockRestaurants);
+    },
+    // Don't refetch on window focus for demo purposes
+    refetchOnWindowFocus: false,
+    // Add error handling
+    onError: err => {
+      console.error('Error fetching restaurants:', err);
+    },
+    // Only enable the query when country is initialized
+    enabled: !!isInitialized,
+  });
+
   // Show loading state
   if (!isInitialized) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500"></div>
+        <Loader2 className="w-6 h-6 animate-spin" />
+      </div>
+    );
+  }
+
+  // Show error state
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen p-4">
+        <h1 className="text-2xl font-bold text-red-600 mb-4">
+          Error Loading Data
+        </h1>
+        <p className="text-gray-700 mb-6">
+          We encountered a problem while loading the page. Please try again
+          later.
+        </p>
+        <button
+          onClick={() => window.location.reload()}
+          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+        >
+          Refresh Page
+        </button>
       </div>
     );
   }

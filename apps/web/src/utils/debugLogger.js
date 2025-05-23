@@ -45,7 +45,7 @@ export const LoggerConfig = {
   includeUserId: false,
   includeTimestamp: true,
   includeCategory: true,
-  serverEndpoint: '/api/debug/logs',
+  serverEndpoint: '/api/debug-logs',
   maxRetries: 3,
   retryDelay: 1000
 }
@@ -206,7 +206,11 @@ export function log(level, category, message, data) {
 
   // Send to server if enabled
   if (config.logToServer) {
-    sendLogToServer(entry)
+    // Prevent infinite loops by not logging server errors to server
+    const isServerLogError = category === 'DebugLogger' && message.includes('Failed to send log to server');
+    if (!isServerLogError) {
+      sendLogToServer(entry)
+    }
   }
 }
 

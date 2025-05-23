@@ -63,7 +63,7 @@ export interface LoggerConfig {
 // Default configuration
 const defaultConfig: LoggerConfig = {
   logLevel: LogLevel.INFO,
-  logToServer: false, // Disable server logging by default to avoid 404s
+  logToServer: false, // Disabled by default to prevent infinite loops
   logToConsole: true,
   serverEndpoint: '/api/debug/logs',
   includeSessionId: true,
@@ -227,11 +227,15 @@ export const log = (
 
   // Log to server if enabled
   if (config.logToServer && typeof window !== 'undefined') {
-    sendLogToServer(entry).catch((error) => {
-      console.error('Failed to log to server:', error);
-      // Add to failed logs queue
-      failedLogs.push(entry);
-    });
+    // Prevent infinite loops by not logging server errors to server
+    const isServerLogError = category === 'Logger' && message.includes('Failed to log to server');
+    if (!isServerLogError) {
+      sendLogToServer(entry).catch((error) => {
+        console.error('Failed to log to server:', error);
+        // Add to failed logs queue
+        failedLogs.push(entry);
+      });
+    }
   }
 };
 

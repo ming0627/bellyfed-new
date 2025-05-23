@@ -1,9 +1,9 @@
 /**
  * Reviews Index API Route
- * 
+ *
  * Handles listing and creating reviews.
  * Supports GET for listing reviews and POST for creating new reviews.
- * 
+ *
  * Features:
  * - List reviews with pagination and filtering
  * - Create new reviews (authenticated users)
@@ -12,8 +12,8 @@
  * - Review moderation support
  */
 
-import { reviewService } from '../../../services/reviewService.js'
-import { withApiAuthRequired } from '../../../utils/auth.js'
+import { reviewService } from '@bellyfed/services'
+import { withApiAuthRequired, isAuthenticated, getUserId } from '@bellyfed/utils'
 
 /**
  * Default pagination settings
@@ -233,20 +233,32 @@ const handler = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-  
+
   // Handle preflight requests
   if (req.method === 'OPTIONS') {
     return res.status(200).end()
   }
-  
+
   try {
     switch (req.method) {
       case 'GET':
         return await getReviews(req, res)
-        
+
       case 'POST':
+        // Check authentication for POST requests
+        if (!isAuthenticated(req)) {
+          return res.status(401).json({
+            error: 'Unauthorized',
+            message: 'Authentication required to create reviews'
+          })
+        }
+
+        // Add user info to request
+        const userId = getUserId(req)
+        req.user = { id: userId }
+
         return await createReview(req, res)
-        
+
       default:
         return res.status(405).json({
           error: 'Method not allowed',
@@ -262,10 +274,8 @@ const handler = async (req, res) => {
   }
 }
 
-// Apply authentication middleware for POST operations
-export default withApiAuthRequired(handler, {
-  requireAuth: ['POST']
-})
+// Export the handler directly (no auth middleware wrapper needed)
+export default handler
 
 /**
  * API route configuration

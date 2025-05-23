@@ -1,8 +1,9 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { COUNTRIES } from '../config/countries.js';
 
 // Define the shape of a country
-// Country: { code: string, name: string, currency: string, locale: string, flag: string }
+// Country: { code: string, name: string, currency: string, reviewers: array, dishes: array, locations: array }
 
 // Define the shape of the country context
 // CountryContextType: {
@@ -450,18 +451,18 @@ export const CountryProvider = ({ children }) => {
     const countryCode = Array.isArray(country) ? country[0] : country;
 
     if (countryCode) {
-      const foundCountry = COUNTRIES.find(c => c.code === countryCode);
+      const foundCountry = COUNTRIES[countryCode];
       if (foundCountry) {
         setCurrentCountry(foundCountry);
       } else {
-        // If country code is invalid, default to US
-        setCurrentCountry(COUNTRIES[0]);
+        // If country code is invalid, default to Malaysia
+        setCurrentCountry(COUNTRIES.my);
         // Redirect to valid country
-        router.replace(`/${COUNTRIES[0].code}${router.pathname.replace('[country]', COUNTRIES[0].code)}`);
+        router.replace(`/my${router.pathname.replace('[country]', 'my')}`);
       }
     } else if (router.pathname === '/') {
-      // On root path, default to US
-      setCurrentCountry(COUNTRIES[0]);
+      // On root path, default to Malaysia
+      setCurrentCountry(COUNTRIES.my);
     }
 
     setIsInitialized(true);
@@ -469,7 +470,7 @@ export const CountryProvider = ({ children }) => {
 
   // Function to change country
   const setCountry = (countryCode) => {
-    const foundCountry = COUNTRIES.find(c => c.code === countryCode);
+    const foundCountry = COUNTRIES[countryCode];
     if (foundCountry) {
       setCurrentCountry(foundCountry);
 

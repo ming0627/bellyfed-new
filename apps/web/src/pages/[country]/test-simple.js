@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { 
-  TestTube, 
-  CheckCircle, 
-  XCircle, 
-  AlertCircle, 
-  Play, 
+import {
+  TestTube,
+  CheckCircle,
+  XCircle,
+  AlertCircle,
+  Play,
   Pause,
   RotateCcw,
   Download,
@@ -116,7 +116,7 @@ export default function TestSimplePage() {
 
     setIsRunning(false)
     setCurrentTest(null)
-    
+
     // Update last run time
     setTestResults(prev => ({
       ...prev,
@@ -304,7 +304,7 @@ export default function TestSimplePage() {
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center space-x-3">
                       {test.value && (
                         <span className="text-sm font-medium text-orange-900 dark:text-orange-100">
@@ -398,7 +398,7 @@ export default function TestSimplePage() {
                 Test Environment
               </h3>
               <p className="text-blue-700 dark:text-blue-300 text-sm">
-                Running on development environment with mock data. 
+                Running on development environment with mock data.
                 Tests are simplified for demonstration purposes and may not reflect production behavior.
               </p>
             </div>
@@ -409,9 +409,18 @@ export default function TestSimplePage() {
   )
 }
 
-// Force client-side rendering to avoid SSR issues with context providers
-export async function getServerSideProps() {
+// Pre-render these paths
+export async function getStaticPaths() {
   return {
-    props: {},
+    paths: [{ params: { country: 'my' } }, { params: { country: 'sg' } }],
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({ params }) {
+  return {
+    props: {
+      country: params.country,
+    },
   };
 }
