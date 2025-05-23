@@ -207,8 +207,8 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
             <Image
               src={image.src}
               alt={image.alt}
-              layout="fill"
-              objectFit="cover"
+              fill
+              className="object-cover"
             />
             {image.overlay && (
               <div className="absolute inset-0 bg-neutral-900/40"></div>
@@ -234,9 +234,9 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
               <Image
                 src={image.src}
                 alt={image.alt}
-                layout="fill"
-                objectFit="cover"
-                className="transition-transform duration-500 group-hover:scale-105"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
             </div>
           )}
@@ -300,9 +300,9 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
             <Image
               src={image.src}
               alt={image.alt}
-              layout="fill"
-              objectFit="cover"
-              className="transition-transform duration-500 group-hover:scale-105"
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
             />
           </div>
         )}

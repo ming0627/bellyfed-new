@@ -230,6 +230,8 @@ export default {
         float: 'float 3s ease-in-out infinite',
         shimmer: 'shimmer 2s linear infinite',
         'rank-change': 'rankChange 0.5s ease-in-out',
+        'collapsible-down': 'collapsibleDown 0.2s ease-out',
+        'collapsible-up': 'collapsibleUp 0.2s ease-out',
       },
 
       keyframes: {
@@ -296,6 +298,14 @@ export default {
             backgroundColor: 'rgba(255, 153, 102, 0)',
             transform: 'translateX(0)',
           },
+        },
+        collapsibleDown: {
+          from: { height: '0' },
+          to: { height: 'var(--radix-collapsible-content-height)' },
+        },
+        collapsibleUp: {
+          from: { height: 'var(--radix-collapsible-content-height)' },
+          to: { height: '0' },
         },
       },
 

@@ -4,8 +4,9 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ThemeProvider } from 'next-themes';
 import { Toaster } from 'react-hot-toast';
 import { useState } from 'react';
-import { CountryProvider, AuthProvider } from '../contexts/index.js';
-import { TRPCProvider } from '../utils/trpc-provider.js';
+import { CountryProvider, AuthProvider } from '../contexts/index';
+import { TRPCProvider } from '../utils/trpc-provider';
+import AuthStateManagerWrapper from '../components/AuthStateManagerWrapper';
 import '../styles/globals.css';
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -17,8 +18,10 @@ export default function App({ Component, pageProps }: AppProps) {
         <CountryProvider>
           <AuthProvider>
             <TRPCProvider>
-              <Component {...pageProps} />
-              <Toaster position="bottom-right" />
+              <AuthStateManagerWrapper>
+                <Component {...pageProps} />
+                <Toaster position="bottom-right" />
+              </AuthStateManagerWrapper>
             </TRPCProvider>
           </AuthProvider>
         </CountryProvider>

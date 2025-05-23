@@ -183,8 +183,9 @@ const Avatar = ({
         <Image
           src={src}
           alt={alt}
-          layout="fill"
-          objectFit="cover"
+          fill
+          sizes="100%"
+          className="object-cover"
           onError={handleImageError}
         />
       ) : (

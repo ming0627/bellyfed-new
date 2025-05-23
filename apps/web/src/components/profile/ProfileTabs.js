@@ -5,10 +5,12 @@ import {
   Award,
   Settings,
   MapPin,
+  Trophy,
 } from 'lucide-react';
 import { LucideClientIcon } from '../ui/lucide-icon.js';
-import UserReviews from './UserReviews.js';
 import UserFavorites from './UserFavorites.js';
+import RankingsTab from './RankingsTab.js';
+import ReviewsTab from './ReviewsTab.js';
 
 /**
  * ProfileTabs component for displaying user profile tabs
@@ -33,7 +35,7 @@ const ProfileTabs = memo(function ProfileTabs({
       label: 'Reviews',
       icon: Star,
       count: user.reviewCount || 0,
-      component: <UserReviews user={user} getCountryLink={getCountryLink} />,
+      component: <ReviewsTab user={user} getCountryLink={getCountryLink} />,
     },
     {
       id: 'favorites',
@@ -41,6 +43,13 @@ const ProfileTabs = memo(function ProfileTabs({
       icon: Heart,
       count: user.favoriteCount || 0,
       component: <UserFavorites user={user} getCountryLink={getCountryLink} />,
+    },
+    {
+      id: 'rankings',
+      label: 'Rankings',
+      icon: Trophy,
+      count: user.rankingCount || 0,
+      component: <RankingsTab user={user} getCountryLink={getCountryLink} />,
     },
     {
       id: 'badges',

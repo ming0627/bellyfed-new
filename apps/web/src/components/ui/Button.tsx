@@ -96,13 +96,7 @@ const buttonVariants = cva(
     },
 
     // Compound variants for special combinations
-    compoundVariants: [
-      // Special styling for icon buttons
-      {
-        size: ['icon.xs', 'icon.sm', 'icon.md', 'icon.lg'],
-        className: 'flex items-center justify-center p-0',
-      },
-    ],
+    compoundVariants: [],
 
     defaultVariants: {
       variant: 'primary',
