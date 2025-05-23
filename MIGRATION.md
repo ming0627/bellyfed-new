@@ -27,7 +27,7 @@ All counts have been verified against the actual file listings in the original r
 | **Infrastructure**       | 44 <!-- AUDIT CORRECTED: 44 from packages/infra (was 24, found +20) -->               | 44        | 0           | 0           | 100%         |
 | **Docker/ECS Deploy**    | 30 <!-- AUDIT COMPLETED: All 30 deployment infrastructure files now exist -->         | 30        | 0           | 0           | 100%         |
 | **CI/CD Pipeline**       | 5 <!-- AUDIT COMPLETED: All 5 CI/CD pipeline files now exist -->                      | 5         | 0           | 0           | 100%         |
-| **CDK Infrastructure**   | 35 <!-- AUDIT DISCOVERED: CDK stacks and constructs from packages/infra/lib -->       | 6         | 0           | 29          | 17%          |
+| **CDK Infrastructure**   | 35 <!-- AUDIT DISCOVERED: CDK stacks and constructs from packages/infra/lib -->       | 16        | 0           | 19          | 46%          |
 | **Lambda Functions**     | 25 <!-- AUDIT DISCOVERED: Lambda functions from packages/infra/functions -->          | 0         | 0           | 25          | 0%           |
 | **Lambda Layers**        | 8 <!-- AUDIT DISCOVERED: Lambda layers from packages/infra/src/layers -->             | 0         | 0           | 8           | 0%           |
 | **Build Scripts**        | 22 <!-- AUDIT DISCOVERED: Build and deployment scripts from scripts/ -->              | 0         | 0           | 22          | 0%           |
@@ -36,7 +36,7 @@ All counts have been verified against the actual file listings in the original r
 | **Monitoring & Logging** | 8 <!-- AUDIT DISCOVERED: CloudWatch and logging configurations -->                    | 0         | 0           | 8           | 0%           |
 | **Security & IAM**       | 6 <!-- AUDIT DISCOVERED: IAM policies and security configurations -->                 | 0         | 0           | 6           | 0%           |
 | **Environment Configs**  | 4 <!-- AUDIT DISCOVERED: Environment-specific configurations -->                      | 0         | 0           | 4           | 0%           |
-| **Overall**              | 656 <!-- AUDIT UPDATED: 537 + 119 newly discovered items -->                          | 543       | 0           | 113         | 83%          |
+| **Overall**              | 656 <!-- AUDIT UPDATED: 537 + 119 newly discovered items -->                          | 553       | 0           | 103         | 84%          |
 
 ### Migration Status Legend
 
@@ -220,14 +220,14 @@ NOTE FOR VERIFICATION (Checklist Accuracy):
 | `/packages/infra/functions/user-profile`              | `/apps/backend/src/services/user-profile`             | ✅     | User profile Lambda function               |
 | `/packages/infra/functions/write-processor`           | `/apps/backend/src/services/write-processor`          | ✅     | Write processing Lambda function           |
 
-## 🔄 CDK Infrastructure Stacks (17% COMPLETE - 6/35 Items)
+## 🔄 CDK Infrastructure Stacks (46% COMPLETE - 16/35 Items)
 
 ### CDK Core Stacks
 
 | Source Path                                              | Destination Path                                         | Status | Notes                                 |
 | -------------------------------------------------------- | -------------------------------------------------------- | ------ | ------------------------------------- |
 | `/packages/infra/lib/api-gateway-stack.ts`               | `/packages/infra/lib/api-gateway-stack.ts`               | ✅     | API Gateway infrastructure stack      |
-| `/packages/infra/lib/api-stack.ts`                       | `/packages/infra/lib/api-stack.ts`                       | ⬜     | Main API infrastructure stack         |
+| `/packages/infra/lib/api-stack.ts`                       | `/packages/infra/lib/api-stack.ts`                       | ✅     | Main API infrastructure stack         |
 | `/packages/infra/lib/aurora-stack.ts`                    | `/packages/infra/lib/aurora-stack.ts`                    | ✅     | Aurora Serverless database stack      |
 | `/packages/infra/lib/bootstrap-stack.ts`                 | `/packages/infra/lib/bootstrap-stack.ts`                 | ⬜     | CDK bootstrap infrastructure          |
 | `/packages/infra/lib/certificate-parameters-stack.ts`    | `/packages/infra/lib/certificate-parameters-stack.ts`    | ⬜     | SSL certificate parameters            |
@@ -238,24 +238,24 @@ NOTE FOR VERIFICATION (Checklist Accuracy):
 | `/packages/infra/lib/config.ts`                          | `/packages/infra/lib/config.ts`                          | ✅     | Infrastructure configuration          |
 | `/packages/infra/lib/db-schema-stack.ts`                 | `/packages/infra/lib/db-schema-stack.ts`                 | ⬜     | Database schema management            |
 | `/packages/infra/lib/deployment-config-stack.ts`         | `/packages/infra/lib/deployment-config-stack.ts`         | ⬜     | Deployment configuration stack        |
-| `/packages/infra/lib/dynamodb-stack.ts`                  | `/packages/infra/lib/dynamodb-stack.ts`                  | ⬜     | DynamoDB infrastructure               |
+| `/packages/infra/lib/dynamodb-stack.ts`                  | `/packages/infra/lib/dynamodb-stack.ts`                  | ✅     | DynamoDB infrastructure               |
 | `/packages/infra/lib/environmentConfig.ts`               | `/packages/infra/lib/environmentConfig.ts`               | ✅     | Environment-specific configurations   |
-| `/packages/infra/lib/eventbridge-stack.ts`               | `/packages/infra/lib/eventbridge-stack.ts`               | ⬜     | EventBridge event routing             |
+| `/packages/infra/lib/eventbridge-stack.ts`               | `/packages/infra/lib/eventbridge-stack.ts`               | ✅     | EventBridge event routing             |
 | `/packages/infra/lib/frontend-cicd-stack.ts`             | `/packages/infra/lib/frontend-cicd-stack.ts`             | ⬜     | Frontend CI/CD pipeline               |
 | `/packages/infra/lib/frontend-service-stack.ts`          | `/packages/infra/lib/frontend-service-stack.ts`          | ⬜     | Frontend service infrastructure       |
 | `/packages/infra/lib/google-maps-stack.ts`               | `/packages/infra/lib/google-maps-stack.ts`               | ⬜     | Google Maps API integration           |
-| `/packages/infra/lib/import-stack.ts`                    | `/packages/infra/lib/import-stack.ts`                    | ⬜     | Data import infrastructure            |
+| `/packages/infra/lib/import-stack.ts`                    | `/packages/infra/lib/import-stack.ts`                    | ✅     | Data import infrastructure            |
 | `/packages/infra/lib/infrastructure-monitoring-stack.ts` | `/packages/infra/lib/infrastructure-monitoring-stack.ts` | ⬜     | Infrastructure monitoring setup       |
 | `/packages/infra/lib/lambda-stack.ts`                    | `/packages/infra/lib/lambda-stack.ts`                    | ⬜     | Lambda functions infrastructure       |
-| `/packages/infra/lib/logging-stack.ts`                   | `/packages/infra/lib/logging-stack.ts`                   | ⬜     | Centralized logging infrastructure    |
-| `/packages/infra/lib/monitoring-stack.ts`                | `/packages/infra/lib/monitoring-stack.ts`                | ⬜     | Application monitoring setup          |
+| `/packages/infra/lib/logging-stack.ts`                   | `/packages/infra/lib/logging-stack.ts`                   | ✅     | Centralized logging infrastructure    |
+| `/packages/infra/lib/monitoring-stack.ts`                | `/packages/infra/lib/monitoring-stack.ts`                | ✅     | Application monitoring setup          |
 | `/packages/infra/lib/networking-stack.ts`                | `/packages/infra/lib/networking-stack.ts`                | ✅     | VPC and networking infrastructure     |
 | `/packages/infra/lib/restaurant-event-driven-stack.ts`   | `/packages/infra/lib/restaurant-event-driven-stack.ts`   | ⬜     | Restaurant event processing           |
 | `/packages/infra/lib/review-event-driven-stack.ts`       | `/packages/infra/lib/review-event-driven-stack.ts`       | ⬜     | Review event processing               |
-| `/packages/infra/lib/secrets-stack.ts`                   | `/packages/infra/lib/secrets-stack.ts`                   | ⬜     | Secrets management infrastructure     |
-| `/packages/infra/lib/shared-resources-stack.ts`          | `/packages/infra/lib/shared-resources-stack.ts`          | ⬜     | Shared AWS resources                  |
-| `/packages/infra/lib/sqs-stack.ts`                       | `/packages/infra/lib/sqs-stack.ts`                       | ⬜     | SQS queue infrastructure              |
-| `/packages/infra/lib/ssm-stack.ts`                       | `/packages/infra/lib/ssm-stack.ts`                       | ⬜     | Systems Manager parameters            |
+| `/packages/infra/lib/secrets-stack.ts`                   | `/packages/infra/lib/secrets-stack.ts`                   | ✅     | Secrets management infrastructure     |
+| `/packages/infra/lib/shared-resources-stack.ts`          | `/packages/infra/lib/shared-resources-stack.ts`          | ✅     | Shared AWS resources                  |
+| `/packages/infra/lib/sqs-stack.ts`                       | `/packages/infra/lib/sqs-stack.ts`                       | ✅     | SQS queue infrastructure              |
+| `/packages/infra/lib/ssm-stack.ts`                       | `/packages/infra/lib/ssm-stack.ts`                       | ✅     | Systems Manager parameters            |
 | `/packages/infra/lib/types.ts`                           | `/packages/infra/lib/types.ts`                           | ✅     | Infrastructure type definitions       |
 | `/packages/infra/lib/typesense-service-stack.ts`         | `/packages/infra/lib/typesense-service-stack.ts`         | ⬜     | Typesense search service              |
 | `/packages/infra/lib/user-account-event-driven-stack.ts` | `/packages/infra/lib/user-account-event-driven-stack.ts` | ⬜     | User account event processing         |
