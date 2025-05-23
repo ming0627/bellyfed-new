@@ -30,8 +30,8 @@ const CollectionCard = memo(function CollectionCard({
             <Image
               src={collection.imageUrl}
               alt={collection.title}
-              layout="fill"
-              objectFit="cover"
+              fill
+              style={{ objectFit: 'cover' }}
               className="group-hover:scale-105 transition-transform duration-300"
               loading="lazy"
             />
