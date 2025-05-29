@@ -1,0 +1,12 @@
+This is a placeholder for the Typesense CI/CD architecture diagram.
+
+The diagram should include:
+1. GitHub Repository
+2. CodePipeline
+3. CodeBuild
+4. CloudFormation
+5. ECS Fargate
+6. Typesense Service
+7. Deployment flow between components
+
+Please create a diagram and save it as typesense-cicd-architecture.png in this directory.

@@ -1,9 +1,9 @@
 /**
  * RankingsTab Component
- * 
+ *
  * A component for displaying a user's dish rankings in their profile.
  * It shows a list of dishes the user has ranked, with filtering and sorting options.
- * 
+ *
  * Features:
  * - Display user's dish rankings
  * - Filter rankings by rank, cuisine, and search query
@@ -15,12 +15,12 @@
 import React, { useState, useCallback, useMemo, memo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { 
-  Star, 
-  Search, 
-  Filter, 
-  ChevronDown, 
-  ChevronUp, 
+import {
+  Star,
+  Search,
+  Filter,
+  ChevronDown,
+  ChevronUp,
   Loader2,
   Heart,
   ThumbsUp,
@@ -31,12 +31,11 @@ import {
   SortAsc,
   SortDesc
 } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
 import { useAuth } from '@bellyfed/hooks';
 
 /**
  * RankingsTab component
- * 
+ *
  * @param {Object} props - Component props
  * @param {Object} props.user - User data object
  * @param {Function} props.getCountryLink - Function to generate country-specific links
@@ -53,16 +52,16 @@ const RankingsTab = memo(function RankingsTab({
   const [filterCuisine, setFilterCuisine] = useState('all');
   const [sortBy, setSortBy] = useState('date');
   const [sortOrder, setSortOrder] = useState('desc');
-  
+
   // Get authentication state
   const { isAuthenticated, user: currentUser } = useAuth();
-  
+
   // Determine if this is the current user's profile
   const isCurrentUser = useMemo(() => {
     if (!isAuthenticated || !currentUser) return false;
     return currentUser.id === user.id;
   }, [isAuthenticated, currentUser, user.id]);
-  
+
   // Mock data for user rankings (in a real app, this would come from an API)
   const [rankings, setRankings] = useState([
     {
@@ -151,46 +150,46 @@ const RankingsTab = memo(function RankingsTab({
       updatedAt: '2023-05-15T18:30:00Z',
     },
   ]);
-  
+
   // Loading state
   const [isLoading, setIsLoading] = useState(false);
-  
+
   // Get unique cuisines from rankings
   const cuisines = useMemo(() => {
     const uniqueCuisines = new Set(rankings.map(ranking => ranking.cuisine));
     return ['all', ...Array.from(uniqueCuisines)];
   }, [rankings]);
-  
+
   // Handle search input change
   const handleSearchChange = useCallback((e) => {
     setSearchQuery(e.target.value);
   }, []);
-  
+
   // Handle filter toggle
   const handleFilterToggle = useCallback(() => {
     setFilterOpen(prev => !prev);
   }, []);
-  
+
   // Handle rank filter change
   const handleRankFilterChange = useCallback((rank) => {
     setFilterRank(rank);
   }, []);
-  
+
   // Handle cuisine filter change
   const handleCuisineFilterChange = useCallback((cuisine) => {
     setFilterCuisine(cuisine);
   }, []);
-  
+
   // Handle sort change
   const handleSortChange = useCallback((e) => {
     setSortBy(e.target.value);
   }, []);
-  
+
   // Handle sort order change
   const handleSortOrderChange = useCallback(() => {
     setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc');
   }, []);
-  
+
   // Clear all filters
   const clearFilters = useCallback(() => {
     setSearchQuery('');
@@ -199,7 +198,7 @@ const RankingsTab = memo(function RankingsTab({
     setSortBy('date');
     setSortOrder('desc');
   }, []);
-  
+
   // Format taste status for display
   const formatTasteStatus = useCallback((status) => {
     switch (status) {
@@ -215,7 +214,7 @@ const RankingsTab = memo(function RankingsTab({
         return { label: 'Not specified', icon: null, color: '' };
     }
   }, []);
-  
+
   // Filter and sort rankings
   const filteredAndSortedRankings = useMemo(() => {
     // First, filter rankings
@@ -226,7 +225,7 @@ const RankingsTab = memo(function RankingsTab({
         ranking.dishName.toLowerCase().includes(searchQuery.toLowerCase()) ||
         ranking.restaurantName.toLowerCase().includes(searchQuery.toLowerCase()) ||
         ranking.notes.toLowerCase().includes(searchQuery.toLowerCase());
-      
+
       // Rank filter
       const rankMatch =
         filterRank === 'all' ||
@@ -235,19 +234,19 @@ const RankingsTab = memo(function RankingsTab({
         (filterRank === '3' && ranking.rank === 3) ||
         (filterRank === '2' && ranking.rank === 2) ||
         (filterRank === '1' && ranking.rank === 1);
-      
+
       // Cuisine filter
       const cuisineMatch =
         filterCuisine === 'all' ||
         ranking.cuisine === filterCuisine;
-      
+
       return searchMatch && rankMatch && cuisineMatch;
     });
-    
+
     // Then, sort rankings
     return result.sort((a, b) => {
       const sortMultiplier = sortOrder === 'asc' ? 1 : -1;
-      
+
       switch (sortBy) {
         case 'date':
           return sortMultiplier * (new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
@@ -260,7 +259,7 @@ const RankingsTab = memo(function RankingsTab({
       }
     });
   }, [rankings, searchQuery, filterRank, filterCuisine, sortBy, sortOrder]);
-  
+
   // Check if any filters are active
   const hasActiveFilters = useMemo(() => {
     return (
@@ -275,23 +274,15 @@ const RankingsTab = memo(function RankingsTab({
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
       <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-        <LucideClientIcon
-          icon={Star}
-          className="w-5 h-5 mr-2 text-orange-500"
-          aria-hidden="true"
-        />
+        <Star className="w-5 h-5 mr-2 text-orange-500" aria-hidden="true" />
         {isCurrentUser ? 'Your Rankings' : `${user.name}'s Rankings`}
       </h3>
-      
+
       {/* Search and Filter Bar */}
       <div className="mb-6">
         {/* Search Input */}
         <div className="relative mb-4">
-          <LucideClientIcon
-            icon={Search}
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500"
-            aria-hidden="true"
-          />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500" aria-hidden="true" />
           <input
             type="text"
             placeholder="Search rankings..."
@@ -301,7 +292,7 @@ const RankingsTab = memo(function RankingsTab({
             aria-label="Search rankings"
           />
         </div>
-        
+
         {/* Sort and Filter Controls */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           {/* Sort Dropdown */}
@@ -319,21 +310,21 @@ const RankingsTab = memo(function RankingsTab({
               <option value="rank">Rank</option>
               <option value="name">Dish Name</option>
             </select>
-            
+
             <button
               type="button"
               onClick={handleSortOrderChange}
               className="ml-2 p-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
               aria-label={`Sort ${sortOrder === 'asc' ? 'ascending' : 'descending'}`}
             >
-              <LucideClientIcon
-                icon={sortOrder === 'asc' ? SortAsc : SortDesc}
-                className="w-5 h-5"
-                aria-hidden="true"
-              />
+              {sortOrder === 'asc' ? (
+                <SortAsc className="w-5 h-5" aria-hidden="true" />
+              ) : (
+                <SortDesc className="w-5 h-5" aria-hidden="true" />
+              )}
             </button>
           </div>
-          
+
           {/* Filter Toggle Button */}
           <button
             type="button"
@@ -342,25 +333,21 @@ const RankingsTab = memo(function RankingsTab({
             aria-expanded={filterOpen}
             aria-controls="filter-panel"
           >
-            <LucideClientIcon
-              icon={Filter}
-              className="w-4 h-4 mr-1"
-              aria-hidden="true"
-            />
+            <Filter className="w-4 h-4 mr-1" aria-hidden="true" />
             Filters
             {hasActiveFilters && (
               <span className="ml-2 px-2 py-0.5 bg-orange-500 text-white text-xs rounded-full">
                 {(filterRank !== 'all' ? 1 : 0) + (filterCuisine !== 'all' ? 1 : 0) + (searchQuery.trim() !== '' ? 1 : 0)}
               </span>
             )}
-            <LucideClientIcon
-              icon={filterOpen ? ChevronUp : ChevronDown}
-              className="w-4 h-4 ml-1"
-              aria-hidden="true"
-            />
+            {filterOpen ? (
+              <ChevronUp className="w-4 h-4 ml-1" aria-hidden="true" />
+            ) : (
+              <ChevronDown className="w-4 h-4 ml-1" aria-hidden="true" />
+            )}
           </button>
         </div>
-        
+
         {/* Filter Panel */}
         {filterOpen && (
           <div id="filter-panel" className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
@@ -396,13 +383,13 @@ const RankingsTab = memo(function RankingsTab({
                         onChange={() => handleRankFilterChange(rank.toString())}
                       />
                       <span className="text-sm text-gray-700 dark:text-gray-300 flex items-center">
-                        {rank} <LucideClientIcon icon={Star} className="w-3 h-3 ml-1 text-yellow-500" />
+                        {rank} <Star className="w-3 h-3 ml-1 text-yellow-500" />
                       </span>
                     </label>
                   ))}
                 </div>
               </div>
-              
+
               {/* Cuisine Filter */}
               <div>
                 <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -429,7 +416,7 @@ const RankingsTab = memo(function RankingsTab({
                 </div>
               </div>
             </div>
-            
+
             {/* Clear Filters Button */}
             {hasActiveFilters && (
               <div className="mt-4 flex justify-end">
@@ -445,21 +432,17 @@ const RankingsTab = memo(function RankingsTab({
           </div>
         )}
       </div>
-      
+
       {/* Rankings List */}
       {isLoading ? (
         <div className="flex justify-center items-center py-12">
-          <LucideClientIcon
-            icon={Loader2}
-            className="w-8 h-8 animate-spin text-orange-500"
-            aria-label="Loading rankings"
-          />
+          <Loader2 className="w-8 h-8 animate-spin text-orange-500" aria-label="Loading rankings" />
         </div>
       ) : filteredAndSortedRankings.length > 0 ? (
         <div className="space-y-6">
           {filteredAndSortedRankings.map(ranking => {
             const tasteStatusDisplay = formatTasteStatus(ranking.tasteStatus);
-            
+
             return (
               <div
                 key={ranking.id}
@@ -477,7 +460,7 @@ const RankingsTab = memo(function RankingsTab({
                       />
                     </div>
                   </div>
-                  
+
                   {/* Ranking Details */}
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-2">
@@ -487,14 +470,14 @@ const RankingsTab = memo(function RankingsTab({
                       >
                         {ranking.dishName}
                       </Link>
-                      
+
                       <div className="flex items-center">
                         <div className="flex items-center justify-center w-8 h-8 bg-orange-500 text-white rounded-full font-bold">
                           {ranking.rank}
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center mb-2 text-sm text-gray-600 dark:text-gray-400">
                       <Link
                         href={getCountryLink(`/restaurant/${ranking.restaurantId}`)}
@@ -507,25 +490,22 @@ const RankingsTab = memo(function RankingsTab({
                       <span className="mx-2">•</span>
                       <span>{ranking.restaurantLocation}</span>
                     </div>
-                    
+
                     {tasteStatusDisplay.icon && (
                       <div className="flex items-center mb-2">
-                        <LucideClientIcon
-                          icon={tasteStatusDisplay.icon}
-                          className={`w-4 h-4 mr-1 ${tasteStatusDisplay.color}`}
-                        />
+                        <tasteStatusDisplay.icon className={`w-4 h-4 mr-1 ${tasteStatusDisplay.color}`} />
                         <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                           {tasteStatusDisplay.label}
                         </span>
                       </div>
                     )}
-                    
+
                     {ranking.notes && (
                       <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
                         {ranking.notes}
                       </p>
                     )}
-                    
+
                     {ranking.photoUrls && ranking.photoUrls.length > 0 && (
                       <div className="grid grid-cols-3 gap-2 mb-3">
                         {ranking.photoUrls.map((url, index) => (
@@ -542,13 +522,9 @@ const RankingsTab = memo(function RankingsTab({
                         ))}
                       </div>
                     )}
-                    
+
                     <div className="flex items-center text-xs text-gray-500 dark:text-gray-400">
-                      <LucideClientIcon
-                        icon={Clock}
-                        className="w-3 h-3 mr-1"
-                        aria-hidden="true"
-                      />
+                      <Clock className="w-3 h-3 mr-1" aria-hidden="true" />
                       <span>
                         {new Date(ranking.updatedAt).toLocaleDateString(undefined, {
                           year: 'numeric',
@@ -566,11 +542,7 @@ const RankingsTab = memo(function RankingsTab({
       ) : (
         <div className="text-center py-12">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 mb-4">
-            <LucideClientIcon
-              icon={Utensils}
-              className="w-8 h-8 text-gray-400 dark:text-gray-500"
-              aria-hidden="true"
-            />
+            <Utensils className="w-8 h-8 text-gray-400 dark:text-gray-500" aria-hidden="true" />
           </div>
           <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
             No Rankings Found

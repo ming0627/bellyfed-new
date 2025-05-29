@@ -3,8 +3,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
 import { Star, Loader2 } from 'lucide-react';
-import { LucideClientIcon } from '../../ui/lucide-icon.js';
-
 // Mock data for similar restaurants
 const mockSimilarRestaurants = [
   {
@@ -90,11 +88,7 @@ const SimilarRestaurantItem = memo(function SimilarRestaurantItem({
 
         <div className="flex items-center mt-1">
           <div className="flex items-center text-yellow-500 mr-2">
-            <LucideClientIcon
-              icon={Star}
-              className="w-4 h-4 fill-current"
-              aria-hidden="true"
-            />
+            <Star className="w-4 h-4 fill-current" aria-hidden="true" />
             <span className="ml-1 text-xs font-medium">
               {restaurant.rating?.toFixed(1) || 'N/A'}
             </span>
@@ -164,11 +158,7 @@ const SimilarRestaurants = memo(function SimilarRestaurants({
 
       {isLoading ? (
         <div className="flex items-center justify-center py-6">
-          <LucideClientIcon
-            icon={Loader2}
-            className="w-6 h-6 animate-spin text-orange-500"
-            aria-label="Loading similar restaurants"
-          />
+          <Loader2 className="w-6 h-6 animate-spin text-orange-500" aria-label="Loading similar restaurants" />
         </div>
       ) : (
         <div className="space-y-2">

@@ -1,0 +1,42 @@
+[
+    {
+        "name": "NODE_ENV",
+        "value": "production"
+    },
+    {
+        "name": "ENVIRONMENT",
+        "value": "dev"
+    },
+    {
+        "name": "REGION",
+        "value": "ap-southeast-1"
+    },
+    {
+        "name": "SITE_DOMAIN_NAME",
+        "value": "app-dev.bellyfed.com"
+    },
+    {
+        "name": "API_ENV",
+        "value": "dev"
+    },
+    {
+        "name": "USE_AWS_API",
+        "value": "true"
+    },
+    {
+        "name": "NEXT_PUBLIC_AWS_REGION",
+        "value": "ap-southeast-1"
+    },
+    {
+        "name": "NEXT_PUBLIC_USER_POOL_ID",
+        "value": "ap-southeast-1_xlU9zwY43"
+    },
+    {
+        "name": "NEXT_PUBLIC_COGNITO_CLIENT_ID",
+        "value": "3mgtmhl7vb3jgbhkrmeqjdc8m2"
+    },
+    {
+        "name": "NEXT_PUBLIC_IDENTITY_POOL_ID",
+        "value": "ap-southeast-1:3e766100-a33d-4a19-86a0-1bc454097932"
+    }
+]

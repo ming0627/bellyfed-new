@@ -1,8 +1,6 @@
 import React, { useState, memo } from 'react';
 import Image from 'next/image';
 import { User, Mail, Lock, Camera, X, Save } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
-
 /**
  * AccountSettings component for managing user account settings
  *
@@ -168,10 +166,8 @@ const AccountSettings = memo(function AccountSettings({ user, onSave }) {
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
-                    <LucideClientIcon
-                      icon={User}
-                      className="w-12 h-12 text-gray-400 dark:text-gray-500"
-                    />
+                    <UserclassName="w-12 h-12 text-gray-400 dark:text-gray-500"
+                     />
                   </div>
                 )}
               </div>
@@ -182,16 +178,14 @@ const AccountSettings = memo(function AccountSettings({ user, onSave }) {
                   className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1"
                   aria-label="Remove profile picture"
                 >
-                  <LucideClientIcon icon={X} className="w-4 h-4" />
+                  <XclassName="w-4 h-4"  />
                 </button>
               )}
             </div>
             <div className="ml-6">
               <label className="px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors cursor-pointer">
-                <LucideClientIcon
-                  icon={Camera}
-                  className="w-5 h-5 inline-block mr-2"
-                />
+                <CameraclassName="w-5 h-5 inline-block mr-2"
+                 />
                 Upload Photo
                 <input
                   type="file"
@@ -224,10 +218,8 @@ const AccountSettings = memo(function AccountSettings({ user, onSave }) {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <LucideClientIcon
-                    icon={User}
-                    className="w-5 h-5 text-gray-400 dark:text-gray-500"
-                  />
+                  <UserclassName="w-5 h-5 text-gray-400 dark:text-gray-500"
+                   />
                 </div>
                 <input
                   type="text"
@@ -256,10 +248,8 @@ const AccountSettings = memo(function AccountSettings({ user, onSave }) {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <LucideClientIcon
-                    icon={Mail}
-                    className="w-5 h-5 text-gray-400 dark:text-gray-500"
-                  />
+                  <MailclassName="w-5 h-5 text-gray-400 dark:text-gray-500"
+                   />
                 </div>
                 <input
                   type="email"
@@ -345,10 +335,8 @@ const AccountSettings = memo(function AccountSettings({ user, onSave }) {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <LucideClientIcon
-                    icon={Lock}
-                    className="w-5 h-5 text-gray-400 dark:text-gray-500"
-                  />
+                  <LockclassName="w-5 h-5 text-gray-400 dark:text-gray-500"
+                   />
                 </div>
                 <input
                   type="password"
@@ -377,10 +365,8 @@ const AccountSettings = memo(function AccountSettings({ user, onSave }) {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <LucideClientIcon
-                    icon={Lock}
-                    className="w-5 h-5 text-gray-400 dark:text-gray-500"
-                  />
+                  <LockclassName="w-5 h-5 text-gray-400 dark:text-gray-500"
+                   />
                 </div>
                 <input
                   type="password"
@@ -409,10 +395,8 @@ const AccountSettings = memo(function AccountSettings({ user, onSave }) {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <LucideClientIcon
-                    icon={Lock}
-                    className="w-5 h-5 text-gray-400 dark:text-gray-500"
-                  />
+                  <LockclassName="w-5 h-5 text-gray-400 dark:text-gray-500"
+                   />
                 </div>
                 <input
                   type="password"
@@ -460,7 +444,7 @@ const AccountSettings = memo(function AccountSettings({ user, onSave }) {
               isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
             }`}
           >
-            <LucideClientIcon icon={Save} className="w-5 h-5 mr-2" />
+            <SaveclassName="w-5 h-5 mr-2"  />
             {isSubmitting ? 'Saving...' : 'Save Changes'}
           </button>
         </div>

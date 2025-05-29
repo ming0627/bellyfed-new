@@ -1,7 +1,5 @@
 import React, { useState, useEffect, memo } from 'react';
 import { ChevronDown, ChevronUp, X } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
-
 /**
  * FilterSection component for displaying a collapsible filter section
  *
@@ -33,11 +31,9 @@ const FilterSection = memo(function FilterSection({
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
           {title}
         </h3>
-        <LucideClientIcon
-          icon={isExpanded ? ChevronUp : ChevronDown}
-          className="w-5 h-5 text-gray-500 dark:text-gray-400"
+        <isExpanded ? ChevronUp : ChevronDownclassName="w-5 h-5 text-gray-500 dark:text-gray-400"
           aria-hidden="true"
-        />
+         />
       </button>
 
       {isExpanded && <div className="mt-4">{children}</div>}
@@ -195,7 +191,7 @@ const SearchFilters = memo(function SearchFilters({ onFilterChange }) {
                       className="ml-1 text-orange-800 dark:text-orange-200 hover:text-orange-900 dark:hover:text-orange-100"
                       aria-label={`Remove ${item} filter`}
                     >
-                      <LucideClientIcon icon={X} className="w-3 h-3" />
+                      <XclassName="w-3 h-3"  />
                     </button>
                   </div>
                 ));
@@ -222,7 +218,7 @@ const SearchFilters = memo(function SearchFilters({ onFilterChange }) {
                       className="ml-1 text-orange-800 dark:text-orange-200 hover:text-orange-900 dark:hover:text-orange-100"
                       aria-label={`Remove ${label} filter`}
                     >
-                      <LucideClientIcon icon={X} className="w-3 h-3" />
+                      <XclassName="w-3 h-3"  />
                     </button>
                   </div>
                 );

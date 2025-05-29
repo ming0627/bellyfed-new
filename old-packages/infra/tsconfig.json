@@ -1,0 +1,32 @@
+{
+    "extends": "@repo/typescript-config/base.json",
+    "compilerOptions": {
+        "target": "ES2022",
+        "module": "NodeNext",
+        "lib": ["es2022", "dom"],
+        "declaration": true,
+        "experimentalDecorators": true,
+        "strictPropertyInitialization": false, // Needed for CDK constructs
+        "inlineSourceMap": true,
+        "inlineSources": true,
+        "typeRoots": ["./node_modules/@types"],
+        "types": [],
+        "outDir": "./dist",
+        "allowSyntheticDefaultImports": true,
+        "skipLibCheck": false, // Check third-party libraries
+
+        /* Path Mapping */
+        "baseUrl": "./",
+        "paths": {
+            "@layers/utils/*": ["src/layers/utils/nodejs/*"],
+            "@layers/middleware/*": ["src/layers/middleware/nodejs/*"],
+            "@infra/utils/*": ["src/layers/utils/nodejs/*"],
+            "@infra/middleware/*": ["src/layers/middleware/nodejs/middlewares/*"],
+            "@infra/lib/*": ["lib/*"],
+            "@infra/functions/*": ["functions/*"],
+            "@infra/config": ["lib/config.ts"]
+        }
+    },
+    "include": ["src/**/*", "lib/**/*", "layers/**/*", "functions/**/*"],
+    "exclude": ["node_modules", "cdk.out", "dist"]
+}

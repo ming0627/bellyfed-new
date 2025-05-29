@@ -1,106 +1,15 @@
 import React, { memo, useMemo } from 'react';
 import Link from 'next/link';
-import Image from 'next/image'; // Import Next.js Image
-import { Utensils, Star, ArrowRight } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
+import { Utensils, ArrowRight } from 'lucide-react';
+import DishCard from '../dishes/DishCard.js';
 
-/**
- * Dish card component for displaying individual dish information
- *
- * @param {Object} props - Component props
- * @param {Object} props.dish - Dish data object
- * @returns {JSX.Element} - Rendered component
- */
-const DishCard = memo(function DishCard({ dish }) {
-  if (!dish) return null;
-
-  return (
-    <div
-      className="group bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-white/20 hover:border-primary-200/50 transform hover:-translate-y-1"
-      data-testid={`dish-card-${dish.id}`}
-    >
-      <div className="relative h-48 overflow-hidden">
-        {dish.imageUrl ? (
-          <Image
-            src={dish.imageUrl}
-            alt={dish.name}
-            fill
-            style={{ objectFit: 'cover' }}
-            loading="lazy"
-            className="group-hover:scale-110 transition-transform duration-500"
-          />
-        ) : (
-          <div className="w-full h-full bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center">
-            <LucideClientIcon
-              icon={Utensils}
-              className="w-12 h-12 text-primary-400"
-            />
-          </div>
-        )}
-
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-        {/* Price Badge */}
-        {dish.price && (
-          <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-sm font-bold text-gray-800 shadow-lg">
-            {dish.price}
-          </div>
-        )}
-
-        {/* Rating Badge */}
-        <div className="absolute top-4 left-4 flex items-center space-x-1 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 shadow-lg">
-          <LucideClientIcon
-            icon={Star}
-            className="w-4 h-4 text-yellow-400 fill-current"
-          />
-          <span className="text-sm font-bold text-gray-800">
-            {dish.rating.toFixed(1)}
-          </span>
-        </div>
-      </div>
-
-      <div className="p-6">
-        <h3 className="font-heading font-bold text-neutral-900 mb-2 text-lg group-hover:text-primary-600 transition-colors">
-          {dish.name}
-        </h3>
-        <p className="text-neutral-700 mb-4 font-medium">{dish.restaurant}</p>
-
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <div className="flex items-center space-x-1">
-              <LucideClientIcon
-                icon={Star}
-                className="w-4 h-4 text-yellow-400 fill-current"
-              />
-              <span className="font-bold text-neutral-900">
-                {dish.rating.toFixed(1)}
-              </span>
-            </div>
-            <span className="text-neutral-500 text-sm">
-              ({dish.reviewCount.toLocaleString()} reviews)
-            </span>
-          </div>
-
-          <div className="flex items-center space-x-1 text-primary-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span className="text-sm font-medium">View Details</span>
-            <LucideClientIcon
-              icon={ArrowRight}
-              className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-200"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-});
 
 /**
  * TopRatedDishes component displays a grid of top-rated dishes
  *
  * @returns {JSX.Element} - Rendered component
  */
-export const TopRatedDishes = memo(function TopRatedDishes() {
+const TopRatedDishes = memo(function TopRatedDishes() {
   // Mock data for top rated dishes - in a real app, this would come from props or an API
   const topDishes = useMemo(
     () => [
@@ -158,9 +67,8 @@ export const TopRatedDishes = memo(function TopRatedDishes() {
       {/* Enhanced Header */}
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center space-x-3">
-          <div className="p-3 bg-gradient-primary rounded-xl shadow-lg">
-            <LucideClientIcon
-              icon={Utensils}
+          <div className="p-3 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl shadow-lg">
+            <Utensils
               className="w-6 h-6 text-white"
               aria-hidden="true"
             />
@@ -168,26 +76,25 @@ export const TopRatedDishes = memo(function TopRatedDishes() {
           <div>
             <h2
               id="top-dishes-heading"
-              className="font-heading text-2xl font-bold text-neutral-900"
+              className="text-2xl font-bold text-gray-900"
             >
               Top Rated Dishes
             </h2>
-            <p className="text-neutral-700 text-sm">
+            <p className="text-gray-700 text-sm">
               Discover the most loved dishes in your area
             </p>
           </div>
         </div>
         <Link
           href="/dish-restaurants"
-          className="group flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-xl border border-primary-200 hover:border-primary-300 hover:bg-primary-50 transition-all duration-300 shadow-sm hover:shadow-md"
+          className="group flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-xl border border-orange-200 hover:border-orange-300 hover:bg-orange-50 transition-all duration-300 shadow-sm hover:shadow-md"
           aria-label="View all top rated dishes"
         >
-          <span className="text-sm font-medium text-neutral-700 group-hover:text-primary-600">
+          <span className="text-sm font-medium text-gray-700 group-hover:text-orange-600">
             View All
           </span>
-          <LucideClientIcon
-            icon={ArrowRight}
-            className="w-4 h-4 text-neutral-400 group-hover:text-primary-500 group-hover:translate-x-1 transition-all duration-200"
+          <ArrowRight
+            className="w-4 h-4 text-gray-400 group-hover:text-orange-500 group-hover:translate-x-1 transition-all duration-200"
             aria-hidden="true"
           />
         </Link>
@@ -202,5 +109,4 @@ export const TopRatedDishes = memo(function TopRatedDishes() {
   );
 });
 
-// Default export for easier imports
 export default TopRatedDishes;

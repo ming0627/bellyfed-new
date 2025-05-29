@@ -1,0 +1,10 @@
+Place all Next.js application code in bellyfed/, including pages, components, API routes, and Dockerfile.
+Place all infrastructure-as-code in bellyfed-infra/, including CDK/Terraform stacks, pipeline definitions, and IAM configurations.
+Put UI, styles, and React/Next.js code only under bellyfed/.
+Put cloud, CDK, Terraform, pipeline, VPC, ECS, IAM, and SSM changes only under bellyfed-infra/.
+Assume bellyfed-infra/ for any request mentioning “stack,” “pipeline,” “cloud,” “CDK,” or “Terraform.”
+Assume bellyfed/ for any request mentioning “page,” “component,” “UI,” “styles,” “hook,” or “API route.”
+Ask “Should this change go in bellyfed/ or bellyfed-infra/?” if the correct location is unclear.
+Always prefix file paths with bellyfed/... or bellyfed-infra/... when referring to code locations.
+Never generate React/Next.js code in bellyfed-infra/ or CDK/Terraform code in bellyfed/.
+After generating code, confirm exactly where you added or modified files (e.g. “Added foo.ts in bellyfed/src/pages/...”).

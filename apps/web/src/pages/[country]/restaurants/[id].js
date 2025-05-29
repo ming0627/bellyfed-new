@@ -10,7 +10,7 @@ import RestaurantReviews from '../../../components/restaurants/detail/Restaurant
 import RestaurantLocation from '../../../components/restaurants/detail/RestaurantLocation.js';
 import SimilarRestaurants from '../../../components/restaurants/detail/SimilarRestaurants.js';
 import { useCountry } from '../../../contexts/index.js';
-import { LucideClientIcon } from '../../../components/ui/lucide-icon.js';
+
 
 // Mock restaurant data - in a real app, this would come from an API
 import { mockRestaurantDetail } from '../../../data/mockRestaurantDetail.js';
@@ -60,11 +60,7 @@ export default function RestaurantDetailPage() {
         description="Loading restaurant details"
       >
         <div className="flex items-center justify-center min-h-screen">
-          <LucideClientIcon
-            icon={Loader2}
-            className="w-8 h-8 animate-spin text-orange-500"
-            aria-label="Loading restaurant details"
-          />
+          <Loader2 className="w-8 h-8 animate-spin text-orange-500" aria-label="Loading restaurant details" />
         </div>
       </Layout>
     );

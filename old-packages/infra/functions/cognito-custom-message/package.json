@@ -1,0 +1,25 @@
+{
+    "name": "cognito-custom-message",
+    "version": "1.0.0",
+    "description": "Lambda function for customizing Cognito email messages",
+    "main": "dist/index.js",
+    "scripts": {
+        "build": "npm run type-check && esbuild src/index.ts --bundle --platform=node --target=node20 --outfile=dist/index.js --alias:@utils=../../src/layers/utils/nodejs --alias:@middlewares=../../src/layers/middleware/nodejs/middlewares --alias:@infra/utils=../../src/layers/utils/nodejs --alias:@infra/middleware=../../src/layers/middleware/nodejs/middlewares --alias:@infra/lib=../../lib --alias:@infra/config=../../lib/config.ts --format=cjs",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
+        "type-check": "tsc --noEmit",
+        "lint:strict": "eslint . --max-warnings=0"
+    },
+    "dependencies": {
+        "@aws-sdk/client-sqs": "^3.410.0",
+        "uuid": "^9.0.0"
+    },
+    "devDependencies": {
+        "@types/aws-lambda": "^8.10.119",
+        "@types/node": "^20.4.2",
+        "@types/uuid": "^9.0.2",
+        "typescript": "^5.1.6"
+    },
+    "type": "module"
+}

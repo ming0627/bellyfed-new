@@ -1,7 +1,6 @@
 import React, { useState, useCallback, memo } from 'react';
 import Image from 'next/image';
 import { MapPin, Star, Filter, ChevronDown, ChevronUp } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
 import Link from 'next/link';
 
 /**
@@ -129,17 +128,13 @@ const NearbyRestaurants = memo(function NearbyRestaurants({
               aria-expanded={filterOpen}
               aria-controls="filter-panel"
             >
-              <LucideClientIcon
-                icon={Filter}
-                className="w-4 h-4 mr-2"
+              <FilterclassName="w-4 h-4 mr-2"
                 aria-hidden="true"
-              />
+               />
               Filter
-              <LucideClientIcon
-                icon={filterOpen ? ChevronUp : ChevronDown}
-                className="w-4 h-4 ml-2"
+              <filterOpen ? ChevronUp : ChevronDownclassName="w-4 h-4 ml-2"
                 aria-hidden="true"
-              />
+               />
             </button>
           </div>
         </div>
@@ -298,11 +293,9 @@ const NearbyRestaurants = memo(function NearbyRestaurants({
 
                       <div className="flex items-center mt-1">
                         <div className="flex items-center">
-                          <LucideClientIcon
-                            icon={Star}
-                            className="w-4 h-4 text-yellow-400"
+                          <StarclassName="w-4 h-4 text-yellow-400"
                             aria-hidden="true"
-                          />
+                           />
                           <span className="ml-1 text-sm text-gray-700 dark:text-gray-300">
                             {restaurant.rating.toFixed(1)}
                           </span>
@@ -323,11 +316,9 @@ const NearbyRestaurants = memo(function NearbyRestaurants({
                     </div>
 
                     <div className="flex items-center text-sm">
-                      <LucideClientIcon
-                        icon={MapPin}
-                        className="w-4 h-4 text-orange-500 mr-1"
+                      <MapPinclassName="w-4 h-4 text-orange-500 mr-1"
                         aria-hidden="true"
-                      />
+                       />
                       <span className="text-gray-600 dark:text-gray-400">
                         {restaurant.distance}
                       </span>

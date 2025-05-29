@@ -5,7 +5,7 @@ import { Loader2 } from 'lucide-react';
 import Layout from '../../../../components/layout/Layout.js';
 import ReviewForm from '../../../../components/reviews/ReviewForm.js';
 import { useCountry } from '../../../../contexts/index.js';
-import { LucideClientIcon } from '../../../../components/ui/lucide-icon.js';
+
 
 // Mock data for restaurant and dish
 const mockRestaurantData = {
@@ -104,11 +104,7 @@ export default function ReviewSubmissionPage() {
       <Layout title="Submit Review" description="Share your dining experience">
         <div className="container mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex items-center justify-center min-h-[60vh]">
-            <LucideClientIcon
-              icon={Loader2}
-              className="w-8 h-8 animate-spin text-orange-500"
-              aria-label="Loading"
-            />
+            <Loader2 className="w-8 h-8 animate-spin text-orange-500" aria-label="Loading" />
           </div>
         </div>
       </Layout>

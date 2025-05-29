@@ -1,0 +1,96 @@
+{
+    "family": "bellyfed-dev-service",
+    "containerDefinitions": [
+        {
+            "name": "bellyfed-dev-container",
+            "image": "590184067494.dkr.ecr.ap-southeast-1.amazonaws.com/bellyfed-dev-frontend@sha256:50790eb532c98d4395c2b7e9801e46eb798a52089f089d4994c27ea309728f66",
+            "cpu": 256,
+            "memory": 512,
+            "links": [],
+            "portMappings": [
+                {
+                    "containerPort": 3000,
+                    "hostPort": 3000,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "entryPoint": [],
+            "command": [],
+            "environment": [
+                {
+                    "name": "COGNITO_IDENTITY_POOL_ID",
+                    "value": "ap-southeast-1:3e766100-a33d-4a19-86a0-1bc454097932"
+                },
+                {
+                    "name": "API_URL",
+                    "value": "https://api-dev.bellyfed.com"
+                },
+                {
+                    "name": "NEXT_PUBLIC_USER_POOL_ID",
+                    "value": "ap-southeast-1_sG2Gcgi8L"
+                },
+                {
+                    "name": "NEXT_PUBLIC_COGNITO_CLIENT_ID",
+                    "value": "5nmsc0hogt2pj3qv7785oh7qb8"
+                },
+                {
+                    "name": "REGION",
+                    "value": "ap-southeast-1"
+                },
+                {
+                    "name": "ENVIRONMENT",
+                    "value": "dev"
+                }
+            ],
+            "environmentFiles": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "secrets": [
+                {
+                    "name": "GOOGLE_MAPS_API_KEY",
+                    "valueFrom": "arn:aws:secretsmanager:ap-southeast-1:590184067494:secret:bellyfed-dev-app-secrets-Oq2EaU:GOOGLE_MAPS_API_KEY::"
+                },
+                {
+                    "name": "JWT_SECRET",
+                    "valueFrom": "arn:aws:secretsmanager:ap-southeast-1:590184067494:secret:bellyfed-dev-app-secrets-Oq2EaU:JWT_SECRET::"
+                }
+            ],
+            "dnsServers": [],
+            "dnsSearchDomains": [],
+            "extraHosts": [],
+            "dockerSecurityOptions": [],
+            "dockerLabels": {},
+            "ulimits": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/aws/ecs/bellyfed-dev",
+                    "awslogs-region": "ap-southeast-1",
+                    "awslogs-stream-prefix": "bellyfed-dev-container"
+                },
+                "secretOptions": []
+            },
+            "healthCheck": {
+                "command": [
+                    "CMD-SHELL",
+                    "curl -f -H \"X-Health-Check-Token: bellyfed-health-check-token\" http://localhost:3000/api/health || exit 1"
+                ],
+                "interval": 30,
+                "timeout": 5,
+                "retries": 3,
+                "startPeriod": 60
+            },
+            "systemControls": [],
+            "credentialSpecs": []
+        }
+    ],
+    "taskRoleArn": "arn:aws:iam::590184067494:role/bellyfed-dev-task-role",
+    "executionRoleArn": "arn:aws:iam::590184067494:role/bellyfed-dev-execution-role",
+    "networkMode": "awsvpc",
+    "volumes": [],
+    "placementConstraints": [],
+    "requiresCompatibilities": ["FARGATE"],
+    "cpu": "256",
+    "memory": "512"
+}

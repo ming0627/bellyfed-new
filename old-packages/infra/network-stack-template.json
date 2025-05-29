@@ -1,0 +1,602 @@
+{
+    "Resources": {
+        "ServerlessVpcdev2C622B8D": {
+            "Type": "AWS::EC2::VPC",
+            "Properties": {
+                "CidrBlock": "10.0.0.0/16",
+                "EnableDnsHostnames": true,
+                "EnableDnsSupport": true,
+                "InstanceTenancy": "default",
+                "Tags": [
+                    {
+                        "Key": "CloudFormationStack",
+                        "Value": "BellyfedNetworkStack-dev"
+                    },
+                    {
+                        "Key": "Environment",
+                        "Value": "dev"
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": "BellyfedNetworkStack-dev/ServerlessVpc-dev"
+                    },
+                    {
+                        "Key": "Region",
+                        "Value": "ap-southeast-1"
+                    },
+                    {
+                        "Key": "Repository",
+                        "Value": "bellyfed-infra"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "BellyfedNetworkStack-dev/ServerlessVpc-dev/Resource"
+            }
+        },
+        "ServerlessVpcdevPublicSubnetdevSubnet1Subnet4A44E6BA": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "AvailabilityZone": "ap-southeast-1a",
+                "CidrBlock": "10.0.0.0/24",
+                "MapPublicIpOnLaunch": true,
+                "Tags": [
+                    {
+                        "Key": "aws-cdk:subnet-name",
+                        "Value": "PublicSubnet-dev"
+                    },
+                    {
+                        "Key": "aws-cdk:subnet-type",
+                        "Value": "Public"
+                    },
+                    {
+                        "Key": "CloudFormationStack",
+                        "Value": "BellyfedNetworkStack-dev"
+                    },
+                    {
+                        "Key": "Environment",
+                        "Value": "dev"
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": "BellyfedNetworkStack-dev/ServerlessVpc-dev/PublicSubnet-devSubnet1"
+                    },
+                    {
+                        "Key": "Region",
+                        "Value": "ap-southeast-1"
+                    },
+                    {
+                        "Key": "Repository",
+                        "Value": "bellyfed-infra"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "ServerlessVpcdev2C622B8D"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "BellyfedNetworkStack-dev/ServerlessVpc-dev/PublicSubnet-devSubnet1/Subnet"
+            }
+        },
+        "ServerlessVpcdevPublicSubnetdevSubnet1RouteTable410739FA": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "CloudFormationStack",
+                        "Value": "BellyfedNetworkStack-dev"
+                    },
+                    {
+                        "Key": "Environment",
+                        "Value": "dev"
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": "BellyfedNetworkStack-dev/ServerlessVpc-dev/PublicSubnet-devSubnet1"
+                    },
+                    {
+                        "Key": "Region",
+                        "Value": "ap-southeast-1"
+                    },
+                    {
+                        "Key": "Repository",
+                        "Value": "bellyfed-infra"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "ServerlessVpcdev2C622B8D"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "BellyfedNetworkStack-dev/ServerlessVpc-dev/PublicSubnet-devSubnet1/RouteTable"
+            }
+        },
+        "ServerlessVpcdevPublicSubnetdevSubnet1RouteTableAssociationFA43047D": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "ServerlessVpcdevPublicSubnetdevSubnet1RouteTable410739FA"
+                },
+                "SubnetId": {
+                    "Ref": "ServerlessVpcdevPublicSubnetdevSubnet1Subnet4A44E6BA"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "BellyfedNetworkStack-dev/ServerlessVpc-dev/PublicSubnet-devSubnet1/RouteTableAssociation"
+            }
+        },
+        "ServerlessVpcdevPublicSubnetdevSubnet1DefaultRoute97E3BB73": {
+            "Type": "AWS::EC2::Route",
+            "Properties": {
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "GatewayId": {
+                    "Ref": "ServerlessVpcdevIGW0A685A64"
+                },
+                "RouteTableId": {
+                    "Ref": "ServerlessVpcdevPublicSubnetdevSubnet1RouteTable410739FA"
+                }
+            },
+            "DependsOn": ["ServerlessVpcdevVPCGW7A150BA1"],
+            "Metadata": {
+                "aws:cdk:path": "BellyfedNetworkStack-dev/ServerlessVpc-dev/PublicSubnet-devSubnet1/DefaultRoute"
+            }
+        },
+        "ServerlessVpcdevPublicSubnetdevSubnet2Subnet7D128F5C": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "AvailabilityZone": "ap-southeast-1b",
+                "CidrBlock": "10.0.1.0/24",
+                "MapPublicIpOnLaunch": true,
+                "Tags": [
+                    {
+                        "Key": "aws-cdk:subnet-name",
+                        "Value": "PublicSubnet-dev"
+                    },
+                    {
+                        "Key": "aws-cdk:subnet-type",
+                        "Value": "Public"
+                    },
+                    {
+                        "Key": "CloudFormationStack",
+                        "Value": "BellyfedNetworkStack-dev"
+                    },
+                    {
+                        "Key": "Environment",
+                        "Value": "dev"
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": "BellyfedNetworkStack-dev/ServerlessVpc-dev/PublicSubnet-devSubnet2"
+                    },
+                    {
+                        "Key": "Region",
+                        "Value": "ap-southeast-1"
+                    },
+                    {
+                        "Key": "Repository",
+                        "Value": "bellyfed-infra"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "ServerlessVpcdev2C622B8D"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "BellyfedNetworkStack-dev/ServerlessVpc-dev/PublicSubnet-devSubnet2/Subnet"
+            }
+        },
+        "ServerlessVpcdevPublicSubnetdevSubnet2RouteTable8AEBA93F": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "CloudFormationStack",
+                        "Value": "BellyfedNetworkStack-dev"
+                    },
+                    {
+                        "Key": "Environment",
+                        "Value": "dev"
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": "BellyfedNetworkStack-dev/ServerlessVpc-dev/PublicSubnet-devSubnet2"
+                    },
+                    {
+                        "Key": "Region",
+                        "Value": "ap-southeast-1"
+                    },
+                    {
+                        "Key": "Repository",
+                        "Value": "bellyfed-infra"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "ServerlessVpcdev2C622B8D"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "BellyfedNetworkStack-dev/ServerlessVpc-dev/PublicSubnet-devSubnet2/RouteTable"
+            }
+        },
+        "ServerlessVpcdevPublicSubnetdevSubnet2RouteTableAssociation34E5D38A": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "ServerlessVpcdevPublicSubnetdevSubnet2RouteTable8AEBA93F"
+                },
+                "SubnetId": {
+                    "Ref": "ServerlessVpcdevPublicSubnetdevSubnet2Subnet7D128F5C"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "BellyfedNetworkStack-dev/ServerlessVpc-dev/PublicSubnet-devSubnet2/RouteTableAssociation"
+            }
+        },
+        "ServerlessVpcdevPublicSubnetdevSubnet2DefaultRouteE7B4DA0B": {
+            "Type": "AWS::EC2::Route",
+            "Properties": {
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "GatewayId": {
+                    "Ref": "ServerlessVpcdevIGW0A685A64"
+                },
+                "RouteTableId": {
+                    "Ref": "ServerlessVpcdevPublicSubnetdevSubnet2RouteTable8AEBA93F"
+                }
+            },
+            "DependsOn": ["ServerlessVpcdevVPCGW7A150BA1"],
+            "Metadata": {
+                "aws:cdk:path": "BellyfedNetworkStack-dev/ServerlessVpc-dev/PublicSubnet-devSubnet2/DefaultRoute"
+            }
+        },
+        "ServerlessVpcdevIsolatedSubnetdevSubnet1Subnet08BBF32A": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "AvailabilityZone": "ap-southeast-1a",
+                "CidrBlock": "10.0.2.0/24",
+                "MapPublicIpOnLaunch": false,
+                "Tags": [
+                    {
+                        "Key": "aws-cdk:subnet-name",
+                        "Value": "IsolatedSubnet-dev"
+                    },
+                    {
+                        "Key": "aws-cdk:subnet-type",
+                        "Value": "Isolated"
+                    },
+                    {
+                        "Key": "CloudFormationStack",
+                        "Value": "BellyfedNetworkStack-dev"
+                    },
+                    {
+                        "Key": "Environment",
+                        "Value": "dev"
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": "BellyfedNetworkStack-dev/ServerlessVpc-dev/IsolatedSubnet-devSubnet1"
+                    },
+                    {
+                        "Key": "Region",
+                        "Value": "ap-southeast-1"
+                    },
+                    {
+                        "Key": "Repository",
+                        "Value": "bellyfed-infra"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "ServerlessVpcdev2C622B8D"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "BellyfedNetworkStack-dev/ServerlessVpc-dev/IsolatedSubnet-devSubnet1/Subnet"
+            }
+        },
+        "ServerlessVpcdevIsolatedSubnetdevSubnet1RouteTableB83E3E7F": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "CloudFormationStack",
+                        "Value": "BellyfedNetworkStack-dev"
+                    },
+                    {
+                        "Key": "Environment",
+                        "Value": "dev"
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": "BellyfedNetworkStack-dev/ServerlessVpc-dev/IsolatedSubnet-devSubnet1"
+                    },
+                    {
+                        "Key": "Region",
+                        "Value": "ap-southeast-1"
+                    },
+                    {
+                        "Key": "Repository",
+                        "Value": "bellyfed-infra"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "ServerlessVpcdev2C622B8D"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "BellyfedNetworkStack-dev/ServerlessVpc-dev/IsolatedSubnet-devSubnet1/RouteTable"
+            }
+        },
+        "ServerlessVpcdevIsolatedSubnetdevSubnet1RouteTableAssociation7624B9B8": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "ServerlessVpcdevIsolatedSubnetdevSubnet1RouteTableB83E3E7F"
+                },
+                "SubnetId": {
+                    "Ref": "ServerlessVpcdevIsolatedSubnetdevSubnet1Subnet08BBF32A"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "BellyfedNetworkStack-dev/ServerlessVpc-dev/IsolatedSubnet-devSubnet1/RouteTableAssociation"
+            }
+        },
+        "ServerlessVpcdevIsolatedSubnetdevSubnet2SubnetD7EB2E59": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "AvailabilityZone": "ap-southeast-1b",
+                "CidrBlock": "10.0.3.0/24",
+                "MapPublicIpOnLaunch": false,
+                "Tags": [
+                    {
+                        "Key": "aws-cdk:subnet-name",
+                        "Value": "IsolatedSubnet-dev"
+                    },
+                    {
+                        "Key": "aws-cdk:subnet-type",
+                        "Value": "Isolated"
+                    },
+                    {
+                        "Key": "CloudFormationStack",
+                        "Value": "BellyfedNetworkStack-dev"
+                    },
+                    {
+                        "Key": "Environment",
+                        "Value": "dev"
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": "BellyfedNetworkStack-dev/ServerlessVpc-dev/IsolatedSubnet-devSubnet2"
+                    },
+                    {
+                        "Key": "Region",
+                        "Value": "ap-southeast-1"
+                    },
+                    {
+                        "Key": "Repository",
+                        "Value": "bellyfed-infra"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "ServerlessVpcdev2C622B8D"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "BellyfedNetworkStack-dev/ServerlessVpc-dev/IsolatedSubnet-devSubnet2/Subnet"
+            }
+        },
+        "ServerlessVpcdevIsolatedSubnetdevSubnet2RouteTable045BB3D6": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "CloudFormationStack",
+                        "Value": "BellyfedNetworkStack-dev"
+                    },
+                    {
+                        "Key": "Environment",
+                        "Value": "dev"
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": "BellyfedNetworkStack-dev/ServerlessVpc-dev/IsolatedSubnet-devSubnet2"
+                    },
+                    {
+                        "Key": "Region",
+                        "Value": "ap-southeast-1"
+                    },
+                    {
+                        "Key": "Repository",
+                        "Value": "bellyfed-infra"
+                    }
+                ],
+                "VpcId": {
+                    "Ref": "ServerlessVpcdev2C622B8D"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "BellyfedNetworkStack-dev/ServerlessVpc-dev/IsolatedSubnet-devSubnet2/RouteTable"
+            }
+        },
+        "ServerlessVpcdevIsolatedSubnetdevSubnet2RouteTableAssociationFB8A9DC2": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "ServerlessVpcdevIsolatedSubnetdevSubnet2RouteTable045BB3D6"
+                },
+                "SubnetId": {
+                    "Ref": "ServerlessVpcdevIsolatedSubnetdevSubnet2SubnetD7EB2E59"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "BellyfedNetworkStack-dev/ServerlessVpc-dev/IsolatedSubnet-devSubnet2/RouteTableAssociation"
+            }
+        },
+        "ServerlessVpcdevIGW0A685A64": {
+            "Type": "AWS::EC2::InternetGateway",
+            "Properties": {
+                "Tags": [
+                    {
+                        "Key": "CloudFormationStack",
+                        "Value": "BellyfedNetworkStack-dev"
+                    },
+                    {
+                        "Key": "Environment",
+                        "Value": "dev"
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": "BellyfedNetworkStack-dev/ServerlessVpc-dev"
+                    },
+                    {
+                        "Key": "Region",
+                        "Value": "ap-southeast-1"
+                    },
+                    {
+                        "Key": "Repository",
+                        "Value": "bellyfed-infra"
+                    }
+                ]
+            },
+            "Metadata": {
+                "aws:cdk:path": "BellyfedNetworkStack-dev/ServerlessVpc-dev/IGW"
+            }
+        },
+        "ServerlessVpcdevVPCGW7A150BA1": {
+            "Type": "AWS::EC2::VPCGatewayAttachment",
+            "Properties": {
+                "InternetGatewayId": {
+                    "Ref": "ServerlessVpcdevIGW0A685A64"
+                },
+                "VpcId": {
+                    "Ref": "ServerlessVpcdev2C622B8D"
+                }
+            },
+            "Metadata": {
+                "aws:cdk:path": "BellyfedNetworkStack-dev/ServerlessVpc-dev/VPCGW"
+            }
+        },
+        "ServerlessVpcdevRestrictDefaultSecurityGroupCustomResource20205C38Dummy": {
+            "Type": "AWS::SSM::Parameter",
+            "Properties": {
+                "Type": "String",
+                "Value": "DummyReplacement",
+                "Name": "/bellyfed/dev/dummy-replacement-for-restrict-default-sg"
+            }
+        },
+        "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0Dummy": {
+            "Type": "AWS::SSM::Parameter",
+            "Properties": {
+                "Type": "String",
+                "Value": "DummyReplacement",
+                "Name": "/bellyfed/dev/dummy-replacement-for-restrict-default-sg-role"
+            }
+        },
+        "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5EDummy": {
+            "Type": "AWS::SSM::Parameter",
+            "Properties": {
+                "Type": "String",
+                "Value": "DummyReplacement",
+                "Name": "/bellyfed/dev/dummy-replacement-for-restrict-default-sg-handler"
+            }
+        },
+        "CDKMetadata": {
+            "Type": "AWS::CDK::Metadata",
+            "Properties": {
+                "Analytics": "v2:deflate64:H4sIAAAAAAAA/3WNsY7CQAxEv4V+s0AKoM2lOFERJYgWORvDGRIvWnsTIcS/I3TotrpqPM8eT26Xm7VdzGCSzHXXrKfWPhoFdzUwyRFdbh+HmzPliQ9VaarY9uSa2DLqm6Wp9lFxD22PiSdWiHhHoOT579hUgUZQTD+2rBgY9RsUJ7h/Sj+uUAX3MyDr09QoPgaHpoyifkj2xP+squBH6jB8gaApRFAbhTPx+Z3ZRb1FfRr2HdqLzMflxuYLu5pdhCgLkZUGtPWvvgDDj2wKMgEAAA=="
+            },
+            "Metadata": {
+                "aws:cdk:path": "BellyfedNetworkStack-dev/CDKMetadata/Default"
+            }
+        }
+    },
+    "Outputs": {
+        "VpcId": {
+            "Value": {
+                "Ref": "ServerlessVpcdev2C622B8D"
+            }
+        },
+        "PublicSubnetIds": {
+            "Value": {
+                "Fn::Join": [
+                    "",
+                    [
+                        {
+                            "Ref": "ServerlessVpcdevPublicSubnetdevSubnet1Subnet4A44E6BA"
+                        },
+                        ",",
+                        {
+                            "Ref": "ServerlessVpcdevPublicSubnetdevSubnet2Subnet7D128F5C"
+                        }
+                    ]
+                ]
+            }
+        },
+        "IsolatedSubnetIds": {
+            "Value": {
+                "Fn::Join": [
+                    "",
+                    [
+                        {
+                            "Ref": "ServerlessVpcdevIsolatedSubnetdevSubnet1Subnet08BBF32A"
+                        },
+                        ",",
+                        {
+                            "Ref": "ServerlessVpcdevIsolatedSubnetdevSubnet2SubnetD7EB2E59"
+                        }
+                    ]
+                ]
+            }
+        },
+        "ExportsOutputRefServerlessVpcdev2C622B8D862C7CCD": {
+            "Value": {
+                "Ref": "ServerlessVpcdev2C622B8D"
+            },
+            "Export": {
+                "Name": "BellyfedNetworkStack-dev:ExportsOutputRefServerlessVpcdev2C622B8D862C7CCD"
+            }
+        },
+        "ExportsOutputRefServerlessVpcdevIsolatedSubnetdevSubnet1Subnet08BBF32A0FEB1B4B": {
+            "Value": {
+                "Ref": "ServerlessVpcdevIsolatedSubnetdevSubnet1Subnet08BBF32A"
+            },
+            "Export": {
+                "Name": "BellyfedNetworkStack-dev:ExportsOutputRefServerlessVpcdevIsolatedSubnetdevSubnet1Subnet08BBF32A0FEB1B4B"
+            }
+        },
+        "ExportsOutputRefServerlessVpcdevIsolatedSubnetdevSubnet2SubnetD7EB2E599F64471A": {
+            "Value": {
+                "Ref": "ServerlessVpcdevIsolatedSubnetdevSubnet2SubnetD7EB2E59"
+            },
+            "Export": {
+                "Name": "BellyfedNetworkStack-dev:ExportsOutputRefServerlessVpcdevIsolatedSubnetdevSubnet2SubnetD7EB2E599F64471A"
+            }
+        }
+    },
+    "Parameters": {
+        "BootstrapVersion": {
+            "Type": "AWS::SSM::Parameter::Value<String>",
+            "Default": "/cdk-bootstrap/hnb659fds/version",
+            "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+        }
+    },
+    "Rules": {
+        "CheckBootstrapVersion": {
+            "Assertions": [
+                {
+                    "Assert": {
+                        "Fn::Not": [
+                            {
+                                "Fn::Contains": [
+                                    ["1", "2", "3", "4", "5"],
+                                    {
+                                        "Ref": "BootstrapVersion"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+                }
+            ]
+        }
+    }
+}

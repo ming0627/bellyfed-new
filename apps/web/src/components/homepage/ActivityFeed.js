@@ -1,7 +1,5 @@
 import React, { memo, useState, useEffect } from 'react';
 import { Heart, MessageCircle, Share2, Star, TrendingUp, Clock } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
-
 /**
  * ActivityFeed component displays recent user activities and social interactions
  *
@@ -142,11 +140,9 @@ const ActivityFeed = memo(function ActivityFeed({ countryName }) {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <div className="p-2 bg-white/20 rounded-lg backdrop-blur-sm">
-              <LucideClientIcon
-                icon={TrendingUp}
-                className="w-5 h-5 text-white"
+              <TrendingUpclassName="w-5 h-5 text-white"
                 aria-hidden="true"
-              />
+               />
             </div>
             <h3 className="font-heading font-bold text-lg text-white">Live Activity</h3>
           </div>
@@ -186,7 +182,7 @@ const ActivityFeed = memo(function ActivityFeed({ countryName }) {
                   <span className="font-medium text-gray-900">{activity.target}</span>
                   {activity.trending && (
                     <div className="flex items-center space-x-1 text-orange-500">
-                      <LucideClientIcon icon={TrendingUp} className="w-3 h-3" />
+                      <TrendingUp className="w-3 h-3" />
                       <span className="text-xs font-medium">Trending</span>
                     </div>
                   )}
@@ -195,9 +191,8 @@ const ActivityFeed = memo(function ActivityFeed({ countryName }) {
                 {activity.rating && (
                   <div className="flex items-center space-x-1 mb-2">
                     {[...Array(5)].map((_, i) => (
-                      <LucideClientIcon
+                      <Star
                         key={i}
-                        icon={Star}
                         className={`w-4 h-4 ${
                           i < activity.rating ? 'text-yellow-400 fill-current' : 'text-gray-300'
                         }`}
@@ -212,15 +207,15 @@ const ActivityFeed = memo(function ActivityFeed({ countryName }) {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4">
                     <button className="flex items-center space-x-1 text-gray-500 hover:text-red-500 transition-colors">
-                      <LucideClientIcon icon={Heart} className="w-4 h-4" />
+                      <HeartclassName="w-4 h-4"  />
                       <span className="text-sm">{activity.likes}</span>
                     </button>
                     <button className="flex items-center space-x-1 text-gray-500 hover:text-blue-500 transition-colors">
-                      <LucideClientIcon icon={MessageCircle} className="w-4 h-4" />
+                      <MessageCircleclassName="w-4 h-4"  />
                       <span className="text-sm">{activity.comments}</span>
                     </button>
                     <button className="flex items-center space-x-1 text-gray-500 hover:text-green-500 transition-colors">
-                      <LucideClientIcon icon={Share2} className="w-4 h-4" />
+                      <Share2className="w-4 h-4"  />
                     </button>
                   </div>
                   <span className="text-xs text-gray-500">{activity.timestamp}</span>
@@ -229,10 +224,8 @@ const ActivityFeed = memo(function ActivityFeed({ countryName }) {
 
               {/* Activity Type Icon */}
               <div className={`p-2 rounded-lg ${getActivityColor(activity.type)}`}>
-                <LucideClientIcon
-                  icon={getActivityIcon(activity.type)}
-                  className="w-4 h-4"
-                />
+                <getActivityIcon(activity.type)className="w-4 h-4"
+                 />
               </div>
             </div>
           ))}
@@ -242,7 +235,7 @@ const ActivityFeed = memo(function ActivityFeed({ countryName }) {
         <div className="mt-6 text-center">
           <button className="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-primary text-white font-medium rounded-xl hover:bg-gradient-primary-hover transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
             <span>View All Activity</span>
-            <LucideClientIcon icon={TrendingUp} className="w-4 h-4" />
+            <TrendingUpclassName="w-4 h-4"  />
           </button>
         </div>
       </div>

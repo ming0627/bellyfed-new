@@ -1,9 +1,9 @@
 /**
  * ReviewCard Component
- * 
+ *
  * A component for displaying a restaurant review.
  * It shows the reviewer's information, rating, review content, and actions.
- * 
+ *
  * Features:
  * - Display reviewer information (name, avatar, verification status)
  * - Show review rating with stars
@@ -17,10 +17,10 @@
 import React, { useState, useCallback, memo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { 
-  Star, 
-  ThumbsUp, 
-  MessageSquare, 
+import {
+  Star,
+  ThumbsUp,
+  MessageSquare,
   Calendar,
   Check,
   Flag,
@@ -28,12 +28,11 @@ import {
   ChevronUp,
   Share2
 } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
 import { useAuth } from '@bellyfed/hooks';
 
 /**
  * Format date to a readable string
- * 
+ *
  * @param {string} dateString - ISO date string
  * @returns {string} - Formatted date string
  */
@@ -48,7 +47,7 @@ const formatDate = (dateString) => {
 
 /**
  * Render star rating
- * 
+ *
  * @param {number} rating - Rating value (1-5)
  * @returns {JSX.Element} - Rendered star rating
  */
@@ -56,9 +55,8 @@ const renderStars = (rating) => {
   return (
     <div className="flex">
       {[1, 2, 3, 4, 5].map((star) => (
-        <LucideClientIcon
+        <Star
           key={star}
-          icon={Star}
           className={`w-4 h-4 ${
             star <= rating
               ? 'text-yellow-500 fill-current'
@@ -73,7 +71,7 @@ const renderStars = (rating) => {
 
 /**
  * ReviewCard component
- * 
+ *
  * @param {Object} props - Component props
  * @param {Object} props.review - Review data object
  * @param {Function} props.getCountryLink - Function to generate country-specific links
@@ -97,27 +95,27 @@ const ReviewCard = memo(function ReviewCard({
 }) {
   // Get authentication state
   const { isAuthenticated } = useAuth();
-  
+
   // State for expanded content
   const [expanded, setExpanded] = useState(isExpanded);
-  
+
   // State for helpful status
   const [isHelpful, setIsHelpful] = useState(review.isHelpful || false);
   const [helpfulCount, setHelpfulCount] = useState(review.helpfulCount || 0);
-  
+
   // Check if review content is long
   const isLongContent = review.content && review.content.length > 300;
-  
+
   // Get truncated content
   const truncatedContent = isLongContent && !expanded
     ? `${review.content.substring(0, 300)}...`
     : review.content;
-  
+
   // Handle expanding/collapsing review
   const toggleExpanded = useCallback(() => {
     setExpanded(prev => !prev);
   }, []);
-  
+
   // Handle marking review as helpful
   const handleMarkHelpful = useCallback(() => {
     if (!isAuthenticated) {
@@ -125,15 +123,15 @@ const ReviewCard = memo(function ReviewCard({
       window.location.href = getCountryLink('/signin');
       return;
     }
-    
+
     setIsHelpful(prev => !prev);
     setHelpfulCount(prev => isHelpful ? prev - 1 : prev + 1);
-    
+
     if (onMarkHelpful) {
       onMarkHelpful(review.id, !isHelpful);
     }
   }, [isHelpful, isAuthenticated, review.id, onMarkHelpful, getCountryLink]);
-  
+
   // Handle reporting review
   const handleReport = useCallback(() => {
     if (!isAuthenticated) {
@@ -141,12 +139,12 @@ const ReviewCard = memo(function ReviewCard({
       window.location.href = getCountryLink('/signin');
       return;
     }
-    
+
     if (onReport) {
       onReport(review.id);
     }
   }, [isAuthenticated, review.id, onReport, getCountryLink]);
-  
+
   // Handle sharing review
   const handleShare = useCallback(() => {
     if (onShare) {
@@ -193,20 +191,12 @@ const ReviewCard = memo(function ReviewCard({
           <div className="flex items-center mt-1">
             <div className="flex">{renderStars(review.rating)}</div>
             <span className="ml-2 text-sm text-gray-500 dark:text-gray-400">
-              <LucideClientIcon
-                icon={Calendar}
-                className="w-3.5 h-3.5 inline mr-1"
-                aria-hidden="true"
-              />
+              <Calendar className="w-3.5 h-3.5 inline mr-1" aria-hidden="true" />
               {formatDate(review.visitDate || review.createdAt)}
             </span>
             {review.isVerifiedVisit && (
               <span className="ml-2 inline-flex items-center text-xs text-green-600 dark:text-green-400">
-                <LucideClientIcon
-                  icon={Check}
-                  className="w-3 h-3 mr-0.5"
-                  aria-hidden="true"
-                />
+                <Check className="w-3 h-3 mr-0.5" aria-hidden="true" />
                 Verified Visit
               </span>
             )}
@@ -234,20 +224,12 @@ const ReviewCard = memo(function ReviewCard({
         >
           {expanded ? (
             <>
-              <LucideClientIcon
-                icon={ChevronUp}
-                className="w-4 h-4 mr-1"
-                aria-hidden="true"
-              />
+              <ChevronUp className="w-4 h-4 mr-1" aria-hidden="true" />
               Show Less
             </>
           ) : (
             <>
-              <LucideClientIcon
-                icon={ChevronDown}
-                className="w-4 h-4 mr-1"
-                aria-hidden="true"
-              />
+              <ChevronDown className="w-4 h-4 mr-1" aria-hidden="true" />
               Read More
             </>
           )}
@@ -332,11 +314,7 @@ const ReviewCard = memo(function ReviewCard({
                 : 'text-gray-500 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400'
             }`}
           >
-            <LucideClientIcon
-              icon={ThumbsUp}
-              className="w-4 h-4 mr-1"
-              aria-hidden="true"
-            />
+            <ThumbsUp className="w-4 h-4 mr-1" aria-hidden="true" />
             <span>Helpful ({helpfulCount})</span>
           </button>
 
@@ -344,11 +322,7 @@ const ReviewCard = memo(function ReviewCard({
             href={getCountryLink(`/reviews/${review.id}#comments`)}
             className="flex items-center text-gray-500 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400"
           >
-            <LucideClientIcon
-              icon={MessageSquare}
-              className="w-4 h-4 mr-1"
-              aria-hidden="true"
-            />
+            <MessageSquare className="w-4 h-4 mr-1" aria-hidden="true" />
             <span>Comments ({review.comments || 0})</span>
           </Link>
 
@@ -357,11 +331,7 @@ const ReviewCard = memo(function ReviewCard({
             onClick={handleShare}
             className="flex items-center text-gray-500 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400"
           >
-            <LucideClientIcon
-              icon={Share2}
-              className="w-4 h-4 mr-1"
-              aria-hidden="true"
-            />
+            <Share2 className="w-4 h-4 mr-1" aria-hidden="true" />
             <span>Share</span>
           </button>
 
@@ -370,11 +340,7 @@ const ReviewCard = memo(function ReviewCard({
             onClick={handleReport}
             className="flex items-center text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400"
           >
-            <LucideClientIcon
-              icon={Flag}
-              className="w-4 h-4 mr-1"
-              aria-hidden="true"
-            />
+            <Flag className="w-4 h-4 mr-1" aria-hidden="true" />
             <span>Report</span>
           </button>
         </div>

@@ -3,8 +3,6 @@ import { useRouter } from 'next/router';
 import { Search, MapPin, Loader2 } from 'lucide-react';
 import RestaurantList from '../restaurants/RestaurantList.js';
 import SearchFilters from './SearchFilters.js';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
-
 /**
  * SearchResults component for displaying search results with filtering options
  *
@@ -39,11 +37,9 @@ const SearchResults = memo(function SearchResults({
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <LucideClientIcon
-          icon={Loader2}
-          className="w-8 h-8 animate-spin text-orange-500"
+        <Loader2className="w-8 h-8 animate-spin text-orange-500"
           aria-label="Loading search results"
-        />
+         />
       </div>
     );
   }
@@ -62,11 +58,9 @@ const SearchResults = memo(function SearchResults({
           <div className="max-w-md mx-auto">
             <form onSubmit={handleSearchSubmit} className="space-y-4">
               <div className="relative">
-                <LucideClientIcon
-                  icon={Search}
-                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500"
+                <SearchclassName="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500"
                   aria-hidden="true"
-                />
+                 />
                 <input
                   type="text"
                   placeholder="Try a different search term..."
@@ -78,11 +72,9 @@ const SearchResults = memo(function SearchResults({
                 />
               </div>
               <div className="relative">
-                <LucideClientIcon
-                  icon={MapPin}
-                  className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500"
+                <MapPinclassName="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500"
                   aria-hidden="true"
-                />
+                 />
                 <input
                   type="text"
                   placeholder="Location (city, area, street...)"
@@ -115,11 +107,9 @@ const SearchResults = memo(function SearchResults({
           className="flex flex-col md:flex-row gap-4"
         >
           <div className="flex-1 relative">
-            <LucideClientIcon
-              icon={Search}
-              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500"
+            <SearchclassName="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500"
               aria-hidden="true"
-            />
+             />
             <input
               type="text"
               placeholder="Search for restaurants, cuisines, dishes..."
@@ -131,11 +121,9 @@ const SearchResults = memo(function SearchResults({
           </div>
 
           <div className="flex-1 relative">
-            <LucideClientIcon
-              icon={MapPin}
-              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500"
+            <MapPinclassName="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500"
               aria-hidden="true"
-            />
+             />
             <input
               type="text"
               placeholder="Location (city, area, street...)"

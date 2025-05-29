@@ -1,10 +1,10 @@
 /**
  * FormField Component
- * 
+ *
  * A versatile form field component that supports various input types, validation,
  * and error handling. It's designed to work with form libraries like react-hook-form
  * but can also be used standalone.
- * 
+ *
  * Features:
  * - Support for various input types (text, email, password, textarea, select, checkbox, radio)
  * - Built-in error display
@@ -17,11 +17,9 @@
 
 import React, { forwardRef, useState } from 'react';
 import { AlertCircle, Eye, EyeOff } from 'lucide-react';
-import { LucideClientIcon } from './ui/lucide-icon.js';
-
 /**
  * FormField component
- * 
+ *
  * @param {Object} props - Component props
  * @param {string} props.id - Field ID
  * @param {string} props.name - Field name
@@ -284,7 +282,7 @@ const FormField = forwardRef(({
         {leftIcon && (
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
             {typeof leftIcon === 'function' ? (
-              <LucideClientIcon icon={leftIcon} className="w-5 h-5 text-gray-400" />
+              <leftIcon className="w-5 h-5 text-gray-400" />
             ) : (
               leftIcon
             )}
@@ -300,17 +298,18 @@ const FormField = forwardRef(({
             onClick={togglePasswordVisibility}
             tabIndex={-1}
           >
-            <LucideClientIcon
-              icon={showPassword ? EyeOff : Eye}
-              className="w-5 h-5 text-gray-400"
-            />
+            {showPassword ? (
+              <EyeOff className="w-5 h-5 text-gray-400" />
+            ) : (
+              <Eye className="w-5 h-5 text-gray-400" />
+            )}
           </button>
         )}
 
         {rightIcon && type !== 'password' && (
           <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
             {typeof rightIcon === 'function' ? (
-              <LucideClientIcon icon={rightIcon} className="w-5 h-5 text-gray-400" />
+              <rightIcon className="w-5 h-5 text-gray-400" />
             ) : (
               rightIcon
             )}
@@ -320,7 +319,7 @@ const FormField = forwardRef(({
 
       {error && (
         <p className={`mt-1 text-sm text-red-600 dark:text-red-400 flex items-center ${errorClassName}`}>
-          <LucideClientIcon icon={AlertCircle} className="w-4 h-4 mr-1" />
+          <AlertCircle className="w-4 h-4 mr-1" />
           {error.message || error}
         </p>
       )}

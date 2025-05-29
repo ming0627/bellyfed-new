@@ -151,10 +151,12 @@ export * from './dish/index.js';
 export * from './dish-restaurants/index.js';
 
 // Dishes Components
-export * from './dishes/DishHeader.js';
-export * from './dishes/DishIngredients.js';
-export * from './dishes/DishReviews.js';
-export * from './dishes/SimilarDishes.js';
+// Note: DishCard uses default export only to prevent dual export conflicts
+export { default as DishCard } from './dishes/DishCard.js';
+export { default as DishHeader } from './dishes/DishHeader.js';
+export { default as DishIngredients } from './dishes/DishIngredients.js';
+export { default as DishReviews } from './dishes/DishReviews.js';
+export { default as SimilarDishes } from './dishes/SimilarDishes.js';
 
 // Explore Components
 export * from './explore/ExploreMap.js';
@@ -162,12 +164,15 @@ export * from './explore/NearbyRestaurants.js';
 
 // Homepage Components
 export { default as Homepage } from './homepage.js';
-export * from './homepage/Collections.js';
-export * from './homepage/FeaturedRestaurants.js';
-export * from './homepage/PremiumBanner.js';
-export * from './homepage/TopCritics.js';
-export * from './homepage/TopFoodies.js';
-export * from './homepage/TopRatedDishes.js';
+export { default as ActivityFeed } from './homepage/ActivityFeed.js';
+export { default as Collections } from './homepage/Collections.js';
+export { default as FeaturedContent } from './homepage/FeaturedContent.js';
+export { default as FeaturedRestaurants } from './homepage/FeaturedRestaurants.js';
+export { default as HomepageNavigation } from './homepage/Navigation.js';
+export { default as PremiumBanner } from './homepage/PremiumBanner.js';
+export { default as TopCritics } from './homepage/TopCritics.js';
+export { default as TopFoodies } from './homepage/TopFoodies.js';
+export { default as TopRatedDishes } from './homepage/TopRatedDishes.js';
 
 // Layout Components
 export * from './layout/CountrySelector.js';
@@ -204,7 +209,7 @@ export * from './restaurant/index.js';
 export * from './restaurant-management/index.js';
 
 // Restaurants Components
-export * from './restaurants/RestaurantCard.js';
+export { default as RestaurantCard } from './restaurants/RestaurantCard.js';
 export * from './restaurants/RestaurantList.js';
 export * from './restaurants/detail/RestaurantHeader.js';
 export * from './restaurants/detail/RestaurantInfo.js';

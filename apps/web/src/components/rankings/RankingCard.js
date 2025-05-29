@@ -17,7 +17,6 @@ import React, { memo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ChevronRight, Star, Award, TrendingUp, TrendingDown, Sparkles } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
 import { Avatar } from '../ui/Avatar.tsx';
 
 /**
@@ -63,27 +62,15 @@ const RankingCard = memo(function RankingCard({
 
     if (trend === 'up') {
       return (
-        <LucideClientIcon
-          icon={TrendingUp}
-          className="w-4 h-4 text-green-500 ml-1"
-          aria-label="Trending up"
-        />
+        <TrendingUp className="w-4 h-4 text-green-500 ml-1" aria-label="Trending up" />
       );
     } else if (trend === 'down') {
       return (
-        <LucideClientIcon
-          icon={TrendingDown}
-          className="w-4 h-4 text-red-500 ml-1"
-          aria-label="Trending down"
-        />
+        <TrendingDown className="w-4 h-4 text-red-500 ml-1" aria-label="Trending down" />
       );
     } else if (trend === 'new') {
       return (
-        <LucideClientIcon
-          icon={Sparkles}
-          className="w-4 h-4 text-yellow-500 ml-1"
-          aria-label="New"
-        />
+        <Sparkles className="w-4 h-4 text-yellow-500 ml-1" aria-label="New" />
       );
     }
 
@@ -95,19 +82,19 @@ const RankingCard = memo(function RankingCard({
     if (position === 1) {
       return (
         <span className="absolute -top-1 -right-1 flex items-center justify-center w-6 h-6 bg-yellow-500 text-white rounded-full shadow-md">
-          <LucideClientIcon icon={Award} className="w-4 h-4" />
+          <Award className="w-4 h-4" />
         </span>
       );
     } else if (position === 2) {
       return (
         <span className="absolute -top-1 -right-1 flex items-center justify-center w-6 h-6 bg-gray-400 text-white rounded-full shadow-md">
-          <LucideClientIcon icon={Award} className="w-4 h-4" />
+          <Award className="w-4 h-4" />
         </span>
       );
     } else if (position === 3) {
       return (
         <span className="absolute -top-1 -right-1 flex items-center justify-center w-6 h-6 bg-amber-700 text-white rounded-full shadow-md">
-          <LucideClientIcon icon={Award} className="w-4 h-4" />
+          <Award className="w-4 h-4" />
         </span>
       );
     }
@@ -122,11 +109,7 @@ const RankingCard = memo(function RankingCard({
         <div className="flex justify-between items-center">
           <div className="flex items-center">
             {icon && (
-              <LucideClientIcon
-                icon={icon}
-                className="w-5 h-5 mr-2"
-                aria-hidden="true"
-              />
+              <icon className="w-5 h-5 mr-2" aria-hidden="true" />
             )}
             <h3 className="font-bold text-lg">{title}</h3>
           </div>
@@ -138,11 +121,7 @@ const RankingCard = memo(function RankingCard({
               aria-label={viewAllLabel || `View all ${title}`}
             >
               View All
-              <LucideClientIcon
-                icon={ChevronRight}
-                className="w-4 h-4 ml-1"
-                aria-hidden="true"
-              />
+              <ChevronRight className="w-4 h-4 ml-1" aria-hidden="true" />
             </Link>
           )}
         </div>
@@ -230,7 +209,7 @@ const RankingCard = memo(function RankingCard({
                 <div className="ml-2 flex items-center">
                   {(type === 'dish' || type === 'restaurant') && item.rating ? (
                     <div className="flex items-center bg-yellow-50 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-500 px-2 py-1 rounded-full text-sm">
-                      <LucideClientIcon icon={Star} className="w-3.5 h-3.5 mr-1" />
+                      <Star className="w-3.5 h-3.5 mr-1" />
                       <span>{typeof item.rating === 'number' ? item.rating.toFixed(1) : item.rating}</span>
                       {item.value && (
                         <span className="text-xs text-gray-500 dark:text-gray-400 ml-1">

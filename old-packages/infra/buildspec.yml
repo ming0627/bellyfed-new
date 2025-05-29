@@ -1,0 +1,44 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+    commands:
+      - echo "Installing pnpm..."
+      - corepack enable
+      - corepack prepare pnpm@latest --activate
+      - npm install -g aws-cdk
+      - echo "Installing dependencies..."
+      - pnpm install --frozen-lockfile
+  pre_build:
+    commands:
+      - echo "Running type checking..."
+      - pnpm run type-check
+      - echo "Running linting..."
+      - pnpm run lint
+  build:
+    commands:
+      - echo "Building Lambda functions..."
+      - pnpm run build:fast
+      - echo "Checking dist directories in all workspaces:"
+      - find functions packages src/layers -type d -name "dist" | xargs ls -la || echo "No dist directories found"
+      - echo "Environment is $ENVIRONMENT"
+      - echo "Deploying CDK stacks..."
+      - if [ "$STACK_NAME" = "BellyfedLambdaStack" ]; then
+          cdk deploy --require-approval never --context environment="$ENVIRONMENT" "BellyfedLambdaStack-${ENVIRONMENT}";
+        else
+          cdk deploy --require-approval never --context environment="$ENVIRONMENT" "*";
+        fi
+  post_build:
+    commands:
+      - echo "Build completed successfully"
+artifacts:
+  files:
+    - '**/*'
+cache:
+  paths:
+    - 'node_modules/**/*'
+    - '.pnpm-store/**/*'
+    - 'functions/*/node_modules/**/*'
+    - 'packages/*/node_modules/**/*'
+    - 'src/layers/*/node_modules/**/*'

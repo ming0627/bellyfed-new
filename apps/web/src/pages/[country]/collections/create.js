@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 import Layout from '../../../components/layout/Layout.js';
 import CollectionForm from '../../../components/collections/CollectionForm.js';
-import { LucideClientIcon } from '../../../components/ui/lucide-icon.js';
+
 import { useCountry } from '../../../contexts/index.js';
 
 /**
@@ -65,7 +65,7 @@ export default function CreateCollectionPage() {
           href={getCountryLink('/collections')}
           className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400 mb-6"
         >
-          <LucideClientIcon icon={ChevronLeft} className="w-4 h-4 mr-1" />
+          <ChevronLeft className="w-4 h-4 mr-1" />
           Back to Collections
         </Link>
 

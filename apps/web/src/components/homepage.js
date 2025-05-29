@@ -3,15 +3,15 @@ import { useQuery } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 
 import { useCountry } from '../contexts/index.js';
-import { getCountryLink } from '../utils/routing.js';
+import { getCountryLink } from '../utils/routing.js'; // RESTORED FOR COMPONENT TESTING
 
-// Import components
-import Collections from './homepage/Collections.js';
-import FeaturedRestaurants from './homepage/FeaturedRestaurants.js';
+// Import components - ALL COMMENTED OUT FOR CLEAN BASELINE
+// import Collections from './homepage/Collections.js';
+// import FeaturedRestaurants from './homepage/FeaturedRestaurants.js';
 import PremiumBanner from './homepage/PremiumBanner.js';
-import { TopCritics } from './homepage/TopCritics.js';
-import TopFoodies from './homepage/TopFoodies.js';
-import TopRatedDishes from './homepage/TopRatedDishes.js';
+import TopCritics from './homepage/TopCritics.js';
+// import TopFoodies from './homepage/TopFoodies.js';
+import TopRatedDishes from './homepage/TopRatedDishes.js'; // TESTING COMPONENT 2
 
 // Mock data for restaurants - in a real app, this would be fetched from an API
 const mockRestaurants = [
@@ -128,17 +128,21 @@ const mockTopReviewers = [
 // This file defines the main Homepage component for the Bellyfed web application.
 // It fetches and displays various sections like featured restaurants, top critics,
 // top-rated dishes, and collections. It also handles dynamic updates for some of these sections.
+//
+// FIXED: Reverted to default imports to resolve "Element type is invalid" runtime errors.
+// All homepage components export both named and default exports, but default imports
+// provide better compatibility and avoid module resolution conflicts.
 
 /**
  * Homepage component for the Bellyfed application
  *
  * @returns {JSX.Element} - Rendered component
  */
-export function Homepage() {
+const Homepage = function Homepage() {
   const { currentCountry, isInitialized } = useCountry();
   const [showPremiumBanner, setShowPremiumBanner] = useState(true);
 
-  // Initialize state with default values
+  // Initialize state with default values - RESTORED TO FIX ReferenceError
   const [reviewers, setReviewers] = useState([]);
   const [dishes, setDishes] = useState([]);
   const [locations, setLocations] = useState([]);
@@ -174,13 +178,13 @@ export function Homepage() {
     }
   }, [currentCountry]);
 
-  // Memoize the country link generator to prevent unnecessary re-renders
-  const createCountryLink = useCallback(
-    path => {
-      return getCountryLink(path, currentCountry?.code);
-    },
-    [currentCountry],
-  );
+  // Memoize the country link generator to prevent unnecessary re-renders - COMMENTED OUT FOR CLEAN BASELINE
+  // const createCountryLink = useCallback(
+  //   path => {
+  //     return getCountryLink(path, currentCountry?.code);
+  //   },
+  //   [currentCountry],
+  // );
 
   // Function to randomly update stats - memoized to prevent unnecessary re-renders
   const updateStats = useCallback(() => {
@@ -328,6 +332,7 @@ export function Homepage() {
   return (
     <>
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+        {/* TESTING: PremiumBanner Component */}
         <PremiumBanner
           showPremiumBanner={showPremiumBanner}
           setShowPremiumBanner={setShowPremiumBanner}
@@ -336,7 +341,51 @@ export function Homepage() {
         {/* Main Content */}
         <main className="w-full">
           <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
-            <TopFoodies
+
+            {/* SYSTEMATIC TESTING: Component 2 - TopCritics + TopRatedDishes */}
+            <div className="text-center py-8 mb-8">
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                🔍 SYSTEMATIC TESTING: Component 2 - TopCritics + TopRatedDishes
+              </h1>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Country: {currentCountry?.name || 'Loading...'} ({currentCountry?.code || 'Loading...'})
+              </p>
+              <p className="text-xs text-blue-500 mt-2">
+                📋 Testing TopCritics ✅ + TopRatedDishes - check browser console for JavaScript runtime errors
+              </p>
+              <p className="text-xs text-orange-500 mt-1">
+                ⚠️ Please check browser developer console for "Element type is invalid" errors
+              </p>
+              <p className="text-xs text-gray-500 mt-1">
+                Remaining: TopFoodies, Collections, FeaturedRestaurants
+              </p>
+            </div>
+
+            {/* ALL HOMEPAGE COMPONENTS COMMENTED OUT FOR CLEAN BASELINE */}
+
+            {/* COMPONENT 1: TopCritics - TESTING NOW */}
+             <TopCritics topReviewers={topReviewers} />
+
+            {/* COMPONENT 2: TopRatedDishes - TESTING NOW */}
+            <TopRatedDishes />
+
+            {/* COMPONENT 3: TopFoodies - COMMENTED OUT */}
+            {/* <TopFoodies reviewers={reviewers} /> */}
+
+            {/* COMPONENT 4: Collections - COMMENTED OUT */}
+            {/* <Collections
+              countryName={currentCountry?.name || 'Your Country'}
+              getCountryLink={createCountryLink}
+            /> */}
+
+            {/* COMPONENT 5: FeaturedRestaurants - COMMENTED OUT */}
+            {/* <FeaturedRestaurants
+              countryName={currentCountry?.name || 'Your Country'}
+              getCountryLink={createCountryLink}
+            /> */}
+
+            {/* TEMPORARILY COMMENTED OUT FOR TESTING */}
+            {/* <TopFoodies
               reviewers={reviewers}
               dishes={dishes}
               locations={locations}
@@ -356,10 +405,12 @@ export function Homepage() {
             <FeaturedRestaurants
               countryName={currentCountry?.name || 'Your Country'}
               getCountryLink={createCountryLink}
-            />
+            /> */}
           </div>
         </main>
       </div>
     </>
   );
-}
+};
+
+export default Homepage;

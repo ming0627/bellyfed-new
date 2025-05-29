@@ -1,7 +1,5 @@
 import React, { memo, useCallback } from 'react';
 import { X } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
-
 /**
  * PremiumBanner component displays a promotional banner for premium features
  *
@@ -10,7 +8,7 @@ import { LucideClientIcon } from '../ui/lucide-icon.js';
  * @param {Function} props.setShowPremiumBanner - Function to toggle banner visibility
  * @returns {JSX.Element|null} - Rendered component or null if hidden
  */
-export const PremiumBanner = memo(function PremiumBanner({
+const PremiumBanner = memo(function PremiumBanner({
   showPremiumBanner,
   setShowPremiumBanner,
 }) {
@@ -54,12 +52,11 @@ export const PremiumBanner = memo(function PremiumBanner({
           aria-label="Close premium banner"
           type="button"
         >
-          <LucideClientIcon icon={X} className="w-4 h-4" aria-hidden="true" />
+          <X className="w-4 h-4" aria-hidden="true" />
         </button>
       </div>
     </div>
   );
 });
 
-// Default export for easier imports
 export default PremiumBanner;

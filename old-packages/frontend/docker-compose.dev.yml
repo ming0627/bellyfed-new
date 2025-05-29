@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  nextjs:
+    build:
+      context: .
+      # Use the development target from our multi-stage Dockerfile
+      target: development
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    # No need to override command as it's already set in the development target
+    restart: unless-stopped

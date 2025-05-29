@@ -2,7 +2,6 @@ import React, { memo, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { BookOpen, ArrowRight } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
 
 /**
  * CollectionCard component for displaying individual collection information
@@ -37,8 +36,7 @@ const CollectionCard = memo(function CollectionCard({
             />
           ) : (
             <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-              <LucideClientIcon
-                icon={BookOpen}
+              <BookOpen
                 className="w-8 h-8 text-gray-400"
               />
             </div>
@@ -72,7 +70,7 @@ const CollectionCard = memo(function CollectionCard({
  * @param {Function} props.getCountryLink - Function to generate country-specific links
  * @returns {JSX.Element} - Rendered component
  */
-export const Collections = memo(function Collections({
+const Collections = memo(function Collections({
   countryName,
   getCountryLink,
 }) {
@@ -135,8 +133,7 @@ export const Collections = memo(function Collections({
     <section className="mb-12" aria-labelledby="collections-heading">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center">
-          <LucideClientIcon
-            icon={BookOpen}
+          <BookOpen
             className="w-5 h-5 text-purple-600 mr-2"
             aria-hidden="true"
           />
@@ -150,8 +147,7 @@ export const Collections = memo(function Collections({
           aria-label="View all collections"
         >
           View All
-          <LucideClientIcon
-            icon={ArrowRight}
+          <ArrowRight
             className="w-4 h-4 ml-1"
             aria-hidden="true"
           />
@@ -171,5 +167,4 @@ export const Collections = memo(function Collections({
   );
 });
 
-// Default export for easier imports
 export default Collections;

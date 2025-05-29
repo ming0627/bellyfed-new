@@ -1,0 +1,49 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Get the current branch name
+BRANCH=$(git symbolic-ref --short HEAD)
+
+# Skip this hook for develop and main branches
+if [ "$BRANCH" = "develop" ] || [ "$BRANCH" = "main" ]; then
+  exit 0
+fi
+
+# Check if we're in a CI environment
+if [ -n "$CI" ]; then
+  echo "Running in CI environment, skipping branch update check"
+  exit 0
+fi
+
+echo "Checking if branch is up-to-date with develop..."
+
+# Fetch the latest develop branch
+git fetch origin develop
+
+# Check if the current branch is behind develop
+BEHIND=$(git rev-list --count HEAD..origin/develop)
+
+if [ "$BEHIND" -gt 0 ]; then
+  echo "⚠️  WARNING: Your branch is behind develop by $BEHIND commit(s)."
+  echo "Please update your branch before pushing:"
+  echo ""
+  echo "  git fetch origin develop"
+  echo "  git merge origin/develop"
+  echo "  # or"
+  echo "  git rebase origin/develop"
+  echo ""
+  echo "This helps prevent conflicts and ensures your code works with the latest changes."
+  
+  # Ask for confirmation to continue
+  exec < /dev/tty
+  read -p "Do you want to continue anyway? (y/N) " response
+  if [[ "$response" =~ ^[Yy]$ ]]; then
+    echo "Continuing push despite branch being behind develop..."
+    exit 0
+  else
+    echo "Push aborted. Please update your branch first."
+    exit 1
+  fi
+fi
+
+echo "✅ Branch is up-to-date with develop."

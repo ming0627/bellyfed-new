@@ -1,7 +1,6 @@
 import React, { useState, memo } from 'react';
 import Image from 'next/image';
 import { Star, ThumbsUp, MessageSquare, Flag } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
 import Link from 'next/link';
 
 /**
@@ -67,9 +66,8 @@ const DishReviews = memo(function DishReviews({ dish, getCountryLink }) {
           </div>
           <div className="flex items-center mt-1">
             {[1, 2, 3, 4, 5].map(star => (
-              <LucideClientIcon
+              <Star
                 key={star}
-                icon={Star}
                 className={`w-5 h-5 ${
                   star <= Math.round(dish.rating)
                     ? 'text-yellow-400 fill-current'
@@ -187,9 +185,8 @@ const DishReviews = memo(function DishReviews({ dish, getCountryLink }) {
 
                 <div className="flex items-center">
                   {[1, 2, 3, 4, 5].map(star => (
-                    <LucideClientIcon
+                    <Star
                       key={star}
-                      icon={Star}
                       className={`w-4 h-4 ${
                         star <= Math.round(review.rating)
                           ? 'text-yellow-400 fill-current'
@@ -256,27 +253,15 @@ const DishReviews = memo(function DishReviews({ dish, getCountryLink }) {
               {/* Review Actions */}
               <div className="flex items-center space-x-4 text-sm">
                 <button className="flex items-center text-gray-600 dark:text-gray-400 hover:text-orange-500 transition-colors">
-                  <LucideClientIcon
-                    icon={ThumbsUp}
-                    className="w-4 h-4 mr-1"
-                    aria-hidden="true"
-                  />
+                  <ThumbsUp className="w-4 h-4 mr-1" aria-hidden="true" />
                   <span>Helpful ({review.helpfulCount || 0})</span>
                 </button>
                 <button className="flex items-center text-gray-600 dark:text-gray-400 hover:text-orange-500 transition-colors">
-                  <LucideClientIcon
-                    icon={MessageSquare}
-                    className="w-4 h-4 mr-1"
-                    aria-hidden="true"
-                  />
+                  <MessageSquare className="w-4 h-4 mr-1" aria-hidden="true" />
                   <span>Comment ({review.commentCount || 0})</span>
                 </button>
                 <button className="flex items-center text-gray-600 dark:text-gray-400 hover:text-orange-500 transition-colors">
-                  <LucideClientIcon
-                    icon={Flag}
-                    className="w-4 h-4 mr-1"
-                    aria-hidden="true"
-                  />
+                  <Flag className="w-4 h-4 mr-1" aria-hidden="true" />
                   <span>Report</span>
                 </button>
               </div>

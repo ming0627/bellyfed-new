@@ -1,7 +1,6 @@
 import React, { memo } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Trophy, Utensils, MapPin, RefreshCw } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
 import { useCountry } from '../../contexts/CountryContext.js';
 
 /**
@@ -87,11 +86,9 @@ const RankingCard = memo(function RankingCard({
           <div className="relative flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="p-2 bg-white/20 rounded-lg backdrop-blur-sm">
-                <LucideClientIcon
-                  icon={icon}
-                  className="w-5 h-5 text-white"
+                <iconclassName="w-5 h-5 text-white"
                   aria-hidden="true"
-                />
+                 />
               </div>
               <h3 className="font-heading font-bold text-lg text-white">{title}</h3>
             </div>
@@ -101,11 +98,9 @@ const RankingCard = memo(function RankingCard({
               aria-label={viewAllLabel}
             >
               <span>View All</span>
-              <LucideClientIcon
-                icon={ArrowRight}
-                className="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform duration-200"
+              <ArrowRightclassName="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform duration-200"
                 aria-hidden="true"
-              />
+               />
             </Link>
           </div>
         </div>
@@ -186,7 +181,7 @@ const RankingCard = memo(function RankingCard({
  * @param {Function} props.getCountryLink - Function to generate country-specific links
  * @returns {JSX.Element} - Rendered component
  */
-export const TopFoodies = memo(function TopFoodies({
+const TopFoodies = memo(function TopFoodies({
   reviewers,
   dishes,
   locations,
@@ -271,7 +266,7 @@ export const TopFoodies = memo(function TopFoodies({
             onClick={updateRankingData}
             className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-primary text-white font-medium rounded-lg hover:bg-gradient-primary-hover transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
           >
-            <LucideClientIcon icon={RefreshCw} className="w-4 h-4" />
+            <RefreshCwclassName="w-4 h-4"  />
             <span>Update Rankings</span>
           </button>
         </div>
@@ -326,5 +321,4 @@ export const TopFoodies = memo(function TopFoodies({
   );
 });
 
-// Default export for easier imports
 export default TopFoodies;

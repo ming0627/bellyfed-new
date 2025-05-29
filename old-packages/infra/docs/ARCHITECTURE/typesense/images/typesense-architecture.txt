@@ -1,0 +1,13 @@
+This is a placeholder for the Typesense architecture diagram.
+
+The diagram should include:
+1. Typesense ECS Service
+2. EFS Volume
+3. Data Sync Lambda
+4. Search API Lambda
+5. API Gateway
+6. PostgreSQL Database
+7. Frontend Application
+8. Data flow between components
+
+Please create a diagram and save it as typesense-architecture.png in this directory.

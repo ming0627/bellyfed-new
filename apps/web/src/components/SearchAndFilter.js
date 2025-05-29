@@ -16,8 +16,6 @@
 import React, { useState, useEffect, useCallback, memo } from 'react';
 import { useRouter } from 'next/router';
 import { Search, MapPin, Filter, X, ChevronDown, ChevronUp } from 'lucide-react';
-import { LucideClientIcon } from './ui/lucide-icon.js';
-
 /**
  * SearchAndFilter component
  * 
@@ -181,11 +179,9 @@ const SearchAndFilter = memo(function SearchAndFilter({
         <div className="flex flex-col md:flex-row gap-4">
           {/* Search Input */}
           <div className="flex-1 relative">
-            <LucideClientIcon
-              icon={Search}
-              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500"
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500"
               aria-hidden="true"
-            />
+             />
             <input
               type="text"
               placeholder={searchPlaceholder}
@@ -199,11 +195,9 @@ const SearchAndFilter = memo(function SearchAndFilter({
           {/* Location Input (Optional) */}
           {showLocationSearch && (
             <div className="flex-1 relative">
-              <LucideClientIcon
-                icon={MapPin}
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500"
+              <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500"
                 aria-hidden="true"
-              />
+               />
               <input
                 type="text"
                 placeholder={locationPlaceholder}
@@ -232,11 +226,9 @@ const SearchAndFilter = memo(function SearchAndFilter({
               aria-expanded={isFilterPanelOpen}
               aria-controls="filter-panel"
             >
-              <LucideClientIcon
-                icon={Filter}
-                className="w-5 h-5 mr-2"
+              <Filter className="w-5 h-5 mr-2"
                 aria-hidden="true"
-              />
+               />
               Filters
               {activeFiltersCount > 0 && (
                 <span className="ml-2 px-2 py-0.5 bg-orange-500 text-white text-xs rounded-full">

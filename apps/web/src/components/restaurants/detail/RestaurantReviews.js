@@ -10,8 +10,6 @@ import {
   ChevronUp,
   Check,
 } from 'lucide-react';
-import { LucideClientIcon } from '../../ui/lucide-icon.js';
-
 /**
  * ReviewItem component for displaying a single review
  *
@@ -58,9 +56,8 @@ const ReviewItem = memo(function ReviewItem({ review, getCountryLink }) {
     for (let i = 0; i < 5; i++) {
       if (i < fullStars) {
         stars.push(
-          <LucideClientIcon
+          <Star
             key={i}
-            icon={Star}
             className="w-4 h-4 text-yellow-500 fill-current"
             aria-hidden="true"
           />,
@@ -68,25 +65,16 @@ const ReviewItem = memo(function ReviewItem({ review, getCountryLink }) {
       } else if (i === fullStars && hasHalfStar) {
         stars.push(
           <span key={i} className="relative">
-            <LucideClientIcon
-              icon={Star}
-              className="w-4 h-4 text-gray-300 dark:text-gray-600 fill-current"
-              aria-hidden="true"
-            />
+            <Star className="w-4 h-4 text-gray-300 dark:text-gray-600 fill-current" aria-hidden="true" />
             <span className="absolute inset-0 overflow-hidden w-1/2">
-              <LucideClientIcon
-                icon={Star}
-                className="w-4 h-4 text-yellow-500 fill-current"
-                aria-hidden="true"
-              />
+              <Star className="w-4 h-4 text-yellow-500 fill-current" aria-hidden="true" />
             </span>
           </span>,
         );
       } else {
         stars.push(
-          <LucideClientIcon
+          <Star
             key={i}
-            icon={Star}
             className="w-4 h-4 text-gray-300 dark:text-gray-600"
             aria-hidden="true"
           />,
@@ -131,11 +119,7 @@ const ReviewItem = memo(function ReviewItem({ review, getCountryLink }) {
               <div className="flex">{renderStars(review.rating)}</div>
               {review.isVerifiedVisit && (
                 <span className="ml-2 inline-flex items-center text-xs text-green-600 dark:text-green-400">
-                  <LucideClientIcon
-                    icon={Check}
-                    className="w-3 h-3 mr-0.5"
-                    aria-hidden="true"
-                  />
+                  <Check className="w-3 h-3 mr-0.5" aria-hidden="true" />
                   Verified Visit
                 </span>
               )}
@@ -144,11 +128,7 @@ const ReviewItem = memo(function ReviewItem({ review, getCountryLink }) {
         </div>
 
         <div className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
-          <LucideClientIcon
-            icon={Calendar}
-            className="w-4 h-4 mr-1"
-            aria-hidden="true"
-          />
+          <Calendar className="w-4 h-4 mr-1" aria-hidden="true" />
           <span>{formatDate(review.visitDate)}</span>
         </div>
       </div>
@@ -172,11 +152,11 @@ const ReviewItem = memo(function ReviewItem({ review, getCountryLink }) {
           className="text-orange-500 hover:text-orange-600 dark:hover:text-orange-400 text-sm font-medium mt-2 flex items-center"
         >
           {isExpanded ? 'Show less' : 'Read more'}
-          <LucideClientIcon
-            icon={isExpanded ? ChevronUp : ChevronDown}
-            className="w-4 h-4 ml-1"
-            aria-hidden="true"
-          />
+          {isExpanded ? (
+            <ChevronUp className="w-4 h-4 ml-1" aria-hidden="true" />
+          ) : (
+            <ChevronDown className="w-4 h-4 ml-1" aria-hidden="true" />
+          )}
         </button>
       )}
 
@@ -230,11 +210,7 @@ const ReviewItem = memo(function ReviewItem({ review, getCountryLink }) {
               : 'text-gray-500 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400'
           } transition-colors`}
         >
-          <LucideClientIcon
-            icon={ThumbsUp}
-            className={`w-4 h-4 mr-1 ${isLiked ? 'fill-current' : ''}`}
-            aria-hidden="true"
-          />
+          <ThumbsUp className={`w-4 h-4 mr-1 ${isLiked ? 'fill-current' : ''}`} aria-hidden="true" />
           <span>Helpful ({review.helpfulCount + (isLiked ? 1 : 0)})</span>
         </button>
 
@@ -242,11 +218,7 @@ const ReviewItem = memo(function ReviewItem({ review, getCountryLink }) {
           href={getCountryLink(`/reviews/${review.id}`)}
           className="flex items-center text-sm text-gray-500 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
         >
-          <LucideClientIcon
-            icon={MessageSquare}
-            className="w-4 h-4 mr-1"
-            aria-hidden="true"
-          />
+          <MessageSquare className="w-4 h-4 mr-1" aria-hidden="true" />
           <span>Comment ({review.comments})</span>
         </Link>
       </div>
@@ -436,9 +408,8 @@ const renderStars = rating => {
   for (let i = 0; i < 5; i++) {
     if (i < fullStars) {
       stars.push(
-        <LucideClientIcon
+        <Star
           key={i}
-          icon={Star}
           className="w-4 h-4 text-yellow-500 fill-current"
           aria-hidden="true"
         />,
@@ -446,25 +417,16 @@ const renderStars = rating => {
     } else if (i === fullStars && hasHalfStar) {
       stars.push(
         <span key={i} className="relative">
-          <LucideClientIcon
-            icon={Star}
-            className="w-4 h-4 text-gray-300 dark:text-gray-600 fill-current"
-            aria-hidden="true"
-          />
+          <Star className="w-4 h-4 text-gray-300 dark:text-gray-600 fill-current" aria-hidden="true" />
           <span className="absolute inset-0 overflow-hidden w-1/2">
-            <LucideClientIcon
-              icon={Star}
-              className="w-4 h-4 text-yellow-500 fill-current"
-              aria-hidden="true"
-            />
+            <Star className="w-4 h-4 text-yellow-500 fill-current" aria-hidden="true" />
           </span>
         </span>,
       );
     } else {
       stars.push(
-        <LucideClientIcon
+        <Star
           key={i}
-          icon={Star}
           className="w-4 h-4 text-gray-300 dark:text-gray-600"
           aria-hidden="true"
         />,

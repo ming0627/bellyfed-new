@@ -1,0 +1,41 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "cloudformation:*",
+                "s3:*",
+                "iam:PassRole",
+                "iam:GetRole",
+                "iam:CreateRole",
+                "iam:AttachRolePolicy",
+                "iam:PutRolePolicy",
+                "lambda:*",
+                "apigateway:*",
+                "ec2:DescribeAvailabilityZones",
+                "ec2:DescribeVpcs",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeSecurityGroups",
+                "ec2:DescribeRouteTables",
+                "sts:AssumeRole",
+                "ssm:GetParameter",
+                "ssm:GetParameters",
+                "ssm:GetParametersByPath",
+                "ssm:PutParameter",
+                "dynamodb:*",
+                "logs:*",
+                "codepipeline:*",
+                "codebuild:*",
+                "codecommit:*",
+                "ecr:*",
+                "sns:*",
+                "sqs:*",
+                "events:*",
+                "elasticloadbalancing:*",
+                "cognito-idp:*"
+            ],
+            "Resource": "*"
+        }
+    ]
+}

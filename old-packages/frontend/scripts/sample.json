@@ -1,0 +1,174 @@
+{
+  "restaurants": [
+    {
+      "id": "ChIJ2eUgeAK2zTERMJAHs_z7p1E",
+      "name": "Sushi Mentai",
+      "type": "RESTAURANT",
+      "description": "Japanese Restaurant in SS15 Subang Jaya",
+      "cuisineTypes": ["japanese", "sushi", "asian"],
+      "priceRange": "$$",
+      "isCurrentlyOperating": true,
+      "address": "47, Jalan SS 15/5a, Ss 15, 47500 Subang Jaya",
+      "city": "Subang Jaya",
+      "state": "Selangor",
+      "country": "Malaysia",
+      "phoneNumber": "+60356113123",
+      "website": "https://sushimentai.com",
+      "locations": [
+        {
+          "name": "Sushi Mentai SS15",
+          "address": "47, Jalan SS 15/5a, Ss 15",
+          "city": "Subang Jaya",
+          "state": "Selangor",
+          "country": "Malaysia",
+          "latitude": 3.0741,
+          "longitude": 101.5903
+        }
+      ],
+      "schedules": [
+        {
+          "dayOfWeek": "MONDAY",
+          "startTime": "11:00",
+          "endTime": "22:00",
+          "isRecurring": true
+        },
+        {
+          "dayOfWeek": "TUESDAY",
+          "startTime": "11:00",
+          "endTime": "22:00",
+          "isRecurring": true
+        }
+      ],
+      "ranking": {
+        "category": "GENERAL",
+        "totalScore": 4.5
+      },
+      "paymentOptions": ["CASH", "CREDIT_CARD", "TOUCH_N_GO"],
+      "services": [
+        {
+          "type": "DINE_IN",
+          "available": true,
+          "details": "50 seating capacity"
+        },
+        {
+          "type": "TAKEAWAY",
+          "available": true
+        },
+        {
+          "type": "DELIVERY",
+          "available": true,
+          "details": "Available through GrabFood and FoodPanda"
+        }
+      ],
+      "additionalInfo": {
+        "parking": {
+          "available": true,
+          "details": "Public parking available at SS15 area"
+        },
+        "wifi": {
+          "available": true,
+          "details": "Free WiFi for customers"
+        },
+        "seating": {
+          "capacity": 50,
+          "details": "Indoor seating only"
+        },
+        "contact": {
+          "phone": "+60356113123",
+          "email": "ss15@sushimentai.com",
+          "website": "https://sushimentai.com"
+        },
+        "location": {
+          "address": "47, Jalan SS 15/5a, Ss 15",
+          "city": "Subang Jaya",
+          "state": "Selangor",
+          "coordinates": {
+            "latitude": 3.0741,
+            "longitude": 101.5903
+          }
+        }
+      },
+      "createdAt": "2023-08-15T08:00:00.000Z",
+      "updatedAt": "2023-08-15T08:00:00.000Z"
+    },
+    {
+      "id": "ChIJ3eUgeAK2zTERMJAHs_z7p2F",
+      "name": "Nasi Lemak Bumbung",
+      "type": "RESTAURANT",
+      "description": "Local Malaysian Restaurant in SS15 Subang Jaya",
+      "cuisineTypes": ["malaysian", "local", "asian"],
+      "priceRange": "$",
+      "isCurrentlyOperating": true,
+      "address": "5, Jalan SS 15/8a, Ss 15, 47500 Subang Jaya",
+      "city": "Subang Jaya",
+      "state": "Selangor",
+      "country": "Malaysia",
+      "phoneNumber": "+60356113999",
+      "locations": [
+        {
+          "name": "Nasi Lemak Bumbung SS15",
+          "address": "5, Jalan SS 15/8a, Ss 15",
+          "city": "Subang Jaya",
+          "state": "Selangor",
+          "country": "Malaysia",
+          "latitude": 3.0739,
+          "longitude": 101.5908
+        }
+      ],
+      "schedules": [
+        {
+          "dayOfWeek": "MONDAY",
+          "startTime": "17:00",
+          "endTime": "04:00",
+          "isRecurring": true
+        },
+        {
+          "dayOfWeek": "TUESDAY",
+          "startTime": "17:00",
+          "endTime": "04:00",
+          "isRecurring": true
+        }
+      ],
+      "ranking": {
+        "category": "GENERAL",
+        "totalScore": 4.3
+      },
+      "paymentOptions": ["CASH", "TOUCH_N_GO"],
+      "services": [
+        {
+          "type": "DINE_IN",
+          "available": true,
+          "details": "Open air seating"
+        },
+        {
+          "type": "TAKEAWAY",
+          "available": true
+        }
+      ],
+      "additionalInfo": {
+        "parking": {
+          "available": true,
+          "details": "Street parking available"
+        },
+        "seating": {
+          "capacity": 30,
+          "details": "Open air seating"
+        },
+        "contact": {
+          "phone": "+60356113999"
+        },
+        "location": {
+          "address": "5, Jalan SS 15/8a, Ss 15",
+          "city": "Subang Jaya",
+          "state": "Selangor",
+          "coordinates": {
+            "latitude": 3.0739,
+            "longitude": 101.5908
+          }
+        }
+      },
+      "createdAt": "2023-08-15T08:00:00.000Z",
+      "updatedAt": "2023-08-15T08:00:00.000Z"
+    }
+  ]
+}

@@ -1,7 +1,4 @@
-import React, { memo } from 'react';
-import Image from 'next/image';
-import { Award } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
+import React from 'react';
 
 /**
  * TopCritics component displays a grid of top food critics with their badges and achievements.
@@ -10,7 +7,7 @@ import { LucideClientIcon } from '../ui/lucide-icon.js';
  * @param {Array} props.topReviewers - Array of top reviewer objects
  * @returns {JSX.Element} - Rendered component
  */
-export const TopCritics = memo(function TopCritics({ topReviewers }) {
+function TopCritics({ topReviewers }) {
   // Early return if no reviewers are provided
   if (!topReviewers || topReviewers.length === 0) {
     return null;
@@ -19,11 +16,7 @@ export const TopCritics = memo(function TopCritics({ topReviewers }) {
   return (
     <section className="mb-12" aria-labelledby="top-critics-heading">
       <div className="flex items-center mb-4">
-        <LucideClientIcon
-          icon={Award}
-          className="w-5 h-5 text-yellow-500 mr-2"
-          aria-hidden="true"
-        />
+        <span className="w-5 h-5 text-yellow-500 mr-2" aria-hidden="true">🏆</span>
         <h2 id="top-critics-heading" className="text-xl font-bold">
           Top Food Critics
         </h2>
@@ -39,26 +32,22 @@ export const TopCritics = memo(function TopCritics({ topReviewers }) {
           >
             <div className="flex items-center mb-3">
               {reviewer.avatar ? (
-                <Image
-                  src={reviewer.avatar}
-                  alt={`${reviewer.name}'s profile`}
-                  width={48}
-                  height={48}
-                  style={{ objectFit: 'cover' }}
-                  className="rounded-full"
-                  loading="lazy"
-                />
+                <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
+                  <span className="text-gray-500 text-lg">
+                    {(reviewer.name || 'U').charAt(0)}
+                  </span>
+                </div>
               ) : (
                 <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
                   <span className="text-gray-500 text-lg">
-                    {reviewer.name.charAt(0)}
+                    {(reviewer.name || 'U').charAt(0)}
                   </span>
                 </div>
               )}
               <div className="ml-3">
-                <h3 className="font-semibold">{reviewer.name}</h3>
+                <h3 className="font-semibold">{reviewer.name || 'Unknown Reviewer'}</h3>
                 <p className="text-sm text-gray-500">
-                  {reviewer.reviews.toLocaleString()} reviews
+                  {typeof reviewer.reviews === 'number' ? reviewer.reviews.toLocaleString() : '0'} reviews
                 </p>
               </div>
             </div>
@@ -87,7 +76,6 @@ export const TopCritics = memo(function TopCritics({ topReviewers }) {
       </div>
     </section>
   );
-});
+}
 
-// Default export for easier imports
 export default TopCritics;

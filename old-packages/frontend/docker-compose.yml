@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  nextjs:
+    build:
+      context: .
+      # Default target is production
+      target: runner
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    restart: always

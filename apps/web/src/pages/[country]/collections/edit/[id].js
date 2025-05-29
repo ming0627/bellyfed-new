@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { ChevronLeft, Loader2 } from 'lucide-react';
 import Layout from '../../../../components/layout/Layout.js';
 import CollectionForm from '../../../../components/collections/CollectionForm.js';
-import { LucideClientIcon } from '../../../../components/ui/lucide-icon.js';
+
 import { useCountry, useAuth } from '../../../../contexts/index.js';
 
 /**
@@ -115,7 +115,7 @@ export default function EditCollectionPage() {
           href={getCountryLink(`/collections/${id}`)}
           className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400 mb-6"
         >
-          <LucideClientIcon icon={ChevronLeft} className="w-4 h-4 mr-1" />
+          <ChevronLeft className="w-4 h-4 mr-1" />
           Back to Collection
         </Link>
 
@@ -133,10 +133,7 @@ export default function EditCollectionPage() {
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
           {isLoading ? (
             <div className="flex items-center justify-center py-12">
-              <LucideClientIcon
-                icon={Loader2}
-                className="w-8 h-8 text-orange-500 animate-spin"
-              />
+              <Loader2 className="w-8 h-8 text-orange-500 animate-spin" />
               <span className="ml-2 text-gray-600 dark:text-gray-400">
                 Loading collection...
               </span>

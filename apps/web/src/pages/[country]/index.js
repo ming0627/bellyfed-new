@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { Homepage } from '../../components/homepage.js';
+import Homepage from '../../components/homepage.js';
 
 export default function CountryHomePage({ country }) {
   const router = useRouter();

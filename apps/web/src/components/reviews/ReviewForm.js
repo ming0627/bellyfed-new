@@ -1,7 +1,6 @@
 import React, { useState, memo } from 'react';
 import { useRouter } from 'next/router';
 import { Star, Camera, X, AlertTriangle } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -132,7 +131,7 @@ const ReviewForm = memo(function ReviewForm({
     return (
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 text-center">
         <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-          <LucideClientIcon icon={Star} className="w-8 h-8 text-green-500" />
+          <Star className="w-8 h-8 text-green-500" />
         </div>
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
           Review Submitted Successfully!
@@ -222,14 +221,11 @@ const ReviewForm = memo(function ReviewForm({
                 className="p-1 focus:outline-none"
                 aria-label={`Rate ${value} stars`}
               >
-                <LucideClientIcon
-                  icon={Star}
-                  className={`w-8 h-8 ${
+                <Star className={`w-8 h-8 ${
                     (hoverRating || rating) >= value
                       ? 'text-yellow-400 fill-current'
                       : 'text-gray-300 dark:text-gray-600'
-                  }`}
-                />
+                  }`} />
               </button>
             ))}
             <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">
@@ -301,15 +297,12 @@ const ReviewForm = memo(function ReviewForm({
                   className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1"
                   aria-label="Remove photo"
                 >
-                  <LucideClientIcon icon={X} className="w-4 h-4" />
+                  <X className="w-4 h-4" />
                 </button>
               </div>
             ))}
             <label className="w-24 h-24 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-md cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-750 transition-colors">
-              <LucideClientIcon
-                icon={Camera}
-                className="w-8 h-8 text-gray-400 dark:text-gray-500 mb-1"
-              />
+              <Camera className="w-8 h-8 text-gray-400 dark:text-gray-500 mb-1" />
               <span className="text-xs text-gray-500 dark:text-gray-400">
                 Add Photo
               </span>
@@ -330,10 +323,7 @@ const ReviewForm = memo(function ReviewForm({
         {/* Guidelines */}
         <div className="mb-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md">
           <div className="flex items-start">
-            <LucideClientIcon
-              icon={AlertTriangle}
-              className="w-5 h-5 text-yellow-500 mr-2 mt-0.5"
-            />
+            <AlertTriangle className="w-5 h-5 text-yellow-500 mr-2 mt-0.5" />
             <div>
               <h3 className="text-base font-medium text-gray-900 dark:text-white mb-1">
                 Review Guidelines

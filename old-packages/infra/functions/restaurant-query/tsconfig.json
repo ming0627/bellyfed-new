@@ -1,0 +1,37 @@
+{
+    "compilerOptions": {
+        "target": "ES2022",
+        "module": "CommonJS",
+        "lib": ["ES2022"],
+        "declaration": true,
+        "strict": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "noImplicitThis": true,
+        "alwaysStrict": true,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": false,
+        "inlineSourceMap": true,
+        "inlineSources": true,
+        "experimentalDecorators": true,
+        "strictPropertyInitialization": false,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "outDir": "./dist",
+        "rootDir": "../../",
+        "baseUrl": ".",
+        "paths": {
+            "@utils/*": ["../../src/layers/utils/nodejs/*"],
+            "@middlewares/*": ["../../src/layers/middleware/nodejs/middlewares/*"],
+            "@infra/utils/*": ["../../src/layers/utils/nodejs/*"],
+            "@infra/middleware/*": ["../../src/layers/middleware/nodejs/middlewares/*"],
+            "@infra/lib/*": ["../../lib/*"],
+            "@infra/config": ["../../lib/config.ts"]
+        }
+    },
+    "include": ["*.ts", "src/**/*.ts", "../../src/layers/utils/nodejs/**/*.ts"],
+    "exclude": ["node_modules", "dist"]
+}

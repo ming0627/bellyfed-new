@@ -1,8 +1,6 @@
 import React, { memo } from 'react';
 import Link from 'next/link';
 import { Star, Award, TrendingUp, Users, ArrowRight, Calendar } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
-
 /**
  * FeaturedContent component displays highlighted content and community picks
  *
@@ -142,10 +140,8 @@ const FeaturedContent = memo(function FeaturedContent({ countryName, getCountryL
 
                 {/* Type Badge */}
                 <div className={`absolute top-4 left-4 p-2 bg-gradient-to-r ${getTypeColor(item.type)} rounded-lg backdrop-blur-sm`}>
-                  <LucideClientIcon
-                    icon={getTypeIcon(item.type)}
-                    className="w-5 h-5 text-white"
-                  />
+                  <getTypeIcon(item.type)className="w-5 h-5 text-white"
+                   />
                 </div>
 
                 {/* Badge */}
@@ -161,7 +157,7 @@ const FeaturedContent = memo(function FeaturedContent({ countryName, getCountryL
                   {item.rating && (
                     <div className="flex items-center space-x-2">
                       <div className="flex items-center space-x-1">
-                        <LucideClientIcon icon={Star} className="w-4 h-4 text-yellow-400 fill-current" />
+                        <StarclassName="w-4 h-4 text-yellow-400 fill-current"  />
                         <span className="text-white font-medium">{item.rating}</span>
                       </div>
                       <span className="text-white/80 text-sm">({item.reviewCount} reviews)</span>
@@ -192,7 +188,7 @@ const FeaturedContent = memo(function FeaturedContent({ countryName, getCountryL
                   {item.endDate && (
                     <div className="text-center">
                       <div className="flex items-center space-x-1 text-gray-600">
-                        <LucideClientIcon icon={Calendar} className="w-4 h-4" />
+                        <CalendarclassName="w-4 h-4"  />
                         <span className="text-sm">Ends Jan 31</span>
                       </div>
                     </div>
@@ -204,10 +200,8 @@ const FeaturedContent = memo(function FeaturedContent({ countryName, getCountryL
                   <span className="text-sm font-medium text-gray-900 group-hover:text-orange-600 transition-colors">
                     {item.type === 'community-challenge' ? 'Join Challenge' : 'Learn More'}
                   </span>
-                  <LucideClientIcon
-                    icon={ArrowRight}
-                    className="w-4 h-4 text-gray-400 group-hover:text-orange-500 group-hover:translate-x-1 transition-all duration-200"
-                  />
+                  <ArrowRightclassName="w-4 h-4 text-gray-400 group-hover:text-orange-500 group-hover:translate-x-1 transition-all duration-200"
+                   />
                 </div>
               </div>
             </div>
@@ -224,7 +218,7 @@ const FeaturedContent = memo(function FeaturedContent({ countryName, getCountryL
             className="flex items-center space-x-2 bg-white/20 px-4 py-2 rounded-lg hover:bg-white/30 transition-colors"
           >
             <span className="font-medium">Submit Your Content</span>
-            <LucideClientIcon icon={ArrowRight} className="w-4 h-4" />
+            <ArrowRightclassName="w-4 h-4"  />
           </Link>
         </div>
       </div>

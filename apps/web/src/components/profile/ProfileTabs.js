@@ -7,7 +7,6 @@ import {
   MapPin,
   Trophy,
 } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
 import UserFavorites from './UserFavorites.js';
 import RankingsTab from './RankingsTab.js';
 import ReviewsTab from './ReviewsTab.js';
@@ -91,11 +90,9 @@ const ProfileTabs = memo(function ProfileTabs({
           ) : (
             <div className="text-center py-8">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 mb-4">
-                <LucideClientIcon
-                  icon={Award}
-                  className="w-8 h-8 text-gray-400 dark:text-gray-500"
+                <AwardclassName="w-8 h-8 text-gray-400 dark:text-gray-500"
                   aria-hidden="true"
-                />
+                 />
               </div>
               <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
                 No Badges Yet
@@ -174,11 +171,9 @@ const ProfileTabs = memo(function ProfileTabs({
                   </label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <LucideClientIcon
-                        icon={MapPin}
-                        className="h-5 w-5 text-gray-400 dark:text-gray-500"
+                      <MapPinclassName="h-5 w-5 text-gray-400 dark:text-gray-500"
                         aria-hidden="true"
-                      />
+                       />
                     </div>
                     <input
                       type="text"
@@ -296,15 +291,13 @@ const ProfileTabs = memo(function ProfileTabs({
                   : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:border-gray-600'
               }`}
             >
-              <LucideClientIcon
-                icon={tab.icon}
-                className={`w-5 h-5 mr-2 ${
+              <tab.iconclassName={`w-5 h-5 mr-2 ${
                   activeTab === tab.id
                     ? 'text-orange-500'
                     : 'text-gray-400 dark:text-gray-500'
                 }`}
                 aria-hidden="true"
-              />
+               />
               {tab.label}
               {tab.count !== null && (
                 <span

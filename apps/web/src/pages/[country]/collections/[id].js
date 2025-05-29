@@ -17,7 +17,7 @@ import {
 import Layout from '../../../components/layout/Layout.js';
 import RestaurantCard from '../../../components/restaurants/RestaurantCard.js';
 import CollectionCard from '../../../components/collections/CollectionCard.js';
-import { LucideClientIcon } from '../../../components/ui/lucide-icon.js';
+
 import { useCountry, useAuth } from '../../../contexts/index.js';
 
 // Mock data for a collection
@@ -229,11 +229,7 @@ export default function CollectionDetailPage() {
       >
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex items-center justify-center min-h-[60vh]">
-            <LucideClientIcon
-              icon={Loader2}
-              className="w-8 h-8 animate-spin text-orange-500"
-              aria-label="Loading"
-            />
+            <Loader2 className="w-8 h-8 animate-spin text-orange-500" aria-label="Loading" />
           </div>
         </div>
       </Layout>
@@ -282,11 +278,7 @@ export default function CollectionDetailPage() {
             href={getCountryLink('/collections')}
             className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
           >
-            <LucideClientIcon
-              icon={ChevronLeft}
-              className="w-4 h-4 mr-1"
-              aria-hidden="true"
-            />
+            <ChevronLeft className="w-4 h-4 mr-1" aria-hidden="true" />
             Back to Collections
           </Link>
         </div>
@@ -314,11 +306,7 @@ export default function CollectionDetailPage() {
 
               <div className="flex flex-wrap gap-y-2 text-white/80 text-sm">
                 <div className="flex items-center mr-4">
-                  <LucideClientIcon
-                    icon={Utensils}
-                    className="w-4 h-4 mr-1.5"
-                    aria-hidden="true"
-                  />
+                  <Utensils className="w-4 h-4 mr-1.5" aria-hidden="true" />
                   <span>
                     {collection.restaurantCount}{' '}
                     {collection.restaurantCount === 1
@@ -329,22 +317,14 @@ export default function CollectionDetailPage() {
 
                 {collection.location && (
                   <div className="flex items-center mr-4">
-                    <LucideClientIcon
-                      icon={MapPin}
-                      className="w-4 h-4 mr-1.5"
-                      aria-hidden="true"
-                    />
+                    <MapPin className="w-4 h-4 mr-1.5" aria-hidden="true" />
                     <span>{collection.location}</span>
                   </div>
                 )}
 
                 {collection.updatedAt && (
                   <div className="flex items-center">
-                    <LucideClientIcon
-                      icon={Clock}
-                      className="w-4 h-4 mr-1.5"
-                      aria-hidden="true"
-                    />
+                    <Clock className="w-4 h-4 mr-1.5" aria-hidden="true" />
                     <span>Updated {formatDate(collection.updatedAt)}</span>
                   </div>
                 )}
@@ -387,11 +367,7 @@ export default function CollectionDetailPage() {
                   href={getCountryLink(`/collections/edit/${id}`)}
                   className="flex items-center px-4 py-2 bg-orange-500 text-white rounded-md text-sm font-medium hover:bg-orange-600 transition-colors"
                 >
-                  <LucideClientIcon
-                    icon={Edit}
-                    className="w-4 h-4 mr-1.5"
-                    aria-hidden="true"
-                  />
+                  <Edit className="w-4 h-4 mr-1.5" aria-hidden="true" />
                   Edit Collection
                 </Link>
               )}
@@ -404,11 +380,11 @@ export default function CollectionDetailPage() {
                     : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
-                <LucideClientIcon
-                  icon={isSaved ? BookmarkCheck : Bookmark}
-                  className="w-4 h-4 mr-1.5"
-                  aria-hidden="true"
-                />
+                {isSaved ? (
+                  <BookmarkCheck className="w-4 h-4 mr-1.5" aria-hidden="true" />
+                ) : (
+                  <Bookmark className="w-4 h-4 mr-1.5" aria-hidden="true" />
+                )}
                 {isSaved ? 'Saved' : 'Save'}
               </button>
 
@@ -416,11 +392,7 @@ export default function CollectionDetailPage() {
                 onClick={handleShare}
                 className="flex items-center px-4 py-2 bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300 rounded-md text-sm font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
               >
-                <LucideClientIcon
-                  icon={Share2}
-                  className="w-4 h-4 mr-1.5"
-                  aria-hidden="true"
-                />
+                <Share2 className="w-4 h-4 mr-1.5" aria-hidden="true" />
                 Share
               </button>
             </div>

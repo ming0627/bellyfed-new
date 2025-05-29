@@ -1,0 +1,28 @@
+# Check if Docker-related files have changed
+DOCKER_FILES_CHANGED=$(git diff --cached --name-only | grep -E '(Dockerfile|docker-compose\.yml|\.dockerignore|lib/frontend-cicd-stack\.ts|lib/ecs-fargate-stack\.ts)')
+
+if [ -n "$DOCKER_FILES_CHANGED" ]; then
+  echo "Docker-related files changed. Running validation script..."
+
+  # Run the Docker validation script
+  if [ -f "scripts/test-frontend-build.sh" ]; then
+    echo "Running Docker validation script..."
+    HUSKY=1 bash scripts/test-frontend-build.sh
+    VALIDATION_RESULT=$?
+
+    if [ $VALIDATION_RESULT -ne 0 ]; then
+      echo "❌ Docker validation failed. Please fix the issues before committing."
+      exit 1
+    else
+      echo "✅ Docker validation passed."
+    fi
+  else
+    echo "⚠️ Warning: Docker validation script not found at scripts/test-frontend-build.sh"
+    echo "Please make sure the script exists and is executable."
+  fi
+else
+  # Skip running tests for now as integration tests have been removed
+  echo "Skipping tests..."
+  # npm test
+  exit 0
+fi

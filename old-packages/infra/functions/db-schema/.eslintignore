@@ -1,0 +1,30 @@
+# Build outputs
+dist/
+build/
+
+# Dependencies
+node_modules/
+
+# Cache
+.turbo/
+.cache/
+
+# Coverage reports
+coverage/
+
+# Type definitions
+*.d.ts
+
+# Generated files
+*.js.map
+*.d.ts.map
+
+# Temporary files
+.DS_Store
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore temp directory
+temp/

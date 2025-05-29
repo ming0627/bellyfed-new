@@ -2,7 +2,6 @@ import React, { useState, memo } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Eye, EyeOff, Mail, Lock, AlertCircle } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
 import { useAuth } from '../../contexts/index.js';
 
 /**
@@ -103,11 +102,9 @@ const SignInForm = memo(function SignInForm({
         {error && (
           <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-md">
             <div className="flex items-start">
-              <LucideClientIcon
-                icon={AlertCircle}
-                className="w-5 h-5 text-red-500 dark:text-red-400 mt-0.5 mr-3 flex-shrink-0"
+              <AlertCircleclassName="w-5 h-5 text-red-500 dark:text-red-400 mt-0.5 mr-3 flex-shrink-0"
                 aria-hidden="true"
-              />
+               />
               <span className="text-red-800 dark:text-red-300">{error}</span>
             </div>
           </div>
@@ -124,11 +121,9 @@ const SignInForm = memo(function SignInForm({
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <LucideClientIcon
-                  icon={Mail}
-                  className="h-5 w-5 text-gray-400 dark:text-gray-500"
+                <MailclassName="h-5 w-5 text-gray-400 dark:text-gray-500"
                   aria-hidden="true"
-                />
+                 />
               </div>
               <input
                 id="email"
@@ -154,11 +149,9 @@ const SignInForm = memo(function SignInForm({
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <LucideClientIcon
-                  icon={Lock}
-                  className="h-5 w-5 text-gray-400 dark:text-gray-500"
+                <LockclassName="h-5 w-5 text-gray-400 dark:text-gray-500"
                   aria-hidden="true"
-                />
+                 />
               </div>
               <input
                 id="password"
@@ -178,11 +171,9 @@ const SignInForm = memo(function SignInForm({
                   className="text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 focus:outline-none"
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
-                  <LucideClientIcon
-                    icon={showPassword ? EyeOff : Eye}
-                    className="h-5 w-5"
+                  <showPassword ? EyeOff : EyeclassName="h-5 w-5"
                     aria-hidden="true"
-                  />
+                   />
                 </button>
               </div>
             </div>

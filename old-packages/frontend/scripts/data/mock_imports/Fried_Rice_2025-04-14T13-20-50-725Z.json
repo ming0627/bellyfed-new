@@ -1,0 +1,32 @@
+[
+  {
+    "id": "104ea29a-81f9-4428-a776-069034fa8d6a",
+    "name": "Golden Fried Rice Restaurant",
+    "rating": 4.5,
+    "reviewCount": 1250
+  },
+  {
+    "id": "3de3d318-0db1-48b9-a953-ad1b0479fe55",
+    "name": "Wok Master",
+    "rating": 4.3,
+    "reviewCount": 980
+  },
+  {
+    "id": "8a3095c3-0353-4147-b60f-4b043b5f9867",
+    "name": "Spicy Dragon",
+    "rating": 4.7,
+    "reviewCount": 1500
+  },
+  {
+    "id": "af586909-696e-4d74-af18-e5e6ca5d7aba",
+    "name": "Uncle Roger's",
+    "rating": 4.8,
+    "reviewCount": 2200
+  },
+  {
+    "id": "27cc171c-52f9-4f26-a0fb-daac65585a0f",
+    "name": "Hawker Delight",
+    "rating": 4.2,
+    "reviewCount": 850
+  }
+]

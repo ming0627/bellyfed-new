@@ -1,7 +1,5 @@
 import React, { useState, memo } from 'react';
 import { Bell, Mail, Smartphone, Save } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
-
 /**
  * NotificationSettings component for managing user notification preferences
  *
@@ -95,10 +93,8 @@ const NotificationSettings = memo(function NotificationSettings({
         {/* Email Notifications */}
         <div className="mb-8">
           <div className="flex items-center mb-4">
-            <LucideClientIcon
-              icon={Mail}
-              className="w-6 h-6 text-orange-500 mr-2"
-            />
+            <MailclassName="w-6 h-6 text-orange-500 mr-2"
+             />
             <h3 className="text-lg font-medium text-gray-900 dark:text-white">
               Email Notifications
             </h3>
@@ -316,10 +312,8 @@ const NotificationSettings = memo(function NotificationSettings({
         {/* Push Notifications */}
         <div className="mb-8">
           <div className="flex items-center mb-4">
-            <LucideClientIcon
-              icon={Bell}
-              className="w-6 h-6 text-orange-500 mr-2"
-            />
+            <BellclassName="w-6 h-6 text-orange-500 mr-2"
+             />
             <h3 className="text-lg font-medium text-gray-900 dark:text-white">
               Push Notifications
             </h3>
@@ -469,10 +463,8 @@ const NotificationSettings = memo(function NotificationSettings({
         {/* SMS Notifications */}
         <div className="mb-8">
           <div className="flex items-center mb-4">
-            <LucideClientIcon
-              icon={Smartphone}
-              className="w-6 h-6 text-orange-500 mr-2"
-            />
+            <SmartphoneclassName="w-6 h-6 text-orange-500 mr-2"
+             />
             <h3 className="text-lg font-medium text-gray-900 dark:text-white">
               SMS Notifications
             </h3>
@@ -567,7 +559,7 @@ const NotificationSettings = memo(function NotificationSettings({
               isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
             }`}
           >
-            <LucideClientIcon icon={Save} className="w-5 h-5 mr-2" />
+            <SaveclassName="w-5 h-5 mr-2"  />
             {isSubmitting ? 'Saving...' : 'Save Changes'}
           </button>
         </div>

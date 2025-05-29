@@ -1,0 +1,20 @@
+{
+    "name": "google-maps-integration",
+    "version": "1.0.0",
+    "description": "Lambda function for Google Maps API integration",
+    "main": "index.ts",
+    "dependencies": {
+        "@aws-sdk/client-rds-data": "^3.0.0",
+        "@aws-sdk/client-secrets-manager": "^3.410.0",
+        "axios": "^0.21.4",
+        "uuid": "^8.3.2"
+    },
+    "scripts": {
+        "build": "npm run type-check && esbuild index.ts --bundle --platform=node --target=node20 --outfile=dist/index.js --alias:@utils=../../src/layers/utils/nodejs --alias:@middlewares=../../src/layers/middleware/nodejs/middlewares --alias:@infra/utils=../../src/layers/utils/nodejs --alias:@infra/middleware=../../src/layers/middleware/nodejs/middlewares --alias:@infra/lib=../../lib --alias:@infra/config=../../lib/config.ts --format=esm",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
+        "type-check": "tsc --noEmit",
+        "lint:strict": "eslint . --max-warnings=0"
+    },
+    "type": "module"
+}

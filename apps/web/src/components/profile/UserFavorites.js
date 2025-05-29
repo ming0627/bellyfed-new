@@ -2,8 +2,6 @@ import React, { useState, memo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Star, MapPin, Search, Filter, Heart } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
-
 // Mock data for user favorites
 const mockUserFavorites = [
   {
@@ -137,11 +135,9 @@ const UserFavorites = memo(function UserFavorites({ user, getCountryLink }) {
           {/* Search Input */}
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <LucideClientIcon
-                icon={Search}
-                className="h-5 w-5 text-gray-400 dark:text-gray-500"
+              <SearchclassName="h-5 w-5 text-gray-400 dark:text-gray-500"
                 aria-hidden="true"
-              />
+               />
             </div>
             <input
               type="text"
@@ -155,11 +151,9 @@ const UserFavorites = memo(function UserFavorites({ user, getCountryLink }) {
           {/* Cuisine Filter */}
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <LucideClientIcon
-                icon={Filter}
-                className="h-5 w-5 text-gray-400 dark:text-gray-500"
+              <FilterclassName="h-5 w-5 text-gray-400 dark:text-gray-500"
                 aria-hidden="true"
-              />
+               />
             </div>
             <select
               className="pl-10 pr-8 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
@@ -209,11 +203,9 @@ const UserFavorites = memo(function UserFavorites({ user, getCountryLink }) {
                   className="absolute top-2 right-2 p-1.5 bg-white dark:bg-gray-800 rounded-full shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                   aria-label={`Remove ${favorite.name} from favorites`}
                 >
-                  <LucideClientIcon
-                    icon={Heart}
-                    className="w-5 h-5 text-red-500 fill-current"
+                  <HeartclassName="w-5 h-5 text-red-500 fill-current"
                     aria-hidden="true"
-                  />
+                   />
                 </button>
 
                 {/* Price Range */}
@@ -235,11 +227,9 @@ const UserFavorites = memo(function UserFavorites({ user, getCountryLink }) {
 
                 <div className="flex items-center mb-2">
                   <div className="flex items-center text-yellow-500 mr-2">
-                    <LucideClientIcon
-                      icon={Star}
-                      className="w-4 h-4 fill-current"
+                    <StarclassName="w-4 h-4 fill-current"
                       aria-hidden="true"
-                    />
+                     />
                     <span className="ml-1 text-xs font-medium">
                       {favorite.rating?.toFixed(1) || 'N/A'}
                     </span>
@@ -263,11 +253,9 @@ const UserFavorites = memo(function UserFavorites({ user, getCountryLink }) {
                 )}
 
                 <div className="flex items-start text-gray-600 dark:text-gray-400 text-sm">
-                  <LucideClientIcon
-                    icon={MapPin}
-                    className="w-4 h-4 mt-0.5 mr-1 flex-shrink-0"
+                  <MapPinclassName="w-4 h-4 mt-0.5 mr-1 flex-shrink-0"
                     aria-hidden="true"
-                  />
+                   />
                   <span className="line-clamp-2">
                     {formatAddress(favorite.address)}
                   </span>
@@ -279,11 +267,9 @@ const UserFavorites = memo(function UserFavorites({ user, getCountryLink }) {
       ) : (
         <div className="text-center py-12">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 mb-4">
-            <LucideClientIcon
-              icon={Heart}
-              className="w-8 h-8 text-gray-400 dark:text-gray-500"
+            <HeartclassName="w-8 h-8 text-gray-400 dark:text-gray-500"
               aria-hidden="true"
-            />
+             />
           </div>
           <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
             No Favorites Found

@@ -1,0 +1,27 @@
+{
+    "name": "user-account-processor",
+    "version": "1.0.0",
+    "description": "Lambda function for processing user account events",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "npm run type-check && esbuild index.ts --bundle --platform=node --target=node20 --outfile=dist/index.js --alias:@utils=../../src/layers/utils/nodejs --alias:@middlewares=../../src/layers/middleware/nodejs/middlewares --alias:@infra/utils=../../src/layers/utils/nodejs --alias:@infra/middleware=../../src/layers/middleware/nodejs/middlewares --alias:@infra/lib=../../lib --alias:@infra/config=../../lib/config.ts --format=cjs",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
+        "type-check": "tsc --noEmit",
+        "lint:strict": "eslint . --max-warnings=0"
+    },
+    "dependencies": {
+        "@aws-sdk/client-cognito-identity-provider": "^3.410.0",
+        "@aws-sdk/client-eventbridge": "^3.410.0",
+        "@aws-sdk/client-secrets-manager": "^3.410.0",
+        "pg": "^8.11.3",
+        "uuid": "^9.0.1"
+    },
+    "devDependencies": {
+        "@types/aws-lambda": "^8.10.114",
+        "@types/pg": "^8.6.6",
+        "@types/uuid": "^9.0.1"
+    },
+    "type": "module"
+}

@@ -1,0 +1,16 @@
+{
+  "brotli": true,
+  "gzip": true,
+  "directory": "out",
+  "extensions": ["html", "js", "css", "svg", "json", "xml", "txt"],
+  "threshold": 1024,
+  "concurrency": 5,
+  "exclude": [
+    "**/*.jpg",
+    "**/*.jpeg",
+    "**/*.png",
+    "**/*.gif",
+    "**/*.webp",
+    "**/*.ico"
+  ]
+}

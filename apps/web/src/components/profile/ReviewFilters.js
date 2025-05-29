@@ -1,16 +1,14 @@
 /**
  * ReviewFilters Component
- * 
+ *
  * A component for filtering reviews by rating and date.
  */
 
 import React, { memo } from 'react';
 import { Star, Calendar } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
-
 /**
  * ReviewFilters component
- * 
+ *
  * @param {Object} props - Component props
  * @param {string} props.filterRating - Current rating filter
  * @param {string} props.filterDate - Current date filter
@@ -34,11 +32,7 @@ const ReviewFilters = memo(function ReviewFilters({
         {/* Rating Filter */}
         <div>
           <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 flex items-center">
-            <LucideClientIcon
-              icon={Star}
-              className="w-4 h-4 mr-1 text-yellow-500"
-              aria-hidden="true"
-            />
+            <Star className="w-4 h-4 mr-1 text-yellow-500" aria-hidden="true" />
             Rating
           </h4>
           <div className="space-y-1">
@@ -67,21 +61,17 @@ const ReviewFilters = memo(function ReviewFilters({
                   onChange={() => handleRatingFilterChange(rating.toString())}
                 />
                 <span className="text-sm text-gray-700 dark:text-gray-300 flex items-center">
-                  {rating} <LucideClientIcon icon={Star} className="w-3 h-3 ml-1 text-yellow-500" />
+                  {rating} <Star className="w-3 h-3 ml-1 text-yellow-500" />
                 </span>
               </label>
             ))}
           </div>
         </div>
-        
+
         {/* Date Filter */}
         <div>
           <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 flex items-center">
-            <LucideClientIcon
-              icon={Calendar}
-              className="w-4 h-4 mr-1 text-blue-500"
-              aria-hidden="true"
-            />
+            <Calendar className="w-4 h-4 mr-1 text-blue-500" aria-hidden="true" />
             Date
           </h4>
           <div className="space-y-1">
@@ -136,7 +126,7 @@ const ReviewFilters = memo(function ReviewFilters({
           </div>
         </div>
       </div>
-      
+
       {/* Clear Filters Button */}
       {hasActiveFilters && (
         <div className="mt-4 flex justify-end">

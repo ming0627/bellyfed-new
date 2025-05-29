@@ -1,0 +1,32 @@
+{
+    "name": "cognito-post-confirmation",
+    "version": "1.0.0",
+    "description": "Lambda function triggered after Cognito user confirmation",
+    "main": "dist/index.js",
+    "private": true,
+    "scripts": {
+        "lint:fix": "eslint . --fix",
+        "lint": "eslint .",
+        "build": "npm run type-check && esbuild index.ts --bundle --platform=node --target=node20 --outfile=dist/index.js --alias:@utils=../../src/layers/utils/nodejs --alias:@middlewares=../../src/layers/middleware/nodejs/middlewares --alias:@infra/utils=../../src/layers/utils/nodejs --alias:@infra/middleware=../../src/layers/middleware/nodejs/middlewares --alias:@infra/lib=../../lib --alias:@infra/config=../../lib/config.ts --format=cjs",
+        "type-check": "tsc --noEmit",
+        "lint:strict": "eslint . --max-warnings=0"
+    },
+    "dependencies": {
+        "@aws-sdk/client-eventbridge": "^3.410.0",
+        "uuid": "^9.0.1"
+    },
+    "devDependencies": {
+        "@types/aws-lambda": "^8.10.146",
+        "@types/node": "^22.10.1",
+        "@types/uuid": "^9.0.8",
+        "@typescript-eslint/eslint-plugin": "^8.17.0",
+        "@typescript-eslint/parser": "^8.17.0",
+        "esbuild": "^0.25.2",
+        "eslint": "^8.56.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-prettier": "^5.2.1",
+        "prettier": "^3.0.0",
+        "typescript": "~5.6.2"
+    },
+    "type": "module"
+}

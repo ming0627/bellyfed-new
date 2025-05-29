@@ -1,0 +1,25 @@
+/**
+ * Simple environment-specific styles
+ * These styles are applied based on a single class on the HTML element
+ */
+
+/* Fix SVG rendering in Lambda@Edge */
+.lambda-edge svg {
+  /* Force hardware acceleration to ensure consistent rendering */
+  transform: translateZ(0);
+}
+
+/* Ensure consistent font rendering */
+.lambda-edge {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Debug info only visible in local development */
+.debug-info {
+  display: none;
+}
+
+.local-dev .debug-info {
+  display: block;
+}

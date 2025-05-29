@@ -1,0 +1,14 @@
+{
+    "version": "1",
+    "triggerSource": "CustomMessage_ResendCode",
+    "request": {
+        "userAttributes": {
+            "email": "sherman.lye@bellyfed.com"
+        },
+        "codeParameter": "{####}"
+    },
+    "response": {
+        "emailSubject": "",
+        "emailMessage": ""
+    }
+}

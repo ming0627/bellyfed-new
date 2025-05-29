@@ -2,7 +2,6 @@ import React, { memo, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Store, Star, ArrowRight, MapPin } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
 
 /**
  * RestaurantCard component for displaying individual restaurant information
@@ -37,8 +36,7 @@ const RestaurantCard = memo(function RestaurantCard({
             />
           ) : (
             <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-              <LucideClientIcon
-                icon={Store}
+              <Store
                 className="w-8 h-8 text-gray-400"
               />
             </div>
@@ -63,8 +61,7 @@ const RestaurantCard = memo(function RestaurantCard({
           )}
           <div className="flex items-center mb-2">
             <div className="flex items-center text-yellow-500 mr-2">
-              <LucideClientIcon
-                icon={Star}
+              <Star
                 className="w-4 h-4 fill-current"
                 aria-hidden="true"
               />
@@ -81,8 +78,7 @@ const RestaurantCard = memo(function RestaurantCard({
           </div>
           {restaurant.location && (
             <p className="text-gray-500 text-sm flex items-center">
-              <LucideClientIcon
-                icon={MapPin}
+              <MapPin
                 className="w-3 h-3 mr-1 flex-shrink-0"
                 aria-hidden="true"
               />
@@ -103,7 +99,7 @@ const RestaurantCard = memo(function RestaurantCard({
  * @param {Function} props.getCountryLink - Function to generate country-specific links
  * @returns {JSX.Element} - Rendered component
  */
-export const FeaturedRestaurants = memo(function FeaturedRestaurants({
+const FeaturedRestaurants = memo(function FeaturedRestaurants({
   countryName,
   getCountryLink,
 }) {
@@ -168,8 +164,7 @@ export const FeaturedRestaurants = memo(function FeaturedRestaurants({
     <section className="mb-12" aria-labelledby="featured-restaurants-heading">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center">
-          <LucideClientIcon
-            icon={Store}
+          <Store
             className="w-5 h-5 text-green-600 mr-2"
             aria-hidden="true"
           />
@@ -183,8 +178,7 @@ export const FeaturedRestaurants = memo(function FeaturedRestaurants({
           aria-label="View all restaurants"
         >
           View All
-          <LucideClientIcon
-            icon={ArrowRight}
+          <ArrowRight
             className="w-4 h-4 ml-1"
             aria-hidden="true"
           />
@@ -204,5 +198,4 @@ export const FeaturedRestaurants = memo(function FeaturedRestaurants({
   );
 });
 
-// Default export for easier imports
 export default FeaturedRestaurants;

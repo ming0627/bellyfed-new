@@ -1,0 +1,211 @@
+[
+  {
+    "id": "SG001",
+    "name": "Ponggol Nasi Lemak",
+    "type": "RESTAURANT",
+    "specialties": ["Nasi Lemak"],
+    "description": "Famous for their crispy chicken wing and otah",
+    "priceRange": "$$",
+    "isCurrentlyOperating": true,
+    "address": "371 Jalan Besar, Singapore 208998",
+    "phoneNumber": "+65 6293 0020",
+    "website": "https://www.ponggolnasilemak.com.sg",
+    "country": "singapore",
+    "locations": [
+      {
+        "name": "Ponggol Nasi Lemak",
+        "address": "371 Jalan Besar, Singapore 208998",
+        "latitude": 1.3074,
+        "longitude": 103.8567
+      }
+    ],
+    "schedules": [
+      {
+        "dayOfWeek": "MONDAY",
+        "startTime": "17:30",
+        "endTime": "23:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "TUESDAY",
+        "startTime": "17:30",
+        "endTime": "23:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "WEDNESDAY",
+        "startTime": "17:30",
+        "endTime": "23:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "THURSDAY",
+        "startTime": "17:30",
+        "endTime": "23:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "FRIDAY",
+        "startTime": "17:30",
+        "endTime": "23:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SATURDAY",
+        "startTime": "17:30",
+        "endTime": "23:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SUNDAY",
+        "startTime": "17:30",
+        "endTime": "23:30",
+        "isRecurring": true
+      }
+    ],
+    "reviews": [
+      {
+        "id": "SG001R1",
+        "authorName": "John Tan",
+        "comment": "Best nasi lemak in Singapore! The chicken wings are always crispy.",
+        "visitDate": "2024-01-15",
+        "overallRating": 5
+      }
+    ]
+  },
+  {
+    "id": "SG002",
+    "name": "Selera Rasa Nasi Lemak",
+    "type": "RESTAURANT",
+    "specialties": ["Nasi Lemak"],
+    "description": "Royal family's favorite nasi lemak",
+    "priceRange": "$$",
+    "isCurrentlyOperating": true,
+    "address": "2 Adam Road, #01-02, Adam Road Food Centre, Singapore 289876",
+    "phoneNumber": "+65 9843 4509",
+    "website": "https://www.selerarasa.com",
+    "country": "singapore",
+    "locations": [
+      {
+        "name": "Selera Rasa Nasi Lemak",
+        "address": "2 Adam Road, #01-02, Adam Road Food Centre, Singapore 289876",
+        "latitude": 1.3242,
+        "longitude": 103.8147
+      }
+    ],
+    "schedules": [
+      {
+        "dayOfWeek": "TUESDAY",
+        "startTime": "07:00",
+        "endTime": "17:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "WEDNESDAY",
+        "startTime": "07:00",
+        "endTime": "17:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "THURSDAY",
+        "startTime": "07:00",
+        "endTime": "17:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "FRIDAY",
+        "startTime": "07:00",
+        "endTime": "17:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SATURDAY",
+        "startTime": "07:00",
+        "endTime": "17:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SUNDAY",
+        "startTime": "07:00",
+        "endTime": "17:00",
+        "isRecurring": true
+      }
+    ],
+    "reviews": [
+      {
+        "id": "SG002R1",
+        "authorName": "Sarah Lee",
+        "comment": "The rice is so fragrant! Worth the queue.",
+        "visitDate": "2024-01-10",
+        "overallRating": 5
+      }
+    ]
+  },
+  {
+    "id": "SG003",
+    "name": "Boon Lay Power Nasi Lemak",
+    "type": "RESTAURANT",
+    "specialties": ["Nasi Lemak"],
+    "description": "Popular supper spot in the west",
+    "priceRange": "$",
+    "isCurrentlyOperating": true,
+    "address": "221B Boon Lay Place, Boon Lay Place Market and Food Centre, #01-106, Singapore 642221",
+    "phoneNumber": "+65 9088 9203",
+    "country": "singapore",
+    "locations": [
+      {
+        "name": "Boon Lay Power Nasi Lemak",
+        "address": "221B Boon Lay Place, Boon Lay Place Market and Food Centre, #01-106, Singapore 642221",
+        "latitude": 1.3462,
+        "longitude": 103.7147
+      }
+    ],
+    "schedules": [
+      {
+        "dayOfWeek": "MONDAY",
+        "startTime": "04:30",
+        "endTime": "15:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "TUESDAY",
+        "startTime": "04:30",
+        "endTime": "15:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "WEDNESDAY",
+        "startTime": "04:30",
+        "endTime": "15:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "THURSDAY",
+        "startTime": "04:30",
+        "endTime": "15:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "FRIDAY",
+        "startTime": "04:30",
+        "endTime": "15:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SATURDAY",
+        "startTime": "04:30",
+        "endTime": "15:00",
+        "isRecurring": true
+      }
+    ],
+    "reviews": [
+      {
+        "id": "SG003R1",
+        "authorName": "Michael Wong",
+        "comment": "Perfect for early breakfast or late night supper!",
+        "visitDate": "2024-01-05",
+        "overallRating": 4
+      }
+    ]
+  }
+]

@@ -1,7 +1,5 @@
 import React, { memo } from 'react';
 import { Check } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
-
 /**
  * DishIngredients component for displaying the ingredients of a dish
  *
@@ -24,11 +22,7 @@ const DishIngredients = memo(function DishIngredients({ dish }) {
       <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {dish.ingredients.map((ingredient, index) => (
           <li key={index} className="flex items-center">
-            <LucideClientIcon
-              icon={Check}
-              className="w-5 h-5 text-green-500 mr-2"
-              aria-hidden="true"
-            />
+            <Check className="w-5 h-5 text-green-500 mr-2" aria-hidden="true" />
             <span className="text-gray-700 dark:text-gray-300">
               {ingredient}
             </span>

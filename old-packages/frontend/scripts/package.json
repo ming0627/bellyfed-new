@@ -1,0 +1,22 @@
+{
+  "name": "restaurant-data-scripts",
+  "version": "1.0.0",
+  "description": "Scripts to fetch restaurant data and import to PostgreSQL RDS",
+  "main": "fetch-restaurants.js",
+  "type": "commonjs",
+  "scripts": {
+    "import": "node import-restaurants-cli.js",
+    "import-to-postgres": "node import-to-postgres.js",
+    "mock-import": "node mock-import.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-cloudwatch": "^3.705.0",
+    "@aws-sdk/client-cloudwatch-logs": "^3.703.0",
+    "@aws-sdk/client-sqs": "^3.699.0",
+    "aws-sdk": "^2.1502.0",
+    "axios": "^1.6.2",
+    "dotenv": "^16.3.1",
+    "pg": "^8.11.3",
+    "uuid": "^11.0.3"
+  }
+}

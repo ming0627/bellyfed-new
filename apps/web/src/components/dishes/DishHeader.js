@@ -1,7 +1,6 @@
 import React, { useState, memo } from 'react';
 import Image from 'next/image';
 import { Heart, Share2, Star, AlertTriangle, Info } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
 import Link from 'next/link';
 
 /**
@@ -75,10 +74,7 @@ const DishHeader = memo(function DishHeader({ dish, getCountryLink }) {
               isFavorite ? 'Remove from favorites' : 'Add to favorites'
             }
           >
-            <LucideClientIcon
-              icon={Heart}
-              className={`w-5 h-5 ${isFavorite ? 'fill-current' : ''}`}
-            />
+            <Heart className={`w-5 h-5 ${isFavorite ? 'fill-current' : ''}`} />
           </button>
 
           <button
@@ -86,7 +82,7 @@ const DishHeader = memo(function DishHeader({ dish, getCountryLink }) {
             className="p-2 rounded-full bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 shadow-md hover:shadow-lg transition-all"
             aria-label="Share dish"
           >
-            <LucideClientIcon icon={Share2} className="w-5 h-5" />
+            <Share2 className="w-5 h-5" />
           </button>
         </div>
       </div>
@@ -101,10 +97,7 @@ const DishHeader = memo(function DishHeader({ dish, getCountryLink }) {
           <div className="flex items-center">
             {dish.rating && (
               <div className="flex items-center bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200 px-3 py-1 rounded-full">
-                <LucideClientIcon
-                  icon={Star}
-                  className="w-4 h-4 mr-1 fill-current text-yellow-500"
-                />
+                <Star className="w-4 h-4 mr-1 fill-current text-yellow-500" />
                 <span className="font-medium">{dish.rating.toFixed(1)}</span>
                 <span className="mx-1 text-gray-500 dark:text-gray-400">•</span>
                 <span className="text-sm text-gray-600 dark:text-gray-400">
@@ -182,10 +175,7 @@ const DishHeader = memo(function DishHeader({ dish, getCountryLink }) {
         {dish.allergens && dish.allergens.length > 0 && (
           <div className="mb-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-md">
             <div className="flex items-start">
-              <LucideClientIcon
-                icon={AlertTriangle}
-                className="w-5 h-5 text-yellow-500 mr-2 mt-0.5"
-              />
+              <AlertTriangle className="w-5 h-5 text-yellow-500 mr-2 mt-0.5" />
               <div>
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
                   Allergen Information
@@ -244,10 +234,7 @@ const DishHeader = memo(function DishHeader({ dish, getCountryLink }) {
         {dish.isAvailable === false && (
           <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md">
             <div className="flex items-start">
-              <LucideClientIcon
-                icon={Info}
-                className="w-5 h-5 text-gray-500 mr-2 mt-0.5"
-              />
+              <Info className="w-5 h-5 text-gray-500 mr-2 mt-0.5" />
               <div>
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">
                   Currently Unavailable

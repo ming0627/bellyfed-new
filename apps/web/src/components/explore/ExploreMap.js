@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useCallback, memo } from 'react';
 import { MapPin, Navigation, Search, Loader2 } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
-
 /**
  * ExploreMap component for displaying an interactive map with restaurant locations
  *
@@ -103,11 +101,9 @@ const ExploreMap = memo(function ExploreMap({
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
           />
-          <LucideClientIcon
-            icon={Search}
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5"
+          <SearchclassName="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5"
             aria-hidden="true"
-          />
+           />
         </form>
 
         <button
@@ -117,17 +113,13 @@ const ExploreMap = memo(function ExploreMap({
           aria-label="Find my location"
         >
           {isLoadingLocation ? (
-            <LucideClientIcon
-              icon={Loader2}
-              className="w-5 h-5 animate-spin mr-2"
+            <Loader2className="w-5 h-5 animate-spin mr-2"
               aria-hidden="true"
-            />
+             />
           ) : (
-            <LucideClientIcon
-              icon={Navigation}
-              className="w-5 h-5 mr-2"
+            <NavigationclassName="w-5 h-5 mr-2"
               aria-hidden="true"
-            />
+             />
           )}
           <span>My Location</span>
         </button>
@@ -137,11 +129,9 @@ const ExploreMap = memo(function ExploreMap({
       <div className="relative h-[500px] bg-gray-100 dark:bg-gray-700">
         {!mapLoaded ? (
           <div className="absolute inset-0 flex items-center justify-center">
-            <LucideClientIcon
-              icon={Loader2}
-              className="w-8 h-8 animate-spin text-orange-500"
+            <Loader2className="w-8 h-8 animate-spin text-orange-500"
               aria-label="Loading map"
-            />
+             />
           </div>
         ) : (
           <>
@@ -149,11 +139,9 @@ const ExploreMap = memo(function ExploreMap({
             <div className="absolute inset-0 bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
               <div className="text-center p-6 max-w-md">
                 <div className="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <LucideClientIcon
-                    icon={MapPin}
-                    className="w-8 h-8 text-orange-500"
+                  <MapPinclassName="w-8 h-8 text-orange-500"
                     aria-hidden="true"
-                  />
+                   />
                 </div>
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
                   Interactive Map
@@ -198,11 +186,9 @@ const ExploreMap = memo(function ExploreMap({
             {userLocation && (
               <div className="absolute bottom-4 left-4 bg-white dark:bg-gray-800 p-3 rounded-md shadow-md">
                 <div className="flex items-center text-sm">
-                  <LucideClientIcon
-                    icon={Navigation}
-                    className="w-4 h-4 text-orange-500 mr-2"
+                  <NavigationclassName="w-4 h-4 text-orange-500 mr-2"
                     aria-hidden="true"
-                  />
+                   />
                   <span className="text-gray-700 dark:text-gray-300">
                     Your location
                   </span>

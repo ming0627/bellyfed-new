@@ -1,0 +1,247 @@
+/**
+ * Infrastructure ESLint configuration for the Bellyfed application
+ * Enhanced configuration for ESLint v8.57.1
+ * Compatible with AWS/CDK and TypeScript
+ */
+
+import pluginJs from '@eslint/js';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
+
+// Ignore patterns
+const ignores = [
+    '**/node_modules/**',
+    '**/dist/**',
+    '**/coverage/**',
+    '**/*.d.ts',
+    '**/functions/db-schema/**', // Ignore db-schema package entirely
+    '**/cdk.out/**', // Ignore CDK output directory
+    '**/cdk.out.new/**', // Ignore new CDK output directory
+    '**/build/**', // Ignore build directories
+    '**/.next/**', // Ignore Next.js build directory
+    '**/out/**', // Ignore output directories
+    // We no longer ignore all TypeScript files
+];
+
+// Minimal configuration for JavaScript files
+const jsConfig = {
+    files: ['**/*.js'],
+    languageOptions: {
+        ecmaVersion: 2022,
+        sourceType: 'module',
+        globals: {
+            ...globals.node,
+            console: 'readonly',
+            process: 'readonly',
+            __dirname: 'readonly',
+            __filename: 'readonly',
+            Buffer: 'readonly',
+            require: 'readonly',
+            module: 'readonly',
+            exports: 'writable',
+        },
+    },
+    rules: {
+        'no-unused-vars': [
+            'warn',
+            {
+                argsIgnorePattern: '^_',
+                varsIgnorePattern: '^_',
+            },
+        ],
+        'no-console': ['warn', { allow: ['warn', 'error', 'info', 'log'] }],
+        'no-undef': 'error',
+    },
+};
+
+// Configuration for TypeScript files
+const tsConfig = {
+    files: ['**/*.ts'],
+    languageOptions: {
+        ecmaVersion: 2022,
+        sourceType: 'module',
+        parser: tseslint.parser,
+        parserOptions: {
+            project: false, // Disable project to avoid tsconfig issues
+        },
+        globals: {
+            ...globals.node,
+            console: 'readonly',
+            process: 'readonly',
+            __dirname: 'readonly',
+            __filename: 'readonly',
+            Buffer: 'readonly',
+            require: 'readonly',
+            module: 'readonly',
+            exports: 'writable',
+        },
+    },
+    plugins: {
+        '@typescript-eslint': tseslint.plugin,
+    },
+    rules: {
+        'no-unused-vars': 'off', // Disable JS rule in favor of TS rule
+        '@typescript-eslint/no-unused-vars': [
+            'warn',
+            {
+                argsIgnorePattern: '^_',
+                varsIgnorePattern: '^_',
+            },
+        ],
+        'no-console': ['warn', { allow: ['warn', 'error', 'info', 'log'] }],
+        'no-undef': 'off', // TypeScript handles this
+    },
+};
+
+// Configuration for Lambda functions
+const lambdaJsConfig = {
+    files: ['functions/**/*.js'],
+    rules: {
+        'no-console': ['warn', { allow: ['warn', 'error', 'info', 'log'] }],
+    },
+};
+
+// Configuration for Lambda TypeScript functions
+const lambdaTsConfig = {
+    files: ['functions/**/*.ts'],
+    rules: {
+        'no-console': ['warn', { allow: ['warn', 'error', 'info', 'log'] }],
+    },
+};
+
+// Configuration for scripts
+const scriptsConfig = {
+    files: [
+        '**/scripts/**/*.js',
+        '**/scripts/**/*.mjs',
+        'check-db.js',
+        'data-api-import.js',
+        'import-nasi-lemak-restaurants.js',
+        'populate-restaurants.js',
+        'populate-restaurants-api.js',
+        'fix-unused-vars.js',
+        'build-lambda.js',
+    ],
+    languageOptions: {
+        globals: {
+            ...globals.node,
+            console: 'readonly',
+            process: 'readonly',
+            __dirname: 'readonly',
+            __filename: 'readonly',
+            Buffer: 'readonly',
+            require: 'readonly',
+            module: 'readonly',
+            exports: 'writable',
+        },
+    },
+    rules: {
+        'no-console': 'off', // Allow console in scripts
+        'no-undef': 'off', // Allow globals in scripts
+        'no-unused-vars': [
+            'warn',
+            {
+                argsIgnorePattern: '^_',
+                varsIgnorePattern: '^_',
+            },
+        ],
+    },
+};
+
+// Configuration for test files
+const testConfig = {
+    files: [
+        '**/*.test.js',
+        '**/*.test.ts',
+        '**/*.spec.js',
+        '**/*.spec.ts',
+        '**/test/**/*.js',
+        '**/test/**/*.ts',
+        '**/tests/**/*.js',
+        '**/tests/**/*.ts',
+        '**/__tests__/**/*.js',
+        '**/__tests__/**/*.ts',
+        '**/__mocks__/**/*.js',
+        '**/__mocks__/**/*.ts',
+    ],
+    languageOptions: {
+        globals: {
+            ...globals.node,
+            ...globals.jest, // Add Jest globals
+            describe: 'readonly',
+            it: 'readonly',
+            test: 'readonly',
+            expect: 'readonly',
+            beforeEach: 'readonly',
+            afterEach: 'readonly',
+            beforeAll: 'readonly',
+            afterAll: 'readonly',
+            jest: 'readonly',
+            jasmine: 'readonly',
+            spyOn: 'readonly',
+            fail: 'readonly',
+            pending: 'readonly',
+            fit: 'readonly',
+            fdescribe: 'readonly',
+            xit: 'readonly',
+            xdescribe: 'readonly',
+        },
+    },
+    rules: {
+        'no-undef': 'off', // Test globals are defined
+        'no-unused-vars': [
+            'warn',
+            {
+                argsIgnorePattern: '^_',
+                varsIgnorePattern: '^_',
+            },
+        ],
+    },
+};
+
+// Configuration for CDK files
+const cdkConfig = {
+    files: ['lib/**/*.ts', 'bin/**/*.ts'],
+    rules: {
+        'no-unused-vars': 'off', // Disable JS rule in favor of TS rule
+        '@typescript-eslint/no-unused-vars': 'off', // Disable unused vars check for CDK files
+        'no-undef': 'off', // TypeScript handles this
+    },
+};
+
+// Configuration for Lambda functions
+const lambdaFunctionsConfig = {
+    files: ['functions/**/*.ts', 'functions/**/*.js', 'src/layers/**/*.ts', 'src/layers/**/*.js'],
+    rules: {
+        'no-unused-vars': 'off', // Disable JS rule in favor of TS rule
+        '@typescript-eslint/no-unused-vars': 'off', // Disable unused vars check for Lambda functions
+        'no-undef': 'off', // TypeScript handles this
+    },
+};
+
+// Configuration for all TypeScript files
+const allTsConfig = {
+    files: ['**/*.ts'],
+    rules: {
+        'no-unused-vars': 'off', // Disable JS rule in favor of TS rule
+        '@typescript-eslint/no-unused-vars': 'off', // Disable unused vars check for all TypeScript files
+        'no-undef': 'off', // TypeScript handles this
+    },
+};
+
+// Export the configuration
+export default [
+    {
+        ignores,
+    },
+    jsConfig,
+    tsConfig,
+    lambdaJsConfig,
+    lambdaTsConfig,
+    scriptsConfig,
+    testConfig,
+    cdkConfig, // Add CDK config
+    lambdaFunctionsConfig, // Add Lambda functions config
+    allTsConfig, // Add configuration for all TypeScript files
+    pluginJs.configs.recommended,
+];

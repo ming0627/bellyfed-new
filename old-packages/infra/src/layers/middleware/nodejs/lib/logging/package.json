@@ -1,0 +1,14 @@
+{
+    "name": "logging-middleware",
+    "version": "1.0.0",
+    "description": "Centralized logging middleware for Lambda functions",
+    "main": "index.js",
+    "type": "module",
+    "keywords": [
+        "lambda",
+        "logging",
+        "middleware"
+    ],
+    "author": "Bellyfed",
+    "license": "ISC"
+}

@@ -1,8 +1,8 @@
 /**
  * RestaurantList Component
- * 
+ *
  * A versatile component for displaying a list of restaurants with filtering and sorting options.
- * 
+ *
  * Features:
  * - Responsive grid layout
  * - Filtering by cuisine, price range, rating, etc.
@@ -15,12 +15,11 @@
 
 import React, { useState, useCallback, useMemo, memo } from 'react';
 import { Search, Filter, ChevronDown, ChevronUp, Loader2 } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
 import RestaurantCard from './RestaurantCard.js';
 
 /**
  * RestaurantList component
- * 
+ *
  * @param {Object} props - Component props
  * @param {Array} props.restaurants - Array of restaurant objects
  * @param {boolean} props.isLoading - Whether data is currently loading
@@ -81,7 +80,7 @@ const RestaurantList = memo(function RestaurantList({
             : [...currentValues, value],
         };
       }
-      
+
       // Toggle boolean values or set other values directly
       return {
         ...prev,
@@ -109,30 +108,30 @@ const RestaurantList = memo(function RestaurantList({
       if (searchQuery && !restaurant.name.toLowerCase().includes(searchQuery.toLowerCase())) {
         return false;
       }
-      
+
       // Cuisine filter
       if (filters.cuisines.length > 0 && !filters.cuisines.includes(restaurant.cuisine)) {
         return false;
       }
-      
+
       // Price range filter
       if (filters.priceRange.length > 0 && !filters.priceRange.includes(restaurant.priceRange)) {
         return false;
       }
-      
+
       // Rating filter
       if (filters.minRating > 0 && restaurant.rating < filters.minRating) {
         return false;
       }
-      
+
       // Open now filter
       if (filters.openNow && !restaurant.isOpen) {
         return false;
       }
-      
+
       return true;
     });
-    
+
     // Then, sort restaurants
     return result.sort((a, b) => {
       switch (sortBy) {
@@ -186,11 +185,7 @@ const RestaurantList = memo(function RestaurantList({
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
           {/* Search Input */}
           <div className="relative mb-4">
-            <LucideClientIcon
-              icon={Search}
-              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500"
-              aria-hidden="true"
-            />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500" aria-hidden="true" />
             <input
               type="text"
               placeholder="Search restaurants..."
@@ -231,22 +226,18 @@ const RestaurantList = memo(function RestaurantList({
               aria-expanded={filterOpen}
               aria-controls="filter-panel"
             >
-              <LucideClientIcon
-                icon={Filter}
-                className="w-4 h-4 mr-1"
-                aria-hidden="true"
-              />
+              <Filter className="w-4 h-4 mr-1" aria-hidden="true" />
               Filters
               {hasActiveFilters && (
                 <span className="ml-2 px-2 py-0.5 bg-orange-500 text-white text-xs rounded-full">
                   {filters.cuisines.length + filters.priceRange.length + (filters.minRating > 0 ? 1 : 0) + (filters.openNow ? 1 : 0) + (searchQuery.trim() !== '' ? 1 : 0)}
                 </span>
               )}
-              <LucideClientIcon
-                icon={filterOpen ? ChevronUp : ChevronDown}
-                className="w-4 h-4 ml-1"
-                aria-hidden="true"
-              />
+              {filterOpen ? (
+                <ChevronUp className="w-4 h-4 ml-1" aria-hidden="true" />
+              ) : (
+                <ChevronDown className="w-4 h-4 ml-1" aria-hidden="true" />
+              )}
             </button>
           </div>
 
@@ -323,7 +314,7 @@ const RestaurantList = memo(function RestaurantList({
                           onChange={() => handleFilterChange('minRating', rating)}
                         />
                         <span className="text-sm text-gray-700 dark:text-gray-300 flex items-center">
-                          {rating}+ <LucideClientIcon icon={Star} className="w-3 h-3 ml-1 text-yellow-500" />
+                          {rating}+ <Star className="w-3 h-3 ml-1 text-yellow-500" />
                         </span>
                       </label>
                     ))}
@@ -371,11 +362,7 @@ const RestaurantList = memo(function RestaurantList({
       {/* Restaurant Grid */}
       {isLoading && restaurants.length === 0 ? (
         <div className="flex justify-center items-center py-12">
-          <LucideClientIcon
-            icon={Loader2}
-            className="w-8 h-8 animate-spin text-orange-500"
-            aria-label="Loading restaurants"
-          />
+          <Loader2 className="w-8 h-8 animate-spin text-orange-500" aria-label="Loading restaurants" />
         </div>
       ) : filteredAndSortedRestaurants.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -430,11 +417,7 @@ const RestaurantList = memo(function RestaurantList({
       {/* Loading Indicator */}
       {isLoading && restaurants.length > 0 && (
         <div className="flex justify-center mt-4">
-          <LucideClientIcon
-            icon={Loader2}
-            className="w-6 h-6 animate-spin text-orange-500"
-            aria-label="Loading more restaurants"
-          />
+          <Loader2 className="w-6 h-6 animate-spin text-orange-500" aria-label="Loading more restaurants" />
         </div>
       )}
     </div>

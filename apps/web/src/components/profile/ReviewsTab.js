@@ -1,9 +1,9 @@
 /**
  * ReviewsTab Component
- * 
+ *
  * A component for displaying a user's reviews in their profile.
  * It shows a list of reviews the user has written, with filtering and sorting options.
- * 
+ *
  * Features:
  * - Display user's reviews
  * - Filter reviews by rating, date, and search query
@@ -13,12 +13,12 @@
  */
 
 import React, { useState, useCallback, useMemo, memo } from 'react';
-import { 
-  Star, 
-  Search, 
-  Filter, 
-  ChevronDown, 
-  ChevronUp, 
+import {
+  Star,
+  Search,
+  Filter,
+  ChevronDown,
+  ChevronUp,
   Loader2,
   Calendar,
   SortAsc,
@@ -26,14 +26,13 @@ import {
   ThumbsUp,
   MessageSquare
 } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
 import { useAuth } from '@bellyfed/hooks';
 import ReviewItem from './ReviewItem.js';
 import ReviewFilters from './ReviewFilters.js';
 
 /**
  * ReviewsTab component
- * 
+ *
  * @param {Object} props - Component props
  * @param {Object} props.user - User data object
  * @param {Function} props.getCountryLink - Function to generate country-specific links
@@ -50,22 +49,22 @@ const ReviewsTab = memo(function ReviewsTab({
   const [filterDate, setFilterDate] = useState('all');
   const [sortBy, setSortBy] = useState('date');
   const [sortOrder, setSortOrder] = useState('desc');
-  
+
   // Get authentication state
   const { isAuthenticated, user: currentUser } = useAuth();
-  
+
   // Determine if this is the current user's profile
   const isCurrentUser = useMemo(() => {
     if (!isAuthenticated || !currentUser) return false;
     return currentUser.id === user.id;
   }, [isAuthenticated, currentUser, user.id]);
-  
+
   // Mock data for user reviews (in a real app, this would come from an API)
   const [reviews, setReviews] = useState([]);
-  
+
   // Loading state
   const [isLoading, setIsLoading] = useState(true);
-  
+
   // Fetch reviews (simulated)
   useMemo(() => {
     // Simulate API call
@@ -73,7 +72,7 @@ const ReviewsTab = memo(function ReviewsTab({
       try {
         // In a real app, this would be a call to the API
         await new Promise(resolve => setTimeout(resolve, 1000));
-        
+
         // Mock data
         const mockReviews = [
           {
@@ -157,7 +156,7 @@ const ReviewsTab = memo(function ReviewsTab({
             isVerifiedVisit: true,
           },
         ];
-        
+
         setReviews(mockReviews);
         setIsLoading(false);
       } catch (error) {
@@ -165,40 +164,40 @@ const ReviewsTab = memo(function ReviewsTab({
         setIsLoading(false);
       }
     };
-    
+
     fetchReviews();
   }, []);
-  
+
   // Handle search input change
   const handleSearchChange = useCallback((e) => {
     setSearchQuery(e.target.value);
   }, []);
-  
+
   // Handle filter toggle
   const handleFilterToggle = useCallback(() => {
     setFilterOpen(prev => !prev);
   }, []);
-  
+
   // Handle rating filter change
   const handleRatingFilterChange = useCallback((rating) => {
     setFilterRating(rating);
   }, []);
-  
+
   // Handle date filter change
   const handleDateFilterChange = useCallback((date) => {
     setFilterDate(date);
   }, []);
-  
+
   // Handle sort change
   const handleSortChange = useCallback((e) => {
     setSortBy(e.target.value);
   }, []);
-  
+
   // Handle sort order change
   const handleSortOrderChange = useCallback(() => {
     setSortOrder(prev => prev === 'asc' ? 'desc' : 'asc');
   }, []);
-  
+
   // Clear all filters
   const clearFilters = useCallback(() => {
     setSearchQuery('');
@@ -207,7 +206,7 @@ const ReviewsTab = memo(function ReviewsTab({
     setSortBy('date');
     setSortOrder('desc');
   }, []);
-  
+
   // Filter and sort reviews
   const filteredAndSortedReviews = useMemo(() => {
     // First, filter reviews
@@ -219,7 +218,7 @@ const ReviewsTab = memo(function ReviewsTab({
         review.dishName.toLowerCase().includes(searchQuery.toLowerCase()) ||
         review.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         review.content.toLowerCase().includes(searchQuery.toLowerCase());
-      
+
       // Rating filter
       const ratingMatch =
         filterRating === 'all' ||
@@ -228,26 +227,26 @@ const ReviewsTab = memo(function ReviewsTab({
         (filterRating === '3' && review.rating === 3) ||
         (filterRating === '2' && review.rating === 2) ||
         (filterRating === '1' && review.rating === 1);
-      
+
       // Date filter
       const reviewDate = new Date(review.visitDate);
       const now = new Date();
       const dateMatch =
         filterDate === 'all' ||
-        (filterDate === 'last-week' && 
+        (filterDate === 'last-week' &&
           reviewDate >= new Date(now.setDate(now.getDate() - 7))) ||
-        (filterDate === 'last-month' && 
+        (filterDate === 'last-month' &&
           reviewDate >= new Date(now.setMonth(now.getMonth() - 1))) ||
-        (filterDate === 'last-year' && 
+        (filterDate === 'last-year' &&
           reviewDate >= new Date(now.setFullYear(now.getFullYear() - 1)));
-      
+
       return searchMatch && ratingMatch && dateMatch;
     });
-    
+
     // Then, sort reviews
     return result.sort((a, b) => {
       const sortMultiplier = sortOrder === 'asc' ? 1 : -1;
-      
+
       switch (sortBy) {
         case 'date':
           return sortMultiplier * (new Date(b.visitDate).getTime() - new Date(a.visitDate).getTime());
@@ -260,7 +259,7 @@ const ReviewsTab = memo(function ReviewsTab({
       }
     });
   }, [reviews, searchQuery, filterRating, filterDate, sortBy, sortOrder]);
-  
+
   // Check if any filters are active
   const hasActiveFilters = useMemo(() => {
     return (
@@ -275,23 +274,15 @@ const ReviewsTab = memo(function ReviewsTab({
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
       <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-        <LucideClientIcon
-          icon={Star}
-          className="w-5 h-5 mr-2 text-orange-500"
-          aria-hidden="true"
-        />
+        <Star className="w-5 h-5 mr-2 text-orange-500" aria-hidden="true" />
         {isCurrentUser ? 'Your Reviews' : `${user.name}'s Reviews`}
       </h3>
-      
+
       {/* Search and Filter Bar */}
       <div className="mb-6">
         {/* Search Input */}
         <div className="relative mb-4">
-          <LucideClientIcon
-            icon={Search}
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500"
-            aria-hidden="true"
-          />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500" aria-hidden="true" />
           <input
             type="text"
             placeholder="Search reviews..."
@@ -301,7 +292,7 @@ const ReviewsTab = memo(function ReviewsTab({
             aria-label="Search reviews"
           />
         </div>
-        
+
         {/* Sort and Filter Controls */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           {/* Sort Dropdown */}
@@ -319,21 +310,21 @@ const ReviewsTab = memo(function ReviewsTab({
               <option value="rating">Rating</option>
               <option value="restaurant">Restaurant</option>
             </select>
-            
+
             <button
               type="button"
               onClick={handleSortOrderChange}
               className="ml-2 p-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
               aria-label={`Sort ${sortOrder === 'asc' ? 'ascending' : 'descending'}`}
             >
-              <LucideClientIcon
-                icon={sortOrder === 'asc' ? SortAsc : SortDesc}
-                className="w-5 h-5"
-                aria-hidden="true"
-              />
+              {sortOrder === 'asc' ? (
+                <SortAsc className="w-5 h-5" aria-hidden="true" />
+              ) : (
+                <SortDesc className="w-5 h-5" aria-hidden="true" />
+              )}
             </button>
           </div>
-          
+
           {/* Filter Toggle Button */}
           <button
             type="button"
@@ -342,28 +333,24 @@ const ReviewsTab = memo(function ReviewsTab({
             aria-expanded={filterOpen}
             aria-controls="filter-panel"
           >
-            <LucideClientIcon
-              icon={Filter}
-              className="w-4 h-4 mr-1"
-              aria-hidden="true"
-            />
+            <Filter className="w-4 h-4 mr-1" aria-hidden="true" />
             Filters
             {hasActiveFilters && (
               <span className="ml-2 px-2 py-0.5 bg-orange-500 text-white text-xs rounded-full">
                 {(filterRating !== 'all' ? 1 : 0) + (filterDate !== 'all' ? 1 : 0) + (searchQuery.trim() !== '' ? 1 : 0)}
               </span>
             )}
-            <LucideClientIcon
-              icon={filterOpen ? ChevronUp : ChevronDown}
-              className="w-4 h-4 ml-1"
-              aria-hidden="true"
-            />
+            {filterOpen ? (
+              <ChevronUp className="w-4 h-4 ml-1" aria-hidden="true" />
+            ) : (
+              <ChevronDown className="w-4 h-4 ml-1" aria-hidden="true" />
+            )}
           </button>
         </div>
-        
+
         {/* Filter Panel */}
         {filterOpen && (
-          <ReviewFilters 
+          <ReviewFilters
             filterRating={filterRating}
             filterDate={filterDate}
             handleRatingFilterChange={handleRatingFilterChange}
@@ -373,34 +360,26 @@ const ReviewsTab = memo(function ReviewsTab({
           />
         )}
       </div>
-      
+
       {/* Reviews List */}
       {isLoading ? (
         <div className="flex justify-center items-center py-12">
-          <LucideClientIcon
-            icon={Loader2}
-            className="w-8 h-8 animate-spin text-orange-500"
-            aria-label="Loading reviews"
-          />
+          <Loader2 className="w-8 h-8 animate-spin text-orange-500" aria-label="Loading reviews" />
         </div>
       ) : filteredAndSortedReviews.length > 0 ? (
         <div className="space-y-6">
           {filteredAndSortedReviews.map(review => (
-            <ReviewItem 
-              key={review.id} 
-              review={review} 
-              getCountryLink={getCountryLink} 
+            <ReviewItem
+              key={review.id}
+              review={review}
+              getCountryLink={getCountryLink}
             />
           ))}
         </div>
       ) : (
         <div className="text-center py-12">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 mb-4">
-            <LucideClientIcon
-              icon={Star}
-              className="w-8 h-8 text-gray-400 dark:text-gray-500"
-              aria-hidden="true"
-            />
+            <Star className="w-8 h-8 text-gray-400 dark:text-gray-500" aria-hidden="true" />
           </div>
           <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
             No Reviews Found

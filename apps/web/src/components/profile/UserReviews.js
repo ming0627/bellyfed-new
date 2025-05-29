@@ -9,8 +9,6 @@ import {
   Filter,
   Search,
 } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
-
 // Mock data for user reviews
 const mockUserReviews = [
   {
@@ -131,9 +129,8 @@ const UserReviews = memo(function UserReviews({ user, getCountryLink }) {
     for (let i = 0; i < 5; i++) {
       if (i < fullStars) {
         stars.push(
-          <LucideClientIcon
+          <Star
             key={i}
-            icon={Star}
             className="w-4 h-4 text-yellow-500 fill-current"
             aria-hidden="true"
           />,
@@ -141,25 +138,16 @@ const UserReviews = memo(function UserReviews({ user, getCountryLink }) {
       } else if (i === fullStars && hasHalfStar) {
         stars.push(
           <span key={i} className="relative">
-            <LucideClientIcon
-              icon={Star}
-              className="w-4 h-4 text-gray-300 dark:text-gray-600 fill-current"
-              aria-hidden="true"
-            />
+            <Star className="w-4 h-4 text-gray-300 dark:text-gray-600 fill-current" aria-hidden="true" />
             <span className="absolute inset-0 overflow-hidden w-1/2">
-              <LucideClientIcon
-                icon={Star}
-                className="w-4 h-4 text-yellow-500 fill-current"
-                aria-hidden="true"
-              />
+              <Star className="w-4 h-4 text-yellow-500 fill-current" aria-hidden="true" />
             </span>
           </span>,
         );
       } else {
         stars.push(
-          <LucideClientIcon
+          <Star
             key={i}
-            icon={Star}
             className="w-4 h-4 text-gray-300 dark:text-gray-600"
             aria-hidden="true"
           />,
@@ -181,11 +169,9 @@ const UserReviews = memo(function UserReviews({ user, getCountryLink }) {
           {/* Search Input */}
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <LucideClientIcon
-                icon={Search}
-                className="h-5 w-5 text-gray-400 dark:text-gray-500"
+              <SearchclassName="h-5 w-5 text-gray-400 dark:text-gray-500"
                 aria-hidden="true"
-              />
+               />
             </div>
             <input
               type="text"
@@ -199,11 +185,9 @@ const UserReviews = memo(function UserReviews({ user, getCountryLink }) {
           {/* Rating Filter */}
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <LucideClientIcon
-                icon={Filter}
-                className="h-5 w-5 text-gray-400 dark:text-gray-500"
+              <FilterclassName="h-5 w-5 text-gray-400 dark:text-gray-500"
                 aria-hidden="true"
-              />
+               />
             </div>
             <select
               className="pl-10 pr-8 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
@@ -261,11 +245,9 @@ const UserReviews = memo(function UserReviews({ user, getCountryLink }) {
                   <div className="flex items-center mt-1">
                     <div className="flex">{renderStars(review.rating)}</div>
                     <span className="ml-2 text-sm text-gray-500 dark:text-gray-400">
-                      <LucideClientIcon
-                        icon={Calendar}
-                        className="w-3.5 h-3.5 inline mr-1"
+                      <CalendarclassName="w-3.5 h-3.5 inline mr-1"
                         aria-hidden="true"
-                      />
+                       />
                       {formatDate(review.visitDate)}
                     </span>
                   </div>
@@ -307,20 +289,16 @@ const UserReviews = memo(function UserReviews({ user, getCountryLink }) {
               {/* Review Actions */}
               <div className="flex items-center space-x-4 text-sm">
                 <div className="flex items-center text-gray-500 dark:text-gray-400">
-                  <LucideClientIcon
-                    icon={ThumbsUp}
-                    className="w-4 h-4 mr-1"
+                  <ThumbsUpclassName="w-4 h-4 mr-1"
                     aria-hidden="true"
-                  />
+                   />
                   <span>Helpful ({review.helpfulCount})</span>
                 </div>
 
                 <div className="flex items-center text-gray-500 dark:text-gray-400">
-                  <LucideClientIcon
-                    icon={MessageSquare}
-                    className="w-4 h-4 mr-1"
+                  <MessageSquareclassName="w-4 h-4 mr-1"
                     aria-hidden="true"
-                  />
+                   />
                   <span>Comments ({review.comments})</span>
                 </div>
 
@@ -337,11 +315,9 @@ const UserReviews = memo(function UserReviews({ user, getCountryLink }) {
       ) : (
         <div className="text-center py-12">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 mb-4">
-            <LucideClientIcon
-              icon={Star}
-              className="w-8 h-8 text-gray-400 dark:text-gray-500"
+            <StarclassName="w-8 h-8 text-gray-400 dark:text-gray-500"
               aria-hidden="true"
-            />
+             />
           </div>
           <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
             No Reviews Found

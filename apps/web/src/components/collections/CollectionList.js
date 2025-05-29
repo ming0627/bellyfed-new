@@ -1,6 +1,5 @@
 import React, { useState, memo } from 'react';
 import { Search, MapPin, Utensils, Clock } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
 import CollectionCard from './CollectionCard.js';
 
 /**
@@ -94,11 +93,7 @@ const CollectionList = memo(function CollectionList({
           {/* Search Input */}
           <div className="relative flex-grow">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <LucideClientIcon
-                icon={Search}
-                className="h-5 w-5 text-gray-400 dark:text-gray-500"
-                aria-hidden="true"
-              />
+              <Search className="h-5 w-5 text-gray-400 dark:text-gray-500" aria-hidden="true" />
             </div>
             <input
               type="text"
@@ -112,11 +107,9 @@ const CollectionList = memo(function CollectionList({
           {/* Sort Dropdown */}
           <div className="relative min-w-[200px]">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <LucideClientIcon
-                icon={Clock}
-                className="h-5 w-5 text-gray-400 dark:text-gray-500"
+              <ClockclassName="h-5 w-5 text-gray-400 dark:text-gray-500"
                 aria-hidden="true"
-              />
+               />
             </div>
             <select
               className="pl-10 pr-8 py-2 w-full border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
@@ -136,11 +129,9 @@ const CollectionList = memo(function CollectionList({
         {locations.length > 0 && (
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <LucideClientIcon
-                icon={MapPin}
-                className="h-5 w-5 text-gray-400 dark:text-gray-500"
+              <MapPinclassName="h-5 w-5 text-gray-400 dark:text-gray-500"
                 aria-hidden="true"
-              />
+               />
             </div>
             <select
               className="pl-10 pr-8 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-orange-500 focus:border-orange-500"
@@ -198,11 +189,9 @@ const CollectionList = memo(function CollectionList({
       ) : (
         <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-lg shadow-md">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 mb-4">
-            <LucideClientIcon
-              icon={Utensils}
-              className="w-8 h-8 text-gray-400 dark:text-gray-500"
+            <UtensilsclassName="w-8 h-8 text-gray-400 dark:text-gray-500"
               aria-hidden="true"
-            />
+             />
           </div>
           <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
             No Collections Found

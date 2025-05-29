@@ -1,0 +1,72 @@
+/**
+ * Enhanced fixes for SVG rendering and hydration issues
+ */
+
+/* Force hardware acceleration on SVGs to prevent rendering differences */
+svg {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Fix for SVG icons in buttons */
+button svg,
+a svg {
+  pointer-events: none;
+}
+
+/* Ensure SVGs don't cause layout shifts */
+[class*="lucide-"] {
+  min-width: 1em;
+  min-height: 1em;
+}
+
+/* Hide SVG elements during server-side rendering to prevent hydration mismatches */
+html:not(.client-rendered) [data-lucide-placeholder="true"],
+html:not(.client-rendered) [data-client-rendered="true"] {
+  visibility: hidden;
+}
+
+/* Ensure SVG placeholders maintain layout */
+[data-lucide-placeholder="true"],
+[data-client-rendered="true"] {
+  display: inline-block;
+}
+
+/* Apply specific fixes for client-rendered content */
+html.client-rendered [data-hydration-fix="true"],
+html.force-client-render [data-hydration-fix="true"] {
+  opacity: 1;
+  transition: opacity 0.2s ease-in;
+}
+
+/* Hide elements with hydration issues until client-side rendering */
+[data-hydration-fix="true"] {
+  opacity: 0;
+}
+
+/* Hide all SVG elements during server-side rendering */
+html:not(.client-rendered) svg {
+  visibility: hidden;
+}
+
+/* Force client rendering for components with hydration issues */
+html.force-client-render [data-suspense-boundary="true"] {
+  display: none !important;
+}
+
+html.force-client-render [data-client-fallback="true"] {
+  display: block !important;
+}
+
+/* Fix for Suspense boundaries with hydration issues */
+[data-suspense-boundary="true"] {
+  min-height: 1px;
+}
+
+/* Ensure consistent rendering of SVG icons */
+svg[data-client-rendered="true"] {
+  opacity: 1 !important;
+  visibility: visible !important;
+}

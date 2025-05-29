@@ -1,0 +1,13 @@
+{
+    "name": "middleware-layer",
+    "version": "1.0.0",
+    "description": "Middleware layer for Lambda functions",
+    "main": "index.js",
+    "type": "module",
+    "keywords": [
+        "lambda",
+        "middleware"
+    ],
+    "author": "Bellyfed",
+    "license": "ISC"
+}

@@ -29,7 +29,6 @@ import {
   Loader2,
   ChevronRight
 } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
 import { Avatar } from '../ui/Avatar.tsx';
 import RankingDialog from '../rankings/RankingDialog.js';
 import { useUserRanking } from '@bellyfed/hooks';
@@ -185,11 +184,9 @@ const DishRanking = memo(function DishRanking({
       <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-4">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
-            <LucideClientIcon
-              icon={Award}
-              className="w-5 h-5 mr-2"
+            <Award className="w-5 h-5 mr-2"
               aria-hidden="true"
-            />
+             />
             <h3 className="font-bold text-lg">Rankings</h3>
           </div>
 
@@ -199,11 +196,9 @@ const DishRanking = memo(function DishRanking({
             aria-label={`View all rankings for ${dishName}`}
           >
             View All
-            <LucideClientIcon
-              icon={ChevronRight}
-              className="w-4 h-4 ml-1"
+            <ChevronRight className="w-4 h-4 ml-1"
               aria-hidden="true"
-            />
+             />
           </Link>
         </div>
       </div>
@@ -219,7 +214,7 @@ const DishRanking = memo(function DishRanking({
           <div className="flex items-center mb-4">
             <div className="flex items-center justify-center w-16 h-16 bg-orange-50 dark:bg-orange-900/20 rounded-full mr-4">
               <div className="flex items-center">
-                <LucideClientIcon icon={Star} className="w-5 h-5 text-orange-500 mr-1" />
+                <Star className="w-5 h-5 text-orange-500 mr-1"  />
                 <span className="text-xl font-bold text-gray-900 dark:text-white">
                   {globalRanking.averageRank ? globalRanking.averageRank.toFixed(1) : 'N/A'}
                 </span>
@@ -263,11 +258,9 @@ const DishRanking = memo(function DishRanking({
 
           {isLoading ? (
             <div className="flex justify-center items-center py-6">
-              <LucideClientIcon
-                icon={Loader2}
-                className="w-6 h-6 animate-spin text-orange-500"
+              <Loader2 className="w-6 h-6 animate-spin text-orange-500"
                 aria-label="Loading ranking"
-              />
+               />
             </div>
           ) : isAuthenticated && userRanking ? (
             <div className="bg-orange-50 dark:bg-orange-900/20 rounded-lg p-4">
@@ -281,10 +274,8 @@ const DishRanking = memo(function DishRanking({
 
                   {tasteStatusDisplay && (
                     <div className="flex items-center">
-                      <LucideClientIcon
-                        icon={tasteStatusDisplay.icon}
-                        className={`w-4 h-4 mr-1 ${tasteStatusDisplay.color}`}
-                      />
+                      <tasteStatusDisplay.icon className={`w-4 h-4 mr-1 ${tasteStatusDisplay.color}`}
+                       />
                       <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                         {tasteStatusDisplay.label}
                       </span>
@@ -299,7 +290,7 @@ const DishRanking = memo(function DishRanking({
                     className="p-2 text-gray-500 hover:text-orange-500 dark:text-gray-400 dark:hover:text-orange-400 transition-colors"
                     disabled={isSubmitting}
                   >
-                    <LucideClientIcon icon={Edit} className="w-4 h-4" />
+                    <Edit className="w-4 h-4"  />
                   </button>
 
                   <button
@@ -308,7 +299,7 @@ const DishRanking = memo(function DishRanking({
                     className="p-2 text-gray-500 hover:text-red-500 dark:text-gray-400 dark:hover:text-red-400 transition-colors"
                     disabled={isSubmitting}
                   >
-                    <LucideClientIcon icon={Trash2} className="w-4 h-4" />
+                    <Trash2 className="w-4 h-4"  />
                   </button>
                 </div>
               </div>
@@ -347,7 +338,7 @@ const DishRanking = memo(function DishRanking({
                 onClick={handleOpenDialog}
                 className="inline-flex items-center px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 focus:outline-none"
               >
-                <LucideClientIcon icon={Plus} className="w-4 h-4 mr-2" />
+                <Plus className="w-4 h-4 mr-2"  />
                 Add Ranking
               </button>
             </div>
@@ -371,7 +362,7 @@ const DishRanking = memo(function DishRanking({
         {recentRankings.length > 0 && (
           <div>
             <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-2 flex items-center">
-              <LucideClientIcon icon={Users} className="w-5 h-5 mr-2 text-gray-500 dark:text-gray-400" />
+              <Users className="w-5 h-5 mr-2 text-gray-500 dark:text-gray-400"  />
               Recent Rankings
             </h4>
 

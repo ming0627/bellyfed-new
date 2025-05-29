@@ -1,0 +1,31 @@
+{
+    "name": "analytics-service",
+    "version": "1.0.0",
+    "description": "Lambda function for analytics using DynamoDB",
+    "main": "dist/index.js",
+    "scripts": {
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
+        "build": "npm run type-check && esbuild src/index.ts --bundle --platform=node --target=node20 --outfile=dist/index.js --alias:@utils=../../src/layers/utils/nodejs --alias:@middlewares=../../src/layers/middleware/nodejs/middlewares --alias:@infra/utils=../../src/layers/utils/nodejs --alias:@infra/middleware=../../src/layers/middleware/nodejs/middlewares --alias:@infra/lib=../../lib --alias:@infra/config=../../lib/config.ts --format=cjs",
+        "type-check": "tsc --noEmit",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "lint:strict": "eslint . --max-warnings=0"
+    },
+    "dependencies": {
+        "@aws-sdk/client-dynamodb": "^3.410.0",
+        "@aws-sdk/lib-dynamodb": "^3.410.0"
+    },
+    "devDependencies": {
+        "@types/aws-lambda": "^8.10.119",
+        "@types/node": "^18.16.0",
+        "typescript": "^5.0.4",
+        "esbuild": "^0.19.0",
+        "eslint": "^8.56.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-prettier": "^5.2.1",
+        "@typescript-eslint/eslint-plugin": "^8.17.0",
+        "@typescript-eslint/parser": "^8.17.0",
+        "prettier": "^3.0.0"
+    },
+    "type": "module"
+}

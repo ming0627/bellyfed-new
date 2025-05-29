@@ -1,0 +1,31 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Check if commitlint is installed
+if ! command -v npx &> /dev/null || ! npx --no-install commitlint --version &> /dev/null; then
+  # If commitlint is not installed, use a simple regex check
+  commit_msg_file=$1
+  commit_msg=$(cat "$commit_msg_file")
+  
+  # Define the regex pattern for conventional commits
+  # Format: type(scope): subject
+  # Examples: feat(auth): add login page, fix: resolve navigation bug
+  conventional_pattern="^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\([a-z0-9-]+\))?: .+"
+  
+  if ! echo "$commit_msg" | grep -E "$conventional_pattern" > /dev/null; then
+    echo "Error: Commit message does not follow conventional commit format."
+    echo "Expected format: type(scope): subject"
+    echo "Examples:"
+    echo "  feat(auth): add login page"
+    echo "  fix: resolve navigation bug"
+    echo "  docs: update README"
+    echo "  chore: update dependencies"
+    echo "  refactor(api): improve error handling"
+    echo ""
+    echo "Allowed types: build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test"
+    exit 1
+  fi
+else
+  # If commitlint is installed, use it
+  npx --no-install commitlint --edit "$1"
+fi

@@ -1,0 +1,7 @@
+{
+  "name": "My Codespace with uv",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "postCreateCommand": "uv --version || echo 'uv installation failed'"
+}

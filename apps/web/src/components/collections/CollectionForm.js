@@ -12,8 +12,6 @@ import {
   Trash2,
   AlertCircle,
 } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
-
 // Define the validation schema using zod
 const collectionSchema = z.object({
   title: z
@@ -231,7 +229,7 @@ const CollectionForm = memo(function CollectionForm({
         />
         {errors.title && (
           <p className="mt-1 text-sm text-red-600 dark:text-red-400 flex items-center">
-            <LucideClientIcon icon={AlertCircle} className="w-4 h-4 mr-1" />
+            <AlertCircle className="w-4 h-4 mr-1" />
             {errors.title.message}
           </p>
         )}
@@ -254,7 +252,7 @@ const CollectionForm = memo(function CollectionForm({
         />
         {errors.description && (
           <p className="mt-1 text-sm text-red-600 dark:text-red-400 flex items-center">
-            <LucideClientIcon icon={AlertCircle} className="w-4 h-4 mr-1" />
+            <AlertCircle className="w-4 h-4 mr-1" />
             {errors.description.message}
           </p>
         )}
@@ -277,7 +275,7 @@ const CollectionForm = memo(function CollectionForm({
         />
         {errors.location && (
           <p className="mt-1 text-sm text-red-600 dark:text-red-400 flex items-center">
-            <LucideClientIcon icon={AlertCircle} className="w-4 h-4 mr-1" />
+            <AlertCircle className="w-4 h-4 mr-1" />
             {errors.location.message}
           </p>
         )}
@@ -304,16 +302,12 @@ const CollectionForm = memo(function CollectionForm({
                   onClick={handleRemoveImage}
                   className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                 >
-                  <LucideClientIcon icon={X} className="w-4 h-4" />
+                  <X className="w-4 h-4" />
                 </button>
               </div>
             ) : (
               <>
-                <LucideClientIcon
-                  icon={ImageIcon}
-                  className="mx-auto h-12 w-12 text-gray-400"
-                  aria-hidden="true"
-                />
+                <ImageIcon className="mx-auto h-12 w-12 text-gray-400" aria-hidden="true" />
                 <div className="flex text-sm text-gray-600 dark:text-gray-400">
                   <label
                     htmlFor="file-upload"
@@ -348,11 +342,7 @@ const CollectionForm = memo(function CollectionForm({
 
         <div className="relative">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <LucideClientIcon
-              icon={Search}
-              className="h-5 w-5 text-gray-400 dark:text-gray-500"
-              aria-hidden="true"
-            />
+            <Search className="h-5 w-5 text-gray-400 dark:text-gray-500" aria-hidden="true" />
           </div>
           <input
             type="text"
@@ -385,10 +375,7 @@ const CollectionForm = memo(function CollectionForm({
                       />
                     ) : (
                       <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center mr-3">
-                        <LucideClientIcon
-                          icon={ImageIcon}
-                          className="w-5 h-5 text-gray-400 dark:text-gray-500"
-                        />
+                        <ImageIcon className="w-5 h-5 text-gray-400 dark:text-gray-500" />
                       </div>
                     )}
                     <div>
@@ -404,7 +391,7 @@ const CollectionForm = memo(function CollectionForm({
                     type="button"
                     className="text-orange-500 hover:text-orange-600 dark:hover:text-orange-400"
                   >
-                    <LucideClientIcon icon={Plus} className="w-5 h-5" />
+                    <Plus className="w-5 h-5" />
                   </button>
                 </li>
               ))}
@@ -443,10 +430,7 @@ const CollectionForm = memo(function CollectionForm({
                       />
                     ) : (
                       <div className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center mr-3">
-                        <LucideClientIcon
-                          icon={ImageIcon}
-                          className="w-5 h-5 text-gray-400 dark:text-gray-500"
-                        />
+                        <ImageIcon className="w-5 h-5 text-gray-400 dark:text-gray-500" />
                       </div>
                     )}
                     <div>
@@ -467,7 +451,7 @@ const CollectionForm = memo(function CollectionForm({
                     onClick={() => handleRemoveRestaurant(restaurant.id)}
                     className="text-red-500 hover:text-red-600 dark:hover:text-red-400"
                   >
-                    <LucideClientIcon icon={Trash2} className="w-5 h-5" />
+                    <Trash2 className="w-5 h-5" />
                   </button>
                 </li>
               ))}
@@ -483,7 +467,7 @@ const CollectionForm = memo(function CollectionForm({
 
           {errors.restaurants && (
             <p className="mt-1 text-sm text-red-600 dark:text-red-400 flex items-center">
-              <LucideClientIcon icon={AlertCircle} className="w-4 h-4 mr-1" />
+              <AlertCircle className="w-4 h-4 mr-1" />
               {errors.restaurants.message}
             </p>
           )}

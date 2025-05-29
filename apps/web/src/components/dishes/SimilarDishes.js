@@ -1,7 +1,6 @@
 import React, { memo } from 'react';
 import Image from 'next/image';
 import { Star, Utensils } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
 import Link from 'next/link';
 
 /**
@@ -65,10 +64,7 @@ const SimilarDishes = memo(function SimilarDishes({
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
-                    <LucideClientIcon
-                      icon={Utensils}
-                      className="w-6 h-6 text-gray-400"
-                    />
+                    <Utensils className="w-6 h-6 text-gray-400" />
                   </div>
                 )}
               </div>
@@ -81,11 +77,7 @@ const SimilarDishes = memo(function SimilarDishes({
                 <div className="flex items-center mt-1">
                   {dish.rating && (
                     <>
-                      <LucideClientIcon
-                        icon={Star}
-                        className="w-4 h-4 text-yellow-400 fill-current"
-                        aria-hidden="true"
-                      />
+                      <Star className="w-4 h-4 text-yellow-400 fill-current" aria-hidden="true" />
                       <span className="ml-1 text-sm text-gray-600 dark:text-gray-400">
                         {dish.rating.toFixed(1)}
                       </span>

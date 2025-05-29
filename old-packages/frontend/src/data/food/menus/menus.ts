@@ -1,0 +1,458 @@
+import {
+  CuisineType,
+  DishCategory,
+  DishTag,
+  EstablishmentType,
+  Menu,
+  MenuItem,
+  MenuSection,
+  PaymentType,
+  S3Object,
+  SpicyLevel,
+} from '@/types';
+
+export const DEFAULT_IMAGE_OBJECT: S3Object = {
+  key: 'restaurants/bellyfed.png',
+  region: 'ap-southeast-1',
+  bucket: 'bellyfed-assets',
+};
+
+export const SAMPLE_MENU_SECTION: MenuSection = {
+  menuId: 'menu1',
+  title: 'Main Dishes',
+  description: 'Our signature dishes',
+  items: [],
+  order: 1,
+  id: 'section1',
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+};
+
+export const SAMPLE_MENU_ITEM: MenuItem = {
+  id: 'item1',
+  menuId: 'menu1',
+  sectionId: 'section1',
+  name: 'Sample Dish',
+  description: 'A delicious sample dish',
+  price: 10.0,
+  dishCategory: DishCategory.MAIN_COURSE,
+  dishTags: [DishTag.SIGNATURE, DishTag.BESTSELLER],
+  standardizedName: 'sample_main_dish',
+  image: DEFAULT_IMAGE_OBJECT,
+  order: 1,
+  establishmentId: 'restaurant_jalan_alor',
+  establishment: {
+    id: 'restaurant_jalan_alor',
+    name: 'Jalan Alor Food Street',
+    type: EstablishmentType.FOOD_COURT_STALL,
+    description: 'A bustling food street with local dishes',
+    cuisineTypes: [CuisineType.MALAYSIAN, CuisineType.CHINESE],
+    priceRange: '$',
+    contact: {
+      phone: '+60 3-2144 9000',
+      email: 'info@jalanalorfoodstreet.com',
+      website: 'https://www.jalanalorfoodstreet.com',
+    },
+    facilities: {
+      parking: { available: true, details: 'Street parking available' },
+      wifi: { available: true, details: 'Free Wi-Fi for customers' },
+      seating: { capacity: 200, details: 'Open-air seating' },
+      payment: {
+        methods: [
+          PaymentType.CASH,
+          PaymentType.CREDIT_CARD,
+          PaymentType.TOUCH_N_GO,
+        ],
+        details: 'Multiple payment options',
+      },
+    },
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  spicyLevel: SpicyLevel.MILD,
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+};
+
+export const createMenuForEstablishment = (establishmentId: string): Menu => ({
+  establishmentId,
+  title: 'Regular Menu',
+  description: 'Our daily offerings',
+  sections: [SAMPLE_MENU_SECTION],
+  seasonalAvailability: ['All year'],
+  isSpecialMenu: false,
+  id: `menu_${establishmentId}`,
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+});
+
+export const jalanAlorMenuItems: MenuItem[] = [
+  {
+    id: 'jalan_char_kway_teow',
+    menuId: 'menu_jalan_alor',
+    sectionId: 'section_noodles',
+    name: 'Char Kway Teow',
+    description:
+      'Stir-fried rice noodles with shrimp, Chinese sausage, and bean sprouts',
+    price: 12.0,
+    dishCategory: DishCategory.MAIN_COURSE,
+    dishTags: [DishTag.SIGNATURE, DishTag.SPICY],
+    standardizedName: 'char_kway_teow',
+    image: DEFAULT_IMAGE_OBJECT,
+    order: 1,
+    establishmentId: 'restaurant_jalan_alor',
+    establishment: {
+      id: 'restaurant_jalan_alor',
+      name: 'Jalan Alor Food Street',
+      type: EstablishmentType.FOOD_COURT_STALL,
+      description: 'A bustling food street with local dishes',
+      cuisineTypes: [CuisineType.MALAYSIAN, CuisineType.CHINESE],
+      priceRange: '$',
+      contact: {
+        phone: '+60 3-2144 9000',
+        email: 'info@jalanalorfoodstreet.com',
+        website: 'https://www.jalanalorfoodstreet.com',
+      },
+      facilities: {
+        parking: { available: true, details: 'Street parking available' },
+        wifi: { available: true, details: 'Free Wi-Fi for customers' },
+        seating: { capacity: 200, details: 'Open-air seating' },
+        payment: {
+          methods: [
+            PaymentType.CASH,
+            PaymentType.CREDIT_CARD,
+            PaymentType.TOUCH_N_GO,
+          ],
+          details: 'Multiple payment options',
+        },
+      },
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    },
+    spicyLevel: SpicyLevel.MEDIUM,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: 'jalan_satay',
+    menuId: 'menu_jalan_alor',
+    sectionId: 'section_grills',
+    name: 'Chicken Satay',
+    description: 'Grilled chicken skewers with peanut sauce',
+    price: 15.0,
+    dishCategory: DishCategory.MAIN_COURSE,
+    dishTags: [DishTag.SIGNATURE],
+    standardizedName: 'chicken_satay',
+    image: DEFAULT_IMAGE_OBJECT,
+    order: 2,
+    establishmentId: 'restaurant_jalan_alor',
+    establishment: {
+      id: 'restaurant_jalan_alor',
+      name: 'Jalan Alor Food Street',
+      type: EstablishmentType.FOOD_COURT_STALL,
+      description: 'A bustling food street with local dishes',
+      cuisineTypes: [CuisineType.MALAYSIAN, CuisineType.CHINESE],
+      priceRange: '$',
+      contact: {
+        phone: '+60 3-2144 9000',
+        email: 'info@jalanalorfoodstreet.com',
+        website: 'https://www.jalanalorfoodstreet.com',
+      },
+      facilities: {
+        parking: { available: true, details: 'Street parking available' },
+        wifi: { available: true, details: 'Free Wi-Fi for customers' },
+        seating: { capacity: 200, details: 'Open-air seating' },
+        payment: {
+          methods: [
+            PaymentType.CASH,
+            PaymentType.CREDIT_CARD,
+            PaymentType.TOUCH_N_GO,
+          ],
+          details: 'Multiple payment options',
+        },
+      },
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    },
+    spicyLevel: SpicyLevel.MILD,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+];
+
+export const satayDelightMenuItems: MenuItem[] = [
+  {
+    id: 'satay_beef',
+    menuId: 'menu_satay_delight',
+    sectionId: 'section_beef',
+    name: 'Premium Beef Satay',
+    description: 'Tender beef skewers marinated in special spices',
+    price: 18.0,
+    dishCategory: DishCategory.MAIN_COURSE,
+    dishTags: [DishTag.SIGNATURE],
+    standardizedName: 'beef_satay',
+    image: DEFAULT_IMAGE_OBJECT,
+    order: 1,
+    establishmentId: 'restaurant_satay_delight',
+    establishment: {
+      id: 'restaurant_satay_delight',
+      name: 'Satay Delight',
+      type: EstablishmentType.RESTAURANT,
+      description: 'A restaurant serving premium satay',
+      cuisineTypes: [CuisineType.MALAYSIAN],
+      priceRange: '$$',
+      contact: {
+        phone: '+60 3-2144 9000',
+        email: 'info@sataydelight.com',
+        website: 'https://www.sataydelight.com',
+      },
+      facilities: {
+        parking: { available: true, details: 'Private parking available' },
+        wifi: { available: true, details: 'Free Wi-Fi for customers' },
+        seating: { capacity: 100, details: 'Air-conditioned seating' },
+        payment: {
+          methods: [
+            PaymentType.CASH,
+            PaymentType.CREDIT_CARD,
+            PaymentType.TOUCH_N_GO,
+          ],
+          details: 'Multiple payment options',
+        },
+      },
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    },
+    spicyLevel: SpicyLevel.MEDIUM,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: 'satay_chicken_wing',
+    menuId: 'menu_satay_delight',
+    sectionId: 'section_chicken',
+    name: 'Grilled Chicken Wings',
+    description: 'Juicy chicken wings with satay marinade',
+    price: 14.0,
+    dishCategory: DishCategory.MAIN_COURSE,
+    dishTags: [DishTag.SIGNATURE],
+    standardizedName: 'chicken_wings',
+    image: DEFAULT_IMAGE_OBJECT,
+    order: 2,
+    establishmentId: 'restaurant_satay_delight',
+    establishment: {
+      id: 'restaurant_satay_delight',
+      name: 'Satay Delight',
+      type: EstablishmentType.RESTAURANT,
+      description: 'A restaurant serving premium satay',
+      cuisineTypes: [CuisineType.MALAYSIAN],
+      priceRange: '$$',
+      contact: {
+        phone: '+60 3-2144 9000',
+        email: 'info@sataydelight.com',
+        website: 'https://www.sataydelight.com',
+      },
+      facilities: {
+        parking: { available: true, details: 'Private parking available' },
+        wifi: { available: true, details: 'Free Wi-Fi for customers' },
+        seating: { capacity: 100, details: 'Air-conditioned seating' },
+        payment: {
+          methods: [
+            PaymentType.CASH,
+            PaymentType.CREDIT_CARD,
+            PaymentType.TOUCH_N_GO,
+          ],
+          details: 'Multiple payment options',
+        },
+      },
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    },
+    spicyLevel: SpicyLevel.MILD,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+];
+
+export const rotiCanaiMenuItems: MenuItem[] = [
+  {
+    id: 'roti_original',
+    menuId: 'menu_roti_canai',
+    sectionId: 'section_classics',
+    name: 'Original Roti Canai',
+    description: 'Flaky flatbread served with curry sauce',
+    price: 3.5,
+    dishCategory: DishCategory.MAIN_COURSE,
+    dishTags: [DishTag.SIGNATURE],
+    standardizedName: 'roti_canai',
+    image: DEFAULT_IMAGE_OBJECT,
+    order: 1,
+    establishmentId: 'restaurant_roti_canai',
+    establishment: {
+      id: 'restaurant_roti_canai',
+      name: 'Roti Canai',
+      type: EstablishmentType.FOOD_COURT_STALL,
+      description: 'A food stall serving traditional roti canai',
+      cuisineTypes: [CuisineType.INDIAN],
+      priceRange: '$',
+      contact: {
+        phone: '+60 3-2144 9000',
+        email: 'info@roticanai.com',
+        website: 'https://www.roticanai.com',
+      },
+      facilities: {
+        parking: { available: true, details: 'Street parking available' },
+        wifi: { available: true, details: 'Free Wi-Fi for customers' },
+        seating: { capacity: 50, details: 'Open-air seating' },
+        payment: {
+          methods: [
+            PaymentType.CASH,
+            PaymentType.CREDIT_CARD,
+            PaymentType.TOUCH_N_GO,
+          ],
+          details: 'Multiple payment options',
+        },
+      },
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    },
+    spicyLevel: SpicyLevel.MILD,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: 'roti_telur',
+    menuId: 'menu_roti_canai',
+    sectionId: 'section_specials',
+    name: 'Roti Telur',
+    description: 'Flatbread with egg filling',
+    price: 5.0,
+    dishCategory: DishCategory.MAIN_COURSE,
+    dishTags: [DishTag.SIGNATURE],
+    standardizedName: 'roti_telur',
+    image: DEFAULT_IMAGE_OBJECT,
+    order: 2,
+    establishmentId: 'restaurant_roti_canai',
+    establishment: {
+      id: 'restaurant_roti_canai',
+      name: 'Roti Canai',
+      type: EstablishmentType.FOOD_COURT_STALL,
+      description: 'A food stall serving traditional roti canai',
+      cuisineTypes: [CuisineType.INDIAN],
+      priceRange: '$',
+      contact: {
+        phone: '+60 3-2144 9000',
+        email: 'info@roticanai.com',
+        website: 'https://www.roticanai.com',
+      },
+      facilities: {
+        parking: { available: true, details: 'Street parking available' },
+        wifi: { available: true, details: 'Free Wi-Fi for customers' },
+        seating: { capacity: 50, details: 'Open-air seating' },
+        payment: {
+          methods: [
+            PaymentType.CASH,
+            PaymentType.CREDIT_CARD,
+            PaymentType.TOUCH_N_GO,
+          ],
+          details: 'Multiple payment options',
+        },
+      },
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    },
+    spicyLevel: SpicyLevel.MILD,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+];
+
+export function getMenuForRestaurant(restaurantId: string): Menu {
+  switch (restaurantId) {
+    case 'restaurant_jalan_alor':
+      return {
+        id: 'menu_jalan_alor',
+        establishmentId: 'restaurant_jalan_alor',
+        title: 'Street Food Favorites',
+        sections: [
+          {
+            id: 'section_noodles',
+            menuId: 'menu_jalan_alor',
+            title: 'Noodles',
+            items: [jalanAlorMenuItems[0]],
+            order: 1,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+          },
+          {
+            id: 'section_grills',
+            menuId: 'menu_jalan_alor',
+            title: 'Grilled Specialties',
+            items: [jalanAlorMenuItems[1]],
+            order: 2,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+          },
+        ],
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+    case 'restaurant_satay_delight':
+      return {
+        id: 'menu_satay_delight',
+        establishmentId: 'restaurant_satay_delight',
+        title: 'Satay Favorites',
+        sections: [
+          {
+            id: 'section_beef',
+            menuId: 'menu_satay_delight',
+            title: 'Beef Satay',
+            items: [satayDelightMenuItems[0]],
+            order: 1,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+          },
+          {
+            id: 'section_chicken',
+            menuId: 'menu_satay_delight',
+            title: 'Chicken Satay',
+            items: [satayDelightMenuItems[1]],
+            order: 2,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+          },
+        ],
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+    case 'restaurant_roti_canai':
+      return {
+        id: 'menu_roti_canai',
+        establishmentId: 'restaurant_roti_canai',
+        title: 'Roti Canai Favorites',
+        sections: [
+          {
+            id: 'section_classics',
+            menuId: 'menu_roti_canai',
+            title: 'Classic Roti Canai',
+            items: [rotiCanaiMenuItems[0]],
+            order: 1,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+          },
+          {
+            id: 'section_specials',
+            menuId: 'menu_roti_canai',
+            title: 'Special Roti Canai',
+            items: [rotiCanaiMenuItems[1]],
+            order: 2,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+          },
+        ],
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+    default:
+      return createMenuForEstablishment(restaurantId);
+  }
+}

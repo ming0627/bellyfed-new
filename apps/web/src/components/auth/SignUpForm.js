@@ -10,8 +10,6 @@ import {
   AlertCircle,
   Check,
 } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
-
 /**
  * PasswordStrengthIndicator component for showing password strength
  *
@@ -81,9 +79,7 @@ const PasswordStrengthIndicator = memo(function PasswordStrengthIndicator({
       {password && (
         <div className="text-xs text-gray-600 dark:text-gray-400 space-y-1 mt-2">
           <div className="flex items-center">
-            <LucideClientIcon
-              icon={password.length >= 8 ? Check : AlertCircle}
-              className={`w-3.5 h-3.5 mr-1.5 ${
+            <password.length >= 8 ? Check : AlertCircleclassName={`w-3.5 h-3.5 mr-1.5 ${
                 password.length >= 8
                   ? 'text-green-500'
                   : 'text-gray-400 dark:text-gray-500'
@@ -93,39 +89,33 @@ const PasswordStrengthIndicator = memo(function PasswordStrengthIndicator({
             <span>At least 8 characters</span>
           </div>
           <div className="flex items-center">
-            <LucideClientIcon
-              icon={/[A-Z]/.test(password) ? Check : AlertCircle}
-              className={`w-3.5 h-3.5 mr-1.5 ${
+            </[A-Z]/.test(password) ? Check : AlertCircleclassName={`w-3.5 h-3.5 mr-1.5 ${
                 /[A-Z]/.test(password)
                   ? 'text-green-500'
                   : 'text-gray-400 dark:text-gray-500'
               }`}
               aria-hidden="true"
-            />
+             />
             <span>Uppercase letter</span>
           </div>
           <div className="flex items-center">
-            <LucideClientIcon
-              icon={/[0-9]/.test(password) ? Check : AlertCircle}
-              className={`w-3.5 h-3.5 mr-1.5 ${
+            </[0-9]/.test(password) ? Check : AlertCircleclassName={`w-3.5 h-3.5 mr-1.5 ${
                 /[0-9]/.test(password)
                   ? 'text-green-500'
                   : 'text-gray-400 dark:text-gray-500'
               }`}
               aria-hidden="true"
-            />
+             />
             <span>Number</span>
           </div>
           <div className="flex items-center">
-            <LucideClientIcon
-              icon={/[^A-Za-z0-9]/.test(password) ? Check : AlertCircle}
-              className={`w-3.5 h-3.5 mr-1.5 ${
+            </[^A-Za-z0-9]/.test(password) ? Check : AlertCircleclassName={`w-3.5 h-3.5 mr-1.5 ${
                 /[^A-Za-z0-9]/.test(password)
                   ? 'text-green-500'
                   : 'text-gray-400 dark:text-gray-500'
               }`}
               aria-hidden="true"
-            />
+             />
             <span>Special character</span>
           </div>
         </div>
@@ -265,11 +255,9 @@ const SignUpForm = memo(function SignUpForm({
         {error && (
           <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-md">
             <div className="flex items-start">
-              <LucideClientIcon
-                icon={AlertCircle}
-                className="w-5 h-5 text-red-500 dark:text-red-400 mt-0.5 mr-3 flex-shrink-0"
+              <AlertCircleclassName="w-5 h-5 text-red-500 dark:text-red-400 mt-0.5 mr-3 flex-shrink-0"
                 aria-hidden="true"
-              />
+               />
               <span className="text-red-800 dark:text-red-300">{error}</span>
             </div>
           </div>
@@ -286,11 +274,9 @@ const SignUpForm = memo(function SignUpForm({
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <LucideClientIcon
-                  icon={User}
-                  className="h-5 w-5 text-gray-400 dark:text-gray-500"
+                <UserclassName="h-5 w-5 text-gray-400 dark:text-gray-500"
                   aria-hidden="true"
-                />
+                 />
               </div>
               <input
                 id="name"
@@ -316,11 +302,9 @@ const SignUpForm = memo(function SignUpForm({
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <LucideClientIcon
-                  icon={Mail}
-                  className="h-5 w-5 text-gray-400 dark:text-gray-500"
+                <MailclassName="h-5 w-5 text-gray-400 dark:text-gray-500"
                   aria-hidden="true"
-                />
+                 />
               </div>
               <input
                 id="email"
@@ -346,11 +330,9 @@ const SignUpForm = memo(function SignUpForm({
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <LucideClientIcon
-                  icon={Lock}
-                  className="h-5 w-5 text-gray-400 dark:text-gray-500"
+                <LockclassName="h-5 w-5 text-gray-400 dark:text-gray-500"
                   aria-hidden="true"
-                />
+                 />
               </div>
               <input
                 id="password"
@@ -370,11 +352,9 @@ const SignUpForm = memo(function SignUpForm({
                   className="text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 focus:outline-none"
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
-                  <LucideClientIcon
-                    icon={showPassword ? EyeOff : Eye}
-                    className="h-5 w-5"
+                  <showPassword ? EyeOff : EyeclassName="h-5 w-5"
                     aria-hidden="true"
-                  />
+                   />
                 </button>
               </div>
             </div>
@@ -393,11 +373,9 @@ const SignUpForm = memo(function SignUpForm({
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <LucideClientIcon
-                  icon={Lock}
-                  className="h-5 w-5 text-gray-400 dark:text-gray-500"
+                <LockclassName="h-5 w-5 text-gray-400 dark:text-gray-500"
                   aria-hidden="true"
-                />
+                 />
               </div>
               <input
                 id="confirmPassword"
@@ -419,11 +397,9 @@ const SignUpForm = memo(function SignUpForm({
                     showConfirmPassword ? 'Hide password' : 'Show password'
                   }
                 >
-                  <LucideClientIcon
-                    icon={showConfirmPassword ? EyeOff : Eye}
-                    className="h-5 w-5"
+                  <showConfirmPassword ? EyeOff : EyeclassName="h-5 w-5"
                     aria-hidden="true"
-                  />
+                   />
                 </button>
               </div>
             </div>
@@ -431,19 +407,17 @@ const SignUpForm = memo(function SignUpForm({
             {/* Password Match Indicator */}
             {formData.confirmPassword && (
               <div className="mt-2 flex items-center">
-                <LucideClientIcon
-                  icon={
+                <
                     formData.password === formData.confirmPassword
                       ? Check
                       : AlertCircle
-                  }
                   className={`w-4 h-4 mr-1.5 ${
                     formData.password === formData.confirmPassword
                       ? 'text-green-500'
                       : 'text-red-500'
                   }`}
                   aria-hidden="true"
-                />
+                 />
                 <span
                   className={`text-xs ${
                     formData.password === formData.confirmPassword

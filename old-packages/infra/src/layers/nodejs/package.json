@@ -1,0 +1,12 @@
+{
+    "name": "nodejs",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "build": "esbuild event-utils/index.ts --bundle --platform=node --target=node20 --outdir=dist/nodejs"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": ""
+}

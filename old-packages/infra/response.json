@@ -1,0 +1,9 @@
+{
+    "statusCode": 500,
+    "headers": {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": "true"
+    },
+    "body": "{\"message\":\"Migration failed\",\"error\":\"Database returned SQL Exception. Check SQL syntax and constraints.\",\"details\":{\"type\":\"SQL_ERROR\",\"suggestion\":\"Review SQL statements for syntax errors or constraint violations\"},\"stack\":\"DatabaseErrorException: Database returned SQL Exception\\n    at de_DatabaseErrorExceptionRes (/var/runtime/node_modules/@aws-sdk/client-rds-data/dist-cjs/index.js:912:21)\\n    at de_CommandError (/var/runtime/node_modules/@aws-sdk/client-rds-data/dist-cjs/index.js:826:19)\\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\\n    at async /var/runtime/node_modules/@aws-sdk/node_modules/@smithy/middleware-serde/dist-cjs/index.js:35:20\\n    at async /var/runtime/node_modules/@aws-sdk/node_modules/@smithy/core/dist-cjs/index.js:167:18\\n    at async /var/runtime/node_modules/@aws-sdk/node_modules/@smithy/middleware-retry/dist-cjs/index.js:320:38\\n    at async /var/runtime/node_modules/@aws-sdk/middleware-logger/dist-cjs/index.js:33:22\\n    at async executeStatement (/var/task/index.js:61:7)\\n    at async executeSqlFile (/var/task/index.js:160:7)\\n    at async executeSchemaDirectory (/var/task/index.js:199:5)\"}"
+}

@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  nextjs:
+    build:
+      context: .
+      # Use the production target from our multi-stage Dockerfile
+      target: production
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    restart: always
+    # Add production-specific settings
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1G
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "--header=X-Health-Check-Token: bellyfed-health-check-token", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s

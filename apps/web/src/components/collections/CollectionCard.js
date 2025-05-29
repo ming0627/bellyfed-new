@@ -2,8 +2,6 @@ import React, { memo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { MapPin, Utensils, Clock, ChevronRight } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
-
 /**
  * CollectionCard component for displaying a restaurant collection
  *
@@ -86,11 +84,7 @@ const CollectionCard = memo(function CollectionCard({
               />
             ) : (
               <div className="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-                <LucideClientIcon
-                  icon={Utensils}
-                  className="w-8 h-8 text-gray-400 dark:text-gray-500"
-                  aria-hidden="true"
-                />
+                <Utensils className="w-8 h-8 text-gray-400 dark:text-gray-500" aria-hidden="true" />
               </div>
             )}
           </div>
@@ -127,11 +121,9 @@ const CollectionCard = memo(function CollectionCard({
 
           <div className="flex flex-wrap gap-y-2 text-xs text-gray-500 dark:text-gray-400">
             <div className="flex items-center mr-4">
-              <LucideClientIcon
-                icon={Utensils}
-                className="w-3.5 h-3.5 mr-1"
+              <Utensils className="w-3.5 h-3.5 mr-1"
                 aria-hidden="true"
-              />
+               />
               <span>
                 {restaurantCount}{' '}
                 {restaurantCount === 1 ? 'Restaurant' : 'Restaurants'}
@@ -140,22 +132,18 @@ const CollectionCard = memo(function CollectionCard({
 
             {location && (
               <div className="flex items-center mr-4">
-                <LucideClientIcon
-                  icon={MapPin}
-                  className="w-3.5 h-3.5 mr-1"
+                <MapPin className="w-3.5 h-3.5 mr-1"
                   aria-hidden="true"
-                />
+                 />
                 <span>{location}</span>
               </div>
             )}
 
             {updatedAt && (
               <div className="flex items-center">
-                <LucideClientIcon
-                  icon={Clock}
-                  className="w-3.5 h-3.5 mr-1"
+                <Clock className="w-3.5 h-3.5 mr-1"
                   aria-hidden="true"
-                />
+                 />
                 <span>Updated {formatDate(updatedAt)}</span>
               </div>
             )}
@@ -191,11 +179,9 @@ const CollectionCard = memo(function CollectionCard({
             />
           ) : (
             <div className="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-              <LucideClientIcon
-                icon={Utensils}
-                className="w-8 h-8 text-gray-400 dark:text-gray-500"
+              <Utensils className="w-8 h-8 text-gray-400 dark:text-gray-500"
                 aria-hidden="true"
-              />
+               />
             </div>
           )}
 
@@ -228,11 +214,9 @@ const CollectionCard = memo(function CollectionCard({
         <div className="p-3">
           <div className="flex justify-between items-center text-xs text-gray-500 dark:text-gray-400 mb-2">
             <div className="flex items-center">
-              <LucideClientIcon
-                icon={Utensils}
-                className="w-3.5 h-3.5 mr-1"
+              <Utensils className="w-3.5 h-3.5 mr-1"
                 aria-hidden="true"
-              />
+               />
               <span>
                 {restaurantCount}{' '}
                 {restaurantCount === 1 ? 'Restaurant' : 'Restaurants'}
@@ -241,11 +225,9 @@ const CollectionCard = memo(function CollectionCard({
 
             {location && (
               <div className="flex items-center">
-                <LucideClientIcon
-                  icon={MapPin}
-                  className="w-3.5 h-3.5 mr-1"
+                <MapPin className="w-3.5 h-3.5 mr-1"
                   aria-hidden="true"
-                />
+                 />
                 <span className="truncate max-w-[100px]">{location}</span>
               </div>
             )}
@@ -256,11 +238,9 @@ const CollectionCard = memo(function CollectionCard({
             className="flex items-center justify-center w-full py-1.5 text-xs font-medium text-orange-500 hover:text-orange-600 dark:hover:text-orange-400 transition-colors border-t border-gray-100 dark:border-gray-700 mt-1 pt-2"
           >
             View Collection
-            <LucideClientIcon
-              icon={ChevronRight}
-              className="w-3.5 h-3.5 ml-1"
+            <ChevronRight className="w-3.5 h-3.5 ml-1"
               aria-hidden="true"
-            />
+             />
           </Link>
         </div>
       </div>
@@ -284,11 +264,7 @@ const CollectionCard = memo(function CollectionCard({
           />
         ) : (
           <div className="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-            <LucideClientIcon
-              icon={Utensils}
-              className="w-12 h-12 text-gray-400 dark:text-gray-500"
-              aria-hidden="true"
-            />
+            <Utensils className="w-12 h-12 text-gray-400 dark:text-gray-500" aria-hidden="true" />
           </div>
         )}
 
@@ -327,11 +303,9 @@ const CollectionCard = memo(function CollectionCard({
 
         <div className="flex flex-wrap gap-y-2 text-sm text-gray-500 dark:text-gray-400">
           <div className="flex items-center mr-4">
-            <LucideClientIcon
-              icon={Utensils}
-              className="w-4 h-4 mr-1.5"
+            <Utensils className="w-4 h-4 mr-1.5"
               aria-hidden="true"
-            />
+             />
             <span>
               {restaurantCount}{' '}
               {restaurantCount === 1 ? 'Restaurant' : 'Restaurants'}
@@ -340,22 +314,18 @@ const CollectionCard = memo(function CollectionCard({
 
           {location && (
             <div className="flex items-center mr-4">
-              <LucideClientIcon
-                icon={MapPin}
-                className="w-4 h-4 mr-1.5"
+              <MapPin className="w-4 h-4 mr-1.5"
                 aria-hidden="true"
-              />
+               />
               <span>{location}</span>
             </div>
           )}
 
           {updatedAt && (
             <div className="flex items-center">
-              <LucideClientIcon
-                icon={Clock}
-                className="w-4 h-4 mr-1.5"
+              <Clock className="w-4 h-4 mr-1.5"
                 aria-hidden="true"
-              />
+               />
               <span>Updated {formatDate(updatedAt)}</span>
             </div>
           )}
@@ -375,11 +345,9 @@ const CollectionCard = memo(function CollectionCard({
           className="mt-4 inline-flex items-center text-orange-500 hover:text-orange-600 dark:hover:text-orange-400 font-medium transition-colors"
         >
           View Collection
-          <LucideClientIcon
-            icon={ChevronRight}
-            className="w-4 h-4 ml-1"
+          <ChevronRight className="w-4 h-4 ml-1"
             aria-hidden="true"
-          />
+           />
         </Link>
       </div>
     </div>

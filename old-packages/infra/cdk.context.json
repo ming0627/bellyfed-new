@@ -1,0 +1,21 @@
+{
+    "availability-zones:account=590184067494:region=ap-southeast-1": [
+        "ap-southeast-1a",
+        "ap-southeast-1b",
+        "ap-southeast-1c"
+    ],
+    "hosted-zone:account=590184067494:domainName=bellyfed.com:region=ap-southeast-1": {
+        "Id": "/hostedzone/Z1234567890ABC",
+        "Name": "bellyfed.com."
+    },
+    "vpc-provider:account=590184067494:filter.vpc-id=vpc-mock:region=ap-southeast-1": {
+        "vpcId": "vpc-mock",
+        "availabilityZones": ["ap-southeast-1a", "ap-southeast-1b"],
+        "privateSubnetIds": ["subnet-private1", "subnet-private2"],
+        "privateSubnetNames": ["Private Subnet 1", "Private Subnet 2"],
+        "privateSubnetRouteTableIds": ["rtb-private1", "rtb-private2"],
+        "publicSubnetIds": ["subnet-public1", "subnet-public2"],
+        "publicSubnetNames": ["Public Subnet 1", "Public Subnet 2"],
+        "publicSubnetRouteTableIds": ["rtb-public1", "rtb-public2"]
+    }
+}

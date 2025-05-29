@@ -1,0 +1,1758 @@
+[
+  {
+    "id": "ChIJIfYLMzFJzDERPG9vHZ7DqiE",
+    "name": "Village Park Restaurant",
+    "type": "RESTAURANT",
+    "specialties": ["Nasi Lemak"],
+    "description": "5, Jalan SS 21/37, Damansara Utama, 47400 Petaling Jaya, Selangor, Malaysia",
+    "priceRange": "$$",
+    "isCurrentlyOperating": true,
+    "address": "5, Jalan SS 21/37, Damansara Utama, 47400 Petaling Jaya, Selangor, Malaysia",
+    "phoneNumber": "012-273 8438",
+    "website": "https://www.facebook.com/Village-Park-Restaurant-1639483826264341/",
+    "locations": [
+      {
+        "name": "Village Park Restaurant",
+        "address": "5, Jalan SS 21/37, Damansara Utama, 47400 Petaling Jaya, Selangor, Malaysia",
+        "latitude": 3.1376947,
+        "longitude": 101.6233261
+      }
+    ],
+    "schedules": [
+      {
+        "dayOfWeek": "SUNDAY",
+        "startTime": "06:30",
+        "endTime": "17:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "MONDAY",
+        "startTime": "06:30",
+        "endTime": "17:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "TUESDAY",
+        "startTime": "06:30",
+        "endTime": "17:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "WEDNESDAY",
+        "startTime": "06:30",
+        "endTime": "17:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "THURSDAY",
+        "startTime": "06:30",
+        "endTime": "17:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "FRIDAY",
+        "startTime": "06:30",
+        "endTime": "17:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SATURDAY",
+        "startTime": "06:30",
+        "endTime": "17:30",
+        "isRecurring": true
+      }
+    ],
+    "ranking": {
+      "category": "GENERAL",
+      "totalScore": 4.3,
+      "reviewCount": 11069
+    },
+    "createdAt": "2024-11-26T14:23:55.553Z",
+    "updatedAt": "2024-11-26T14:23:55.553Z",
+    "additionalInfo": {
+      "contact": {
+        "phone": "012-273 8438",
+        "website": "https://www.facebook.com/Village-Park-Restaurant-1639483826264341/"
+      },
+      "location": {
+        "address": "5, Jalan SS 21/37, Damansara Utama, 47400 Petaling Jaya, Selangor, Malaysia",
+        "coordinates": {
+          "latitude": 3.1376947,
+          "longitude": 101.6233261
+        }
+      }
+    }
+  },
+  {
+    "id": "ChIJ9yOgzVhMzDERrG1_NTNKBN4",
+    "name": "JIBRIL SS15",
+    "type": "RESTAURANT",
+    "specialties": ["Nasi Lemak"],
+    "description": "25, Jalan SS 15/4b, Ss 15, 47500 Subang Jaya, Selangor, Malaysia",
+    "priceRange": "$$",
+    "isCurrentlyOperating": true,
+    "address": "25, Jalan SS 15/4b, Ss 15, 47500 Subang Jaya, Selangor, Malaysia",
+    "phoneNumber": "017-488 4300",
+    "website": "https://jibrilss15.com/",
+    "locations": [
+      {
+        "name": "JIBRIL SS15",
+        "address": "25, Jalan SS 15/4b, Ss 15, 47500 Subang Jaya, Selangor, Malaysia",
+        "latitude": 3.0757807,
+        "longitude": 101.5872127
+      }
+    ],
+    "schedules": [
+      {
+        "dayOfWeek": "SUNDAY",
+        "startTime": "12:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "MONDAY",
+        "startTime": "12:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "TUESDAY",
+        "startTime": "12:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "WEDNESDAY",
+        "startTime": "12:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "THURSDAY",
+        "startTime": "12:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "FRIDAY",
+        "startTime": "12:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SATURDAY",
+        "startTime": "12:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      }
+    ],
+    "ranking": {
+      "category": "GENERAL",
+      "totalScore": 4.7,
+      "reviewCount": 10222
+    },
+    "createdAt": "2024-11-26T14:23:54.678Z",
+    "updatedAt": "2024-11-26T14:23:54.678Z",
+    "additionalInfo": {
+      "contact": {
+        "phone": "017-488 4300",
+        "website": "https://jibrilss15.com/"
+      },
+      "location": {
+        "address": "25, Jalan SS 15/4b, Ss 15, 47500 Subang Jaya, Selangor, Malaysia",
+        "coordinates": {
+          "latitude": 3.0757807,
+          "longitude": 101.5872127
+        }
+      }
+    }
+  },
+  {
+    "id": "ChIJIX_PtydIzDERHS_1R1F40zU",
+    "name": "Nasi Lemak Wanjo Kampung Baru",
+    "type": "RESTAURANT",
+    "specialties": ["Nasi Lemak"],
+    "description": "8, Jalan Raja Muda Musa, Kampung Baru, 50300 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia",
+    "priceRange": "$$",
+    "isCurrentlyOperating": true,
+    "address": "8, Jalan Raja Muda Musa, Kampung Baru, 50300 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia",
+    "phoneNumber": "011-6336 1963",
+    "website": "https://www.facebook.com/nasilemakwanjoofficial/",
+    "locations": [
+      {
+        "name": "Nasi Lemak Wanjo Kampung Baru",
+        "address": "8, Jalan Raja Muda Musa, Kampung Baru, 50300 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia",
+        "latitude": 3.1623678,
+        "longitude": 101.7044279
+      }
+    ],
+    "schedules": [
+      {
+        "dayOfWeek": "SUNDAY",
+        "startTime": "06:00",
+        "endTime": "00:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "MONDAY",
+        "startTime": "06:00",
+        "endTime": "00:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "TUESDAY",
+        "startTime": "06:00",
+        "endTime": "00:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "WEDNESDAY",
+        "startTime": "06:00",
+        "endTime": "00:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "THURSDAY",
+        "startTime": "06:00",
+        "endTime": "00:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "FRIDAY",
+        "startTime": "06:00",
+        "endTime": "00:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SATURDAY",
+        "startTime": "06:00",
+        "endTime": "00:30",
+        "isRecurring": true
+      }
+    ],
+    "ranking": {
+      "category": "GENERAL",
+      "totalScore": 4.1,
+      "reviewCount": 10095
+    },
+    "createdAt": "2024-11-26T14:23:56.155Z",
+    "updatedAt": "2024-11-26T14:23:56.155Z",
+    "additionalInfo": {
+      "contact": {
+        "phone": "011-6336 1963",
+        "website": "https://www.facebook.com/nasilemakwanjoofficial/"
+      },
+      "location": {
+        "address": "8, Jalan Raja Muda Musa, Kampung Baru, 50300 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia",
+        "coordinates": {
+          "latitude": 3.1623678,
+          "longitude": 101.7044279
+        }
+      }
+    }
+  },
+  {
+    "id": "ChIJD0P7YHtLzDERKU8IXyctme0",
+    "name": "Nasi Lemak Bumbung",
+    "type": "RESTAURANT",
+    "specialties": ["Nasi Lemak"],
+    "description": "6, Jalan 21/11b, Sea Park, 46300 Petaling Jaya, Selangor, Malaysia",
+    "priceRange": "$",
+    "isCurrentlyOperating": true,
+    "address": "6, Jalan 21/11b, Sea Park, 46300 Petaling Jaya, Selangor, Malaysia",
+    "phoneNumber": "011-2311 3576",
+    "locations": [
+      {
+        "name": "Nasi Lemak Bumbung",
+        "address": "6, Jalan 21/11b, Sea Park, 46300 Petaling Jaya, Selangor, Malaysia",
+        "latitude": 3.1098197,
+        "longitude": 101.6225115
+      }
+    ],
+    "schedules": [
+      {
+        "dayOfWeek": "SUNDAY",
+        "startTime": "16:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "MONDAY",
+        "startTime": "16:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "TUESDAY",
+        "startTime": "16:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "WEDNESDAY",
+        "startTime": "16:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "THURSDAY",
+        "startTime": "16:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "FRIDAY",
+        "startTime": "16:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SATURDAY",
+        "startTime": "16:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      }
+    ],
+    "ranking": {
+      "category": "GENERAL",
+      "totalScore": 4.1,
+      "reviewCount": 6417
+    },
+    "createdAt": "2024-11-26T14:23:54.411Z",
+    "updatedAt": "2024-11-26T14:23:54.411Z",
+    "additionalInfo": {
+      "contact": {
+        "phone": "011-2311 3576"
+      },
+      "location": {
+        "address": "6, Jalan 21/11b, Sea Park, 46300 Petaling Jaya, Selangor, Malaysia",
+        "coordinates": {
+          "latitude": 3.1098197,
+          "longitude": 101.6225115
+        }
+      }
+    }
+  },
+  {
+    "id": "ChIJ1zRFsqo3zDERMx5HJ83BFUs",
+    "name": "Nasi Lemak Royale ‘Kedah’",
+    "type": "RESTAURANT",
+    "specialties": ["Nasi Lemak"],
+    "description": "3, Jalan Ampang Putra, Taman Putra Sulaiman, 68000 Ampang, Selangor, Malaysia",
+    "priceRange": "$$",
+    "isCurrentlyOperating": true,
+    "address": "3, Jalan Ampang Putra, Taman Putra Sulaiman, 68000 Ampang, Selangor, Malaysia",
+    "phoneNumber": "011-1525 2609",
+    "website": "https://www.facebook.com/NasiLemakRoyalKedahAmpang/",
+    "locations": [
+      {
+        "name": "Nasi Lemak Royale ‘Kedah’",
+        "address": "3, Jalan Ampang Putra, Taman Putra Sulaiman, 68000 Ampang, Selangor, Malaysia",
+        "latitude": 3.1505808,
+        "longitude": 101.7515856
+      }
+    ],
+    "schedules": [
+      {
+        "dayOfWeek": "SUNDAY",
+        "startTime": "07:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "MONDAY",
+        "startTime": "07:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "TUESDAY",
+        "startTime": "07:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "WEDNESDAY",
+        "startTime": "07:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "THURSDAY",
+        "startTime": "07:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "FRIDAY",
+        "startTime": "07:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SATURDAY",
+        "startTime": "07:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      }
+    ],
+    "ranking": {
+      "category": "GENERAL",
+      "totalScore": 4.2,
+      "reviewCount": 3046
+    },
+    "createdAt": "2024-11-26T14:23:57.062Z",
+    "updatedAt": "2024-11-26T14:23:57.062Z",
+    "additionalInfo": {
+      "contact": {
+        "phone": "011-1525 2609",
+        "website": "https://www.facebook.com/NasiLemakRoyalKedahAmpang/"
+      },
+      "location": {
+        "address": "3, Jalan Ampang Putra, Taman Putra Sulaiman, 68000 Ampang, Selangor, Malaysia",
+        "coordinates": {
+          "latitude": 3.1505808,
+          "longitude": 101.7515856
+        }
+      }
+    }
+  },
+  {
+    "id": "ChIJmbVdX5ZNzDERnfIf_mv4ubA",
+    "name": "NASI LEMAK CINTA SAYANG",
+    "type": "RESTAURANT",
+    "specialties": ["Nasi Lemak"],
+    "description": "2, Jalan Renang 13/26, Seksyen 13, 40100 Shah Alam, Selangor, Malaysia",
+    "priceRange": "$$",
+    "isCurrentlyOperating": true,
+    "address": "2, Jalan Renang 13/26, Seksyen 13, 40100 Shah Alam, Selangor, Malaysia",
+    "phoneNumber": "013-338 3038",
+    "locations": [
+      {
+        "name": "NASI LEMAK CINTA SAYANG",
+        "address": "2, Jalan Renang 13/26, Seksyen 13, 40100 Shah Alam, Selangor, Malaysia",
+        "latitude": 3.087734,
+        "longitude": 101.544697
+      }
+    ],
+    "schedules": [
+      {
+        "dayOfWeek": "SUNDAY",
+        "startTime": "06:30",
+        "endTime": "23:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "MONDAY",
+        "startTime": "06:30",
+        "endTime": "23:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "TUESDAY",
+        "startTime": "06:30",
+        "endTime": "23:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "WEDNESDAY",
+        "startTime": "06:30",
+        "endTime": "23:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "THURSDAY",
+        "startTime": "06:30",
+        "endTime": "23:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "FRIDAY",
+        "startTime": "06:30",
+        "endTime": "23:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SATURDAY",
+        "startTime": "06:30",
+        "endTime": "23:30",
+        "isRecurring": true
+      }
+    ],
+    "ranking": {
+      "category": "GENERAL",
+      "totalScore": 3.7,
+      "reviewCount": 2633
+    },
+    "createdAt": "2024-11-26T14:23:57.767Z",
+    "updatedAt": "2024-11-26T14:23:57.767Z",
+    "additionalInfo": {
+      "contact": {
+        "phone": "013-338 3038"
+      },
+      "location": {
+        "address": "2, Jalan Renang 13/26, Seksyen 13, 40100 Shah Alam, Selangor, Malaysia",
+        "coordinates": {
+          "latitude": 3.087734,
+          "longitude": 101.544697
+        }
+      }
+    }
+  },
+  {
+    "id": "ChIJrcJChydIzDERvXbtzZPPUkk",
+    "name": "Nasi Lemak Pak Aji",
+    "type": "RESTAURANT",
+    "specialties": ["Nasi Lemak"],
+    "description": "4, Jalan Raja Muda Musa, Kampung Baru, 50300 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia",
+    "priceRange": "$$",
+    "isCurrentlyOperating": true,
+    "address": "4, Jalan Raja Muda Musa, Kampung Baru, 50300 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia",
+    "phoneNumber": "011-5111 1991",
+    "locations": [
+      {
+        "name": "Nasi Lemak Pak Aji",
+        "address": "4, Jalan Raja Muda Musa, Kampung Baru, 50300 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia",
+        "latitude": 3.1624151,
+        "longitude": 101.7040313
+      }
+    ],
+    "schedules": [
+      {
+        "dayOfWeek": "SUNDAY",
+        "startTime": "06:00",
+        "endTime": "02:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "MONDAY",
+        "startTime": "06:00",
+        "endTime": "02:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "TUESDAY",
+        "startTime": "06:00",
+        "endTime": "02:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "WEDNESDAY",
+        "startTime": "06:00",
+        "endTime": "02:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "THURSDAY",
+        "startTime": "06:00",
+        "endTime": "02:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "FRIDAY",
+        "startTime": "06:00",
+        "endTime": "02:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SATURDAY",
+        "startTime": "06:00",
+        "endTime": "02:00",
+        "isRecurring": true
+      }
+    ],
+    "ranking": {
+      "category": "GENERAL",
+      "totalScore": 3.6,
+      "reviewCount": 2412
+    },
+    "createdAt": "2024-11-26T14:23:56.234Z",
+    "updatedAt": "2024-11-26T14:23:56.234Z",
+    "additionalInfo": {
+      "contact": {
+        "phone": "011-5111 1991"
+      },
+      "location": {
+        "address": "4, Jalan Raja Muda Musa, Kampung Baru, 50300 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia",
+        "coordinates": {
+          "latitude": 3.1624151,
+          "longitude": 101.7040313
+        }
+      }
+    }
+  },
+  {
+    "id": "ChIJrXun1sVMzDERveGNlhiBs9w",
+    "name": "Murni Discovery USJ 9",
+    "type": "RESTAURANT",
+    "specialties": ["Nasi Lemak"],
+    "description": "39-1 & 41, 1, Jalan USJ 9/5p, Subang Business Centre, 47620 Subang Jaya, Selangor, Malaysia",
+    "priceRange": "$$",
+    "isCurrentlyOperating": true,
+    "address": "39-1 & 41, 1, Jalan USJ 9/5p, Subang Business Centre, 47620 Subang Jaya, Selangor, Malaysia",
+    "phoneNumber": "012-529 9602",
+    "website": "http://www.murnidiscovery.com/",
+    "locations": [
+      {
+        "name": "Murni Discovery USJ 9",
+        "address": "39-1 & 41, 1, Jalan USJ 9/5p, Subang Business Centre, 47620 Subang Jaya, Selangor, Malaysia",
+        "latitude": 3.0469105,
+        "longitude": 101.5874856
+      }
+    ],
+    "schedules": [
+      {
+        "dayOfWeek": "SUNDAY",
+        "startTime": "10:00",
+        "endTime": "03:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "MONDAY",
+        "startTime": "10:00",
+        "endTime": "03:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "TUESDAY",
+        "startTime": "10:00",
+        "endTime": "03:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "WEDNESDAY",
+        "startTime": "10:00",
+        "endTime": "03:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "THURSDAY",
+        "startTime": "10:00",
+        "endTime": "03:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "FRIDAY",
+        "startTime": "10:00",
+        "endTime": "03:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SATURDAY",
+        "startTime": "10:00",
+        "endTime": "03:00",
+        "isRecurring": true
+      }
+    ],
+    "ranking": {
+      "category": "GENERAL",
+      "totalScore": 4,
+      "reviewCount": 2387
+    },
+    "createdAt": "2024-11-26T14:23:54.279Z",
+    "updatedAt": "2024-11-26T14:23:54.279Z",
+    "additionalInfo": {
+      "contact": {
+        "phone": "012-529 9602",
+        "website": "http://www.murnidiscovery.com/"
+      },
+      "location": {
+        "address": "39-1 & 41, 1, Jalan USJ 9/5p, Subang Business Centre, 47620 Subang Jaya, Selangor, Malaysia",
+        "coordinates": {
+          "latitude": 3.0469105,
+          "longitude": 101.5874856
+        }
+      }
+    }
+  },
+  {
+    "id": "ChIJ63Rs3cVMzDERiGYioFFQHhs",
+    "name": "Nasi Lemak Panas Restoran Warisan Sambal Opah",
+    "type": "RESTAURANT",
+    "specialties": ["Nasi Lemak"],
+    "description": "2-1, Jalan USJ 9/5p, Subang Business Centre, 47620 Subang Jaya, Selangor, Malaysia",
+    "priceRange": "$$",
+    "isCurrentlyOperating": true,
+    "address": "2-1, Jalan USJ 9/5p, Subang Business Centre, 47620 Subang Jaya, Selangor, Malaysia",
+    "phoneNumber": "012-976 1116",
+    "locations": [
+      {
+        "name": "Nasi Lemak Panas Restoran Warisan Sambal Opah",
+        "address": "2-1, Jalan USJ 9/5p, Subang Business Centre, 47620 Subang Jaya, Selangor, Malaysia",
+        "latitude": 3.0457067,
+        "longitude": 101.5867238
+      }
+    ],
+    "schedules": [
+      {
+        "dayOfWeek": "SUNDAY",
+        "startTime": "15:30",
+        "endTime": "04:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "MONDAY",
+        "startTime": "16:00",
+        "endTime": "04:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "TUESDAY",
+        "startTime": "15:30",
+        "endTime": "04:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "WEDNESDAY",
+        "startTime": "15:30",
+        "endTime": "04:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "THURSDAY",
+        "startTime": "15:30",
+        "endTime": "04:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "FRIDAY",
+        "startTime": "15:30",
+        "endTime": "04:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SATURDAY",
+        "startTime": "15:30",
+        "endTime": "04:00",
+        "isRecurring": true
+      }
+    ],
+    "ranking": {
+      "category": "GENERAL",
+      "totalScore": 3.8,
+      "reviewCount": 2143
+    },
+    "createdAt": "2024-11-26T14:23:53.920Z",
+    "updatedAt": "2024-11-26T14:23:53.921Z",
+    "additionalInfo": {
+      "contact": {
+        "phone": "012-976 1116"
+      },
+      "location": {
+        "address": "2-1, Jalan USJ 9/5p, Subang Business Centre, 47620 Subang Jaya, Selangor, Malaysia",
+        "coordinates": {
+          "latitude": 3.0457067,
+          "longitude": 101.5867238
+        }
+      }
+    }
+  },
+  {
+    "id": "ChIJtTdeGn5NzDERmGKdjz8Lw-Y",
+    "name": "Restoran Nasi Lemak Royale Kedah",
+    "type": "RESTAURANT",
+    "specialties": ["Nasi Lemak"],
+    "description": "Persiaran Damai, Seksyen 14, 40100 Shah Alam, Selangor, Malaysia",
+    "priceRange": "$$",
+    "isCurrentlyOperating": true,
+    "address": "Persiaran Damai, Seksyen 14, 40100 Shah Alam, Selangor, Malaysia",
+    "phoneNumber": "016-433 7921",
+    "website": "https://www.facebook.com/nasilemakroyalekedahSA/",
+    "locations": [
+      {
+        "name": "Restoran Nasi Lemak Royale Kedah",
+        "address": "Persiaran Damai, Seksyen 14, 40100 Shah Alam, Selangor, Malaysia",
+        "latitude": 3.0705861,
+        "longitude": 101.5253663
+      }
+    ],
+    "schedules": [
+      {
+        "dayOfWeek": "SUNDAY",
+        "startTime": "07:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "MONDAY",
+        "startTime": "07:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "TUESDAY",
+        "startTime": "07:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "WEDNESDAY",
+        "startTime": "07:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "THURSDAY",
+        "startTime": "07:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "FRIDAY",
+        "startTime": "07:00",
+        "endTime": "12:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "FRIDAY",
+        "startTime": "15:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SATURDAY",
+        "startTime": "07:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      }
+    ],
+    "ranking": {
+      "category": "GENERAL",
+      "totalScore": 3.8,
+      "reviewCount": 2045
+    },
+    "createdAt": "2024-11-26T14:23:57.859Z",
+    "updatedAt": "2024-11-26T14:23:57.859Z",
+    "additionalInfo": {
+      "contact": {
+        "phone": "016-433 7921",
+        "website": "https://www.facebook.com/nasilemakroyalekedahSA/"
+      },
+      "location": {
+        "address": "Persiaran Damai, Seksyen 14, 40100 Shah Alam, Selangor, Malaysia",
+        "coordinates": {
+          "latitude": 3.0705861,
+          "longitude": 101.5253663
+        }
+      }
+    }
+  },
+  {
+    "id": "ChIJJaHUWVE2zDERNV3eY8ONWtc",
+    "name": "Nasi Lemak Saleha",
+    "type": "RESTAURANT",
+    "specialties": ["Nasi Lemak"],
+    "description": "8, Jln Seri Rejang 5, Setapak Jaya, 53300 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia",
+    "priceRange": "$$",
+    "isCurrentlyOperating": true,
+    "address": "8, Jln Seri Rejang 5, Setapak Jaya, 53300 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia",
+    "phoneNumber": "017-747 0100",
+    "website": "https://linktr.ee/salehagroup",
+    "locations": [
+      {
+        "name": "Nasi Lemak Saleha",
+        "address": "8, Jln Seri Rejang 5, Setapak Jaya, 53300 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia",
+        "latitude": 3.1942638,
+        "longitude": 101.7262087
+      }
+    ],
+    "schedules": [
+      {
+        "dayOfWeek": "SUNDAY",
+        "startTime": "07:00",
+        "endTime": "23:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "MONDAY",
+        "startTime": "07:00",
+        "endTime": "23:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "TUESDAY",
+        "startTime": "07:00",
+        "endTime": "23:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "WEDNESDAY",
+        "startTime": "07:00",
+        "endTime": "23:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "THURSDAY",
+        "startTime": "07:00",
+        "endTime": "23:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "FRIDAY",
+        "startTime": "07:00",
+        "endTime": "23:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SATURDAY",
+        "startTime": "07:00",
+        "endTime": "23:00",
+        "isRecurring": true
+      }
+    ],
+    "ranking": {
+      "category": "GENERAL",
+      "totalScore": 4,
+      "reviewCount": 2039
+    },
+    "createdAt": "2024-11-26T14:23:56.972Z",
+    "updatedAt": "2024-11-26T14:23:56.972Z",
+    "additionalInfo": {
+      "contact": {
+        "phone": "017-747 0100",
+        "website": "https://linktr.ee/salehagroup"
+      },
+      "location": {
+        "address": "8, Jln Seri Rejang 5, Setapak Jaya, 53300 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia",
+        "coordinates": {
+          "latitude": 3.1942638,
+          "longitude": 101.7262087
+        }
+      }
+    }
+  },
+  {
+    "id": "ChIJgxoyxM5JzDER_wDOoQqk5zo",
+    "name": "Nasi Lemak Tanglin",
+    "type": "RESTAURANT",
+    "specialties": ["Nasi Lemak"],
+    "description": "Kompleks Makan Tanglin, Gerai, No. 6, Jalan Cenderasari, Wilayah Persekutuan, 50480 Kuala Lumpur, Federal Territory of Kuala Lumpur, Malaysia",
+    "priceRange": "$$",
+    "isCurrentlyOperating": true,
+    "address": "Kompleks Makan Tanglin, Gerai, No. 6, Jalan Cenderasari, Wilayah Persekutuan, 50480 Kuala Lumpur, Federal Territory of Kuala Lumpur, Malaysia",
+    "phoneNumber": "017-277 3176",
+    "website": "https://linktr.ee/nasilemaktanglin",
+    "locations": [
+      {
+        "name": "Nasi Lemak Tanglin",
+        "address": "Kompleks Makan Tanglin, Gerai, No. 6, Jalan Cenderasari, Wilayah Persekutuan, 50480 Kuala Lumpur, Federal Territory of Kuala Lumpur, Malaysia",
+        "latitude": 3.1441055,
+        "longitude": 101.6906507
+      }
+    ],
+    "schedules": [
+      {
+        "dayOfWeek": "SUNDAY",
+        "startTime": "07:00",
+        "endTime": "12:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "MONDAY",
+        "startTime": "07:00",
+        "endTime": "12:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "TUESDAY",
+        "startTime": "07:00",
+        "endTime": "12:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "WEDNESDAY",
+        "startTime": "07:00",
+        "endTime": "12:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "THURSDAY",
+        "startTime": "07:00",
+        "endTime": "12:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "FRIDAY",
+        "startTime": "07:00",
+        "endTime": "12:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SATURDAY",
+        "startTime": "07:00",
+        "endTime": "12:30",
+        "isRecurring": true
+      }
+    ],
+    "ranking": {
+      "category": "GENERAL",
+      "totalScore": 3.9,
+      "reviewCount": 2022
+    },
+    "createdAt": "2024-11-26T14:23:56.358Z",
+    "updatedAt": "2024-11-26T14:23:56.358Z",
+    "additionalInfo": {
+      "contact": {
+        "phone": "017-277 3176",
+        "website": "https://linktr.ee/nasilemaktanglin"
+      },
+      "location": {
+        "address": "Kompleks Makan Tanglin, Gerai, No. 6, Jalan Cenderasari, Wilayah Persekutuan, 50480 Kuala Lumpur, Federal Territory of Kuala Lumpur, Malaysia",
+        "coordinates": {
+          "latitude": 3.1441055,
+          "longitude": 101.6906507
+        }
+      }
+    }
+  },
+  {
+    "id": "ChIJqdxk4cJTzDER2h3uu7PvQD8",
+    "name": "NALE - The Nasi Lemak Company, Central Icity",
+    "type": "RESTAURANT",
+    "specialties": ["Nasi Lemak"],
+    "description": "LG34-B Central i-City No1 Persiaran Multimedia i-City, Seksyen 7, 40000 Shah Alam, Selangor, Malaysia",
+    "isCurrentlyOperating": true,
+    "address": "LG34-B Central i-City No1 Persiaran Multimedia i-City, Seksyen 7, 40000 Shah Alam, Selangor, Malaysia",
+    "phoneNumber": "014-360 0835",
+    "website": "http://www.thenale.com/",
+    "locations": [
+      {
+        "name": "NALE - The Nasi Lemak Company, Central Icity",
+        "address": "LG34-B Central i-City No1 Persiaran Multimedia i-City, Seksyen 7, 40000 Shah Alam, Selangor, Malaysia",
+        "latitude": 3.062019199999999,
+        "longitude": 101.481414
+      }
+    ],
+    "schedules": [
+      {
+        "dayOfWeek": "SUNDAY",
+        "startTime": "10:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "MONDAY",
+        "startTime": "10:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "TUESDAY",
+        "startTime": "10:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "WEDNESDAY",
+        "startTime": "10:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "THURSDAY",
+        "startTime": "10:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "FRIDAY",
+        "startTime": "10:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SATURDAY",
+        "startTime": "10:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      }
+    ],
+    "ranking": {
+      "category": "GENERAL",
+      "totalScore": 4.8,
+      "reviewCount": 1870
+    },
+    "createdAt": "2024-11-26T14:23:57.572Z",
+    "updatedAt": "2024-11-26T14:23:57.572Z",
+    "additionalInfo": {
+      "contact": {
+        "phone": "014-360 0835",
+        "website": "http://www.thenale.com/"
+      },
+      "location": {
+        "address": "LG34-B Central i-City No1 Persiaran Multimedia i-City, Seksyen 7, 40000 Shah Alam, Selangor, Malaysia",
+        "coordinates": {
+          "latitude": 3.062019199999999,
+          "longitude": 101.481414
+        }
+      }
+    }
+  },
+  {
+    "id": "ChIJc0QNzZBJzDERQu0JIwIb4Jk",
+    "name": "NALÉ - The Nasi Lemak Company",
+    "type": "RESTAURANT",
+    "specialties": ["Nasi Lemak"],
+    "description": "G(E)-013, MIDVALLEY MEGAMALL, Lingkaran Syed Putra, Mid Valley City, 59200 Kuala Lumpur, Federal Territory of Kuala Lumpur, Malaysia",
+    "isCurrentlyOperating": true,
+    "address": "G(E)-013, MIDVALLEY MEGAMALL, Lingkaran Syed Putra, Mid Valley City, 59200 Kuala Lumpur, Federal Territory of Kuala Lumpur, Malaysia",
+    "phoneNumber": "010-661 7871",
+    "website": "http://www.thenale.com/",
+    "locations": [
+      {
+        "name": "NALÉ - The Nasi Lemak Company",
+        "address": "G(E)-013, MIDVALLEY MEGAMALL, Lingkaran Syed Putra, Mid Valley City, 59200 Kuala Lumpur, Federal Territory of Kuala Lumpur, Malaysia",
+        "latitude": 3.1185099,
+        "longitude": 101.6770965
+      }
+    ],
+    "schedules": [
+      {
+        "dayOfWeek": "SUNDAY",
+        "startTime": "11:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "MONDAY",
+        "startTime": "11:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "TUESDAY",
+        "startTime": "11:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "WEDNESDAY",
+        "startTime": "11:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "THURSDAY",
+        "startTime": "11:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "FRIDAY",
+        "startTime": "11:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SATURDAY",
+        "startTime": "11:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      }
+    ],
+    "ranking": {
+      "category": "GENERAL",
+      "totalScore": 4.6,
+      "reviewCount": 1833
+    },
+    "createdAt": "2024-11-26T14:23:56.469Z",
+    "updatedAt": "2024-11-26T14:23:56.469Z",
+    "additionalInfo": {
+      "contact": {
+        "phone": "010-661 7871",
+        "website": "http://www.thenale.com/"
+      },
+      "location": {
+        "address": "G(E)-013, MIDVALLEY MEGAMALL, Lingkaran Syed Putra, Mid Valley City, 59200 Kuala Lumpur, Federal Territory of Kuala Lumpur, Malaysia",
+        "coordinates": {
+          "latitude": 3.1185099,
+          "longitude": 101.6770965
+        }
+      }
+    }
+  },
+  {
+    "id": "ChIJ_UzMKOlLzDER7BLv-pWJo4g",
+    "name": "Nasi Lemak Panas 223",
+    "type": "RESTAURANT",
+    "specialties": ["Nasi Lemak"],
+    "description": "No 2, Jalan 51a/223, Seksyen 51a, 46100 Petaling Jaya, Selangor, Malaysia",
+    "priceRange": "$$",
+    "isCurrentlyOperating": true,
+    "address": "No 2, Jalan 51a/223, Seksyen 51a, 46100 Petaling Jaya, Selangor, Malaysia",
+    "phoneNumber": "012-385 4541",
+    "website": "https://www.facebook.com/NasiLemakPJ/",
+    "locations": [
+      {
+        "name": "Nasi Lemak Panas 223",
+        "address": "No 2, Jalan 51a/223, Seksyen 51a, 46100 Petaling Jaya, Selangor, Malaysia",
+        "latitude": 3.1003824,
+        "longitude": 101.6332717
+      }
+    ],
+    "schedules": [
+      {
+        "dayOfWeek": "SUNDAY",
+        "startTime": "06:00",
+        "endTime": "01:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "MONDAY",
+        "startTime": "06:00",
+        "endTime": "01:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "TUESDAY",
+        "startTime": "06:00",
+        "endTime": "01:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "WEDNESDAY",
+        "startTime": "06:00",
+        "endTime": "01:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "THURSDAY",
+        "startTime": "06:00",
+        "endTime": "01:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "FRIDAY",
+        "startTime": "06:00",
+        "endTime": "01:30",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SATURDAY",
+        "startTime": "06:00",
+        "endTime": "01:30",
+        "isRecurring": true
+      }
+    ],
+    "ranking": {
+      "category": "GENERAL",
+      "totalScore": 4.1,
+      "reviewCount": 1832
+    },
+    "createdAt": "2024-11-26T14:23:55.458Z",
+    "updatedAt": "2024-11-26T14:23:55.458Z",
+    "additionalInfo": {
+      "contact": {
+        "phone": "012-385 4541",
+        "website": "https://www.facebook.com/NasiLemakPJ/"
+      },
+      "location": {
+        "address": "No 2, Jalan 51a/223, Seksyen 51a, 46100 Petaling Jaya, Selangor, Malaysia",
+        "coordinates": {
+          "latitude": 3.1003824,
+          "longitude": 101.6332717
+        }
+      }
+    }
+  },
+  {
+    "id": "ChIJVxfovRI3zDER95QgBnblG_U",
+    "name": "Nasi Lemak Saleha (Ampang)",
+    "type": "RESTAURANT",
+    "specialties": ["Nasi Lemak"],
+    "description": "1, Jalan Pandan Prima 1, Dataran Pandan Prima, 55100 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia",
+    "priceRange": "$$",
+    "isCurrentlyOperating": true,
+    "address": "1, Jalan Pandan Prima 1, Dataran Pandan Prima, 55100 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia",
+    "phoneNumber": "03-3310 0018",
+    "website": "https://linktr.ee/salehagroup",
+    "locations": [
+      {
+        "name": "Nasi Lemak Saleha (Ampang)",
+        "address": "1, Jalan Pandan Prima 1, Dataran Pandan Prima, 55100 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia",
+        "latitude": 3.1423701,
+        "longitude": 101.7420179
+      }
+    ],
+    "schedules": [
+      {
+        "dayOfWeek": "SUNDAY",
+        "startTime": "07:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "MONDAY",
+        "startTime": "07:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "TUESDAY",
+        "startTime": "07:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "WEDNESDAY",
+        "startTime": "07:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "THURSDAY",
+        "startTime": "07:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "FRIDAY",
+        "startTime": "07:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SATURDAY",
+        "startTime": "07:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      }
+    ],
+    "ranking": {
+      "category": "GENERAL",
+      "totalScore": 4,
+      "reviewCount": 1823
+    },
+    "createdAt": "2024-11-26T14:23:56.758Z",
+    "updatedAt": "2024-11-26T14:23:56.758Z",
+    "additionalInfo": {
+      "contact": {
+        "phone": "03-3310 0018",
+        "website": "https://linktr.ee/salehagroup"
+      },
+      "location": {
+        "address": "1, Jalan Pandan Prima 1, Dataran Pandan Prima, 55100 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia",
+        "coordinates": {
+          "latitude": 3.1423701,
+          "longitude": 101.7420179
+        }
+      }
+    }
+  },
+  {
+    "id": "ChIJw28n9yVIzDERlXHzRjCYH3M",
+    "name": "Nasi Lemak CT Garden",
+    "type": "RESTAURANT",
+    "specialties": ["Nasi Lemak"],
+    "description": "Jalan Datuk Abdul Razak, Kampung Baru, 50300 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia",
+    "priceRange": "$",
+    "isCurrentlyOperating": true,
+    "address": "Jalan Datuk Abdul Razak, Kampung Baru, 50300 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia",
+    "locations": [
+      {
+        "name": "Nasi Lemak CT Garden",
+        "address": "Jalan Datuk Abdul Razak, Kampung Baru, 50300 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia",
+        "latitude": 3.1625042,
+        "longitude": 101.701271
+      }
+    ],
+    "schedules": [
+      {
+        "dayOfWeek": "SUNDAY",
+        "startTime": "18:00",
+        "endTime": "03:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "MONDAY",
+        "startTime": "18:00",
+        "endTime": "03:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "TUESDAY",
+        "startTime": "18:00",
+        "endTime": "03:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "WEDNESDAY",
+        "startTime": "18:00",
+        "endTime": "03:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "THURSDAY",
+        "startTime": "18:00",
+        "endTime": "03:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "FRIDAY",
+        "startTime": "18:00",
+        "endTime": "03:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SATURDAY",
+        "startTime": "18:00",
+        "endTime": "03:00",
+        "isRecurring": true
+      }
+    ],
+    "ranking": {
+      "category": "GENERAL",
+      "totalScore": 3.8,
+      "reviewCount": 1695
+    },
+    "createdAt": "2024-11-26T14:23:56.557Z",
+    "updatedAt": "2024-11-26T14:23:56.557Z",
+    "additionalInfo": {
+      "location": {
+        "address": "Jalan Datuk Abdul Razak, Kampung Baru, 50300 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia",
+        "coordinates": {
+          "latitude": 3.1625042,
+          "longitude": 101.701271
+        }
+      }
+    }
+  },
+  {
+    "id": "ChIJE6kKUn9HzDERjVlu5RWPCMo",
+    "name": "Nasi Lemak Ujang Corner",
+    "type": "RESTAURANT",
+    "specialties": ["Nasi Lemak"],
+    "description": "Gerai MPS, Gerai, No. 1, Jln Batu Caves, Taman Greenwood, 68100 Batu Caves, Selangor, Malaysia",
+    "priceRange": "$$",
+    "isCurrentlyOperating": true,
+    "address": "Gerai MPS, Gerai, No. 1, Jln Batu Caves, Taman Greenwood, 68100 Batu Caves, Selangor, Malaysia",
+    "phoneNumber": "017-333 7791",
+    "website": "https://m.facebook.com/nasilemakujangcorner/",
+    "locations": [
+      {
+        "name": "Nasi Lemak Ujang Corner",
+        "address": "Gerai MPS, Gerai, No. 1, Jln Batu Caves, Taman Greenwood, 68100 Batu Caves, Selangor, Malaysia",
+        "latitude": 3.234299400000001,
+        "longitude": 101.7056275
+      }
+    ],
+    "schedules": [
+      {
+        "dayOfWeek": "SUNDAY",
+        "startTime": "08:00",
+        "endTime": "14:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "MONDAY",
+        "startTime": "15:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "TUESDAY",
+        "startTime": "08:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "WEDNESDAY",
+        "startTime": "08:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "THURSDAY",
+        "startTime": "08:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "FRIDAY",
+        "startTime": "08:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SATURDAY",
+        "startTime": "08:00",
+        "endTime": "00:00",
+        "isRecurring": true
+      }
+    ],
+    "ranking": {
+      "category": "GENERAL",
+      "totalScore": 4.3,
+      "reviewCount": 1419
+    },
+    "createdAt": "2024-11-26T14:23:56.848Z",
+    "updatedAt": "2024-11-26T14:23:56.848Z",
+    "additionalInfo": {
+      "contact": {
+        "phone": "017-333 7791",
+        "website": "https://m.facebook.com/nasilemakujangcorner/"
+      },
+      "location": {
+        "address": "Gerai MPS, Gerai, No. 1, Jln Batu Caves, Taman Greenwood, 68100 Batu Caves, Selangor, Malaysia",
+        "coordinates": {
+          "latitude": 3.234299400000001,
+          "longitude": 101.7056275
+        }
+      }
+    }
+  },
+  {
+    "id": "ChIJF0kotlhMzDERBEkxfySe5_4",
+    "name": "Restoran Darussalam Subang Jaya",
+    "type": "RESTAURANT",
+    "specialties": ["Nasi Lemak"],
+    "description": "No 1 & 3G Jalan, Jalan SS 15/8b, Ss 15, 47500 Subang Jaya, Selangor, Malaysia",
+    "priceRange": "$",
+    "isCurrentlyOperating": true,
+    "address": "No 1 & 3G Jalan, Jalan SS 15/8b, Ss 15, 47500 Subang Jaya, Selangor, Malaysia",
+    "phoneNumber": "03-5631 2700",
+    "locations": [
+      {
+        "name": "Restoran Darussalam Subang Jaya",
+        "address": "No 1 & 3G Jalan, Jalan SS 15/8b, Ss 15, 47500 Subang Jaya, Selangor, Malaysia",
+        "latitude": 3.0743208,
+        "longitude": 101.5867567
+      }
+    ],
+    "schedules": [
+      {
+        "dayOfWeek": "SUNDAY",
+        "startTime": "00:00",
+        "isRecurring": true
+      }
+    ],
+    "ranking": {
+      "category": "GENERAL",
+      "totalScore": 3.7,
+      "reviewCount": 1288
+    },
+    "createdAt": "2024-11-26T14:23:54.555Z",
+    "updatedAt": "2024-11-26T14:23:54.555Z",
+    "additionalInfo": {
+      "contact": {
+        "phone": "03-5631 2700"
+      },
+      "location": {
+        "address": "No 1 & 3G Jalan, Jalan SS 15/8b, Ss 15, 47500 Subang Jaya, Selangor, Malaysia",
+        "coordinates": {
+          "latitude": 3.0743208,
+          "longitude": 101.5867567
+        }
+      }
+    }
+  },
+  {
+    "id": "ChIJp4iAqFJJzDER4wNGpsJ_y1k",
+    "name": "Nalé The Nasi Lemak Company",
+    "type": "RESTAURANT",
+    "specialties": ["Nasi Lemak"],
+    "description": "Lot 1.36.00, Level, 1, Pavilion Damansara Heights Rd, Pusat Bandar Damansara, 50490 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia",
+    "isCurrentlyOperating": true,
+    "address": "Lot 1.36.00, Level, 1, Pavilion Damansara Heights Rd, Pusat Bandar Damansara, 50490 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia",
+    "phoneNumber": "010-206 3010",
+    "website": "http://www.thenale.com/",
+    "locations": [
+      {
+        "name": "Nalé The Nasi Lemak Company",
+        "address": "Lot 1.36.00, Level, 1, Pavilion Damansara Heights Rd, Pusat Bandar Damansara, 50490 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia",
+        "latitude": 3.1471396,
+        "longitude": 101.6632362
+      }
+    ],
+    "schedules": [
+      {
+        "dayOfWeek": "SUNDAY",
+        "startTime": "10:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "MONDAY",
+        "startTime": "10:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "TUESDAY",
+        "startTime": "10:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "WEDNESDAY",
+        "startTime": "10:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "THURSDAY",
+        "startTime": "10:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "FRIDAY",
+        "startTime": "10:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SATURDAY",
+        "startTime": "10:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      }
+    ],
+    "ranking": {
+      "category": "GENERAL",
+      "totalScore": 4.8,
+      "reviewCount": 1049
+    },
+    "createdAt": "2024-11-26T14:23:56.669Z",
+    "updatedAt": "2024-11-26T14:23:56.669Z",
+    "additionalInfo": {
+      "contact": {
+        "phone": "010-206 3010",
+        "website": "http://www.thenale.com/"
+      },
+      "location": {
+        "address": "Lot 1.36.00, Level, 1, Pavilion Damansara Heights Rd, Pusat Bandar Damansara, 50490 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur, Malaysia",
+        "coordinates": {
+          "latitude": 3.1471396,
+          "longitude": 101.6632362
+        }
+      }
+    }
+  },
+  {
+    "id": "ChIJG1LCB0NNzDER4n6N2q5UdOs",
+    "name": "Warung Nasi Lemak Pak Ayob Warisan",
+    "type": "RESTAURANT",
+    "specialties": ["Nasi Lemak"],
+    "description": "31, Jalan Singa G 20/G, Seksyen 20, 40300 Shah Alam, Selangor, Malaysia",
+    "priceRange": "$",
+    "isCurrentlyOperating": true,
+    "address": "31, Jalan Singa G 20/G, Seksyen 20, 40300 Shah Alam, Selangor, Malaysia",
+    "phoneNumber": "016-266 5525",
+    "website": "https://www.facebook.com/nasilemakpakayob/",
+    "locations": [
+      {
+        "name": "Warung Nasi Lemak Pak Ayob Warisan",
+        "address": "31, Jalan Singa G 20/G, Seksyen 20, 40300 Shah Alam, Selangor, Malaysia",
+        "latitude": 3.0517611,
+        "longitude": 101.5388987
+      }
+    ],
+    "schedules": [
+      {
+        "dayOfWeek": "SUNDAY",
+        "startTime": "06:45",
+        "endTime": "12:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SUNDAY",
+        "startTime": "17:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "MONDAY",
+        "startTime": "06:45",
+        "endTime": "12:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "MONDAY",
+        "startTime": "17:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "TUESDAY",
+        "startTime": "06:45",
+        "endTime": "12:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "TUESDAY",
+        "startTime": "17:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "WEDNESDAY",
+        "startTime": "06:45",
+        "endTime": "12:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "WEDNESDAY",
+        "startTime": "17:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "THURSDAY",
+        "startTime": "06:45",
+        "endTime": "12:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "THURSDAY",
+        "startTime": "17:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "FRIDAY",
+        "startTime": "06:45",
+        "endTime": "12:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "FRIDAY",
+        "startTime": "17:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SATURDAY",
+        "startTime": "06:45",
+        "endTime": "12:00",
+        "isRecurring": true
+      },
+      {
+        "dayOfWeek": "SATURDAY",
+        "startTime": "17:00",
+        "endTime": "22:00",
+        "isRecurring": true
+      }
+    ],
+    "ranking": {
+      "category": "GENERAL",
+      "totalScore": 3.9,
+      "reviewCount": 1028
+    },
+    "createdAt": "2024-11-26T14:23:57.669Z",
+    "updatedAt": "2024-11-26T14:23:57.669Z",
+    "additionalInfo": {
+      "contact": {
+        "phone": "016-266 5525",
+        "website": "https://www.facebook.com/nasilemakpakayob/"
+      },
+      "location": {
+        "address": "31, Jalan Singa G 20/G, Seksyen 20, 40300 Shah Alam, Selangor, Malaysia",
+        "coordinates": {
+          "latitude": 3.0517611,
+          "longitude": 101.5388987
+        }
+      }
+    }
+  }
+]

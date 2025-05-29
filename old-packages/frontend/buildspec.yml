@@ -1,0 +1,52 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - echo "Installing pnpm..."
+      - corepack enable
+      - corepack prepare pnpm@latest --activate
+      - echo "Installing dependencies..."
+      - pnpm install --frozen-lockfile
+  pre_build:
+    commands:
+      - echo "Running tests..."
+      - pnpm run test
+      - echo "Preparing environment variables..."
+      - echo "ENVIRONMENT=$ENVIRONMENT" >> .env
+      - echo "REPOSITORY=bellyfed" >> .env
+      - echo "REGION=ap-southeast-1" >> .env
+      - echo "ECR_REPOSITORY_URI=$ECR_REPOSITORY_URI" >> .env
+      - echo "ECS_CLUSTER_NAME=$ECS_CLUSTER_NAME" >> .env
+      - echo "ECS_SERVICE_NAME=$ECS_SERVICE_NAME" >> .env
+      - echo "SITE_DOMAIN_NAME=$SITE_DOMAIN_NAME" >> .env
+  build:
+    commands:
+      - echo "Building the application..."
+      # Set Node options for faster builds
+      - export NODE_OPTIONS="--max-old-space-size=4096"
+      - export NEXT_TELEMETRY_DISABLED=1
+      # Clean cache for fresh build
+      - pnpm run clean
+      # Run optimized build
+      - pnpm run build:fast
+      - echo "Build completed successfully"
+artifacts:
+  base-directory: .
+  files:
+    - out/**/*
+    - package.json
+    - pnpm-lock.yaml
+    - .npmrc
+    - next.config.js
+    - next.config.mjs
+cache:
+  paths:
+    - node_modules/**/*
+    - .next/cache/**/*
+    # Cache specific Next.js cache directories for faster builds
+    - .next/cache/webpack/**/*
+    - .next/cache/images/**/*
+    # Cache pnpm store
+    - .pnpm-store/**/*

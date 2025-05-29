@@ -1,9 +1,9 @@
 /**
  * RankingDialog Component
- * 
+ *
  * A dialog component for creating or editing rankings.
  * It allows users to rank dishes, add notes, upload photos, and select taste status.
- * 
+ *
  * Features:
  * - Create or edit rankings for dishes
  * - Select rank from 1 to 5
@@ -15,23 +15,21 @@
 
 import React, { useState, useCallback, useEffect, memo } from 'react';
 import Image from 'next/image';
-import { 
-  X, 
-  Star, 
-  Upload, 
-  Trash2, 
-  Camera, 
-  Heart, 
-  ThumbsUp, 
-  Meh, 
+import {
+  X,
+  Star,
+  Upload,
+  Trash2,
+  Camera,
+  Heart,
+  ThumbsUp,
+  Meh,
   ThumbsDown,
   Loader2
 } from 'lucide-react';
-import { LucideClientIcon } from '../ui/lucide-icon.js';
-
 /**
  * RankingDialog component
- * 
+ *
  * @param {Object} props - Component props
  * @param {boolean} props.isOpen - Whether the dialog is open
  * @param {Function} props.onClose - Function to call when the dialog is closed
@@ -72,7 +70,7 @@ const RankingDialog = memo(function RankingDialog({
   const [notes, setNotes] = useState(initialData.notes || '');
   const [photoUrls, setPhotoUrls] = useState(initialData.photoUrls || []);
   const [newPhotos, setNewPhotos] = useState([]);
-  
+
   // Reset form when dialog opens/closes or initialData changes
   useEffect(() => {
     if (isOpen) {
@@ -83,33 +81,33 @@ const RankingDialog = memo(function RankingDialog({
       setNewPhotos([]);
     }
   }, [isOpen, initialData]);
-  
+
   // Handle rank selection
   const handleRankSelect = useCallback((selectedRank) => {
     setRank(selectedRank === rank ? null : selectedRank);
   }, [rank]);
-  
+
   // Handle taste status selection
   const handleTasteStatusSelect = useCallback((selectedStatus) => {
     setTasteStatus(selectedStatus === tasteStatus ? null : selectedStatus);
   }, [tasteStatus]);
-  
+
   // Handle notes change
   const handleNotesChange = useCallback((e) => {
     setNotes(e.target.value);
   }, []);
-  
+
   // Handle photo upload
   const handlePhotoUpload = useCallback((e) => {
     const files = Array.from(e.target.files);
     if (files.length === 0) return;
-    
+
     // In a real app, we would upload the files to a server and get URLs back
     // For now, we'll just create object URLs for the files
     const newPhotoUrls = files.map(file => URL.createObjectURL(file));
     setNewPhotos(prev => [...prev, ...newPhotoUrls]);
   }, []);
-  
+
   // Handle photo removal
   const handlePhotoRemove = useCallback((index, isNewPhoto) => {
     if (isNewPhoto) {
@@ -118,14 +116,14 @@ const RankingDialog = memo(function RankingDialog({
       setPhotoUrls(prev => prev.filter((_, i) => i !== index));
     }
   }, []);
-  
+
   // Handle form submission
   const handleSubmit = useCallback((e) => {
     e.preventDefault();
-    
+
     // Combine existing and new photos
     const allPhotoUrls = [...photoUrls, ...newPhotos];
-    
+
     // Call onSubmit with form data
     onSubmit({
       dishId: initialData.dishId,
@@ -138,10 +136,10 @@ const RankingDialog = memo(function RankingDialog({
       photoUrls: allPhotoUrls,
     });
   }, [initialData, rank, tasteStatus, notes, photoUrls, newPhotos, onSubmit]);
-  
+
   // If dialog is not open, don't render anything
   if (!isOpen) return null;
-  
+
   // Taste status options
   const tasteStatusOptions = [
     { value: 'loved', label: 'Loved it', icon: Heart, color: 'text-red-500' },
@@ -149,7 +147,7 @@ const RankingDialog = memo(function RankingDialog({
     { value: 'okay', label: 'It was okay', icon: Meh, color: 'text-yellow-500' },
     { value: 'disliked', label: 'Didn\'t like it', icon: ThumbsDown, color: 'text-gray-500' },
   ];
-  
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50">
       <div className="relative w-full max-w-md bg-white dark:bg-gray-800 rounded-lg shadow-xl max-h-[90vh] overflow-hidden">
@@ -164,10 +162,10 @@ const RankingDialog = memo(function RankingDialog({
             className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 focus:outline-none"
             disabled={isSubmitting}
           >
-            <LucideClientIcon icon={X} className="w-5 h-5" />
+            <X className="w-5 h-5" />
           </button>
         </div>
-        
+
         {/* Content */}
         <div className="p-4 overflow-y-auto max-h-[calc(90vh-8rem)]">
           <form onSubmit={handleSubmit}>
@@ -176,7 +174,7 @@ const RankingDialog = memo(function RankingDialog({
               <h3 className="font-medium text-gray-900 dark:text-white">{initialData.dishName}</h3>
               <p className="text-sm text-gray-500 dark:text-gray-400">{initialData.restaurantName}</p>
             </div>
-            
+
             {/* Rank Selection */}
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -199,7 +197,7 @@ const RankingDialog = memo(function RankingDialog({
                 ))}
               </div>
             </div>
-            
+
             {/* Taste Status Selection */}
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -217,7 +215,7 @@ const RankingDialog = memo(function RankingDialog({
                         : 'bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700'
                     }`}
                   >
-                    <LucideClientIcon icon={option.icon} className={`w-5 h-5 mr-2 ${option.color}`} />
+                    <option.icon className={`w-5 h-5 mr-2 ${option.color}`} />
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                       {option.label}
                     </span>
@@ -225,7 +223,7 @@ const RankingDialog = memo(function RankingDialog({
                 ))}
               </div>
             </div>
-            
+
             {/* Notes */}
             <div className="mb-6">
               <label htmlFor="notes" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -240,13 +238,13 @@ const RankingDialog = memo(function RankingDialog({
                 rows={3}
               />
             </div>
-            
+
             {/* Photos */}
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Photos (Optional)
               </label>
-              
+
               {/* Existing Photos */}
               {photoUrls.length > 0 && (
                 <div className="grid grid-cols-3 gap-2 mb-2">
@@ -263,13 +261,13 @@ const RankingDialog = memo(function RankingDialog({
                         onClick={() => handlePhotoRemove(index, false)}
                         className="absolute top-1 right-1 p-1 bg-black bg-opacity-50 rounded-full text-white hover:bg-opacity-70 focus:outline-none"
                       >
-                        <LucideClientIcon icon={Trash2} className="w-4 h-4" />
+                        <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
                   ))}
                 </div>
               )}
-              
+
               {/* New Photos */}
               {newPhotos.length > 0 && (
                 <div className="grid grid-cols-3 gap-2 mb-2">
@@ -286,13 +284,13 @@ const RankingDialog = memo(function RankingDialog({
                         onClick={() => handlePhotoRemove(index, true)}
                         className="absolute top-1 right-1 p-1 bg-black bg-opacity-50 rounded-full text-white hover:bg-opacity-70 focus:outline-none"
                       >
-                        <LucideClientIcon icon={Trash2} className="w-4 h-4" />
+                        <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
                   ))}
                 </div>
               )}
-              
+
               {/* Upload Button */}
               <label className="flex items-center justify-center w-full p-3 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-md cursor-pointer hover:border-orange-500 dark:hover:border-orange-500">
                 <input
@@ -302,7 +300,7 @@ const RankingDialog = memo(function RankingDialog({
                   onChange={handlePhotoUpload}
                   className="hidden"
                 />
-                <LucideClientIcon icon={Camera} className="w-5 h-5 mr-2 text-gray-500 dark:text-gray-400" />
+                <Camera className="w-5 h-5 mr-2 text-gray-500 dark:text-gray-400" />
                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                   Add Photos
                 </span>
@@ -310,7 +308,7 @@ const RankingDialog = memo(function RankingDialog({
             </div>
           </form>
         </div>
-        
+
         {/* Footer */}
         <div className="flex justify-end p-4 border-t border-gray-200 dark:border-gray-700">
           <button
@@ -329,7 +327,7 @@ const RankingDialog = memo(function RankingDialog({
           >
             {isSubmitting ? (
               <span className="flex items-center">
-                <LucideClientIcon icon={Loader2} className="w-4 h-4 mr-2 animate-spin" />
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                 {isEditing ? 'Updating...' : 'Submitting...'}
               </span>
             ) : (
