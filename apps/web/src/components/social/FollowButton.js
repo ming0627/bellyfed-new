@@ -1,9 +1,9 @@
 /**
- * Follow Button Component
- * 
- * Provides follow/unfollow functionality for users with real-time updates
- * and optimistic UI updates for better user experience.
- * 
+ * User Follow Button Component
+ *
+ * Enhanced follow/unfollow functionality for users with real-time updates,
+ * optimistic UI updates, and comprehensive social features.
+ *
  * Features:
  * - Follow/unfollow toggle functionality
  * - Optimistic UI updates
@@ -11,6 +11,8 @@
  * - Follower count display
  * - Authentication checks
  * - Analytics tracking
+ * - Social notifications
+ * - Mutual follow detection
  */
 
 import React, { useState, useEffect } from 'react';

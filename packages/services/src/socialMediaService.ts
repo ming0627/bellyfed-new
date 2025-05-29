@@ -338,6 +338,135 @@ export class SocialMediaService {
       return { posts: [], total: 0 };
     }
   }
+
+  /**
+   * Follow a user
+   * @param userId The user ID to follow
+   * @returns Whether the operation was successful
+   */
+  async followUser(userId: string): Promise<boolean> {
+    try {
+      const response = await fetch(`/api/user/follow`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({ targetUserId: userId }),
+      });
+
+      return response.ok;
+    } catch (error: unknown) {
+      console.error('Error following user:', error);
+      return false;
+    }
+  }
+
+  /**
+   * Unfollow a user
+   * @param userId The user ID to unfollow
+   * @returns Whether the operation was successful
+   */
+  async unfollowUser(userId: string): Promise<boolean> {
+    try {
+      const response = await fetch(`/api/user/unfollow`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({ targetUserId: userId }),
+      });
+
+      return response.ok;
+    } catch (error: unknown) {
+      console.error('Error unfollowing user:', error);
+      return false;
+    }
+  }
+
+  /**
+   * Add a comment to a post
+   * @param postId The post ID
+   * @param content The comment content
+   * @returns Whether the operation was successful
+   */
+  async addComment(postId: string, content: string): Promise<boolean> {
+    try {
+      const response = await fetch(`/api/social/posts/${postId}/comments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({ content }),
+      });
+
+      return response.ok;
+    } catch (error: unknown) {
+      console.error('Error adding comment:', error);
+      return false;
+    }
+  }
+
+  /**
+   * Get comments for a post
+   * @param postId The post ID
+   * @param limit The maximum number of comments to return
+   * @param offset The offset for pagination
+   * @returns The post comments
+   */
+  async getComments(
+    postId: string,
+    limit: number = 10,
+    offset: number = 0,
+  ): Promise<{ comments: any[]; total: number }> {
+    try {
+      const response = await fetch(
+        `/api/social/posts/${postId}/comments?limit=${limit}&offset=${offset}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch comments');
+      }
+
+      return await response.json();
+    } catch (error: unknown) {
+      console.error('Error fetching comments:', error);
+      return { comments: [], total: 0 };
+    }
+  }
+
+  /**
+   * Share a post
+   * @param postId The post ID
+   * @param message Optional share message
+   * @returns Whether the operation was successful
+   */
+  async sharePost(postId: string, message?: string): Promise<boolean> {
+    try {
+      const response = await fetch(`/api/social/posts/${postId}/share`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({ message }),
+      });
+
+      return response.ok;
+    } catch (error: unknown) {
+      console.error('Error sharing post:', error);
+      return false;
+    }
+  }
 }
 
 // Export a singleton instance
