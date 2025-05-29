@@ -30,8 +30,28 @@ import { Bell, Users, Filter } from 'lucide-react';
 
 export default function SocialFeed({ country }) {
   const router = useRouter();
-  const { user, isAuthenticated } = useAuth();
-  const { trackUserEngagement } = useAnalyticsContext();
+
+  // Handle auth safely for static generation
+  let user = null;
+  let isAuthenticated = false;
+  let trackUserEngagement = () => {};
+
+  try {
+    const authResult = useAuth();
+    user = authResult.user;
+    isAuthenticated = authResult.isAuthenticated;
+  } catch (error) {
+    // Auth provider not available during static generation
+    console.log('Auth not available during static generation');
+  }
+
+  try {
+    const analyticsResult = useAnalyticsContext();
+    trackUserEngagement = analyticsResult.trackUserEngagement;
+  } catch (error) {
+    // Analytics provider not available during static generation
+    console.log('Analytics not available during static generation');
+  }
 
   // State
   const [posts, setPosts] = useState([]);
