@@ -8,7 +8,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { CognitoUserData } from '@bellyfed/types';
-import { userProfileService } from '@bellyfed/services';
+import { userProfileService, AvatarUploadResponse, FileUploadOptions } from '@bellyfed/services';
 import { useAuth } from './useAuth.js';
 import { useToast } from './useToast.js';
 
@@ -110,6 +110,16 @@ export interface UserProfileMethods {
    * Search for users
    */
   searchUsers: (query: string) => Promise<CognitoUserData[]>;
+
+  /**
+   * Upload avatar image
+   */
+  uploadAvatar: (file: File, options?: FileUploadOptions) => Promise<AvatarUploadResponse>;
+
+  /**
+   * Delete avatar image
+   */
+  deleteAvatar: () => Promise<void>;
 
   /**
    * Reset the user profile state
@@ -335,6 +345,60 @@ export function useUserProfile(): UserProfileState & UserProfileMethods {
   });
 
   /**
+   * Upload avatar mutation
+   */
+  const uploadAvatarMutation = useMutation({
+    mutationFn: async ({ file, options }: { file: File; options?: FileUploadOptions }) => {
+      try {
+        return await userProfileService.uploadAvatar(file, options);
+      } catch (error) {
+        const errorMessage = error instanceof Error
+          ? error.message
+          : 'Failed to upload avatar';
+
+        toast.error(errorMessage);
+        throw error instanceof Error ? error : new Error(errorMessage);
+      }
+    },
+    onSuccess: (response: AvatarUploadResponse) => {
+      // Update the profile with new avatar URL
+      queryClient.setQueryData([USER_PROFILE_QUERY_KEY], (oldData: CognitoUserData | undefined) => {
+        if (oldData) {
+          return {
+            ...oldData,
+            avatarUrl: response.avatarUrl,
+            updated_at: new Date().toISOString(),
+          };
+        }
+        return oldData;
+      });
+      toast.success('Avatar uploaded successfully');
+    },
+  });
+
+  /**
+   * Delete avatar mutation
+   */
+  const deleteAvatarMutation = useMutation({
+    mutationFn: async () => {
+      try {
+        return await userProfileService.deleteAvatar();
+      } catch (error) {
+        const errorMessage = error instanceof Error
+          ? error.message
+          : 'Failed to delete avatar';
+
+        toast.error(errorMessage);
+        throw error instanceof Error ? error : new Error(errorMessage);
+      }
+    },
+    onSuccess: (updatedProfile: CognitoUserData) => {
+      queryClient.setQueryData([USER_PROFILE_QUERY_KEY], updatedProfile);
+      toast.success('Avatar deleted successfully');
+    },
+  });
+
+  /**
    * Refetch user profile
    */
   const refetch = useCallback(async (): Promise<void> => {
@@ -368,6 +432,20 @@ export function useUserProfile(): UserProfileState & UserProfileMethods {
   const updatePreferences = useCallback(async (preferences: Record<string, unknown>): Promise<void> => {
     await updatePreferencesMutation.mutateAsync(preferences);
   }, [updatePreferencesMutation]);
+
+  /**
+   * Upload avatar
+   */
+  const uploadAvatar = useCallback(async (file: File, options?: FileUploadOptions): Promise<AvatarUploadResponse> => {
+    return await uploadAvatarMutation.mutateAsync({ file, options });
+  }, [uploadAvatarMutation]);
+
+  /**
+   * Delete avatar
+   */
+  const deleteAvatar = useCallback(async (): Promise<void> => {
+    await deleteAvatarMutation.mutateAsync();
+  }, [deleteAvatarMutation]);
 
   /**
    * Search for users
@@ -410,7 +488,7 @@ export function useUserProfile(): UserProfileState & UserProfileMethods {
     setState({
       profile: profile || null,
       isLoading,
-      isUpdating: updateProfileMutation.isPending,
+      isUpdating: updateProfileMutation.isLoading || false,
       error: error || null,
       followers: followers || [],
       following: following || [],
@@ -427,7 +505,7 @@ export function useUserProfile(): UserProfileState & UserProfileMethods {
     following,
     isLoadingFollowers,
     isLoadingFollowing,
-    updateProfileMutation.isPending,
+    updateProfileMutation.isLoading,
     stats,
     isLoadingStats,
   ]);
@@ -439,6 +517,8 @@ export function useUserProfile(): UserProfileState & UserProfileMethods {
     followUser,
     unfollowUser,
     updatePreferences,
+    uploadAvatar,
+    deleteAvatar,
     searchUsers,
     reset,
   };
