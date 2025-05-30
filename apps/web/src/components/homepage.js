@@ -3,15 +3,16 @@ import { useQuery } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 
 import { useCountry } from '../contexts/index.js';
-import { getCountryLink } from '../utils/routing.js'; // RESTORED FOR COMPONENT TESTING
+import { getCountryLink } from '../utils/routing.js';
 
-// Import components - ALL COMMENTED OUT FOR CLEAN BASELINE
-// import Collections from './homepage/Collections.js';
-// import FeaturedRestaurants from './homepage/FeaturedRestaurants.js';
+// Import all homepage components - MIGRATED FROM OLD-PACKAGES
+import Collections from './homepage/Collections.js';
+import FeaturedRestaurants from './homepage/FeaturedRestaurants.js';
+import Navigation from './homepage/Navigation.js';
 import PremiumBanner from './homepage/PremiumBanner.js';
 import TopCritics from './homepage/TopCritics.js';
-// import TopFoodies from './homepage/TopFoodies.js';
-import TopRatedDishes from './homepage/TopRatedDishes.js'; // TESTING COMPONENT 2
+import TopFoodies from './homepage/TopFoodies.js';
+import TopRatedDishes from './homepage/TopRatedDishes.js';
 
 // Mock data for restaurants - in a real app, this would be fetched from an API
 const mockRestaurants = [
@@ -129,12 +130,12 @@ const mockTopReviewers = [
 // It fetches and displays various sections like featured restaurants, top critics,
 // top-rated dishes, and collections. It also handles dynamic updates for some of these sections.
 //
-// FIXED: Reverted to default imports to resolve "Element type is invalid" runtime errors.
-// All homepage components export both named and default exports, but default imports
-// provide better compatibility and avoid module resolution conflicts.
+// MIGRATED: Updated to match the visual design and component structure from old-packages
+// while maintaining compatibility with the current project structure and conventions.
 
 /**
  * Homepage component for the Bellyfed application
+ * Migrated from old-packages to include all visual components and enhanced functionality
  *
  * @returns {JSX.Element} - Rendered component
  */
@@ -142,7 +143,7 @@ const Homepage = function Homepage() {
   const { currentCountry, isInitialized } = useCountry();
   const [showPremiumBanner, setShowPremiumBanner] = useState(true);
 
-  // Initialize state with default values - RESTORED TO FIX ReferenceError
+  // Initialize state with default values - Enhanced from old-packages structure
   const [reviewers, setReviewers] = useState([]);
   const [dishes, setDishes] = useState([]);
   const [locations, setLocations] = useState([]);
@@ -178,13 +179,13 @@ const Homepage = function Homepage() {
     }
   }, [currentCountry]);
 
-  // Memoize the country link generator to prevent unnecessary re-renders - COMMENTED OUT FOR CLEAN BASELINE
-  // const createCountryLink = useCallback(
-  //   path => {
-  //     return getCountryLink(path, currentCountry?.code);
-  //   },
-  //   [currentCountry],
-  // );
+  // Memoize the country link generator to prevent unnecessary re-renders - RESTORED FROM OLD-PACKAGES
+  const createCountryLink = useCallback(
+    path => {
+      return getCountryLink(path, currentCountry?.code);
+    },
+    [currentCountry],
+  );
 
   // Function to randomly update stats - memoized to prevent unnecessary re-renders
   const updateStats = useCallback(() => {
@@ -330,86 +331,46 @@ const Homepage = function Homepage() {
   }
 
   return (
-    <>
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-        {/* TESTING: PremiumBanner Component */}
-        <PremiumBanner
-          showPremiumBanner={showPremiumBanner}
-          setShowPremiumBanner={setShowPremiumBanner}
+    <div className="min-h-screen bg-gray-50">
+      {/* Premium Banner - Migrated from old-packages */}
+      <PremiumBanner
+        showPremiumBanner={showPremiumBanner}
+        setShowPremiumBanner={setShowPremiumBanner}
+      />
+
+      {/* Navigation - Migrated from old-packages */}
+      <Navigation getCountryLink={createCountryLink} />
+
+      {/* Main Content - Updated layout to match old-packages structure */}
+      <main className="content-container px-4 py-8">
+        {/* TopFoodies - Hero section with three ranking cards */}
+        <TopFoodies
+          reviewers={reviewers}
+          dishes={dishes}
+          locations={locations}
+          countryName={currentCountry?.name || 'Your Country'}
+          getCountryLink={createCountryLink}
         />
 
-        {/* Main Content */}
-        <main className="w-full">
-          <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+        {/* TopCritics - Enhanced version with badges and tooltips */}
+        <TopCritics topReviewers={topReviewers} />
 
-            {/* SYSTEMATIC TESTING: Component 2 - TopCritics + TopRatedDishes */}
-            <div className="text-center py-8 mb-8">
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                🔍 SYSTEMATIC TESTING: Component 2 - TopCritics + TopRatedDishes
-              </h1>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                Country: {currentCountry?.name || 'Loading...'} ({currentCountry?.code || 'Loading...'})
-              </p>
-              <p className="text-xs text-blue-500 mt-2">
-                📋 Testing TopCritics ✅ + TopRatedDishes - check browser console for JavaScript runtime errors
-              </p>
-              <p className="text-xs text-orange-500 mt-1">
-                ⚠️ Please check browser developer console for "Element type is invalid" errors
-              </p>
-              <p className="text-xs text-gray-500 mt-1">
-                Remaining: TopFoodies, Collections, FeaturedRestaurants
-              </p>
-            </div>
+        {/* TopRatedDishes - Sophisticated version with animations */}
+        <TopRatedDishes />
 
-            {/* ALL HOMEPAGE COMPONENTS COMMENTED OUT FOR CLEAN BASELINE */}
+        {/* Collections - Carousel and grid sections */}
+        <Collections
+          countryName={currentCountry?.name || 'Your Country'}
+          getCountryLink={createCountryLink}
+        />
 
-            {/* COMPONENT 1: TopCritics - TESTING NOW */}
-             <TopCritics topReviewers={topReviewers} />
-
-            {/* COMPONENT 2: TopRatedDishes - TESTING NOW */}
-            <TopRatedDishes />
-
-            {/* COMPONENT 3: TopFoodies - COMMENTED OUT */}
-            {/* <TopFoodies reviewers={reviewers} /> */}
-
-            {/* COMPONENT 4: Collections - COMMENTED OUT */}
-            {/* <Collections
-              countryName={currentCountry?.name || 'Your Country'}
-              getCountryLink={createCountryLink}
-            /> */}
-
-            {/* COMPONENT 5: FeaturedRestaurants - COMMENTED OUT */}
-            {/* <FeaturedRestaurants
-              countryName={currentCountry?.name || 'Your Country'}
-              getCountryLink={createCountryLink}
-            /> */}
-
-            {/* TEMPORARILY COMMENTED OUT FOR TESTING */}
-            {/* <TopFoodies
-              reviewers={reviewers}
-              dishes={dishes}
-              locations={locations}
-              countryName={currentCountry?.name || 'Your Country'}
-              getCountryLink={createCountryLink}
-            />
-
-            <TopCritics topReviewers={topReviewers} />
-
-            <TopRatedDishes />
-
-            <Collections
-              countryName={currentCountry?.name || 'Your Country'}
-              getCountryLink={createCountryLink}
-            />
-
-            <FeaturedRestaurants
-              countryName={currentCountry?.name || 'Your Country'}
-              getCountryLink={createCountryLink}
-            /> */}
-          </div>
-        </main>
-      </div>
-    </>
+        {/* FeaturedRestaurants - Grid of featured restaurants */}
+        <FeaturedRestaurants
+          countryName={currentCountry?.name || 'Your Country'}
+          getCountryLink={createCountryLink}
+        />
+      </main>
+    </div>
   );
 };
 

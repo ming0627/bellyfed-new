@@ -1,111 +1,133 @@
-import React, { memo, useMemo } from 'react';
-import Link from 'next/link';
-import { Utensils, ArrowRight } from 'lucide-react';
-import DishCard from '../dishes/DishCard.js';
-
+import React, { memo, useMemo, useState, useEffect } from 'react';
+import { Star, Award, ArrowRight } from 'lucide-react';
 
 /**
- * TopRatedDishes component displays a grid of top-rated dishes
+ * TopRatedDishes component displays a card-based list of top-rated dishes
+ * Migrated from old-packages with enhanced functionality and animations
  *
  * @returns {JSX.Element} - Rendered component
  */
 const TopRatedDishes = memo(function TopRatedDishes() {
-  // Mock data for top rated dishes - in a real app, this would come from props or an API
-  const topDishes = useMemo(
-    () => [
-      {
-        id: '1',
-        name: 'Nasi Lemak Special',
-        restaurant: 'Nasi Lemak House',
-        rating: 4.8,
-        reviewCount: 120,
-        imageUrl:
-          'https://images.unsplash.com/photo-1628517394226-4f0c0f9a8b79?q=80&w=300&h=200&fit=crop',
-        price: 'RM 15.90',
-      },
-      {
-        id: '2',
-        name: 'Premium Sushi Platter',
-        restaurant: 'Sushi Sensation',
-        rating: 4.9,
-        reviewCount: 87,
-        imageUrl:
-          'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=300&h=200&fit=crop',
-        price: 'RM 88.00',
-      },
-      {
-        id: '3',
-        name: 'Street Tacos Trio',
-        restaurant: 'Taco Temple',
-        rating: 4.7,
-        reviewCount: 78,
-        imageUrl:
-          'https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?q=80&w=300&h=200&fit=crop',
-        price: 'RM 24.90',
-      },
-      {
-        id: '4',
-        name: 'Char Kuey Teow',
-        restaurant: 'Penang Delights',
-        rating: 4.7,
-        reviewCount: 92,
-        imageUrl:
-          'https://images.unsplash.com/photo-1590759668628-05b0fc34bb70?q=80&w=300&h=200&fit=crop',
-        price: 'RM 12.90',
-      },
-    ],
-    [],
-  );
+  const [topDishes, setTopDishes] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Early return if no dishes are available
-  if (!topDishes || topDishes.length === 0) {
-    return null;
-  }
+  useEffect(() => {
+    const loadTopDishes = async () => {
+      setIsLoading(true);
+      try {
+        // Simulate API call - in real app, this would fetch from backend
+        await new Promise(resolve => setTimeout(resolve, 500));
+
+        // Use mock data if API fails
+        setTopDishes([
+          {
+            id: 'dish1',
+            name: 'Nasi Lemak Special',
+            restaurantId: 'restaurant1',
+            restaurantName: 'Village Park Restaurant',
+            totalVotes: 1250,
+            averageRating: 4.8,
+          },
+          {
+            id: 'dish2',
+            name: 'Char Kuey Teow',
+            restaurantId: 'restaurant2',
+            restaurantName: 'Penang Famous',
+            totalVotes: 980,
+            averageRating: 4.7,
+          },
+          {
+            id: 'dish3',
+            name: 'Laksa',
+            restaurantId: 'restaurant3',
+            restaurantName: 'Janggut Laksa',
+            totalVotes: 1400,
+            averageRating: 4.9,
+          },
+        ]);
+      } catch (error) {
+        console.error('Error loading top dishes:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadTopDishes();
+  }, []);
+
+  const handleDishClick = (dishId, dishName) => {
+    // In real app, this would navigate to dish details
+    console.log(`Navigate to dish: ${dishName} (${dishId})`);
+  };
+
+  const handleViewAllClick = () => {
+    // In real app, this would navigate to dishes page
+    console.log('Navigate to all dishes');
+  };
 
   return (
-    <section className="mb-16" aria-labelledby="top-dishes-heading">
-      {/* Enhanced Header */}
-      <div className="flex items-center justify-between mb-8">
-        <div className="flex items-center space-x-3">
-          <div className="p-3 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl shadow-lg">
-            <Utensils
-              className="w-6 h-6 text-white"
-              aria-hidden="true"
-            />
-          </div>
-          <div>
-            <h2
-              id="top-dishes-heading"
-              className="text-2xl font-bold text-gray-900"
-            >
-              Top Rated Dishes
-            </h2>
-            <p className="text-gray-700 text-sm">
-              Discover the most loved dishes in your area
-            </p>
-          </div>
+    <div className="w-full bg-white rounded-lg shadow-md">
+      <div className="flex flex-row items-center justify-between p-6 border-b">
+        <div className="flex items-center gap-2">
+          <Award className="h-5 w-5 text-orange-500" />
+          <h2 className="text-xl font-bold">Top Rated Dishes</h2>
         </div>
-        <Link
-          href="/dish-restaurants"
-          className="group flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-xl border border-orange-200 hover:border-orange-300 hover:bg-orange-50 transition-all duration-300 shadow-sm hover:shadow-md"
-          aria-label="View all top rated dishes"
+        <button
+          className="text-orange-500 hover:text-orange-600 hover:bg-orange-50 text-sm font-medium flex items-center gap-2 px-3 py-1 rounded transition-colors"
+          onClick={handleViewAllClick}
         >
-          <span className="text-sm font-medium text-gray-700 group-hover:text-orange-600">
-            View All
-          </span>
-          <ArrowRight
-            className="w-4 h-4 text-gray-400 group-hover:text-orange-500 group-hover:translate-x-1 transition-all duration-200"
-            aria-hidden="true"
-          />
-        </Link>
+          View All
+          <ArrowRight className="ml-2 h-4 w-4" />
+        </button>
       </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {topDishes.map(dish => (
-          <DishCard key={dish.id} dish={dish} />
-        ))}
+      <div className="p-6">
+        {isLoading ? (
+          <div className="space-y-4">
+            {[1, 2, 3].map(i => (
+              <div
+                key={i}
+                className="h-20 bg-gray-100 animate-pulse rounded-md"
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {topDishes.map((dish, index) => (
+              <div
+                key={dish.id}
+                className="opacity-0 animate-[fadeInUp_0.3s_ease-out_forwards]"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div
+                  className="cursor-pointer hover:shadow-md transition-shadow bg-white border rounded-lg p-4"
+                  onClick={() => handleDishClick(dish.id, dish.name)}
+                >
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <h3 className="font-semibold">{dish.name}</h3>
+                      <p className="text-sm text-gray-500">
+                        {dish.restaurantName}
+                      </p>
+                    </div>
+                    <div className="flex flex-col items-end">
+                      <div className="flex items-center">
+                        <span className="font-medium mr-1">
+                          {dish.averageRating.toFixed(1)}
+                        </span>
+                        <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      </div>
+                      <span className="text-xs text-gray-500 border border-gray-200 px-2 py-1 rounded mt-1">
+                        {dish.totalVotes} votes
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
-    </section>
+    </div>
   );
 });
 

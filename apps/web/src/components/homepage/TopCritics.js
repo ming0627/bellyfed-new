@@ -1,4 +1,4 @@
-// STEP 3: ADD PROPS HANDLING
+// STEP 4: ADD BASIC DATA DISPLAY
 import React from 'react';
 
 function TopCritics({ topReviewers }) {
@@ -15,7 +15,23 @@ function TopCritics({ topReviewers }) {
   return (
     <div>
       <h2>Top Food Critics</h2>
-      <p>Received {topReviewers.length} reviewers from props.</p>
+      <p>Displaying {topReviewers.length} reviewers:</p>
+
+      {/* Basic data display - names and review counts only */}
+      <div>
+        {topReviewers.map((reviewer, index) => {
+          // Safe property access with fallbacks
+          const name = reviewer?.name || `Reviewer ${index + 1}`;
+          const reviews = reviewer?.reviews || 0;
+
+          return (
+            <div key={index}>
+              <h3>{name}</h3>
+              <p>{reviews} reviews</p>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
