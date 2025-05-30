@@ -27,7 +27,7 @@ All counts have been verified against the actual file listings in the original r
 | **Infrastructure**       | 44 <!-- AUDIT CORRECTED: 44 from packages/infra (was 24, found +20) -->               | 44        | 0           | 0           | 100%         |
 | **Docker/ECS Deploy**    | 30 <!-- AUDIT COMPLETED: All 30 deployment infrastructure files now exist -->         | 30        | 0           | 0           | 100%         |
 | **CI/CD Pipeline**       | 5 <!-- AUDIT COMPLETED: All 5 CI/CD pipeline files now exist -->                      | 5         | 0           | 0           | 100%         |
-| **CDK Infrastructure**   | 35 <!-- AUDIT DISCOVERED: CDK stacks and constructs from packages/infra/lib -->       | 18        | 0           | 17          | 51%          |
+| **CDK Infrastructure**   | 35 <!-- AUDIT DISCOVERED: CDK stacks and constructs from packages/infra/lib -->       | 22        | 0           | 13          | 63%          |
 | **Lambda Functions**     | 25 <!-- AUDIT DISCOVERED: Lambda functions from packages/infra/functions -->          | 0         | 0           | 25          | 0%           |
 | **Lambda Layers**        | 8 <!-- AUDIT DISCOVERED: Lambda layers from packages/infra/src/layers -->             | 0         | 0           | 8           | 0%           |
 | **Build Scripts**        | 22 <!-- AUDIT DISCOVERED: Build and deployment scripts from scripts/ -->              | 0         | 0           | 22          | 0%           |
@@ -36,7 +36,7 @@ All counts have been verified against the actual file listings in the original r
 | **Monitoring & Logging** | 8 <!-- AUDIT DISCOVERED: CloudWatch and logging configurations -->                    | 0         | 0           | 8           | 0%           |
 | **Security & IAM**       | 6 <!-- AUDIT DISCOVERED: IAM policies and security configurations -->                 | 0         | 0           | 6           | 0%           |
 | **Environment Configs**  | 4 <!-- AUDIT DISCOVERED: Environment-specific configurations -->                      | 0         | 0           | 4           | 0%           |
-| **Overall**              | 656 <!-- AUDIT UPDATED: 537 + 119 newly discovered items -->                          | 555       | 0           | 101         | 85%          |
+| **Overall**              | 656 <!-- AUDIT UPDATED: 537 + 119 newly discovered items -->                          | 559       | 0           | 97          | 85%          |
 
 ### Migration Status Legend
 
@@ -220,7 +220,7 @@ NOTE FOR VERIFICATION (Checklist Accuracy):
 | `/packages/infra/functions/user-profile`              | `/apps/backend/src/services/user-profile`             | ✅     | User profile Lambda function               |
 | `/packages/infra/functions/write-processor`           | `/apps/backend/src/services/write-processor`          | ✅     | Write processing Lambda function           |
 
-## 🔄 CDK Infrastructure Stacks (51% COMPLETE - 18/35 Items)
+## 🔄 CDK Infrastructure Stacks (63% COMPLETE - 22/35 Items)
 
 ### CDK Core Stacks
 
@@ -229,10 +229,10 @@ NOTE FOR VERIFICATION (Checklist Accuracy):
 | `/packages/infra/lib/api-gateway-stack.ts`               | `/packages/infra/lib/api-gateway-stack.ts`               | ✅     | API Gateway infrastructure stack      |
 | `/packages/infra/lib/api-stack.ts`                       | `/packages/infra/lib/api-stack.ts`                       | ✅     | Main API infrastructure stack         |
 | `/packages/infra/lib/aurora-stack.ts`                    | `/packages/infra/lib/aurora-stack.ts`                    | ✅     | Aurora Serverless database stack      |
-| `/packages/infra/lib/bootstrap-stack.ts`                 | `/packages/infra/lib/bootstrap-stack.ts`                 | ⬜     | CDK bootstrap infrastructure          |
-| `/packages/infra/lib/certificate-parameters-stack.ts`    | `/packages/infra/lib/certificate-parameters-stack.ts`    | ⬜     | SSL certificate parameters            |
-| `/packages/infra/lib/certificate-stack.ts`               | `/packages/infra/lib/certificate-stack.ts`               | ⬜     | SSL certificate management            |
-| `/packages/infra/lib/cicd-stack.ts`                      | `/packages/infra/lib/cicd-stack.ts`                      | ⬜     | CI/CD pipeline infrastructure         |
+| `/packages/infra/lib/bootstrap-stack.ts`                 | `/packages/infra/lib/bootstrap-stack.ts`                 | ✅     | CDK bootstrap infrastructure          |
+| `/packages/infra/lib/certificate-parameters-stack.ts`    | `/packages/infra/lib/certificate-parameters-stack.ts`    | ✅     | SSL certificate parameters            |
+| `/packages/infra/lib/certificate-stack.ts`               | `/packages/infra/lib/certificate-stack.ts`               | ✅     | SSL certificate management            |
+| `/packages/infra/lib/cicd-stack.ts`                      | `/packages/infra/lib/cicd-stack.ts`                      | ✅     | CI/CD pipeline infrastructure         |
 | `/packages/infra/lib/cognito-parameters-stack.ts`        | `/packages/infra/lib/cognito-parameters-stack.ts`        | ⬜     | Cognito configuration parameters      |
 | `/packages/infra/lib/cognito-stack.ts`                   | `/packages/infra/lib/cognito-stack.ts`                   | ✅     | Cognito authentication infrastructure |
 | `/packages/infra/lib/config.ts`                          | `/packages/infra/lib/config.ts`                          | ✅     | Infrastructure configuration          |
