@@ -1,6 +1,9 @@
 import React, { useCallback, useState } from 'react';
-import Image from 'next/image';
+import ImageModule from 'next/image';
 import { useDropzone } from 'react-dropzone';
+
+// Solution for Next.js 15.x: Extract the actual Image component from default property
+const Image = ImageModule.default;
 import { Upload, X, AlertCircle, CheckCircle } from 'lucide-react';
 
 /**

@@ -1,6 +1,9 @@
 import React, { useState, useCallback } from 'react';
-import Image from 'next/image';
+import ImageModule from 'next/image';
 import { Camera, Trash2, User, Upload } from 'lucide-react';
+
+// Solution for Next.js 15.x: Extract the actual Image component from default property
+const Image = ImageModule.default;
 import ImageUploader from '../ui/ImageUploader.js';
 import { useUserProfile } from '@bellyfed/hooks';
 

@@ -1,4 +1,4 @@
-// STEP 7: NEXT.JS IMAGE WORKING - FINAL SOLUTION
+// STEP 8: ENHANCED STYLING
 import React from 'react';
 import ImageModule from 'next/image';
 import { Trophy } from 'lucide-react';
@@ -19,16 +19,13 @@ function TopCritics({ topReviewers }) {
   }
 
   return (
-    <div className="py-4">
-      <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-        <Trophy className="w-5 h-5" />
+    <div className="py-6 px-4 bg-white rounded-lg shadow-sm border border-gray-100">
+      <h2 className="text-2xl font-bold mb-6 flex items-center gap-3 text-gray-900">
+        <Trophy className="w-6 h-6 text-orange-500" />
         Top Food Critics
       </h2>
-      <p className="text-gray-600 mb-4">
-        Displaying {topReviewers.length} reviewers:
-      </p>
 
-      {/* Basic data display with minimal styling */}
+      {/* Enhanced data display with improved styling */}
       <div className="space-y-4">
         {topReviewers.map((reviewer, index) => {
           // Safe property access with fallbacks
@@ -36,17 +33,39 @@ function TopCritics({ topReviewers }) {
           const reviews = reviewer?.reviews || 0;
 
           return (
-            <div key={index} className="border-b pb-2 flex items-center gap-3">
-              <Image
-                src={reviewer?.avatar || '/placeholder-avatar.jpg'}
-                alt={`${name} avatar`}
-                width={40}
-                height={40}
-                className="rounded-full"
-              />
-              <div>
-                <h3 className="font-medium">{name}</h3>
-                <p className="text-sm text-gray-600">{reviews} reviews</p>
+            <div
+              key={index}
+              className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 border border-transparent hover:border-gray-200"
+            >
+              <div className="relative">
+                <Image
+                  src={reviewer?.avatar || '/placeholder-avatar.jpg'}
+                  alt={`${name} avatar`}
+                  width={48}
+                  height={48}
+                  className="rounded-full border-2 border-orange-100"
+                />
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-orange-500 rounded-full flex items-center justify-center">
+                  <span className="text-xs font-bold text-white">
+                    #{index + 1}
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex-1">
+                <h3 className="font-semibold text-gray-900 text-lg">{name}</h3>
+                <p className="text-sm text-gray-600 font-medium">
+                  {reviews.toLocaleString()} reviews
+                </p>
+              </div>
+
+              <div className="text-right">
+                <div className="flex items-center gap-1">
+                  <Trophy className="w-4 h-4 text-orange-400" />
+                  <span className="text-sm font-medium text-orange-600">
+                    Rank #{index + 1}
+                  </span>
+                </div>
               </div>
             </div>
           );
