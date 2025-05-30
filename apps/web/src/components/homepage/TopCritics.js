@@ -1,5 +1,6 @@
-// STEP 5: ADD BASIC STYLING
+// STEP 6: ADD ICON IMPORT
 import React from 'react';
+import { Trophy } from 'lucide-react';
 
 function TopCritics({ topReviewers }) {
   // Basic prop validation/safety checks
@@ -14,7 +15,10 @@ function TopCritics({ topReviewers }) {
 
   return (
     <div className="py-4">
-      <h2 className="text-xl font-semibold mb-4">Top Food Critics</h2>
+      <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+        <Trophy className="w-5 h-5" />
+        Top Food Critics
+      </h2>
       <p className="text-gray-600 mb-4">
         Displaying {topReviewers.length} reviewers:
       </p>
