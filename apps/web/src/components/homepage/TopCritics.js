@@ -1,5 +1,6 @@
-// STEP 6: ADD ICON IMPORT
+// STEP 7: ADD NEXT.JS IMAGE IMPORT
 import React from 'react';
+import Image from 'next/image';
 import { Trophy } from 'lucide-react';
 
 function TopCritics({ topReviewers }) {
