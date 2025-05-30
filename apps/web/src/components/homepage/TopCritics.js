@@ -1,7 +1,11 @@
-// STEP 7: ADD NEXT.JS IMAGE IMPORT
+// STEP 7: NEXT.JS IMAGE WORKING - FINAL SOLUTION
 import React from 'react';
-import Image from 'next/image';
+import ImageModule from 'next/image';
 import { Trophy } from 'lucide-react';
+
+// Solution for Next.js 15.x: Extract the actual Image component from default property
+// This is required because Next.js 15.x exports Image as { default: Component, getImageProps: Function }
+const Image = ImageModule.default;
 
 function TopCritics({ topReviewers }) {
   // Basic prop validation/safety checks
@@ -32,9 +36,18 @@ function TopCritics({ topReviewers }) {
           const reviews = reviewer?.reviews || 0;
 
           return (
-            <div key={index} className="border-b pb-2">
-              <h3 className="font-medium">{name}</h3>
-              <p className="text-sm text-gray-600">{reviews} reviews</p>
+            <div key={index} className="border-b pb-2 flex items-center gap-3">
+              <Image
+                src={reviewer?.avatar || '/placeholder-avatar.jpg'}
+                alt={`${name} avatar`}
+                width={40}
+                height={40}
+                className="rounded-full"
+              />
+              <div>
+                <h3 className="font-medium">{name}</h3>
+                <p className="text-sm text-gray-600">{reviews} reviews</p>
+              </div>
             </div>
           );
         })}
