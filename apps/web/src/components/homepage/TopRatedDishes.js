@@ -1,5 +1,12 @@
 import React, { memo, useMemo, useState, useEffect } from 'react';
-import { Star, Award, ArrowRight } from 'lucide-react';
+import {
+  Star,
+  Award,
+  ArrowRight,
+  TrendingUp,
+  MapPin,
+  Clock,
+} from 'lucide-react';
 
 /**
  * TopRatedDishes component displays a card-based list of top-rated dishes
@@ -25,24 +32,62 @@ const TopRatedDishes = memo(function TopRatedDishes() {
             name: 'Nasi Lemak Special',
             restaurantId: 'restaurant1',
             restaurantName: 'Village Park Restaurant',
+            location: 'Damansara Uptown',
             totalVotes: 1250,
             averageRating: 4.8,
+            image:
+              'https://images.unsplash.com/photo-1562967914-608f82629710?q=80&w=600&h=400&fit=crop',
+            price: 'RM 12.90',
+            category: 'Malaysian',
+            trending: true,
+            trendingPercentage: 15,
+            waitTime: '10-15 min',
           },
           {
             id: 'dish2',
             name: 'Char Kuey Teow',
             restaurantId: 'restaurant2',
             restaurantName: 'Penang Famous',
+            location: 'Georgetown',
             totalVotes: 980,
             averageRating: 4.7,
+            image:
+              'https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?q=80&w=600&h=400&fit=crop',
+            price: 'RM 8.50',
+            category: 'Street Food',
+            trending: false,
+            waitTime: '5-10 min',
           },
           {
             id: 'dish3',
             name: 'Laksa',
             restaurantId: 'restaurant3',
             restaurantName: 'Janggut Laksa',
+            location: 'PJ Old Town',
             totalVotes: 1400,
             averageRating: 4.9,
+            image:
+              'https://images.unsplash.com/photo-1588168333986-5078d3ae3976?q=80&w=600&h=400&fit=crop',
+            price: 'RM 10.00',
+            category: 'Malaysian',
+            trending: true,
+            trendingPercentage: 28,
+            waitTime: '15-20 min',
+          },
+          {
+            id: 'dish4',
+            name: 'Chicken Rice',
+            restaurantId: 'restaurant4',
+            restaurantName: 'Nam Heong',
+            location: 'Chinatown',
+            totalVotes: 1100,
+            averageRating: 4.6,
+            image:
+              'https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?q=80&w=600&h=400&fit=crop',
+            price: 'RM 7.80',
+            category: 'Chinese',
+            trending: false,
+            waitTime: '10-15 min',
           },
         ]);
       } catch (error) {
@@ -66,67 +111,108 @@ const TopRatedDishes = memo(function TopRatedDishes() {
   };
 
   return (
-    <div className="w-full bg-white rounded-lg shadow-md">
-      <div className="flex flex-row items-center justify-between p-6 border-b">
-        <div className="flex items-center gap-2">
-          <Award className="h-5 w-5 text-orange-500" />
-          <h2 className="text-xl font-bold">Top Rated Dishes</h2>
-        </div>
-        <button
-          className="text-orange-500 hover:text-orange-600 hover:bg-orange-50 text-sm font-medium flex items-center gap-2 px-3 py-1 rounded transition-colors"
-          onClick={handleViewAllClick}
-        >
-          View All
-          <ArrowRight className="ml-2 h-4 w-4" />
-        </button>
-      </div>
-      <div className="p-6">
+    <div className="w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {isLoading ? (
-          <div className="space-y-4">
-            {[1, 2, 3].map(i => (
+          // Loading skeleton
+          <>
+            {[1, 2, 3, 4].map(i => (
               <div
                 key={i}
-                className="h-20 bg-gray-100 animate-pulse rounded-md"
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="space-y-4">
-            {topDishes.map((dish, index) => (
-              <div
-                key={dish.id}
-                className="opacity-0 animate-[fadeInUp_0.3s_ease-out_forwards]"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="bg-white rounded-xl overflow-hidden shadow-lg animate-pulse"
               >
-                <div
-                  className="cursor-pointer hover:shadow-md transition-shadow bg-white border rounded-lg p-4"
-                  onClick={() => handleDishClick(dish.id, dish.name)}
-                >
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <h3 className="font-semibold">{dish.name}</h3>
-                      <p className="text-sm text-gray-500">
-                        {dish.restaurantName}
-                      </p>
-                    </div>
-                    <div className="flex flex-col items-end">
-                      <div className="flex items-center">
-                        <span className="font-medium mr-1">
-                          {dish.averageRating.toFixed(1)}
-                        </span>
-                        <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                      </div>
-                      <span className="text-xs text-gray-500 border border-gray-200 px-2 py-1 rounded mt-1">
-                        {dish.totalVotes} votes
-                      </span>
-                    </div>
-                  </div>
+                <div className="h-48 bg-gray-300"></div>
+                <div className="p-4">
+                  <div className="h-4 bg-gray-300 rounded w-3/4 mb-2"></div>
+                  <div className="h-3 bg-gray-300 rounded w-1/2"></div>
                 </div>
               </div>
             ))}
-          </div>
+          </>
+        ) : (
+          // Actual dishes
+          topDishes.map((dish, index) => (
+            <div
+              key={dish.id}
+              className="opacity-0 animate-[fadeInUp_0.3s_ease-out_forwards] cursor-pointer"
+              style={{ animationDelay: `${index * 0.1}s` }}
+              onClick={() => handleDishClick(dish.id, dish.name)}
+            >
+              <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
+                {/* Image Container */}
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={dish.image}
+                    alt={dish.name}
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                  />
+                  {/* Overlay badges */}
+                  <div className="absolute top-3 left-3 flex gap-2">
+                    <span className="bg-yellow-500 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
+                      <Star className="w-3 h-3 fill-current" />
+                      {dish.averageRating}
+                    </span>
+                    {dish.trending && (
+                      <span className="bg-red-500 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
+                        <TrendingUp className="w-3 h-3" />+
+                        {dish.trendingPercentage}%
+                      </span>
+                    )}
+                  </div>
+                  <div className="absolute top-3 right-3">
+                    <span className="bg-black/70 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                      {dish.category}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="p-4">
+                  <h3 className="font-bold text-lg mb-1 text-gray-900">
+                    {dish.name}
+                  </h3>
+                  <p className="text-sm text-gray-600 mb-3">
+                    {dish.restaurantName}
+                  </p>
+
+                  <div className="flex items-center gap-4 text-xs text-gray-500 mb-3">
+                    <span className="flex items-center gap-1">
+                      <MapPin className="w-3 h-3" />
+                      {dish.location}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-3 h-3" />
+                      {dish.waitTime}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <span className="text-lg font-bold text-orange-500">
+                      {dish.price}
+                    </span>
+                    <span className="text-sm text-gray-500">
+                      {dish.totalVotes.toLocaleString()} votes
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
         )}
       </div>
+
+      {/* View All Button */}
+      {!isLoading && (
+        <div className="mt-8 text-center">
+          <button
+            className="inline-flex items-center gap-2 bg-orange-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-orange-600 transition-colors shadow-lg hover:shadow-xl"
+            onClick={handleViewAllClick}
+          >
+            Discover More Dishes
+            <ArrowRight className="w-5 h-5" />
+          </button>
+        </div>
+      )}
     </div>
   );
 });
