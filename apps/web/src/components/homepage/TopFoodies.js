@@ -1,186 +1,15 @@
 import React, { memo } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Trophy, Utensils, MapPin, RefreshCw } from 'lucide-react';
-import { useCountry } from '../../contexts/CountryContext.js';
+import { ChevronRight, MapPin, Trophy, Utensils } from 'lucide-react';
 
-/**
- * RankingCard component for displaying a ranked list of items with modern design
- *
- * @param {Object} props - Component props
- * @param {string} props.title - Card title
- * @param {string} props.viewAllLink - Link for "View All" button
- * @param {string} props.viewAllLabel - Accessible label for "View All" button
- * @param {React.ReactNode} props.icon - Icon component to display
- * @param {string} props.gradientFrom - Starting gradient color
- * @param {string} props.gradientTo - Ending gradient color
- * @param {Array} props.items - Array of items to display
- * @param {string} props.itemValueLabel - Label for the item value (e.g., "reviews", "votes")
- * @param {string} props.highlightClass - CSS class for highlighted items
- * @returns {JSX.Element} - Rendered component
- */
-const RankingCard = memo(function RankingCard({
-  title,
-  viewAllLink,
-  viewAllLabel,
-  icon,
-  gradientFrom,
-  gradientTo,
-  items,
-  itemValueLabel,
-  highlightClass,
-}) {
-  if (!items || items.length === 0) {
-    return null;
-  }
-
-  // Get the appropriate gradient classes based on the color
-  const getGradientClasses = () => {
-    switch (gradientFrom) {
-      case 'blue-600':
-        return 'bg-gradient-to-r from-info to-blue-600';
-      case 'orange-500':
-        return 'bg-gradient-primary';
-      case 'green-600':
-        return 'bg-gradient-to-r from-success to-green-600';
-      default:
-        return 'bg-gradient-primary';
-    }
-  };
-
-  const getBadgeClasses = () => {
-    switch (gradientFrom) {
-      case 'blue-600':
-        return 'bg-blue-50 text-info border-blue-200';
-      case 'orange-500':
-        return 'bg-primary-50 text-primary-700 border-primary-200';
-      case 'green-600':
-        return 'bg-green-50 text-success border-green-200';
-      default:
-        return 'bg-primary-50 text-primary-700 border-primary-200';
-    }
-  };
-
-  const getRankingClasses = (index) => {
-    const baseClasses = 'w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-white shadow-sm';
-    switch (gradientFrom) {
-      case 'blue-600':
-        return `${baseClasses} bg-gradient-to-br from-blue-400 to-info`;
-      case 'orange-500':
-        return `${baseClasses} bg-gradient-primary`;
-      case 'green-600':
-        return `${baseClasses} bg-gradient-to-br from-green-400 to-success`;
-      default:
-        return `${baseClasses} bg-gradient-primary`;
-    }
-  };
-
-  return (
-    <div className="group relative">
-      {/* Modern card with glassmorphism effect */}
-      <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-white/20 hover:border-primary-200/50 transform hover:-translate-y-1">
-        {/* Enhanced gradient header */}
-        <div className={`bg-gradient-to-r ${getGradientClasses()} px-6 py-4 relative overflow-hidden`}>
-          {/* Subtle pattern overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"></div>
-
-          <div className="relative flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="p-2 bg-white/20 rounded-lg backdrop-blur-sm">
-                <iconclassName="w-5 h-5 text-white"
-                  aria-hidden="true"
-                 />
-              </div>
-              <h3 className="font-heading font-bold text-lg text-white">{title}</h3>
-            </div>
-            <Link
-              href={viewAllLink}
-              className="group/link flex items-center space-x-1 text-white/90 hover:text-white transition-colors duration-200 text-sm font-medium"
-              aria-label={viewAllLabel}
-            >
-              <span>View All</span>
-              <ArrowRightclassName="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform duration-200"
-                aria-hidden="true"
-               />
-            </Link>
-          </div>
-        </div>
-
-        {/* Enhanced content area */}
-        <div className="p-6">
-          <ul className="space-y-3">
-            {items.slice(0, 5).map((item, index) => (
-              <li
-                key={`${item.name}-${index}`}
-                className={`group/item flex items-center justify-between p-3 rounded-xl transition-all duration-300 hover:bg-gray-50/80 ${
-                  item.highlight
-                    ? `animate-pulse ${highlightClass} ring-2 ring-orange-200 bg-orange-50/50`
-                    : 'hover:shadow-sm'
-                }`}
-              >
-                <div className="flex items-center space-x-4">
-                  {/* Enhanced ranking number */}
-                  <div className={getRankingClasses(index)}>
-                    {index + 1}
-                  </div>
-
-                  <div className="flex flex-col">
-                    <span className="font-medium text-neutral-900 group-hover/item:text-neutral-700 transition-colors">
-                      {item.name}
-                    </span>
-                    {item.badges && item.badges.length > 0 && (
-                      <div className="flex items-center mt-1">
-                        <span className="text-xs text-neutral-500 mr-1">{item.badges[0].icon}</span>
-                        <span className="text-xs text-neutral-600">{item.badges[0].name}</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                <div className="flex flex-col items-end space-y-1">
-                  <div className="flex items-center space-x-2">
-                    <span className="font-bold text-neutral-900 text-lg">
-                      {typeof item.value === 'number'
-                        ? item.value.toLocaleString()
-                        : item.value}
-                    </span>
-                    <span className="text-neutral-500 text-sm font-medium">
-                      {itemValueLabel}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center space-x-2">
-                    {item.badge && (
-                      <span className={`text-xs px-2 py-1 rounded-full border font-medium ${getBadgeClasses()}`}>
-                        {item.badge}
-                      </span>
-                    )}
-                    {item.trend && (
-                      <span className="text-xs text-green-600 font-medium bg-green-50 px-2 py-1 rounded-full">
-                        {item.trend}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </div>
-  );
-});
+// Note: framer-motion is not available in current project, using CSS transitions instead
+// import { motion } from 'framer-motion';
 
 /**
  * TopFoodies component displays three ranking cards for reviewers, dishes, and locations
- *
- * @param {Object} props - Component props
- * @param {Array} props.reviewers - Array of reviewer objects
- * @param {Array} props.dishes - Array of dish objects
- * @param {Array} props.locations - Array of location objects
- * @param {string} props.countryName - Name of the current country
- * @param {Function} props.getCountryLink - Function to generate country-specific links
- * @returns {JSX.Element} - Rendered component
+ * Migrated from old-packages with enhanced visual design and animations
  */
+
 const TopFoodies = memo(function TopFoodies({
   reviewers,
   dishes,
@@ -188,8 +17,6 @@ const TopFoodies = memo(function TopFoodies({
   countryName,
   getCountryLink,
 }) {
-  const { updateRankingData } = useCountry();
-
   // Validate required props
   if (
     !reviewers ||
@@ -202,120 +29,195 @@ const TopFoodies = memo(function TopFoodies({
     return null;
   }
 
-  // Transform reviewers data for the RankingCard component
-  const reviewersData = reviewers.map(reviewer => ({
-    ...reviewer,
-    value: reviewer.reviews,
-  }));
-
-  // Transform dishes data for the RankingCard component
-  const dishesData = dishes.map(dish => ({
-    ...dish,
-    value: dish.votes,
-  }));
-
-  // Transform locations data for the RankingCard component
-  const locationsData = locations.map(location => ({
-    ...location,
-    value: location.restaurants,
-    trend: location.new,
-  }));
-
   return (
-    <section className="mb-16" aria-labelledby="top-foodies-heading">
-      {/* Hero Section */}
-      <div className="text-center mb-12">
-        <h1 className="font-heading text-4xl md:text-5xl font-bold text-neutral-900 mb-4">
-          Discover Food Excellence in{' '}
-          <span className="bg-gradient-primary bg-clip-text text-transparent">
-            {countryName}
-          </span>
-        </h1>
-        <p className="text-xl text-neutral-700 max-w-3xl mx-auto leading-relaxed">
-          Join our vibrant community of food lovers and discover the best dishes,
-          top reviewers, and trending restaurants in your area.
-        </p>
-
-        {/* Live Stats */}
-        <div className="flex justify-center items-center mt-8 space-x-8">
-          <div className="text-center">
-            <div className="text-2xl font-bold text-primary-600">
-              {reviewersData.reduce((sum, r) => sum + r.value, 0).toLocaleString()}
-            </div>
-            <div className="text-sm text-neutral-600 font-medium">Total Reviews</div>
-          </div>
-          <div className="w-px h-8 bg-neutral-300"></div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-primary-600">
-              {dishesData.reduce((sum, d) => sum + d.value, 0).toLocaleString()}
-            </div>
-            <div className="text-sm text-neutral-600 font-medium">Dish Votes</div>
-          </div>
-          <div className="w-px h-8 bg-neutral-300"></div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-primary-600">
-              {locationsData.reduce((sum, l) => sum + l.value, 0).toLocaleString()}
-            </div>
-            <div className="text-sm text-neutral-600 font-medium">Restaurants</div>
-          </div>
+    <section className="py-8">
+      <div className="flex justify-between items-end mb-6">
+        <div>
+          <h2 className="text-2xl font-bold text-gray-800">Top Foodies</h2>
+          <p className="text-gray-500 mt-1">
+            Meet our most active food enthusiasts and their discoveries
+          </p>
         </div>
-
-        {/* Live Update Button */}
-        <div className="flex justify-center mt-6">
-          <button
-            onClick={updateRankingData}
-            className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-primary text-white font-medium rounded-lg hover:bg-gradient-primary-hover transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
-          >
-            <RefreshCwclassName="w-4 h-4"  />
-            <span>Update Rankings</span>
-          </button>
-        </div>
+        <Link
+          href={getCountryLink('/ranking')}
+          className="text-orange-600 hover:text-orange-700 font-medium flex items-center"
+        >
+          View all rankings
+          <ChevronRight className="w-4 h-4 ml-1" />
+        </Link>
       </div>
 
-      <h2 id="top-foodies-heading" className="sr-only">
-        Top Food Statistics in {countryName}
-      </h2>
-
-      {/* Enhanced grid with better spacing */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Top Reviewers */}
-        <RankingCard
-          title={`Top Reviewers`}
-          viewAllLink={getCountryLink('/social')}
-          viewAllLabel={`View all top reviewers in ${countryName}`}
-          icon={Trophy}
-          gradientFrom="blue-600"
-          gradientTo="blue-700"
-          items={reviewersData}
-          itemValueLabel="reviews"
-          highlightClass="bg-blue-50"
-        />
+        <div className="bg-gradient-to-br from-orange-50 to-white border border-orange-100 rounded-lg p-6">
+          <h3 className="font-semibold text-orange-800 mb-4 flex items-center gap-2">
+            <Trophy className="w-5 h-5 text-orange-500" />
+            Top {countryName} Reviewers
+          </h3>
+          <div className="space-y-3">
+            {reviewers.map((user, index) => (
+              <div
+                key={user.name}
+                className={`flex items-center gap-3 p-2 rounded-lg transition-colors ${
+                  user.highlight
+                    ? 'bg-gradient-to-r from-orange-100/50 to-transparent'
+                    : ''
+                }`}
+              >
+                <div
+                  className={`w-8 h-8 rounded-full flex items-center justify-center font-semibold transition-colors ${
+                    user.highlight
+                      ? 'bg-orange-200 text-orange-700'
+                      : 'bg-orange-100 text-orange-600'
+                  }`}
+                >
+                  {index + 1}
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <span
+                      className={`font-semibold transition-colors ${
+                        user.highlight ? 'text-orange-700' : 'text-gray-900'
+                      }`}
+                    >
+                      {user.name}
+                    </span>
+                    <span
+                      className={`text-xs px-2 py-1 rounded-full font-medium transition-colors ${
+                        user.highlight
+                          ? 'bg-orange-200 text-orange-700'
+                          : 'bg-gray-100 text-gray-600'
+                      }`}
+                    >
+                      {user.badge}
+                    </span>
+                  </div>
+                  <p
+                    className={`text-sm font-medium transition-colors ${
+                      user.highlight ? 'text-orange-700' : 'text-gray-500'
+                    }`}
+                  >
+                    {user.reviews} reviews
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
 
-        {/* Top Dishes */}
-        <RankingCard
-          title={`Trending Dishes`}
-          viewAllLink={getCountryLink('/dish-restaurants')}
-          viewAllLabel={`View all top dishes in ${countryName}`}
-          icon={Utensils}
-          gradientFrom="orange-500"
-          gradientTo="orange-600"
-          items={dishesData}
-          itemValueLabel="votes"
-          highlightClass="bg-orange-50"
-        />
+        {/* Trending Dishes */}
+        <div className="bg-gradient-to-br from-yellow-50 to-white border border-yellow-100 rounded-lg p-6">
+          <h3 className="font-semibold text-yellow-800 mb-4 flex items-center gap-2">
+            <Utensils className="w-5 h-5 text-yellow-500" />
+            Trending {countryName} Dishes
+          </h3>
+          <div className="space-y-3">
+            {dishes.map((item, index) => (
+              <div
+                key={item.dish}
+                className={`flex items-center gap-3 p-2 rounded-lg transition-colors ${
+                  item.highlight
+                    ? 'bg-gradient-to-r from-amber-100/50 to-transparent'
+                    : ''
+                }`}
+              >
+                <div
+                  className={`w-8 h-8 rounded-full flex items-center justify-center font-semibold transition-colors ${
+                    item.highlight
+                      ? 'bg-amber-200 text-amber-700'
+                      : 'bg-yellow-100 text-yellow-600'
+                  }`}
+                >
+                  {index + 1}
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <span
+                      className={`font-semibold transition-colors ${
+                        item.highlight ? 'text-amber-700' : 'text-gray-900'
+                      }`}
+                    >
+                      {item.dish}
+                    </span>
+                    <span
+                      className={`text-xs px-2 py-1 rounded-full font-medium transition-colors ${
+                        item.highlight
+                          ? 'bg-amber-200 text-amber-700'
+                          : 'bg-gray-100 text-gray-600'
+                      }`}
+                    >
+                      {item.trend}
+                    </span>
+                  </div>
+                  <p
+                    className={`text-sm font-medium transition-colors ${
+                      item.highlight ? 'text-amber-700' : 'text-gray-500'
+                    }`}
+                  >
+                    {item.votes} votes this week
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
 
-        {/* Top Locations */}
-        <RankingCard
-          title={`Hot Spots`}
-          viewAllLink={getCountryLink('/restaurants')}
-          viewAllLabel={`View all top areas in ${countryName}`}
-          icon={MapPin}
-          gradientFrom="green-600"
-          gradientTo="green-700"
-          items={locationsData}
-          itemValueLabel="restaurants"
-          highlightClass="bg-green-50"
-        />
+        {/* Popular Locations */}
+        <div className="bg-gradient-to-br from-blue-50 to-white border border-blue-100 rounded-lg p-6">
+          <h3 className="font-semibold text-blue-800 mb-4 flex items-center gap-2">
+            <MapPin className="w-5 h-5 text-blue-500" />
+            Popular Areas in {countryName}
+          </h3>
+          <div className="space-y-3">
+            {locations.map((location, index) => (
+              <div
+                key={location.area}
+                className={`flex items-center gap-3 p-2 rounded-lg transition-colors ${
+                  location.highlight
+                    ? 'bg-gradient-to-r from-sky-100/50 to-transparent'
+                    : ''
+                }`}
+              >
+                <div
+                  className={`w-8 h-8 rounded-full flex items-center justify-center font-semibold transition-colors ${
+                    location.highlight
+                      ? 'bg-sky-200 text-sky-700'
+                      : 'bg-blue-100 text-blue-600'
+                  }`}
+                >
+                  {index + 1}
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <span
+                      className={`font-semibold transition-colors ${
+                        location.highlight ? 'text-sky-700' : 'text-gray-900'
+                      }`}
+                    >
+                      {location.area}
+                    </span>
+                    <span
+                      className={`text-xs px-2 py-1 rounded-full font-medium transition-colors ${
+                        location.highlight
+                          ? 'bg-sky-200 text-sky-700'
+                          : 'bg-gray-100 text-gray-600'
+                      }`}
+                    >
+                      {location.new}
+                    </span>
+                  </div>
+                  <p
+                    className={`text-sm font-medium transition-colors ${
+                      location.highlight ? 'text-sky-700' : 'text-gray-500'
+                    }`}
+                  >
+                    {location.restaurants} restaurants
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

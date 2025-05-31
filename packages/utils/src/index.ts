@@ -12,13 +12,13 @@ export * from './config/countries.js';
 export * from './aws.js';
 export * from './csrfProtection.js';
 export * from './date.js';
-export * from './db.js';
+// export * from './db.js'; // Temporarily disabled due to pg dependency
 export * from './environment.js';
 export * from './environmentHandler.js';
 export * from './hydrationFix.js';
 export * from './image.js';
-export * from './postgres.js';
-export * from './serverAuth.js';
+// export * from './postgres.js'; // Temporarily disabled due to pg dependency
+// export * from './serverAuth.js'; // Temporarily disabled due to aws-jwt-verify dependency
 
 // Export shared utilities with explicit exports to avoid naming conflicts
 export {

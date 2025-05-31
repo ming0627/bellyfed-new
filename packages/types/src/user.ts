@@ -43,6 +43,8 @@ export interface CognitoUserData {
   email_verified?: boolean;
   created_at?: string;
   updated_at?: string;
+  avatarUrl?: string;
+  thumbnailUrl?: string;
   preferences?: Record<string, unknown>;
   interests?: string[];
   stats?: {
