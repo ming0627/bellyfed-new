@@ -1,4 +1,4 @@
-// STEP 8: ENHANCED STYLING
+// STEP 9: INTERACTIVE FEATURES - CLICK HANDLERS
 import React from 'react';
 import ImageModule from 'next/image';
 import { Trophy } from 'lucide-react';
@@ -18,6 +18,15 @@ function TopCritics({ topReviewers }) {
     );
   }
 
+  // Step 9: Simple click handler for reviewer interaction
+  const handleReviewerClick = (reviewer, rank) => {
+    const name = reviewer?.name || `Reviewer ${rank}`;
+    const reviews = reviewer?.reviews || 0;
+    alert(
+      `Clicked on ${name}\nRank: #${rank}\nReviews: ${reviews.toLocaleString()}`,
+    );
+  };
+
   return (
     <div className="py-6 px-4 bg-white rounded-lg shadow-sm border border-gray-100">
       <h2 className="text-2xl font-bold mb-6 flex items-center gap-3 text-gray-900">
@@ -35,7 +44,8 @@ function TopCritics({ topReviewers }) {
           return (
             <div
               key={index}
-              className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 border border-transparent hover:border-gray-200"
+              onClick={() => handleReviewerClick(reviewer, index + 1)}
+              className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 border border-transparent hover:border-gray-200 cursor-pointer"
             >
               <div className="relative">
                 <Image
