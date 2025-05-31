@@ -1,4 +1,4 @@
-// STEP 9: INTERACTIVE FEATURES - CLICK HANDLERS
+// STEP 10: ENHANCED VISUAL FEEDBACK - CLICK ANIMATIONS
 import React from 'react';
 import ImageModule from 'next/image';
 import { Trophy } from 'lucide-react';
@@ -45,7 +45,7 @@ function TopCritics({ topReviewers }) {
             <div
               key={index}
               onClick={() => handleReviewerClick(reviewer, index + 1)}
-              className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 border border-transparent hover:border-gray-200 cursor-pointer"
+              className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition-all duration-150 border border-transparent hover:border-gray-200 cursor-pointer active:scale-95 active:shadow-sm"
             >
               <div className="relative">
                 <Image

@@ -352,7 +352,7 @@ const Homepage = function Homepage() {
           getCountryLink={createCountryLink}
         />
 
-        {/* TopCritics - Enhanced version with badges and tooltips */}
+        {/* TopCritics - Professional card design with interactive features, click animations, and enhanced styling */}
         <TopCritics topReviewers={topReviewers} />
 
         {/* TopRatedDishes - Sophisticated version with animations */}

@@ -21,23 +21,36 @@ const DishCard = memo(function DishCard({ dish }) {
   }
 
   // Enhanced defensive programming with better validation
-  const rating = typeof dish.rating === 'number' && !isNaN(dish.rating) ? dish.rating : 0;
-  const reviewCount = typeof dish.reviewCount === 'number' && !isNaN(dish.reviewCount) ? dish.reviewCount : 0;
-  const dishName = dish.name && typeof dish.name === 'string' ? dish.name.trim() : 'Unknown Dish';
-  const dishId = dish.id && typeof dish.id === 'string' ? dish.id.trim() : 'unknown';
-  const dishPrice = dish.price && typeof dish.price === 'string' ? dish.price.trim() : null;
+  const rating =
+    typeof dish.rating === 'number' && !isNaN(dish.rating) ? dish.rating : 0;
+  const reviewCount =
+    typeof dish.reviewCount === 'number' && !isNaN(dish.reviewCount)
+      ? dish.reviewCount
+      : 0;
+  const dishName =
+    dish.name && typeof dish.name === 'string'
+      ? dish.name.trim()
+      : 'Unknown Dish';
+  const dishId =
+    dish.id && typeof dish.id === 'string' ? dish.id.trim() : 'unknown';
+  const dishPrice =
+    dish.price && typeof dish.price === 'string' ? dish.price.trim() : null;
 
-  console.log('DishCard processed data:', { rating, reviewCount, dishName, dishId, dishPrice });
+  console.log('DishCard processed data:', {
+    rating,
+    reviewCount,
+    dishName,
+    dishId,
+    dishPrice,
+  });
 
-  // TEMPORARY: Return minimal version to isolate the issue
+  // Simplified dish card with essential features and reliable rendering
   return (
     <div className="block bg-white rounded-lg shadow-md p-4 border border-gray-200">
       <div className="h-32 bg-gray-200 rounded mb-4 flex items-center justify-center">
         <span className="text-gray-500">🍽️</span>
       </div>
-      <h3 className="text-lg font-semibold text-gray-900 mb-2">
-        {dishName}
-      </h3>
+      <h3 className="text-lg font-semibold text-gray-900 mb-2">{dishName}</h3>
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
           {rating > 0 && (
@@ -55,9 +68,7 @@ const DishCard = memo(function DishCard({ dish }) {
           )}
         </div>
         {dishPrice && (
-          <span className="text-sm font-bold text-gray-800">
-            {dishPrice}
-          </span>
+          <span className="text-sm font-bold text-gray-800">{dishPrice}</span>
         )}
       </div>
     </div>
