@@ -14,17 +14,18 @@ const CountryContext = createContext(null);
 // Country Provider Component
 export const CountryProvider = ({ children }) => {
   const router = useRouter();
-  const [country, setCountry] = useState('us');
+  const [country, setCountry] = useState('my');
   const [countryData, setCountryData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   // Available countries
   const countries = [
+    { code: 'my', name: 'Malaysia', flag: '🇲🇾' },
+    { code: 'sg', name: 'Singapore', flag: '🇸🇬' },
     { code: 'us', name: 'United States', flag: '🇺🇸' },
     { code: 'ca', name: 'Canada', flag: '🇨🇦' },
     { code: 'uk', name: 'United Kingdom', flag: '🇬🇧' },
-    { code: 'au', name: 'Australia', flag: '🇦🇺' },
-    { code: 'sg', name: 'Singapore', flag: '🇸🇬' }
+    { code: 'au', name: 'Australia', flag: '🇦🇺' }
   ];
 
   // Get country from router
@@ -88,14 +89,15 @@ export const useCountry = () => {
   if (!context) {
     // Return default values if not in provider
     return {
-      country: 'us',
-      countryData: { code: 'us', name: 'United States', flag: '🇺🇸' },
+      country: 'my',
+      countryData: { code: 'my', name: 'Malaysia', flag: '🇲🇾' },
       countries: [
+        { code: 'my', name: 'Malaysia', flag: '🇲🇾' },
+        { code: 'sg', name: 'Singapore', flag: '🇸🇬' },
         { code: 'us', name: 'United States', flag: '🇺🇸' },
         { code: 'ca', name: 'Canada', flag: '🇨🇦' },
         { code: 'uk', name: 'United Kingdom', flag: '🇬🇧' },
-        { code: 'au', name: 'Australia', flag: '🇦🇺' },
-        { code: 'sg', name: 'Singapore', flag: '🇸🇬' }
+        { code: 'au', name: 'Australia', flag: '🇦🇺' }
       ],
       isLoading: false,
       switchCountry: () => {}
