@@ -1,396 +1,357 @@
 /**
  * Homepage Navigation Component
- * 
- * Main navigation component for the homepage with dynamic menu items.
- * Provides quick access to key sections and user-specific features.
- * 
- * Features:
- * - Responsive navigation menu
- * - User authentication state
- * - Dynamic menu items based on user role
- * - Search integration
- * - Country/location selector
- * - Mobile-friendly design
+ *
+ * Enhanced navigation for food review app with modern design
+ * Features logo, search, user profile, and food-centric navigation
  */
 
-import React, { useState, useEffect } from 'react'
-import { Button, Badge } from '../ui/index.js'
-import { useAuth } from '../../hooks/useAuth.js'
-import { useAnalyticsContext } from '../analytics/AnalyticsProvider.js'
+import {
+  Heart,
+  Menu,
+  MessageSquare,
+  Search,
+  Trophy,
+  User,
+  Utensils,
+  X,
+  Shield,
+  LogOut,
+  Settings,
+  BookOpen,
+  Camera,
+  Bell,
+  ChevronDown,
+} from 'lucide-react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useState, useEffect, useRef } from 'react';
 
-const HomepageNavigation = ({
-  currentCountry = 'malaysia',
-  showSearch = true,
-  showCountrySelector = true,
-  showUserMenu = true,
-  className = ''
-}) => {
-  // State
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('')
-  const [notifications, setNotifications] = useState(0)
+function Navigation({ getCountryLink }) {
+  const router = useRouter();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [hasNotifications, setHasNotifications] = useState(true);
+  const profileRef = useRef(null);
 
-  // Context
-  const { user, isAuthenticated, logout } = useAuth()
-  const { trackUserEngagement } = useAnalyticsContext()
+  // Mock authentication state - replace with actual auth context
+  const [user, setUser] = useState({
+    name: 'John Doe',
+    email: 'john@example.com',
+    avatar:
+      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=100&h=100&fit=crop',
+  });
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  // Mock notifications
+  // Check if the user is an admin - simplified for migration
   useEffect(() => {
-    if (isAuthenticated) {
-      setNotifications(Math.floor(Math.random() * 5))
-    }
-  }, [isAuthenticated])
+    const checkAdminStatus = async () => {
+      if (!isAuthenticated || !user) {
+        setIsAdmin(false);
+        return;
+      }
 
-  // Navigation items
+      try {
+        const response = await fetch('/api/admin/status');
+        setIsAdmin(response.ok);
+      } catch (error) {
+        console.error('Error checking admin status:', error);
+        setIsAdmin(false);
+      }
+    };
+
+    checkAdminStatus();
+  }, [isAuthenticated, user]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = event => {
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setProfileDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   const navigationItems = [
     {
-      label: 'Explore',
-      href: `/${currentCountry}/explore`,
-      icon: '🗺️',
-      description: 'Discover restaurants near you'
+      href: getCountryLink('/explore'),
+      icon: Search,
+      label: 'Discover',
+      description: 'Find new places',
     },
     {
-      label: 'Rankings',
-      href: `/${currentCountry}/rankings`,
-      icon: '🏆',
-      description: 'Top dishes and restaurants'
+      href: getCountryLink('/restaurants'),
+      icon: Utensils,
+      label: 'Restaurants',
+      description: 'Browse all',
     },
     {
-      label: 'Social',
-      href: `/${currentCountry}/social`,
-      icon: '👥',
-      description: 'Connect with food lovers'
+      href: getCountryLink('/ranking'),
+      icon: Trophy,
+      label: 'Top Rated',
+      description: 'Best of the best',
     },
     {
-      label: 'Competitions',
-      href: `/${currentCountry}/competitions`,
-      icon: '🎯',
-      description: 'Food challenges and contests'
-    }
-  ]
+      href: getCountryLink('/social'),
+      icon: MessageSquare,
+      label: 'Community',
+      description: 'Connect & share',
+    },
+  ];
 
-  // User menu items
-  const userMenuItems = isAuthenticated ? [
-    {
-      label: 'My Profile',
-      href: `/${currentCountry}/profile`,
-      icon: '👤'
-    },
-    {
-      label: 'My Rankings',
-      href: `/${currentCountry}/rankings/my`,
-      icon: '📊'
-    },
-    {
-      label: 'Favorites',
-      href: `/${currentCountry}/favorites`,
-      icon: '❤️'
-    },
-    {
-      label: 'Settings',
-      href: `/${currentCountry}/settings`,
-      icon: '⚙️'
-    }
-  ] : [
-    {
-      label: 'Sign In',
-      href: '/signin',
-      icon: '🔑'
-    },
-    {
-      label: 'Sign Up',
-      href: '/signup',
-      icon: '📝'
-    }
-  ]
-
-  // Countries list
-  const countries = [
-    { code: 'malaysia', name: 'Malaysia', flag: '🇲🇾' },
-    { code: 'singapore', name: 'Singapore', flag: '🇸🇬' },
-    { code: 'thailand', name: 'Thailand', flag: '🇹🇭' },
-    { code: 'indonesia', name: 'Indonesia', flag: '🇮🇩' }
-  ]
-
-  // Handle search
-  const handleSearch = (e) => {
-    e.preventDefault()
+  const handleSearch = e => {
+    e.preventDefault();
     if (searchQuery.trim()) {
-      trackUserEngagement('search', 'submit', 'homepage_nav', {
-        query: searchQuery,
-        country: currentCountry
-      })
-      window.location.href = `/${currentCountry}/search?q=${encodeURIComponent(searchQuery)}`
+      router.push(
+        getCountryLink(`/search?q=${encodeURIComponent(searchQuery)}`),
+      );
+      setSearchQuery('');
+      setSearchOpen(false);
     }
-  }
-
-  // Handle navigation click
-  const handleNavClick = (item) => {
-    trackUserEngagement('navigation', 'click', item.label.toLowerCase(), {
-      source: 'homepage_nav',
-      country: currentCountry
-    })
-    window.location.href = item.href
-  }
-
-  // Handle logout
-  const handleLogout = async () => {
-    try {
-      await logout()
-      trackUserEngagement('auth', 'logout', 'homepage_nav')
-      window.location.href = '/'
-    } catch (error) {
-      console.error('Logout error:', error)
-    }
-  }
+  };
 
   return (
-    <nav className={`bg-white shadow-sm border-b border-gray-200 ${className}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+    <nav className="bg-white shadow-lg sticky top-0 z-50 border-b border-gray-100">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo Section */}
           <div className="flex items-center">
-            <a
-              href={`/${currentCountry}`}
-              className="flex items-center gap-2 text-xl font-bold text-orange-600 hover:text-orange-700 transition-colors"
+            <Link
+              href={getCountryLink('/')}
+              className="flex items-center space-x-2"
             >
-              🍽️ Bellyfed
-            </a>
+              <div className="bg-gradient-to-r from-orange-500 to-red-500 p-2 rounded-lg">
+                <Utensils className="w-6 h-6 text-white" />
+              </div>
+              <span className="text-2xl font-bold text-gray-900">Bellyfed</span>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navigationItems.map((item) => (
-              <button
-                key={item.label}
-                onClick={() => handleNavClick(item)}
-                className="flex items-center gap-2 text-gray-700 hover:text-orange-600 transition-colors group"
-                title={item.description}
-              >
-                <span className="text-lg group-hover:scale-110 transition-transform">
-                  {item.icon}
-                </span>
-                <span className="font-medium">{item.label}</span>
-              </button>
-            ))}
+          <div className="hidden md:flex items-center space-x-1">
+            {navigationItems.map(item => {
+              const Icon = item.icon;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`flex flex-col items-center px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 group
+                    ${
+                      router.pathname === item.href
+                        ? 'text-orange-600 bg-orange-50'
+                        : 'text-gray-600 hover:text-orange-600 hover:bg-orange-50'
+                    }`}
+                >
+                  <Icon className="w-5 h-5 mb-1 group-hover:scale-110 transition-transform" />
+                  <span className="text-xs">{item.label}</span>
+                </Link>
+              );
+            })}
           </div>
 
-          {/* Search Bar */}
-          {showSearch && (
-            <div className="hidden lg:flex flex-1 max-w-md mx-8">
-              <form onSubmit={handleSearch} className="w-full">
-                <div className="relative">
-                  <input
-                    type="text"
-                    placeholder="Search restaurants, dishes..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-                  />
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <span className="text-gray-400">🔍</span>
-                  </div>
-                </div>
-              </form>
-            </div>
-          )}
+          {/* Right Section */}
+          <div className="flex items-center space-x-3">
+            {/* Search Button */}
+            <button
+              onClick={() => setSearchOpen(!searchOpen)}
+              className="p-2 rounded-lg text-gray-600 hover:text-orange-600 hover:bg-orange-50 transition-colors"
+            >
+              <Search className="w-5 h-5" />
+            </button>
 
-          {/* Right Side */}
-          <div className="flex items-center gap-4">
-            {/* Country Selector */}
-            {showCountrySelector && (
-              <div className="hidden sm:block">
-                <select
-                  value={currentCountry}
-                  onChange={(e) => {
-                    const newCountry = e.target.value
-                    trackUserEngagement('country', 'change', newCountry, {
-                      previousCountry: currentCountry
-                    })
-                    window.location.href = `/${newCountry}`
-                  }}
-                  className="px-3 py-1 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-orange-500"
-                >
-                  {countries.map((country) => (
-                    <option key={country.code} value={country.code}>
-                      {country.flag} {country.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+            {/* Write Review Button */}
+            {isAuthenticated && (
+              <Link
+                href={getCountryLink('/write-review')}
+                className="hidden md:flex items-center space-x-2 bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-orange-600 transition-colors"
+              >
+                <Camera className="w-4 h-4" />
+                <span className="text-sm font-medium">Write Review</span>
+              </Link>
             )}
 
             {/* Notifications */}
             {isAuthenticated && (
-              <button className="relative p-2 text-gray-600 hover:text-orange-600 transition-colors">
-                <span className="text-xl">🔔</span>
-                {notifications > 0 && (
-                  <Badge
-                    variant="error"
-                    size="sm"
-                    className="absolute -top-1 -right-1 min-w-[20px] h-5 flex items-center justify-center text-xs"
-                  >
-                    {notifications}
-                  </Badge>
+              <button className="relative p-2 rounded-lg text-gray-600 hover:text-orange-600 hover:bg-orange-50 transition-colors">
+                <Bell className="w-5 h-5" />
+                {hasNotifications && (
+                  <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
                 )}
               </button>
             )}
 
-            {/* User Menu */}
-            {showUserMenu && (
-              <div className="relative">
+            {/* User Profile */}
+            {isAuthenticated ? (
+              <div className="relative" ref={profileRef}>
                 <button
-                  onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className="flex items-center gap-2 p-2 text-gray-700 hover:text-orange-600 transition-colors"
+                  onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
+                  className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-50 transition-colors"
                 >
-                  {isAuthenticated ? (
-                    <>
-                      <img
-                        src={user?.avatar || '/images/placeholder-avatar.jpg'}
-                        alt={user?.name || 'User'}
-                        className="w-8 h-8 rounded-full object-cover"
-                      />
-                      <span className="hidden sm:block font-medium">
-                        {user?.name || 'User'}
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      <span className="text-xl">👤</span>
-                      <span className="hidden sm:block font-medium">Account</span>
-                    </>
-                  )}
-                  <span className="text-sm">▼</span>
+                  <img
+                    src={user.avatar}
+                    alt={user.name}
+                    className="w-8 h-8 rounded-full object-cover"
+                  />
+                  <ChevronDown
+                    className={`w-4 h-4 text-gray-500 transition-transform ${
+                      profileDropdownOpen ? 'rotate-180' : ''
+                    }`}
+                  />
                 </button>
 
-                {/* Dropdown Menu */}
-                {isMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
-                    {userMenuItems.map((item) => (
-                      <button
-                        key={item.label}
-                        onClick={() => {
-                          setIsMenuOpen(false)
-                          if (item.label === 'Sign Out') {
-                            handleLogout()
-                          } else {
-                            handleNavClick(item)
-                          }
-                        }}
-                        className="w-full px-4 py-2 text-left flex items-center gap-3 text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
+                {/* Profile Dropdown */}
+                {profileDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-100 py-2">
+                    <div className="px-4 py-3 border-b border-gray-100">
+                      <p className="text-sm font-semibold text-gray-900">
+                        {user.name}
+                      </p>
+                      <p className="text-xs text-gray-500">{user.email}</p>
+                    </div>
+
+                    <Link
+                      href={getCountryLink('/profile')}
+                      className="flex items-center space-x-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                    >
+                      <User className="w-4 h-4" />
+                      <span>My Profile</span>
+                    </Link>
+
+                    <Link
+                      href={getCountryLink('/favorites')}
+                      className="flex items-center space-x-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                    >
+                      <Heart className="w-4 h-4" />
+                      <span>My Favorites</span>
+                    </Link>
+
+                    <Link
+                      href={getCountryLink('/my-reviews')}
+                      className="flex items-center space-x-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                    >
+                      <BookOpen className="w-4 h-4" />
+                      <span>My Reviews</span>
+                    </Link>
+
+                    <Link
+                      href={getCountryLink('/settings')}
+                      className="flex items-center space-x-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                    >
+                      <Settings className="w-4 h-4" />
+                      <span>Settings</span>
+                    </Link>
+
+                    {isAdmin && (
+                      <Link
+                        href="/admin"
+                        className="flex items-center space-x-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 border-t border-gray-100"
                       >
-                        <span>{item.icon}</span>
-                        <span>{item.label}</span>
-                      </button>
-                    ))}
-                    
-                    {isAuthenticated && (
-                      <>
-                        <hr className="my-2 border-gray-200" />
-                        <button
-                          onClick={() => {
-                            setIsMenuOpen(false)
-                            handleLogout()
-                          }}
-                          className="w-full px-4 py-2 text-left flex items-center gap-3 text-red-600 hover:bg-red-50 transition-colors"
-                        >
-                          <span>🚪</span>
-                          <span>Sign Out</span>
-                        </button>
-                      </>
+                        <Shield className="w-4 h-4" />
+                        <span>Admin Panel</span>
+                      </Link>
                     )}
+
+                    <button className="flex items-center space-x-3 px-4 py-2 text-sm text-red-600 hover:bg-red-50 w-full text-left border-t border-gray-100">
+                      <LogOut className="w-4 h-4" />
+                      <span>Sign Out</span>
+                    </button>
                   </div>
                 )}
               </div>
+            ) : (
+              <Link
+                href={getCountryLink('/login')}
+                className="bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-orange-600 transition-colors text-sm font-medium"
+              >
+                Sign In
+              </Link>
             )}
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 text-gray-600 hover:text-orange-600 transition-colors"
-            >
-              <span className="text-xl">☰</span>
-            </button>
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2 rounded-lg text-gray-600 hover:text-orange-600 hover:bg-orange-50"
+              >
+                {mobileMenuOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
+              </button>
+            </div>
           </div>
         </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 py-4">
-            {/* Mobile Search */}
-            {showSearch && (
-              <div className="mb-4">
-                <form onSubmit={handleSearch}>
-                  <input
-                    type="text"
-                    placeholder="Search restaurants, dishes..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
-                  />
-                </form>
-              </div>
-            )}
-
-            {/* Mobile Navigation Items */}
-            <div className="space-y-2">
-              {navigationItems.map((item) => (
-                <button
-                  key={item.label}
-                  onClick={() => {
-                    setIsMenuOpen(false)
-                    handleNavClick(item)
-                  }}
-                  className="w-full flex items-center gap-3 px-4 py-3 text-left text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors rounded-lg"
-                >
-                  <span className="text-lg">{item.icon}</span>
-                  <div>
-                    <div className="font-medium">{item.label}</div>
-                    <div className="text-sm text-gray-500">{item.description}</div>
-                  </div>
-                </button>
-              ))}
-            </div>
-
-            {/* Mobile Country Selector */}
-            {showCountrySelector && (
-              <div className="mt-4 pt-4 border-t border-gray-200">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Country/Region
-                </label>
-                <select
-                  value={currentCountry}
-                  onChange={(e) => {
-                    const newCountry = e.target.value
-                    setIsMenuOpen(false)
-                    trackUserEngagement('country', 'change', newCountry, {
-                      previousCountry: currentCountry
-                    })
-                    window.location.href = `/${newCountry}`
-                  }}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
-                >
-                  {countries.map((country) => (
-                    <option key={country.code} value={country.code}>
-                      {country.flag} {country.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            )}
-          </div>
-        )}
       </div>
 
-      {/* Click outside to close menu */}
-      {isMenuOpen && (
-        <div
-          className="fixed inset-0 z-40"
-          onClick={() => setIsMenuOpen(false)}
-        />
+      {/* Search Bar Overlay */}
+      {searchOpen && (
+        <div className="absolute top-16 left-0 right-0 bg-white border-b border-gray-200 px-4 py-3 shadow-lg">
+          <form onSubmit={handleSearch} className="max-w-3xl mx-auto">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search restaurants, dishes, or cuisines..."
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                autoFocus
+              />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+            </div>
+          </form>
+        </div>
+      )}
+
+      {/* Mobile Navigation Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-white border-t border-gray-100">
+          <div className="px-2 pt-2 pb-3 space-y-1">
+            {navigationItems.map(item => {
+              const Icon = item.icon;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`flex items-center space-x-3 px-3 py-3 rounded-lg text-base font-medium
+                    ${
+                      router.pathname === item.href
+                        ? 'text-orange-600 bg-orange-50'
+                        : 'text-gray-600 hover:text-orange-600 hover:bg-orange-50'
+                    }`}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <Icon className="w-5 h-5" />
+                  <div>
+                    <span className="block">{item.label}</span>
+                    <span className="text-xs text-gray-500">
+                      {item.description}
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
+
+            {isAuthenticated && (
+              <Link
+                href={getCountryLink('/write-review')}
+                className="flex items-center space-x-3 px-3 py-3 rounded-lg bg-orange-500 text-white"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Camera className="w-5 h-5" />
+                <span>Write Review</span>
+              </Link>
+            )}
+          </div>
+        </div>
       )}
     </nav>
-  )
+  );
 }
 
-export default HomepageNavigation
+export default Navigation;

@@ -29,30 +29,27 @@ const PremiumBanner = memo(function PremiumBanner({
   }
 
   return (
-    <div
-      className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2 px-4 text-center relative"
-      role="alert"
-      aria-live="polite"
-    >
-      <div className="container mx-auto">
-        <p className="text-sm md:text-base">
-          <span className="font-bold">Upgrade to Premium</span> for exclusive
-          restaurant recommendations and priority bookings!{' '}
-          <a
-            href="/premium"
-            className="underline font-semibold hover:text-white/90 transition-colors"
-            aria-label="Learn more about premium features"
-          >
-            Learn more
-          </a>
-        </p>
+    <div className="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white py-2 relative">
+      <div className="content-container flex items-center justify-center">
+        <span className="font-medium">
+          ✨ Upgrade to Premium for exclusive rankings and features!
+        </span>
+        <button
+          className="ml-4 bg-white/20 hover:bg-white/30 text-white border-white border px-3 py-1 rounded text-sm transition-colors"
+          onClick={() => {
+            // In real app, this would use router to navigate
+            console.log('Navigate to premium page');
+          }}
+        >
+          Learn More
+        </button>
         <button
           onClick={handleClose}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white/80 hover:text-white transition-colors"
+          className="absolute right-4 text-white hover:text-white/80 hover:bg-white/20 p-1 rounded transition-colors"
           aria-label="Close premium banner"
           type="button"
         >
-          <X className="w-4 h-4" aria-hidden="true" />
+          <X className="h-4 w-4" />
         </button>
       </div>
     </div>

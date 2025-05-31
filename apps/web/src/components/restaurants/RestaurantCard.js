@@ -1,7 +1,18 @@
 import React, { useState } from 'react';
-import Image from 'next/image';
+import ImageModule from 'next/image';
 import Link from 'next/link';
-import { Star, MapPin, Clock, BadgeCheck, Heart, Award, Utensils } from 'lucide-react';
+
+// Solution for Next.js 15.x: Extract the actual Image component from default property
+const Image = ImageModule.default;
+import {
+  Star,
+  MapPin,
+  Clock,
+  BadgeCheck,
+  Heart,
+  Award,
+  Utensils,
+} from 'lucide-react';
 /**
  * Restaurant card component for displaying restaurant information
  * Consolidated from .js and .tsx versions - preserving best features from both.
@@ -135,7 +146,10 @@ const RestaurantCard = function RestaurantCard({
           } hover:scale-110 transition-all`}
           aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
         >
-          <Heart className="h-5 w-5" fill={isFavorite ? 'currentColor' : 'none'} />
+          <Heart
+            className="h-5 w-5"
+            fill={isFavorite ? 'currentColor' : 'none'}
+          />
         </button>
 
         {/* Open/Closed Status */}
@@ -158,7 +172,10 @@ const RestaurantCard = function RestaurantCard({
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
               {name}
               {isVerified && (
-                <BadgeCheck className="h-4 w-4 ml-1 text-blue-500" aria-label="Verified" />
+                <BadgeCheck
+                  className="h-4 w-4 ml-1 text-blue-500"
+                  aria-label="Verified"
+                />
               )}
             </h3>
 
@@ -186,7 +203,10 @@ const RestaurantCard = function RestaurantCard({
           </div>
 
           <div className="flex items-center ml-2 flex-shrink-0 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded-full">
-            <Star className={`h-4 w-4 mr-1 ${getRatingColor()}`} fill="currentColor" />
+            <Star
+              className={`h-4 w-4 mr-1 ${getRatingColor()}`}
+              fill="currentColor"
+            />
             <span className={`font-medium text-sm ${getRatingColor()}`}>
               {formattedRating}
             </span>

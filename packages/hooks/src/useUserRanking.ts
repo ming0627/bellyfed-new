@@ -517,15 +517,15 @@ export function useUserRanking(
       dishDetails: userRankingData?.dishDetails || null,
       rankingStats: userRankingData?.rankingStats || null,
       isLoading,
-      isUpdating: createOrUpdateRankingMutation.isPending || deleteRankingMutation.isPending,
+      isUpdating: createOrUpdateRankingMutation.isLoading || deleteRankingMutation.isLoading,
       error: error as Error | null,
     });
   }, [
     userRankingData,
     isLoading,
     error,
-    createOrUpdateRankingMutation.isPending,
-    deleteRankingMutation.isPending,
+    createOrUpdateRankingMutation.isLoading,
+    deleteRankingMutation.isLoading,
   ]);
 
   return {

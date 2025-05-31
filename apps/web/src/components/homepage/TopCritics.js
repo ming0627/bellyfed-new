@@ -1,80 +1,87 @@
+// STEP 10: ENHANCED VISUAL FEEDBACK - CLICK ANIMATIONS
 import React from 'react';
+import ImageModule from 'next/image';
+import { Trophy } from 'lucide-react';
 
-/**
- * TopCritics component displays a grid of top food critics with their badges and achievements.
- *
- * @param {Object} props - Component props
- * @param {Array} props.topReviewers - Array of top reviewer objects
- * @returns {JSX.Element} - Rendered component
- */
+// Solution for Next.js 15.x: Extract the actual Image component from default property
+// This is required because Next.js 15.x exports Image as { default: Component, getImageProps: Function }
+const Image = ImageModule.default;
+
 function TopCritics({ topReviewers }) {
-  // Early return if no reviewers are provided
-  if (!topReviewers || topReviewers.length === 0) {
-    return null;
+  // Basic prop validation/safety checks
+  if (!topReviewers || !Array.isArray(topReviewers)) {
+    return (
+      <div className="py-4">
+        <h2 className="text-xl font-semibold mb-2">Top Food Critics</h2>
+        <p className="text-gray-600">No reviewers data available.</p>
+      </div>
+    );
   }
 
-  return (
-    <section className="mb-12" aria-labelledby="top-critics-heading">
-      <div className="flex items-center mb-4">
-        <span className="w-5 h-5 text-yellow-500 mr-2" aria-hidden="true">🏆</span>
-        <h2 id="top-critics-heading" className="text-xl font-bold">
-          Top Food Critics
-        </h2>
-      </div>
+  // Step 9: Simple click handler for reviewer interaction
+  const handleReviewerClick = (reviewer, rank) => {
+    const name = reviewer?.name || `Reviewer ${rank}`;
+    const reviews = reviewer?.reviews || 0;
+    alert(
+      `Clicked on ${name}\nRank: #${rank}\nReviews: ${reviews.toLocaleString()}`,
+    );
+  };
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {topReviewers.map((reviewer, index) => (
-          <div
-            key={`reviewer-${reviewer.name}-${index}`}
-            className={`bg-white rounded-lg shadow-md p-4 ${
-              reviewer.highlight ? 'animate-pulse' : ''
-            }`}
-          >
-            <div className="flex items-center mb-3">
-              {reviewer.avatar ? (
-                <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
-                  <span className="text-gray-500 text-lg">
-                    {(reviewer.name || 'U').charAt(0)}
+  return (
+    <div className="py-6 px-4 bg-white rounded-lg shadow-sm border border-gray-100">
+      <h2 className="text-2xl font-bold mb-6 flex items-center gap-3 text-gray-900">
+        <Trophy className="w-6 h-6 text-orange-500" />
+        Top Food Critics
+      </h2>
+
+      {/* Enhanced data display with improved styling */}
+      <div className="space-y-4">
+        {topReviewers.map((reviewer, index) => {
+          // Safe property access with fallbacks
+          const name = reviewer?.name || `Reviewer ${index + 1}`;
+          const reviews = reviewer?.reviews || 0;
+
+          return (
+            <div
+              key={index}
+              onClick={() => handleReviewerClick(reviewer, index + 1)}
+              className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition-all duration-150 border border-transparent hover:border-gray-200 cursor-pointer active:scale-95 active:shadow-sm"
+            >
+              <div className="relative">
+                <Image
+                  src={reviewer?.avatar || '/placeholder-avatar.jpg'}
+                  alt={`${name} avatar`}
+                  width={48}
+                  height={48}
+                  className="rounded-full border-2 border-orange-100"
+                />
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-orange-500 rounded-full flex items-center justify-center">
+                  <span className="text-xs font-bold text-white">
+                    #{index + 1}
                   </span>
                 </div>
-              ) : (
-                <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
-                  <span className="text-gray-500 text-lg">
-                    {(reviewer.name || 'U').charAt(0)}
-                  </span>
-                </div>
-              )}
-              <div className="ml-3">
-                <h3 className="font-semibold">{reviewer.name || 'Unknown Reviewer'}</h3>
-                <p className="text-sm text-gray-500">
-                  {typeof reviewer.reviews === 'number' ? reviewer.reviews.toLocaleString() : '0'} reviews
+              </div>
+
+              <div className="flex-1">
+                <h3 className="font-semibold text-gray-900 text-lg">{name}</h3>
+                <p className="text-sm text-gray-600 font-medium">
+                  {reviews.toLocaleString()} reviews
                 </p>
               </div>
-            </div>
 
-            {reviewer.badges && reviewer.badges.length > 0 && (
-              <div className="space-y-2">
-                {reviewer.badges.map((badge, badgeIndex) => (
-                  <div
-                    key={`badge-${badgeIndex}`}
-                    className="flex items-center bg-gray-50 p-2 rounded"
-                    title={badge.tooltip}
-                  >
-                    <span className="text-lg mr-2" aria-hidden="true">
-                      {badge.icon}
-                    </span>
-                    <div>
-                      <p className="font-medium text-sm">{badge.name}</p>
-                      <p className="text-xs text-gray-500">{badge.tooltip}</p>
-                    </div>
-                  </div>
-                ))}
+              <div className="text-right">
+                <div className="flex items-center gap-1">
+                  <Trophy className="w-4 h-4 text-orange-400" />
+                  <span className="text-sm font-medium text-orange-600">
+                    Rank #{index + 1}
+                  </span>
+                </div>
               </div>
-            )}
-          </div>
-        ))}
+            </div>
+          );
+        })}
       </div>
-    </section>
+    </div>
   );
 }
 

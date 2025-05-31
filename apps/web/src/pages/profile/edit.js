@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { 
-  User, 
-  Camera, 
-  Save, 
-  ArrowLeft, 
-  Mail, 
-  Phone, 
-  MapPin, 
+import {
+  User,
+  Camera,
+  Save,
+  ArrowLeft,
+  Mail,
+  Phone,
+  MapPin,
   Globe,
   Instagram,
   Twitter,
@@ -16,6 +16,7 @@ import {
   Trash2
 } from 'lucide-react'
 import { useAuth } from '../../contexts/AuthContext.js'
+import AvatarUpload from '../../components/profile/AvatarUpload.js'
 
 export default function EditProfilePage() {
   const router = useRouter()
@@ -159,9 +160,22 @@ export default function EditProfilePage() {
     }
   }
 
-  const handlePhotoUpload = () => {
-    // TODO: Implement photo upload functionality
-    console.log('Photo upload functionality to be implemented')
+  const handleAvatarChange = (avatarResponse) => {
+    if (avatarResponse) {
+      // Update profile data with new avatar URL
+      setProfileData(prev => ({
+        ...prev,
+        avatarUrl: avatarResponse.avatarUrl,
+        thumbnailUrl: avatarResponse.thumbnailUrl
+      }))
+    } else {
+      // Avatar was deleted
+      setProfileData(prev => ({
+        ...prev,
+        avatarUrl: null,
+        thumbnailUrl: null
+      }))
+    }
   }
 
   const handleDeleteAccount = () => {
@@ -241,25 +255,14 @@ export default function EditProfilePage() {
             <h3 className="text-lg font-semibold text-orange-900 dark:text-orange-100 mb-4">
               Profile Photo
             </h3>
-            <div className="flex items-center space-x-4">
-              <div className="w-20 h-20 bg-orange-200 dark:bg-orange-700 rounded-full flex items-center justify-center">
-                <span className="text-2xl text-orange-700 dark:text-orange-300">
-                  {profileData.firstName.charAt(0) || 'U'}
-                </span>
-              </div>
-              <div>
-                <button
-                  onClick={handlePhotoUpload}
-                  className="flex items-center px-4 py-2 bg-orange-100 hover:bg-orange-200 text-orange-700 rounded-lg transition-colors dark:bg-orange-800 dark:hover:bg-orange-700 dark:text-orange-300"
-                >
-                  <Camera className="w-4 h-4 mr-2" />
-                  Change Photo
-                </button>
-                <p className="text-sm text-orange-600 dark:text-orange-400 mt-1">
-                  JPG, PNG or GIF. Max size 2MB.
-                </p>
-              </div>
-            </div>
+            <AvatarUpload
+              currentAvatarUrl={profileData.avatarUrl}
+              onAvatarChange={handleAvatarChange}
+              uploadOptions={{
+                maxSizeBytes: 2 * 1024 * 1024, // 2MB
+                generateThumbnail: true
+              }}
+            />
           </div>
 
           {/* Basic Information */}

@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import Image from 'next/image';
-import {
-  Award,
-  Star,
-  ChevronRight,
-  ChevronLeft,
-} from 'lucide-react';
+import ImageModule from 'next/image';
+import { Award, Star, ChevronRight, ChevronLeft } from 'lucide-react';
+
+// Solution for Next.js 15.x: Extract the actual Image component from default property
+const Image = ImageModule.default;
 import { Card, Button, AvatarWithInitials } from '@bellyfed/ui';
 import dynamic from 'next/dynamic';
 
